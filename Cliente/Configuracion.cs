@@ -19,6 +19,8 @@ namespace Cliente
         //Interfaz
         public bool MenuSlideDeluxe = true;
         public bool BotonSlideDeluxe = true;
+        public bool InicioFadeDeluxe = true;
+        public bool temaOscuro = true;
         //Transferencias
         public int limiteDesacargas = 3;
         public int limiteSubida = 0;

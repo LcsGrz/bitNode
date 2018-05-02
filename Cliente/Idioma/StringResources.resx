@@ -138,6 +138,9 @@
   <data name="mensajeEmail" xml:space="preserve">
     <value>Email copiado al portapapeles.</value>
   </data>
+  <data name="MensajeIniciarConWindows" xml:space="preserve">
+    <value>Error al configurar, intente ejecutar como administrador.</value>
+  </data>
   <data name="tbVistaAboutDescripcion" xml:space="preserve">
     <value>Este proyecto fue realizado por alumnos de 3er año de la Universidad de la Punta (ULP) para la materia optativa programación concurrente como objetivo de cursada</value>
   </data>

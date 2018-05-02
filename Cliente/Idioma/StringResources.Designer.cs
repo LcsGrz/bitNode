@@ -124,6 +124,15 @@ namespace Cliente.Idioma {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Error al configurar, intente ejecutar como administrador..
+        /// </summary>
+        internal static string MensajeIniciarConWindows {
+            get {
+                return ResourceManager.GetString("MensajeIniciarConWindows", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Este proyecto fue realizado por alumnos de 3er año de la Universidad de la Punta (ULP) para la materia optativa programación concurrente como objetivo de cursada.
         /// </summary>
         internal static string tbVistaAboutDescripcion {
