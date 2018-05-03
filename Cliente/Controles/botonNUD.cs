@@ -1,10 +1,13 @@
 ﻿using System;
+using System.Drawing;
+using System.Drawing.Text;
 using System.Windows.Forms;
 
 namespace Cliente.Controles
 {
     public partial class botonNUD : UserControl
     {
+        private PrivateFontCollection pfc = Configuracion.Tipografia();
         private int valorActual = 0;
         private int UltimoApretado = 0;
 
@@ -25,6 +28,7 @@ namespace Cliente.Controles
         public botonNUD()
         {
             InitializeComponent();
+            mtbNumero.Font = new Font(pfc.Families[0], 14);
         }
 
         private void UP_DOWN(object sender, EventArgs e)

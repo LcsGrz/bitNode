@@ -105,6 +105,8 @@
             this.fbdNavegador = new System.Windows.Forms.FolderBrowserDialog();
             this.ttAyuda = new System.Windows.Forms.ToolTip(this.components);
             this.niMinimizar = new System.Windows.Forms.NotifyIcon(this.components);
+            this.bnudVistaConfiguracionDescargasSimultaneas = new Cliente.Controles.botonNUD();
+            this.bnudVistaConfiguracionLimiteBajada = new Cliente.Controles.botonNUD();
             this.bnudVistaConfiguracionLimiteSubida = new Cliente.Controles.botonNUD();
             this.bsVistaConfiguracionEfectoFade = new Cliente.Controles.botonSwitch();
             this.bsVistaConfiguracionIniciarConWindows = new Cliente.Controles.botonSwitch();
@@ -113,6 +115,8 @@
             this.bsVistaConfiguracionMinimizarBandeja = new Cliente.Controles.botonSwitch();
             this.bsVistaConfiguracionTema = new Cliente.Controles.botonSwitch();
             this.bsVistaConfiguracionLatino = new Cliente.Controles.botonSwitch();
+            this.lblVistaConfiguracionKbpsSubida = new System.Windows.Forms.Label();
+            this.lblVistaConfiguracionKbpsBajada = new System.Windows.Forms.Label();
             this.pnlBarra.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbCerrar)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbMinimizar)).BeginInit();
@@ -245,6 +249,8 @@
             // pnlVistaConfiguracionGeneral
             // 
             this.pnlVistaConfiguracionGeneral.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(13)))), ((int)(((byte)(23)))), ((int)(((byte)(33)))));
+            this.pnlVistaConfiguracionGeneral.Controls.Add(this.bnudVistaConfiguracionDescargasSimultaneas);
+            this.pnlVistaConfiguracionGeneral.Controls.Add(this.bnudVistaConfiguracionLimiteBajada);
             this.pnlVistaConfiguracionGeneral.Controls.Add(this.bnudVistaConfiguracionLimiteSubida);
             this.pnlVistaConfiguracionGeneral.Controls.Add(this.lblVistaConfiguracionEfectoBotones);
             this.pnlVistaConfiguracionGeneral.Controls.Add(this.lblVistaConfiguracionMovimientoMenu);
@@ -264,6 +270,8 @@
             this.pnlVistaConfiguracionGeneral.Controls.Add(this.bsVistaConfiguracionLatino);
             this.pnlVistaConfiguracionGeneral.Controls.Add(this.lblVistaConfiguracionTema);
             this.pnlVistaConfiguracionGeneral.Controls.Add(this.lblVistaConfiguracionRutaDescarga);
+            this.pnlVistaConfiguracionGeneral.Controls.Add(this.lblVistaConfiguracionKbpsBajada);
+            this.pnlVistaConfiguracionGeneral.Controls.Add(this.lblVistaConfiguracionKbpsSubida);
             this.pnlVistaConfiguracionGeneral.Controls.Add(this.lblVistaConfiguracionLimiteSubida);
             this.pnlVistaConfiguracionGeneral.Controls.Add(this.lblVistaConfiguracionLimiteBajada);
             this.pnlVistaConfiguracionGeneral.Controls.Add(this.lblVistaConfiguracionLimiteDescargas);
@@ -1056,6 +1064,7 @@
             this.ttAyuda.BackColor = System.Drawing.Color.Silver;
             this.ttAyuda.OwnerDraw = true;
             this.ttAyuda.Draw += new System.Windows.Forms.DrawToolTipEventHandler(this.ttAyuda_Draw);
+            this.ttAyuda.Popup += new System.Windows.Forms.PopupEventHandler(this.ttAyuda_Popup);
             // 
             // niMinimizar
             // 
@@ -1063,6 +1072,34 @@
             this.niMinimizar.Tag = "niMinimizar";
             this.niMinimizar.Text = "bitNode";
             this.niMinimizar.Click += new System.EventHandler(this.Maximizar);
+            // 
+            // bnudVistaConfiguracionDescargasSimultaneas
+            // 
+            this.bnudVistaConfiguracionDescargasSimultaneas.BackColor = System.Drawing.Color.Transparent;
+            this.bnudVistaConfiguracionDescargasSimultaneas.Location = new System.Drawing.Point(712, 477);
+            this.bnudVistaConfiguracionDescargasSimultaneas.maxValor = 5;
+            this.bnudVistaConfiguracionDescargasSimultaneas.minValor = 0;
+            this.bnudVistaConfiguracionDescargasSimultaneas.Name = "bnudVistaConfiguracionDescargasSimultaneas";
+            this.bnudVistaConfiguracionDescargasSimultaneas.Size = new System.Drawing.Size(65, 35);
+            this.bnudVistaConfiguracionDescargasSimultaneas.TabIndex = 6;
+            this.bnudVistaConfiguracionDescargasSimultaneas.Tag = "33";
+            this.bnudVistaConfiguracionDescargasSimultaneas.UpDown = 1;
+            this.bnudVistaConfiguracionDescargasSimultaneas.valor = 0;
+            this.bnudVistaConfiguracionDescargasSimultaneas.CambioDeValor += new System.EventHandler(this.CambiarConfiguracion);
+            // 
+            // bnudVistaConfiguracionLimiteBajada
+            // 
+            this.bnudVistaConfiguracionLimiteBajada.BackColor = System.Drawing.Color.Transparent;
+            this.bnudVistaConfiguracionLimiteBajada.Location = new System.Drawing.Point(280, 545);
+            this.bnudVistaConfiguracionLimiteBajada.maxValor = 9999;
+            this.bnudVistaConfiguracionLimiteBajada.minValor = 0;
+            this.bnudVistaConfiguracionLimiteBajada.Name = "bnudVistaConfiguracionLimiteBajada";
+            this.bnudVistaConfiguracionLimiteBajada.Size = new System.Drawing.Size(65, 35);
+            this.bnudVistaConfiguracionLimiteBajada.TabIndex = 6;
+            this.bnudVistaConfiguracionLimiteBajada.Tag = "31";
+            this.bnudVistaConfiguracionLimiteBajada.UpDown = 5;
+            this.bnudVistaConfiguracionLimiteBajada.valor = 0;
+            this.bnudVistaConfiguracionLimiteBajada.CambioDeValor += new System.EventHandler(this.CambiarConfiguracion);
             // 
             // bnudVistaConfiguracionLimiteSubida
             // 
@@ -1073,7 +1110,7 @@
             this.bnudVistaConfiguracionLimiteSubida.Name = "bnudVistaConfiguracionLimiteSubida";
             this.bnudVistaConfiguracionLimiteSubida.Size = new System.Drawing.Size(65, 35);
             this.bnudVistaConfiguracionLimiteSubida.TabIndex = 6;
-            this.bnudVistaConfiguracionLimiteSubida.Tag = "31";
+            this.bnudVistaConfiguracionLimiteSubida.Tag = "32";
             this.bnudVistaConfiguracionLimiteSubida.UpDown = 5;
             this.bnudVistaConfiguracionLimiteSubida.valor = 0;
             this.bnudVistaConfiguracionLimiteSubida.CambioDeValor += new System.EventHandler(this.CambiarConfiguracion);
@@ -1162,6 +1199,28 @@
             this.bsVistaConfiguracionLatino.TabIndex = 2;
             this.bsVistaConfiguracionLatino.Tag = "13";
             this.bsVistaConfiguracionLatino.Clickaso += new System.EventHandler(this.CambiarConfiguracion);
+            // 
+            // lblVistaConfiguracionKbpsSubida
+            // 
+            this.lblVistaConfiguracionKbpsSubida.AutoSize = true;
+            this.lblVistaConfiguracionKbpsSubida.Font = new System.Drawing.Font("Roboto Lt", 14F);
+            this.lblVistaConfiguracionKbpsSubida.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(153)))), ((int)(((byte)(153)))), ((int)(((byte)(153)))));
+            this.lblVistaConfiguracionKbpsSubida.Location = new System.Drawing.Point(336, 502);
+            this.lblVistaConfiguracionKbpsSubida.Name = "lblVistaConfiguracionKbpsSubida";
+            this.lblVistaConfiguracionKbpsSubida.Size = new System.Drawing.Size(62, 23);
+            this.lblVistaConfiguracionKbpsSubida.TabIndex = 1;
+            this.lblVistaConfiguracionKbpsSubida.Text = "Kbp/s";
+            // 
+            // lblVistaConfiguracionKbpsBajada
+            // 
+            this.lblVistaConfiguracionKbpsBajada.AutoSize = true;
+            this.lblVistaConfiguracionKbpsBajada.Font = new System.Drawing.Font("Roboto Lt", 14F);
+            this.lblVistaConfiguracionKbpsBajada.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(153)))), ((int)(((byte)(153)))), ((int)(((byte)(153)))));
+            this.lblVistaConfiguracionKbpsBajada.Location = new System.Drawing.Point(355, 553);
+            this.lblVistaConfiguracionKbpsBajada.Name = "lblVistaConfiguracionKbpsBajada";
+            this.lblVistaConfiguracionKbpsBajada.Size = new System.Drawing.Size(62, 23);
+            this.lblVistaConfiguracionKbpsBajada.TabIndex = 1;
+            this.lblVistaConfiguracionKbpsBajada.Text = "Kbp/s";
             // 
             // frmCliente
             // 
@@ -1318,6 +1377,10 @@
         private System.Windows.Forms.Label lblVistaConfiguracionTemaOscuro;
         private System.Windows.Forms.NotifyIcon niMinimizar;
         private Controles.botonNUD bnudVistaConfiguracionLimiteSubida;
+        private Controles.botonNUD bnudVistaConfiguracionDescargasSimultaneas;
+        private Controles.botonNUD bnudVistaConfiguracionLimiteBajada;
+        private System.Windows.Forms.Label lblVistaConfiguracionKbpsBajada;
+        private System.Windows.Forms.Label lblVistaConfiguracionKbpsSubida;
     }
 }
 

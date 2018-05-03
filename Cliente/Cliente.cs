@@ -35,17 +35,6 @@ namespace Cliente
             CargarFuentes();
             CargarConfiguracion();
             AplicarIdioma();
-
-            ttAyuda.SetToolTip(pbVistaConfiguracionCarpetaDescarga, configuracion.rutaDescarga + "    ");
-            /* if (configuracion.InicioFadeDeluxe)
-             {
-                 tmrFader.Start();
-                 this.SizeChanged += TimerOn;
-             }
-             else
-             {
-                 SinFade();
-             }*/
         }
         //----------------------------------------------------------------------------------------------Funciones de form
         private void pnlBarra_MouseDown(object sender, MouseEventArgs e) //Mover form
@@ -256,7 +245,7 @@ namespace Cliente
             if (fbdNavegador.ShowDialog() == DialogResult.OK && !string.IsNullOrWhiteSpace(fbdNavegador.SelectedPath))
             {
                 configuracion.rutaDescarga = fbdNavegador.SelectedPath;
-                ttAyuda.SetToolTip(pbVistaConfiguracionCarpetaDescarga, configuracion.rutaDescarga + "    ");
+                ttAyuda.SetToolTip(pbVistaConfiguracionCarpetaDescarga, configuracion.rutaDescarga);
                 configuracion.Guardar();
             }
         }
@@ -267,7 +256,19 @@ namespace Cliente
             e.DrawBackground();
             e.DrawBorder();
 
-            e.Graphics.DrawString(e.ToolTipText, diezR, Brushes.White, new PointF(2, 2));
+            StringFormat sf = new StringFormat();
+            sf.Alignment = StringAlignment.Center;
+            sf.LineAlignment = StringAlignment.Center;
+            sf.HotkeyPrefix = System.Drawing.Text.HotkeyPrefix.None;
+            sf.FormatFlags = StringFormatFlags.NoWrap;
+            e.Graphics.DrawString(e.ToolTipText, diezR, Brushes.White, e.Bounds, sf);
+            // e.Graphics.DrawString(e.ToolTipText, diezR, Brushes.White, new PointF(2, 2));
+        }
+        private void ttAyuda_Popup(object sender, PopupEventArgs e) //Dibuja el tooltip
+        {
+            Font diezR = new Font(pfc.Families[0], 10);
+            e.ToolTipSize = TextRenderer.MeasureText(ttAyuda.GetToolTip(e.AssociatedControl), diezR);
+            e.ToolTipSize = Size.Add(e.ToolTipSize, new Size(4, 4));
         }
         private void CambiarConfiguracion(object sender, EventArgs e) //Cambia la configuracion de la clase y aplica algunas al form
         {
@@ -316,6 +317,16 @@ namespace Cliente
                         configuracion.limiteBajada = (sender as botonNUD).valor;
                         break;
                     }
+                case 32:
+                    {
+                        configuracion.limiteSubida = (sender as botonNUD).valor;
+                        break;
+                    }
+                case 33:
+                    {
+                        configuracion.limiteDesacargas = (sender as botonNUD).valor;
+                        break;
+                    }
             }
             configuracion.Guardar();
         }
@@ -328,6 +339,10 @@ namespace Cliente
             bsVistaConfiguracionEfectoBotones.Activo = configuracion.BotonSlideDeluxe;
             bsVistaConfiguracionEfectoMenu.Activo = configuracion.MenuSlideDeluxe;
             bsVistaConfiguracionTema.Activo = configuracion.temaOscuro;
+            bnudVistaConfiguracionLimiteSubida.valor = configuracion.limiteSubida;
+            bnudVistaConfiguracionLimiteBajada.valor = configuracion.limiteBajada;
+            bnudVistaConfiguracionDescargasSimultaneas.valor = configuracion.limiteDesacargas;
+            ttAyuda.SetToolTip(pbVistaConfiguracionCarpetaDescarga, configuracion.rutaDescarga);
         }
         private void CargarFuentes() //Carga las fuentes y las aplica a los componentes
         {
@@ -413,7 +428,7 @@ namespace Cliente
  https://www.codeproject.com/Tips/480049/Shut-Down-Restart-Log-off-Lock-Hibernate-or-Sleep     
 
   bugs:
-     ttayuda grafica mal el texto
+     -
     mejoras:
      ver si puedo resumir mas los efectos
      ir agregando fonts a cargar guentes
