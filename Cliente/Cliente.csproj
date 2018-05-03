@@ -69,6 +69,12 @@
       <DependentUpon>Cliente.cs</DependentUpon>
     </Compile>
     <Compile Include="Configuracion.cs" />
+    <Compile Include="Controles\botonNUD.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controles\botonNUD.Designer.cs">
+      <DependentUpon>botonNUD.cs</DependentUpon>
+    </Compile>
     <Compile Include="Controles\botonSwitch.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -99,6 +105,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Cliente.resx">
       <DependentUpon>Cliente.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controles\botonNUD.resx">
+      <DependentUpon>botonNUD.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Controles\BotonSwitch.resx">
       <DependentUpon>botonSwitch.cs</DependentUpon>

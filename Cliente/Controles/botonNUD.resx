@@ -117,85 +117,40 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="lblMenuAbout" xml:space="preserve">
-    <value>Sobre bitNode</value>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="pbFondo.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAAEEAAAAjCAYAAADLy2cUAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAO
+        xAAADsQBlSsOGwAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAAADXSURBVGhD7dlB
+        DoIwEEbhkaXdFi5n1KsZ43kAj4ML9U3bEIN6gfYn+YJKN30Z3NTWK/TnXejveOBVMd/fbGE4lZ3nqwvD
+        rSx4lnvt0j67EK+5QJ6AXwubwEQcjQ/+CrQyAVu+78kj1P4f8N/e73HxCN8PG6MIUAQoAhQBigBFgCJA
+        EaAIUAQoAhQBigBFgCJAEaAIUAQoAhQBigBFgCJAEeARdALFlxktn0WO5qeymwdNsRAP6XTez+nLj61M
+        RNpnF/pLCrBeeSJ4NeLysbhCaX/TOgFm9gYFEuou1vALqgAAAABJRU5ErkJggg==
+</value>
   </data>
-  <data name="lblMenuCompartir" xml:space="preserve">
-    <value>Compartir</value>
+  <data name="pbUP.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAAAsAAAASCAYAAACNdSR1AAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAO
+        xAAADsQBlSsOGwAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAAADwSURBVDhPlZK7
+        CsIwFIajdBBadKp2UGhRqkkfS9/AtxBnH0Qc3VzFRbxruyjo7NRBjudEq021XgIf4f/zJZwhDIQ4AOfB
+        W4SYguf1wLZzjBYGH0v4wAUZAmNZhi98k4kQadMYu1iZjueNfpeFWJG8TZTguw0l3wlI3sTLvl2FjG7C
+        wKnFRUKVQ87ByVtSdgqWzNEZIuV1VHTKDmiGKWXau2X7RV5RONYboBtFKUYYmE/Yv8jNUgU0XZUpt7B/
+        ypwvzzibFpPUCyZMau7j5QXdXLp1GGP5jv1tlKf8A1KeJ8o0pDxLlGn8L2+UD5+GEIcrOkOc6f3sEWsA
+        AAAASUVORK5CYII=
+</value>
   </data>
-  <data name="lblMenuConfiguracion" xml:space="preserve">
-    <value>Configuracion</value>
+  <data name="pbDOWN.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAAAsAAAASCAYAAACNdSR1AAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAO
+        xAAADsQBlSsOGwAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAAAEGSURBVDhPY5g1
+        a9btmTNn3ieEgeqeMgAZV4H4PxH4PsmKr6EJ4sJgxdfRBHFhhOKmltb/VTV1WHFnVzdc8Y1Jkyf/Z+YV
+        /8/ILYqBQeI1dQ1wxTdBJts4efxn5kHVAOLbOnsinAEMP7Di7p7e/+wCUiiKOQSl//f09iEUA4lbUM7/
+        4IhYoLViEFOBdEhkLEwhXDEoBsECU6dO/S8iowZWLCqrBubD5IAY7Ay4YhDOzisEK87JL0JWCMJgk++g
+        Cf5vbetA4UMxWPFdNEGseMaMGTeJVgzEh0GK76EJYsM/gLgA5EG8ioHyf4D07oaGBiaQ4qdADtYED3Tn
+        JSA9ZdKkSewMDAwMAKD97BZ/uet6AAAAAElFTkSuQmCC
+</value>
   </data>
-  <data name="lblMenuDescargar" xml:space="preserve">
-    <value>Descargar</value>
-  </data>
-  <data name="lblMenuExplorar" xml:space="preserve">
-    <value>Explorar</value>
-  </data>
-  <data name="lblMenuSolicitar" xml:space="preserve">
-    <value>Solicitar</value>
-  </data>
-  <data name="mensajeEmail" xml:space="preserve">
-    <value>Email copiado al portapapeles.</value>
-  </data>
-  <data name="MensajeIniciarConWindows" xml:space="preserve">
-    <value>Error al configurar, intente ejecutar como administrador.</value>
-  </data>
-  <data name="tbVistaAboutDescripcion" xml:space="preserve">
-    <value>Este proyecto fue realizado por alumnos de 3er año de la Universidad de la Punta (ULP) para la materia optativa programación concurrente como objetivo de cursada</value>
-  </data>
-  <data name="lblVistaConfiguracionEfectoBotones" xml:space="preserve">
-    <value>Efecto transision de botones</value>
-  </data>
-  <data name="lblVistaConfiguracionEfectoFade" xml:space="preserve">
-    <value>Efecto transparencia de sistema</value>
-  </data>
-  <data name="lblVistaConfiguracionEspañol" xml:space="preserve">
-    <value>Español</value>
-  </data>
-  <data name="lblVistaConfiguracionGeneral" xml:space="preserve">
-    <value>General</value>
-  </data>
-  <data name="lblVistaConfiguracionIdioma" xml:space="preserve">
-    <value>Idioma</value>
-  </data>
-  <data name="lblVistaConfiguracionIngles" xml:space="preserve">
-    <value>Ingles</value>
-  </data>
-  <data name="lblVistaConfiguracionIniciarConWindows" xml:space="preserve">
-    <value>Iniciar con windows</value>
-  </data>
-  <data name="lblVistaConfiguracionInterfaz" xml:space="preserve">
-    <value>Interfaz</value>
-  </data>
-  <data name="lblVistaConfiguracionLimiteBajada" xml:space="preserve">
-    <value>Limite bajada</value>
-  </data>
-  <data name="lblVistaConfiguracionLimiteDescargas" xml:space="preserve">
-    <value>Descargas simultaneas</value>
-  </data>
-  <data name="lblVistaConfiguracionLimiteSubida" xml:space="preserve">
-    <value>Limite subida</value>
-  </data>
-  <data name="lblVistaConfiguracionMinimizarBanjeda" xml:space="preserve">
-    <value>Minimizar a bandeja</value>
-  </data>
-  <data name="lblVistaConfiguracionMovimientoMenu" xml:space="preserve">
-    <value>Efecto deslizante de menu</value>
-  </data>
-  <data name="lblVistaConfiguracionRutaDescarga" xml:space="preserve">
-    <value>Ruta de descarga</value>
-  </data>
-  <data name="lblVistaConfiguracionTema" xml:space="preserve">
-    <value>Tema</value>
-  </data>
-  <data name="lblVistaConfiguracionTemaClaro" xml:space="preserve">
-    <value>Claro</value>
-  </data>
-  <data name="lblVistaConfiguracionTemaOscuro" xml:space="preserve">
-    <value>Oscuro</value>
-  </data>
-  <data name="lblVistaConfiguracionTranseferecias" xml:space="preserve">
-    <value>Transferencias</value>
-  </data>
+  <metadata name="tmrTimer.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>17, 17</value>
+  </metadata>
 </root>

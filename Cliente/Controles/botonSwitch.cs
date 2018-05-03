@@ -18,7 +18,6 @@ namespace Cliente.Controles
                 pbOFF.Visible = (value) ? false : true;
             }
         }
-
         public botonSwitch()
         {
             InitializeComponent();

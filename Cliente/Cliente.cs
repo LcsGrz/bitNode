@@ -271,46 +271,49 @@ namespace Cliente
         }
         private void CambiarConfiguracion(object sender, EventArgs e) //Cambia la configuracion de la clase y aplica algunas al form
         {
-            int tag = Convert.ToInt32((sender as botonSwitch).Tag);
-            bool nuevoEstado = (sender as botonSwitch).Activo;
-            switch (tag)
+            switch (Convert.ToInt32((sender as Control).Tag))
             {
                 case 11:
                     {
-                        configuracion.iniciarConWindows = nuevoEstado;
+                        configuracion.iniciarConWindows = (sender as botonSwitch).Activo;
                         IniciarConWindows();
                         break;
                     }
                 case 12:
                     {
-                        configuracion.minimizarBandeja = nuevoEstado;
+                        configuracion.minimizarBandeja = (sender as botonSwitch).Activo;
                         break;
                     }
                 case 13:
                     {
-                        configuracion.latino = nuevoEstado;
+                        configuracion.latino = (sender as botonSwitch).Activo;
                         AplicarIdioma();
                         break;
                     }
                 case 21:
                     {
-                        configuracion.InicioFadeDeluxe = nuevoEstado;
+                        configuracion.InicioFadeDeluxe = (sender as botonSwitch).Activo;
                         break;
                     }
                 case 22:
                     {
-                        configuracion.BotonSlideDeluxe = nuevoEstado;
+                        configuracion.BotonSlideDeluxe = (sender as botonSwitch).Activo;
                         break;
                     }
                 case 23:
                     {
-                        configuracion.MenuSlideDeluxe = nuevoEstado;
+                        configuracion.MenuSlideDeluxe = (sender as botonSwitch).Activo;
                         break;
                     }
                 case 24:
                     {
-                        configuracion.temaOscuro = nuevoEstado;
+                        configuracion.temaOscuro = (sender as botonSwitch).Activo;
                         //aplicartema()
+                        break;
+                    }
+                case 31:
+                    {
+                        configuracion.limiteBajada = (sender as botonNUD).valor;
                         break;
                     }
             }
@@ -413,5 +416,5 @@ namespace Cliente
      ttayuda grafica mal el texto
     mejoras:
      ver si puedo resumir mas los efectos
-     hacer qe el fade se cambie y funcione en el momento de ejecucion
+     ir agregando fonts a cargar guentes
   */

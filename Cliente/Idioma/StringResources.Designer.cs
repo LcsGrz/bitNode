@@ -187,7 +187,7 @@ namespace Cliente.Idioma {
         }
         
         /// <summary>
-        ///   Busca una cadena traducida similar a Limite de bajada.
+        ///   Busca una cadena traducida similar a Limite bajada.
         /// </summary>
         internal static string lblVistaConfiguracionLimiteBajada {
             get {
@@ -205,7 +205,7 @@ namespace Cliente.Idioma {
         }
         
         /// <summary>
-        ///   Busca una cadena traducida similar a Limite de subida.
+        ///   Busca una cadena traducida similar a Limite subida.
         /// </summary>
         internal static string lblVistaConfiguracionLimiteSubida {
             get {

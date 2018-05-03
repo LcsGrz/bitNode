@@ -105,6 +105,7 @@
             this.fbdNavegador = new System.Windows.Forms.FolderBrowserDialog();
             this.ttAyuda = new System.Windows.Forms.ToolTip(this.components);
             this.niMinimizar = new System.Windows.Forms.NotifyIcon(this.components);
+            this.bnudVistaConfiguracionLimiteSubida = new Cliente.Controles.botonNUD();
             this.bsVistaConfiguracionEfectoFade = new Cliente.Controles.botonSwitch();
             this.bsVistaConfiguracionIniciarConWindows = new Cliente.Controles.botonSwitch();
             this.bsVistaConfiguracionEfectoMenu = new Cliente.Controles.botonSwitch();
@@ -244,6 +245,7 @@
             // pnlVistaConfiguracionGeneral
             // 
             this.pnlVistaConfiguracionGeneral.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(13)))), ((int)(((byte)(23)))), ((int)(((byte)(33)))));
+            this.pnlVistaConfiguracionGeneral.Controls.Add(this.bnudVistaConfiguracionLimiteSubida);
             this.pnlVistaConfiguracionGeneral.Controls.Add(this.lblVistaConfiguracionEfectoBotones);
             this.pnlVistaConfiguracionGeneral.Controls.Add(this.lblVistaConfiguracionMovimientoMenu);
             this.pnlVistaConfiguracionGeneral.Controls.Add(this.pnlVistaComfiguracionInterfaz);
@@ -1062,6 +1064,20 @@
             this.niMinimizar.Text = "bitNode";
             this.niMinimizar.Click += new System.EventHandler(this.Maximizar);
             // 
+            // bnudVistaConfiguracionLimiteSubida
+            // 
+            this.bnudVistaConfiguracionLimiteSubida.BackColor = System.Drawing.Color.Transparent;
+            this.bnudVistaConfiguracionLimiteSubida.Location = new System.Drawing.Point(265, 502);
+            this.bnudVistaConfiguracionLimiteSubida.maxValor = 9999;
+            this.bnudVistaConfiguracionLimiteSubida.minValor = 0;
+            this.bnudVistaConfiguracionLimiteSubida.Name = "bnudVistaConfiguracionLimiteSubida";
+            this.bnudVistaConfiguracionLimiteSubida.Size = new System.Drawing.Size(65, 35);
+            this.bnudVistaConfiguracionLimiteSubida.TabIndex = 6;
+            this.bnudVistaConfiguracionLimiteSubida.Tag = "31";
+            this.bnudVistaConfiguracionLimiteSubida.UpDown = 5;
+            this.bnudVistaConfiguracionLimiteSubida.valor = 0;
+            this.bnudVistaConfiguracionLimiteSubida.CambioDeValor += new System.EventHandler(this.CambiarConfiguracion);
+            // 
             // bsVistaConfiguracionEfectoFade
             // 
             this.bsVistaConfiguracionEfectoFade.Activo = true;
@@ -1301,6 +1317,7 @@
         private System.Windows.Forms.Label lblVistaConfiguracionTemaClaro;
         private System.Windows.Forms.Label lblVistaConfiguracionTemaOscuro;
         private System.Windows.Forms.NotifyIcon niMinimizar;
+        private Controles.botonNUD bnudVistaConfiguracionLimiteSubida;
     }
 }
 
