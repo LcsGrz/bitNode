@@ -16,10 +16,12 @@ namespace Cliente
         private extern static void SendMessage(System.IntPtr hWnd, int wMsg, int wParam, int lParam);
 
         PrivateFontCollection pfc = Configuracion.Tipografia();
+        Configuracion configuracion = new Configuracion().Leer();
         //----------------------------------------------------------------------------------------------Constructor del form
         public frmMensaje(string mensaje)
         {
             InitializeComponent();
+            AplicarTema();
 
             pbCheck.Click += new EventHandler((object sender, EventArgs e) => { this.Close(); });
 
@@ -36,6 +38,16 @@ namespace Cliente
         {
             ReleaseCapture();
             SendMessage(this.Handle, 0x112, 0xf012, 0);
+        }
+        private void AplicarTema()
+        {
+            configuracion.CambiarTema();
+            pnlMensaje.BackColor = (configuracion.temaOscuro) ? configuracion.colorVistaFondo : configuracion.colorVistaFondo;
+            pnlBarra.BackColor = (configuracion.temaOscuro) ? Color.FromArgb(255, 153, 153, 153) : Color.FromArgb(255, 197, 33, 35);
+            this.BackColor = (configuracion.temaOscuro) ? configuracion.colorFondo : configuracion.colorPanelesInternosVistas;
+            panel1.BackColor = (configuracion.temaOscuro) ? configuracion.colorFondo : configuracion.colorPanelesInternosVistas;
+            panel2.BackColor = (configuracion.temaOscuro) ? configuracion.colorFondo : configuracion.colorPanelesInternosVistas;
+            panel3.BackColor = (configuracion.temaOscuro) ? configuracion.colorFondo : configuracion.colorPanelesInternosVistas;
         }
     }
 }

@@ -35,6 +35,7 @@ namespace Cliente
             CargarFuentes();
             CargarConfiguracion();
             AplicarIdioma();
+            AplicarTema();
         }
         //----------------------------------------------------------------------------------------------Funciones de form
         private void pnlBarra_MouseDown(object sender, MouseEventArgs e) //Mover form
@@ -63,7 +64,7 @@ namespace Cliente
         private void ExpandirMenu(object sender, EventArgs e) //Inicia la funcion de expandir el menu Lite - Deluxe
         {
             pnlRojoMenu.Visible = !pnlRojoMenu.Visible;
-            panelesMenu[tagAnterior].Controls[0].BackColor = (pnlRojoMenu.Visible) ? configuracion.colorMenuSeleccion : configuracion.colorDetalles;
+            panelesMenu[tagAnterior].Controls[0].BackColor = (pnlRojoMenu.Visible) ? Color.Transparent : configuracion.colorDetalles;
 
             if (pnlMenu.Width == 210) //Expandido
             {
@@ -163,7 +164,7 @@ namespace Cliente
             {
                 if (pnlMenu.Size.Width == 65)
                 {
-                    panelesMenu[tagAnterior].Controls[0].BackColor = configuracion.colorFondo;
+                    panelesMenu[tagAnterior].Controls[0].BackColor = configuracion.colorMenu;
 
                     int vY = pnlRojoMenu.Location.Y;
                     int nY = panelesMenu[tagNuevo].Location.Y;
@@ -218,10 +219,14 @@ namespace Cliente
                     }
                 }
 
-                panelesMenu[tagAnterior].BackColor = configuracion.colorFondo;
+                panelesMenu[tagAnterior].BackColor = configuracion.colorMenu;
+                panelesMenu[tagAnterior].Controls[0].BackColor = configuracion.colorMenu;
+
                 panelesVistas[tagAnterior].Visible = false;
                 //------------------------------------------------------------------
                 panelesMenu[tagNuevo].BackColor = configuracion.colorMenuSeleccion;
+                panelesMenu[tagNuevo].Controls[0].BackColor = (pnlRojoMenu.Visible) ? Color.Transparent : configuracion.colorDetalles;
+
                 panelesVistas[tagNuevo].Visible = true;
                 tagAnterior = tagNuevo;
             }
@@ -309,7 +314,7 @@ namespace Cliente
                 case 24:
                     {
                         configuracion.temaOscuro = (sender as botonSwitch).Activo;
-                        //aplicartema()
+                        AplicarTema();
                         break;
                     }
                 case 31:
@@ -421,6 +426,31 @@ namespace Cliente
             //About
             tbVistaAboutDescripcion.Text = Idioma.StringResources.tbVistaAboutDescripcion;
         }
+        private void AplicarTema() //Aplica el tema seleccionado 
+        {
+            configuracion.CambiarTema();
+            //HUD
+            pnlBarra.BackColor = configuracion.colorFondo;
+            pnlBarraGris1Px.BackColor = (configuracion.temaOscuro) ? Color.FromArgb(255, 153, 153, 153) : Color.FromArgb(255, 197, 33, 35);
+            pnlMenu.BackColor = configuracion.colorMenu;
+            for(int i = 0; i < 6; i++)
+            {
+                panelesMenu[i].BackColor = (tagAnterior == i) ? configuracion.colorMenuSeleccion : configuracion.colorMenu;
+                panelesMenu[i].Controls[0].BackColor = Color.Transparent;
+                panelesVistas[i].BackColor = configuracion.colorVistaFondo;
+            }
+            panelesMenu[tagAnterior].Controls[0].BackColor = (pnlMenu.Width == 65) ? Color.Transparent : configuracion.colorDetalles;
+            //Descargar
+            //Explorar
+            //Compartir
+            //Solicitar
+            //Configuracion
+            pnlVistaComfiguracionGeneral.BackColor = configuracion.colorPanelesInternosVistas;
+            pnlVistaComfiguracionInterfaz.BackColor = configuracion.colorPanelesInternosVistas;
+            pnlVistaConfiguracionTransferencias.BackColor = configuracion.colorPanelesInternosVistas;
+            //About
+            tbVistaAboutDescripcion.BackColor = configuracion.colorVistaFondo;
+        }
         private void IniciarConWindows() //Iniciar con windows
         {
             string nombre = Path.GetFileName(Application.ExecutablePath);
@@ -438,7 +468,9 @@ namespace Cliente
             }
             catch (Exception)
             {
+                configuracion.iniciarConWindows = !configuracion.iniciarConWindows;
                 new frmMensaje(Idioma.StringResources.MensajeIniciarConWindows).ShowDialog();
+                bsVistaConfiguracionIniciarConWindows.Activo = configuracion.iniciarConWindows;
             }
         }
     }
