@@ -46,18 +46,11 @@
             this.lblVistaConfiguracionEfectoFade = new System.Windows.Forms.Label();
             this.pnlVistaConfiguracionTransferencias = new System.Windows.Forms.Panel();
             this.lblVistaConfiguracionTranseferecias = new System.Windows.Forms.Label();
-            this.botonSwitch4 = new Cliente.Controles.botonSwitch();
-            this.botonSwitch2 = new Cliente.Controles.botonSwitch();
-            this.botonSwitch6 = new Cliente.Controles.botonSwitch();
             this.pnlVistaComfiguracionGeneral = new System.Windows.Forms.Panel();
             this.lblVistaConfiguracionGeneral = new System.Windows.Forms.Label();
-            this.botonSwitch5 = new Cliente.Controles.botonSwitch();
-            this.botonSwitch3 = new Cliente.Controles.botonSwitch();
             this.pbVistaConfiguracionCarpetaDescarga = new System.Windows.Forms.PictureBox();
             this.lblVistaConfiguracionMinimizarBanjeda = new System.Windows.Forms.Label();
-            this.botonSwitch7 = new Cliente.Controles.botonSwitch();
             this.lblVistaConfiguracionIniciarConWindows = new System.Windows.Forms.Label();
-            this.botonSwitch1 = new Cliente.Controles.botonSwitch();
             this.lblVistaConfiguracionTema = new System.Windows.Forms.Label();
             this.lblVistaConfiguracionRutaDescarga = new System.Windows.Forms.Label();
             this.lblVistaConfiguracionLimiteSubida = new System.Windows.Forms.Label();
@@ -112,6 +105,13 @@
             this.fbdNavegador = new System.Windows.Forms.FolderBrowserDialog();
             this.ttAyuda = new System.Windows.Forms.ToolTip(this.components);
             this.niMinimizar = new System.Windows.Forms.NotifyIcon(this.components);
+            this.bsVistaConfiguracionEfectoFade = new Cliente.Controles.botonSwitch();
+            this.bsVistaConfiguracionIniciarConWindows = new Cliente.Controles.botonSwitch();
+            this.bsVistaConfiguracionEfectoMenu = new Cliente.Controles.botonSwitch();
+            this.bsVistaConfiguracionEfectoBotones = new Cliente.Controles.botonSwitch();
+            this.bsVistaConfiguracionMinimizarBandeja = new Cliente.Controles.botonSwitch();
+            this.bsVistaConfiguracionTema = new Cliente.Controles.botonSwitch();
+            this.bsVistaConfiguracionLatino = new Cliente.Controles.botonSwitch();
             this.pnlBarra.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbCerrar)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbMinimizar)).BeginInit();
@@ -249,17 +249,17 @@
             this.pnlVistaConfiguracionGeneral.Controls.Add(this.pnlVistaComfiguracionInterfaz);
             this.pnlVistaConfiguracionGeneral.Controls.Add(this.lblVistaConfiguracionEfectoFade);
             this.pnlVistaConfiguracionGeneral.Controls.Add(this.pnlVistaConfiguracionTransferencias);
-            this.pnlVistaConfiguracionGeneral.Controls.Add(this.botonSwitch4);
-            this.pnlVistaConfiguracionGeneral.Controls.Add(this.botonSwitch2);
-            this.pnlVistaConfiguracionGeneral.Controls.Add(this.botonSwitch6);
+            this.pnlVistaConfiguracionGeneral.Controls.Add(this.bsVistaConfiguracionEfectoFade);
+            this.pnlVistaConfiguracionGeneral.Controls.Add(this.bsVistaConfiguracionIniciarConWindows);
+            this.pnlVistaConfiguracionGeneral.Controls.Add(this.bsVistaConfiguracionEfectoMenu);
             this.pnlVistaConfiguracionGeneral.Controls.Add(this.pnlVistaComfiguracionGeneral);
-            this.pnlVistaConfiguracionGeneral.Controls.Add(this.botonSwitch5);
-            this.pnlVistaConfiguracionGeneral.Controls.Add(this.botonSwitch3);
+            this.pnlVistaConfiguracionGeneral.Controls.Add(this.bsVistaConfiguracionEfectoBotones);
+            this.pnlVistaConfiguracionGeneral.Controls.Add(this.bsVistaConfiguracionMinimizarBandeja);
             this.pnlVistaConfiguracionGeneral.Controls.Add(this.pbVistaConfiguracionCarpetaDescarga);
             this.pnlVistaConfiguracionGeneral.Controls.Add(this.lblVistaConfiguracionMinimizarBanjeda);
-            this.pnlVistaConfiguracionGeneral.Controls.Add(this.botonSwitch7);
+            this.pnlVistaConfiguracionGeneral.Controls.Add(this.bsVistaConfiguracionTema);
             this.pnlVistaConfiguracionGeneral.Controls.Add(this.lblVistaConfiguracionIniciarConWindows);
-            this.pnlVistaConfiguracionGeneral.Controls.Add(this.botonSwitch1);
+            this.pnlVistaConfiguracionGeneral.Controls.Add(this.bsVistaConfiguracionLatino);
             this.pnlVistaConfiguracionGeneral.Controls.Add(this.lblVistaConfiguracionTema);
             this.pnlVistaConfiguracionGeneral.Controls.Add(this.lblVistaConfiguracionRutaDescarga);
             this.pnlVistaConfiguracionGeneral.Controls.Add(this.lblVistaConfiguracionLimiteSubida);
@@ -357,43 +357,6 @@
             this.lblVistaConfiguracionTranseferecias.TabIndex = 1;
             this.lblVistaConfiguracionTranseferecias.Text = "Transferencias";
             // 
-            // botonSwitch4
-            // 
-            this.botonSwitch4.Activo = true;
-            this.botonSwitch4.BackColor = System.Drawing.Color.Transparent;
-            this.botonSwitch4.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.botonSwitch4.Location = new System.Drawing.Point(94, 284);
-            this.botonSwitch4.Name = "botonSwitch4";
-            this.botonSwitch4.Size = new System.Drawing.Size(36, 18);
-            this.botonSwitch4.TabIndex = 2;
-            this.botonSwitch4.Tag = "21";
-            this.botonSwitch4.Clickaso += new System.EventHandler(this.CambiarConfiguracion);
-            // 
-            // botonSwitch2
-            // 
-            this.botonSwitch2.Activo = false;
-            this.botonSwitch2.BackColor = System.Drawing.Color.Transparent;
-            this.botonSwitch2.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.botonSwitch2.Location = new System.Drawing.Point(126, 83);
-            this.botonSwitch2.Name = "botonSwitch2";
-            this.botonSwitch2.Size = new System.Drawing.Size(36, 18);
-            this.botonSwitch2.TabIndex = 2;
-            this.botonSwitch2.Tag = "11";
-            this.botonSwitch2.Clickaso += new System.EventHandler(this.CambiarConfiguracion);
-            this.botonSwitch2.Click += new System.EventHandler(this.CambiarConfiguracion);
-            // 
-            // botonSwitch6
-            // 
-            this.botonSwitch6.Activo = true;
-            this.botonSwitch6.BackColor = System.Drawing.Color.Transparent;
-            this.botonSwitch6.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.botonSwitch6.Location = new System.Drawing.Point(94, 376);
-            this.botonSwitch6.Name = "botonSwitch6";
-            this.botonSwitch6.Size = new System.Drawing.Size(36, 18);
-            this.botonSwitch6.TabIndex = 2;
-            this.botonSwitch6.Tag = "23";
-            this.botonSwitch6.Clickaso += new System.EventHandler(this.CambiarConfiguracion);
-            // 
             // pnlVistaComfiguracionGeneral
             // 
             this.pnlVistaComfiguracionGeneral.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
@@ -416,30 +379,6 @@
             this.lblVistaConfiguracionGeneral.Size = new System.Drawing.Size(124, 38);
             this.lblVistaConfiguracionGeneral.TabIndex = 1;
             this.lblVistaConfiguracionGeneral.Text = "General";
-            // 
-            // botonSwitch5
-            // 
-            this.botonSwitch5.Activo = true;
-            this.botonSwitch5.BackColor = System.Drawing.Color.Transparent;
-            this.botonSwitch5.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.botonSwitch5.Location = new System.Drawing.Point(94, 327);
-            this.botonSwitch5.Name = "botonSwitch5";
-            this.botonSwitch5.Size = new System.Drawing.Size(36, 18);
-            this.botonSwitch5.TabIndex = 2;
-            this.botonSwitch5.Tag = "22";
-            this.botonSwitch5.Clickaso += new System.EventHandler(this.CambiarConfiguracion);
-            // 
-            // botonSwitch3
-            // 
-            this.botonSwitch3.Activo = false;
-            this.botonSwitch3.BackColor = System.Drawing.Color.Transparent;
-            this.botonSwitch3.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.botonSwitch3.Location = new System.Drawing.Point(125, 150);
-            this.botonSwitch3.Name = "botonSwitch3";
-            this.botonSwitch3.Size = new System.Drawing.Size(36, 18);
-            this.botonSwitch3.TabIndex = 2;
-            this.botonSwitch3.Tag = "12";
-            this.botonSwitch3.Clickaso += new System.EventHandler(this.CambiarConfiguracion);
             // 
             // pbVistaConfiguracionCarpetaDescarga
             // 
@@ -465,18 +404,6 @@
             this.lblVistaConfiguracionMinimizarBanjeda.TabIndex = 1;
             this.lblVistaConfiguracionMinimizarBanjeda.Text = "Minimizar a bandeja";
             // 
-            // botonSwitch7
-            // 
-            this.botonSwitch7.Activo = true;
-            this.botonSwitch7.BackColor = System.Drawing.Color.Transparent;
-            this.botonSwitch7.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.botonSwitch7.Location = new System.Drawing.Point(790, 347);
-            this.botonSwitch7.Name = "botonSwitch7";
-            this.botonSwitch7.Size = new System.Drawing.Size(36, 18);
-            this.botonSwitch7.TabIndex = 2;
-            this.botonSwitch7.Tag = "24";
-            this.botonSwitch7.Clickaso += new System.EventHandler(this.CambiarConfiguracion);
-            // 
             // lblVistaConfiguracionIniciarConWindows
             // 
             this.lblVistaConfiguracionIniciarConWindows.AutoSize = true;
@@ -487,18 +414,6 @@
             this.lblVistaConfiguracionIniciarConWindows.Size = new System.Drawing.Size(177, 23);
             this.lblVistaConfiguracionIniciarConWindows.TabIndex = 1;
             this.lblVistaConfiguracionIniciarConWindows.Text = "Iniciar con windows";
-            // 
-            // botonSwitch1
-            // 
-            this.botonSwitch1.Activo = true;
-            this.botonSwitch1.BackColor = System.Drawing.Color.Transparent;
-            this.botonSwitch1.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.botonSwitch1.Location = new System.Drawing.Point(783, 173);
-            this.botonSwitch1.Name = "botonSwitch1";
-            this.botonSwitch1.Size = new System.Drawing.Size(36, 18);
-            this.botonSwitch1.TabIndex = 2;
-            this.botonSwitch1.Tag = "13";
-            this.botonSwitch1.Clickaso += new System.EventHandler(this.CambiarConfiguracion);
             // 
             // lblVistaConfiguracionTema
             // 
@@ -1147,6 +1062,91 @@
             this.niMinimizar.Text = "bitNode";
             this.niMinimizar.Click += new System.EventHandler(this.Maximizar);
             // 
+            // bsVistaConfiguracionEfectoFade
+            // 
+            this.bsVistaConfiguracionEfectoFade.Activo = true;
+            this.bsVistaConfiguracionEfectoFade.BackColor = System.Drawing.Color.Transparent;
+            this.bsVistaConfiguracionEfectoFade.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.bsVistaConfiguracionEfectoFade.Location = new System.Drawing.Point(94, 284);
+            this.bsVistaConfiguracionEfectoFade.Name = "bsVistaConfiguracionEfectoFade";
+            this.bsVistaConfiguracionEfectoFade.Size = new System.Drawing.Size(36, 18);
+            this.bsVistaConfiguracionEfectoFade.TabIndex = 2;
+            this.bsVistaConfiguracionEfectoFade.Tag = "21";
+            this.bsVistaConfiguracionEfectoFade.Clickaso += new System.EventHandler(this.CambiarConfiguracion);
+            // 
+            // bsVistaConfiguracionIniciarConWindows
+            // 
+            this.bsVistaConfiguracionIniciarConWindows.Activo = false;
+            this.bsVistaConfiguracionIniciarConWindows.BackColor = System.Drawing.Color.Transparent;
+            this.bsVistaConfiguracionIniciarConWindows.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.bsVistaConfiguracionIniciarConWindows.Location = new System.Drawing.Point(126, 83);
+            this.bsVistaConfiguracionIniciarConWindows.Name = "bsVistaConfiguracionIniciarConWindows";
+            this.bsVistaConfiguracionIniciarConWindows.Size = new System.Drawing.Size(36, 18);
+            this.bsVistaConfiguracionIniciarConWindows.TabIndex = 2;
+            this.bsVistaConfiguracionIniciarConWindows.Tag = "11";
+            this.bsVistaConfiguracionIniciarConWindows.Clickaso += new System.EventHandler(this.CambiarConfiguracion);
+            this.bsVistaConfiguracionIniciarConWindows.Click += new System.EventHandler(this.CambiarConfiguracion);
+            // 
+            // bsVistaConfiguracionEfectoMenu
+            // 
+            this.bsVistaConfiguracionEfectoMenu.Activo = true;
+            this.bsVistaConfiguracionEfectoMenu.BackColor = System.Drawing.Color.Transparent;
+            this.bsVistaConfiguracionEfectoMenu.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.bsVistaConfiguracionEfectoMenu.Location = new System.Drawing.Point(94, 376);
+            this.bsVistaConfiguracionEfectoMenu.Name = "bsVistaConfiguracionEfectoMenu";
+            this.bsVistaConfiguracionEfectoMenu.Size = new System.Drawing.Size(36, 18);
+            this.bsVistaConfiguracionEfectoMenu.TabIndex = 2;
+            this.bsVistaConfiguracionEfectoMenu.Tag = "23";
+            this.bsVistaConfiguracionEfectoMenu.Clickaso += new System.EventHandler(this.CambiarConfiguracion);
+            // 
+            // bsVistaConfiguracionEfectoBotones
+            // 
+            this.bsVistaConfiguracionEfectoBotones.Activo = true;
+            this.bsVistaConfiguracionEfectoBotones.BackColor = System.Drawing.Color.Transparent;
+            this.bsVistaConfiguracionEfectoBotones.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.bsVistaConfiguracionEfectoBotones.Location = new System.Drawing.Point(94, 327);
+            this.bsVistaConfiguracionEfectoBotones.Name = "bsVistaConfiguracionEfectoBotones";
+            this.bsVistaConfiguracionEfectoBotones.Size = new System.Drawing.Size(36, 18);
+            this.bsVistaConfiguracionEfectoBotones.TabIndex = 2;
+            this.bsVistaConfiguracionEfectoBotones.Tag = "22";
+            this.bsVistaConfiguracionEfectoBotones.Clickaso += new System.EventHandler(this.CambiarConfiguracion);
+            // 
+            // bsVistaConfiguracionMinimizarBandeja
+            // 
+            this.bsVistaConfiguracionMinimizarBandeja.Activo = false;
+            this.bsVistaConfiguracionMinimizarBandeja.BackColor = System.Drawing.Color.Transparent;
+            this.bsVistaConfiguracionMinimizarBandeja.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.bsVistaConfiguracionMinimizarBandeja.Location = new System.Drawing.Point(125, 150);
+            this.bsVistaConfiguracionMinimizarBandeja.Name = "bsVistaConfiguracionMinimizarBandeja";
+            this.bsVistaConfiguracionMinimizarBandeja.Size = new System.Drawing.Size(36, 18);
+            this.bsVistaConfiguracionMinimizarBandeja.TabIndex = 2;
+            this.bsVistaConfiguracionMinimizarBandeja.Tag = "12";
+            this.bsVistaConfiguracionMinimizarBandeja.Clickaso += new System.EventHandler(this.CambiarConfiguracion);
+            // 
+            // bsVistaConfiguracionTema
+            // 
+            this.bsVistaConfiguracionTema.Activo = true;
+            this.bsVistaConfiguracionTema.BackColor = System.Drawing.Color.Transparent;
+            this.bsVistaConfiguracionTema.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.bsVistaConfiguracionTema.Location = new System.Drawing.Point(790, 347);
+            this.bsVistaConfiguracionTema.Name = "bsVistaConfiguracionTema";
+            this.bsVistaConfiguracionTema.Size = new System.Drawing.Size(36, 18);
+            this.bsVistaConfiguracionTema.TabIndex = 2;
+            this.bsVistaConfiguracionTema.Tag = "24";
+            this.bsVistaConfiguracionTema.Clickaso += new System.EventHandler(this.CambiarConfiguracion);
+            // 
+            // bsVistaConfiguracionLatino
+            // 
+            this.bsVistaConfiguracionLatino.Activo = true;
+            this.bsVistaConfiguracionLatino.BackColor = System.Drawing.Color.Transparent;
+            this.bsVistaConfiguracionLatino.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.bsVistaConfiguracionLatino.Location = new System.Drawing.Point(783, 173);
+            this.bsVistaConfiguracionLatino.Name = "bsVistaConfiguracionLatino";
+            this.bsVistaConfiguracionLatino.Size = new System.Drawing.Size(36, 18);
+            this.bsVistaConfiguracionLatino.TabIndex = 2;
+            this.bsVistaConfiguracionLatino.Tag = "13";
+            this.bsVistaConfiguracionLatino.Clickaso += new System.EventHandler(this.CambiarConfiguracion);
+            // 
             // frmCliente
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
@@ -1163,6 +1163,7 @@
             this.Opacity = 0D;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Form1";
+            this.SizeChanged += new System.EventHandler(this.TimerOn);
             this.pnlBarra.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pbCerrar)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbMinimizar)).EndInit();
@@ -1282,21 +1283,21 @@
         private System.Windows.Forms.Label lblVistaConfiguracionLimiteBajada;
         private System.Windows.Forms.Label lblVistaConfiguracionRutaDescarga;
         private System.Windows.Forms.Label lblVistaConfiguracionLimiteSubida;
-        private Controles.botonSwitch botonSwitch2;
-        private Controles.botonSwitch botonSwitch1;
+        private Controles.botonSwitch bsVistaConfiguracionIniciarConWindows;
+        private Controles.botonSwitch bsVistaConfiguracionLatino;
         private System.Windows.Forms.PictureBox pbVistaConfiguracionCarpetaDescarga;
         private System.Windows.Forms.FolderBrowserDialog fbdNavegador;
         private System.Windows.Forms.ToolTip ttAyuda;
         private System.Windows.Forms.Panel pnlVistaComfiguracionGeneral;
         private System.Windows.Forms.Panel pnlVistaComfiguracionInterfaz;
         private System.Windows.Forms.Panel pnlVistaConfiguracionTransferencias;
-        private Controles.botonSwitch botonSwitch3;
+        private Controles.botonSwitch bsVistaConfiguracionMinimizarBandeja;
         private System.Windows.Forms.Label lblVistaConfiguracionIngles;
         private System.Windows.Forms.Label lblVistaConfiguracionEspañol;
-        private Controles.botonSwitch botonSwitch4;
-        private Controles.botonSwitch botonSwitch6;
-        private Controles.botonSwitch botonSwitch5;
-        private Controles.botonSwitch botonSwitch7;
+        private Controles.botonSwitch bsVistaConfiguracionEfectoFade;
+        private Controles.botonSwitch bsVistaConfiguracionEfectoMenu;
+        private Controles.botonSwitch bsVistaConfiguracionEfectoBotones;
+        private Controles.botonSwitch bsVistaConfiguracionTema;
         private System.Windows.Forms.Label lblVistaConfiguracionTemaClaro;
         private System.Windows.Forms.Label lblVistaConfiguracionTemaOscuro;
         private System.Windows.Forms.NotifyIcon niMinimizar;

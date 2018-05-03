@@ -27,24 +27,25 @@ namespace Cliente
 
         List<Panel> panelesMenu, panelesVistas;
         //----------------------------------------------------------------------------------------------Constructor del form
-        public frmCliente()
+        public frmCliente() //Constructor del Form - Aplica configuraciones y etc
         {
             InitializeComponent();
 
             CargarListas();
             CargarFuentes();
+            CargarConfiguracion();
             AplicarIdioma();
 
             ttAyuda.SetToolTip(pbVistaConfiguracionCarpetaDescarga, configuracion.rutaDescarga + "    ");
-            if (configuracion.InicioFadeDeluxe)
-            {
-                tmrFader.Start();
-                this.SizeChanged += TimerOn;
-            }
-            else
-            {
-                SinFade();
-            }
+            /* if (configuracion.InicioFadeDeluxe)
+             {
+                 tmrFader.Start();
+                 this.SizeChanged += TimerOn;
+             }
+             else
+             {
+                 SinFade();
+             }*/
         }
         //----------------------------------------------------------------------------------------------Funciones de form
         private void pnlBarra_MouseDown(object sender, MouseEventArgs e) //Mover form
@@ -131,34 +132,38 @@ namespace Cliente
             if (TransparenciaFull)
             {
                 this.Opacity -= .07;
-                if (this.Opacity <= 0)
-                {
-                    TransparenciaFull = false;
-                    if (cerrar)
-                    {
-                        this.Close();
-                    }
-                    else if (!configuracion.minimizarBandeja)
-                    {
-                        this.WindowState = FormWindowState.Minimized;
-                    }
-                    else
-                    {
-                        this.Hide();
-                        niMinimizar.Visible = true;
-                    }
-                    tmrFader.Stop();
-                }
+                if (!configuracion.InicioFadeDeluxe)
+                    this.Opacity = 0;
             }
             else
             {
                 this.Opacity += .03;
-                if (this.Opacity >= 1)
+                if (!configuracion.InicioFadeDeluxe)
+                    this.Opacity = 1;
+            }
+            if (this.Opacity == 0)
+            {
+                TransparenciaFull = false;
+                if (cerrar)
                 {
-                    TransparenciaFull = true;
-                    this.WindowState = FormWindowState.Normal;
-                    tmrFader.Stop();
+                    this.Close();
                 }
+                else if (!configuracion.minimizarBandeja)
+                {
+                    this.WindowState = FormWindowState.Minimized;
+                }
+                else
+                {
+                    this.Hide();
+                    niMinimizar.Visible = true;
+                }
+                tmrFader.Stop();
+            }
+            else if (this.Opacity == 1)
+            {
+                TransparenciaFull = true;
+                this.WindowState = FormWindowState.Normal;
+                tmrFader.Stop();
             }
         }
         private void ClickMenu(object sender, EventArgs e) //Click en los paneles de menu
@@ -232,30 +237,6 @@ namespace Cliente
                 tagAnterior = tagNuevo;
             }
         }
-        private void SinFade()
-        {
-            TransparenciaFull = !TransparenciaFull;
-
-            this.Opacity = 1;
-            pbCerrar.Click -= TimerOn;
-            pbMinimizar.Click -= TimerOn;
-
-            pbCerrar.Click += (object sender, EventArgs e) => { this.Close(); };
-            pbMinimizar.Click += (object sender, EventArgs e) =>
-            {
-                this.WindowState = (TransparenciaFull) ? FormWindowState.Minimized : FormWindowState.Normal;
-                TransparenciaFull = !TransparenciaFull;
-            };
-            this.SizeChanged += (object sender, EventArgs e) =>
-            {
-                if (!TransparenciaFull)
-                {
-                    this.Hide();
-                }
-                niMinimizar.Visible = true;
-                TransparenciaFull = !TransparenciaFull;
-            };
-        }
         //----------------------------------------------------------------------------------------------Funciones
         private void MostrarInformacionPersonal(object sender, EventArgs e) //Mostrar GITHUB - MAIL propio
         {
@@ -269,7 +250,6 @@ namespace Cliente
             panelesMenu = new List<Panel>() { pnlMenuDescargar, pnlMenuExplorar, pnlMenuCompartir, pnlMenuSolicitar, pnlMenuConfiguracion, pnlMenuAbout };
             panelesVistas = new List<Panel>() { pnlVistaDescargar, pnlVistaExplorar, pnlVistaCompartir, pnlVistaSolicitar, pnlVistaConfiguracionGeneral, pnlVistaAbout };
         }
-
         private void SeleccionarCarpetaDescargas(object sender, EventArgs e) //Selecciona la carpeta de descargas
         {
             fbdNavegador.SelectedPath = configuracion.rutaDescarga;
@@ -280,7 +260,6 @@ namespace Cliente
                 configuracion.Guardar();
             }
         }
-
         private void ttAyuda_Draw(object sender, DrawToolTipEventArgs e) //Dibuja el tooltip
         {
             Font diezR = new Font(pfc.Families[0], 10); //fuente personalizada
@@ -290,7 +269,6 @@ namespace Cliente
 
             e.Graphics.DrawString(e.ToolTipText, diezR, Brushes.White, new PointF(2, 2));
         }
-
         private void CambiarConfiguracion(object sender, EventArgs e) //Cambia la configuracion de la clase y aplica algunas al form
         {
             int tag = Convert.ToInt32((sender as botonSwitch).Tag);
@@ -338,7 +316,16 @@ namespace Cliente
             }
             configuracion.Guardar();
         }
-
+        private void CargarConfiguracion() //Carga la configuracion de la clase a los controles
+        {
+            bsVistaConfiguracionIniciarConWindows.Activo = configuracion.iniciarConWindows;
+            bsVistaConfiguracionMinimizarBandeja.Activo = configuracion.minimizarBandeja;
+            bsVistaConfiguracionLatino.Activo = configuracion.latino;
+            bsVistaConfiguracionEfectoFade.Activo = configuracion.InicioFadeDeluxe;
+            bsVistaConfiguracionEfectoBotones.Activo = configuracion.BotonSlideDeluxe;
+            bsVistaConfiguracionEfectoMenu.Activo = configuracion.MenuSlideDeluxe;
+            bsVistaConfiguracionTema.Activo = configuracion.temaOscuro;
+        }
         private void CargarFuentes() //Carga las fuentes y las aplica a los componentes
         {
             pfc = Configuracion.Tipografia();
@@ -358,7 +345,6 @@ namespace Cliente
             //About
             tbVistaAboutDescripcion.Font = veintiunoR;
         }
-
         private void AplicarIdioma() //Cambiar de idioma la aplicacion
         {
             Thread.CurrentThread.CurrentUICulture = new System.Globalization.CultureInfo((configuracion.latino) ? "ES-AR" : "EN-US");
@@ -398,7 +384,6 @@ namespace Cliente
                 new frmMensaje(Idioma.StringResources.MensajeIniciarConWindows).ShowDialog();
             }
         }
-
     }
 }
 
@@ -410,4 +395,5 @@ namespace Cliente
      ttayuda grafica mal el texto
     mejoras:
      ver si puedo resumir mas los efectos
+     hacer qe el fade se cambie y funcione en el momento de ejecucion
   */
