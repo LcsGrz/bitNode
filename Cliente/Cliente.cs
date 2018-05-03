@@ -350,6 +350,7 @@ namespace Cliente
 
             Font catorceR = new Font(pfc.Families[0], 14);
             Font veintiunoR = new Font(pfc.Families[0], 21);
+            Font veinticuatroR = new Font(pfc.Families[0], 24);
             //Menu
             foreach (Panel p in panelesMenu)
             {
@@ -360,6 +361,26 @@ namespace Cliente
             //Compartir
             //Solicitar
             //Configuracion
+            lblVistaConfiguracionGeneral.Font = veinticuatroR;
+            lblVistaConfiguracionIniciarConWindows.Font = catorceR;
+            lblVistaConfiguracionMinimizarBanjeda.Font = catorceR;
+            lblVistaConfiguracionIdioma.Font = catorceR;
+            lblVistaConfiguracionIngles.Font = catorceR;
+            lblVistaConfiguracionEspañol.Font = catorceR;
+            lblVistaConfiguracionInterfaz.Font = veinticuatroR;
+            lblVistaConfiguracionEfectoFade.Font = catorceR;
+            lblVistaConfiguracionEfectoBotones.Font = catorceR;
+            lblVistaConfiguracionMovimientoMenu.Font = catorceR;
+            lblVistaConfiguracionTema.Font = catorceR;
+            lblVistaConfiguracionTemaClaro.Font = catorceR;
+            lblVistaConfiguracionTemaOscuro.Font = catorceR;
+            lblVistaConfiguracionTranseferecias.Font = veinticuatroR;
+            lblVistaConfiguracionLimiteSubida.Font = catorceR;
+            lblVistaConfiguracionLimiteBajada.Font = catorceR;
+            lblVistaConfiguracionKbpsSubida.Font = catorceR;
+            lblVistaConfiguracionKbpsBajada.Font = catorceR;
+            lblVistaConfiguracionLimiteDescargas.Font = catorceR;
+            lblVistaConfiguracionRutaDescarga.Font = catorceR;
             //About
             tbVistaAboutDescripcion.Font = veintiunoR;
         }
