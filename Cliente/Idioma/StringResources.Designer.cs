@@ -115,6 +115,168 @@ namespace Cliente.Idioma {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Efecto transision de botones.
+        /// </summary>
+        internal static string lblVistaConfiguracionEfectoBotones {
+            get {
+                return ResourceManager.GetString("lblVistaConfiguracionEfectoBotones", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Efecto transparencia de sistema.
+        /// </summary>
+        internal static string lblVistaConfiguracionEfectoFade {
+            get {
+                return ResourceManager.GetString("lblVistaConfiguracionEfectoFade", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Español.
+        /// </summary>
+        internal static string lblVistaConfiguracionEspañol {
+            get {
+                return ResourceManager.GetString("lblVistaConfiguracionEspañol", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a General.
+        /// </summary>
+        internal static string lblVistaConfiguracionGeneral {
+            get {
+                return ResourceManager.GetString("lblVistaConfiguracionGeneral", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Idioma.
+        /// </summary>
+        internal static string lblVistaConfiguracionIdioma {
+            get {
+                return ResourceManager.GetString("lblVistaConfiguracionIdioma", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Ingles.
+        /// </summary>
+        internal static string lblVistaConfiguracionIngles {
+            get {
+                return ResourceManager.GetString("lblVistaConfiguracionIngles", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Iniciar con windows.
+        /// </summary>
+        internal static string lblVistaConfiguracionIniciarConWindows {
+            get {
+                return ResourceManager.GetString("lblVistaConfiguracionIniciarConWindows", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Interfaz.
+        /// </summary>
+        internal static string lblVistaConfiguracionInterfaz {
+            get {
+                return ResourceManager.GetString("lblVistaConfiguracionInterfaz", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Limite de bajada.
+        /// </summary>
+        internal static string lblVistaConfiguracionLimiteBajada {
+            get {
+                return ResourceManager.GetString("lblVistaConfiguracionLimiteBajada", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Descargas simultaneas.
+        /// </summary>
+        internal static string lblVistaConfiguracionLimiteDescargas {
+            get {
+                return ResourceManager.GetString("lblVistaConfiguracionLimiteDescargas", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Limite de subida.
+        /// </summary>
+        internal static string lblVistaConfiguracionLimiteSubida {
+            get {
+                return ResourceManager.GetString("lblVistaConfiguracionLimiteSubida", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Minimizar a bandeja.
+        /// </summary>
+        internal static string lblVistaConfiguracionMinimizarBanjeda {
+            get {
+                return ResourceManager.GetString("lblVistaConfiguracionMinimizarBanjeda", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Efecto deslizante de menu.
+        /// </summary>
+        internal static string lblVistaConfiguracionMovimientoMenu {
+            get {
+                return ResourceManager.GetString("lblVistaConfiguracionMovimientoMenu", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Ruta de descarga.
+        /// </summary>
+        internal static string lblVistaConfiguracionRutaDescarga {
+            get {
+                return ResourceManager.GetString("lblVistaConfiguracionRutaDescarga", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Tema.
+        /// </summary>
+        internal static string lblVistaConfiguracionTema {
+            get {
+                return ResourceManager.GetString("lblVistaConfiguracionTema", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Claro.
+        /// </summary>
+        internal static string lblVistaConfiguracionTemaClaro {
+            get {
+                return ResourceManager.GetString("lblVistaConfiguracionTemaClaro", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Oscuro.
+        /// </summary>
+        internal static string lblVistaConfiguracionTemaOscuro {
+            get {
+                return ResourceManager.GetString("lblVistaConfiguracionTemaOscuro", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Transferencias.
+        /// </summary>
+        internal static string lblVistaConfiguracionTranseferecias {
+            get {
+                return ResourceManager.GetString("lblVistaConfiguracionTranseferecias", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Email copiado al portapapeles..
         /// </summary>
         internal static string mensajeEmail {

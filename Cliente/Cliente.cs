@@ -361,6 +361,24 @@ namespace Cliente
             //Compartir
             //Solicitar
             //Configuracion
+            lblVistaConfiguracionGeneral.Text = Idioma.StringResources.lblVistaConfiguracionGeneral;
+            lblVistaConfiguracionIniciarConWindows.Text = Idioma.StringResources.lblVistaConfiguracionIniciarConWindows;
+            lblVistaConfiguracionMinimizarBanjeda.Text = Idioma.StringResources.lblVistaConfiguracionMinimizarBanjeda;
+            lblVistaConfiguracionIdioma.Text = Idioma.StringResources.lblVistaConfiguracionIdioma;
+            lblVistaConfiguracionIngles.Text = Idioma.StringResources.lblVistaConfiguracionIngles;
+            lblVistaConfiguracionEspañol.Text = Idioma.StringResources.lblVistaConfiguracionEspañol;
+            lblVistaConfiguracionInterfaz.Text = Idioma.StringResources.lblVistaConfiguracionInterfaz;
+            lblVistaConfiguracionEfectoFade.Text = Idioma.StringResources.lblVistaConfiguracionEfectoFade;
+            lblVistaConfiguracionEfectoBotones.Text = Idioma.StringResources.lblVistaConfiguracionEfectoBotones;
+            lblVistaConfiguracionMovimientoMenu.Text = Idioma.StringResources.lblVistaConfiguracionMovimientoMenu;
+            lblVistaConfiguracionTema.Text = Idioma.StringResources.lblVistaConfiguracionTema;
+            lblVistaConfiguracionTemaClaro.Text = Idioma.StringResources.lblVistaConfiguracionTemaClaro;
+            lblVistaConfiguracionTemaOscuro.Text = Idioma.StringResources.lblVistaConfiguracionTemaOscuro;
+            lblVistaConfiguracionTranseferecias.Text = Idioma.StringResources.lblVistaConfiguracionTranseferecias;
+            lblVistaConfiguracionLimiteSubida.Text = Idioma.StringResources.lblVistaConfiguracionLimiteSubida;
+            lblVistaConfiguracionLimiteBajada.Text = Idioma.StringResources.lblVistaConfiguracionLimiteBajada;
+            lblVistaConfiguracionLimiteDescargas.Text = Idioma.StringResources.lblVistaConfiguracionLimiteDescargas;
+            lblVistaConfiguracionRutaDescarga.Text = Idioma.StringResources.lblVistaConfiguracionRutaDescarga;
             //About
             tbVistaAboutDescripcion.Text = Idioma.StringResources.tbVistaAboutDescripcion;
         }

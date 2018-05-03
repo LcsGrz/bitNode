@@ -144,4 +144,58 @@
   <data name="tbVistaAboutDescripcion" xml:space="preserve">
     <value>Este proyecto fue realizado por alumnos de 3er año de la Universidad de la Punta (ULP) para la materia optativa programación concurrente como objetivo de cursada</value>
   </data>
+  <data name="lblVistaConfiguracionEfectoBotones" xml:space="preserve">
+    <value>Efecto transision de botones</value>
+  </data>
+  <data name="lblVistaConfiguracionEfectoFade" xml:space="preserve">
+    <value>Efecto transparencia de sistema</value>
+  </data>
+  <data name="lblVistaConfiguracionEspañol" xml:space="preserve">
+    <value>Español</value>
+  </data>
+  <data name="lblVistaConfiguracionGeneral" xml:space="preserve">
+    <value>General</value>
+  </data>
+  <data name="lblVistaConfiguracionIdioma" xml:space="preserve">
+    <value>Idioma</value>
+  </data>
+  <data name="lblVistaConfiguracionIngles" xml:space="preserve">
+    <value>Ingles</value>
+  </data>
+  <data name="lblVistaConfiguracionIniciarConWindows" xml:space="preserve">
+    <value>Iniciar con windows</value>
+  </data>
+  <data name="lblVistaConfiguracionInterfaz" xml:space="preserve">
+    <value>Interfaz</value>
+  </data>
+  <data name="lblVistaConfiguracionLimiteBajada" xml:space="preserve">
+    <value>Limite de bajada</value>
+  </data>
+  <data name="lblVistaConfiguracionLimiteDescargas" xml:space="preserve">
+    <value>Descargas simultaneas</value>
+  </data>
+  <data name="lblVistaConfiguracionLimiteSubida" xml:space="preserve">
+    <value>Limite de subida</value>
+  </data>
+  <data name="lblVistaConfiguracionMinimizarBanjeda" xml:space="preserve">
+    <value>Minimizar a bandeja</value>
+  </data>
+  <data name="lblVistaConfiguracionMovimientoMenu" xml:space="preserve">
+    <value>Efecto deslizante de menu</value>
+  </data>
+  <data name="lblVistaConfiguracionRutaDescarga" xml:space="preserve">
+    <value>Ruta de descarga</value>
+  </data>
+  <data name="lblVistaConfiguracionTema" xml:space="preserve">
+    <value>Tema</value>
+  </data>
+  <data name="lblVistaConfiguracionTemaClaro" xml:space="preserve">
+    <value>Claro</value>
+  </data>
+  <data name="lblVistaConfiguracionTemaOscuro" xml:space="preserve">
+    <value>Oscuro</value>
+  </data>
+  <data name="lblVistaConfiguracionTranseferecias" xml:space="preserve">
+    <value>Transferencias</value>
+  </data>
 </root>
