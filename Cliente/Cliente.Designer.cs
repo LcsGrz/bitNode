@@ -39,6 +39,9 @@
             this.pnlBarraGris1Px = new System.Windows.Forms.Panel();
             this.pnlVistaContenedor = new System.Windows.Forms.Panel();
             this.pnlVistaConfiguracionGeneral = new System.Windows.Forms.Panel();
+            this.bnudVistaConfiguracionDescargasSimultaneas = new Cliente.Controles.botonNUD();
+            this.bnudVistaConfiguracionLimiteBajada = new Cliente.Controles.botonNUD();
+            this.bnudVistaConfiguracionLimiteSubida = new Cliente.Controles.botonNUD();
             this.lblVistaConfiguracionEfectoBotones = new System.Windows.Forms.Label();
             this.lblVistaConfiguracionMovimientoMenu = new System.Windows.Forms.Label();
             this.pnlVistaComfiguracionInterfaz = new System.Windows.Forms.Panel();
@@ -46,13 +49,22 @@
             this.lblVistaConfiguracionEfectoFade = new System.Windows.Forms.Label();
             this.pnlVistaConfiguracionTransferencias = new System.Windows.Forms.Panel();
             this.lblVistaConfiguracionTranseferecias = new System.Windows.Forms.Label();
+            this.bsVistaConfiguracionEfectoFade = new Cliente.Controles.botonSwitch();
+            this.bsVistaConfiguracionIniciarConWindows = new Cliente.Controles.botonSwitch();
+            this.bsVistaConfiguracionEfectoMenu = new Cliente.Controles.botonSwitch();
             this.pnlVistaComfiguracionGeneral = new System.Windows.Forms.Panel();
             this.lblVistaConfiguracionGeneral = new System.Windows.Forms.Label();
+            this.bsVistaConfiguracionEfectoBotones = new Cliente.Controles.botonSwitch();
+            this.bsVistaConfiguracionMinimizarBandeja = new Cliente.Controles.botonSwitch();
             this.pbVistaConfiguracionCarpetaDescarga = new System.Windows.Forms.PictureBox();
             this.lblVistaConfiguracionMinimizarBanjeda = new System.Windows.Forms.Label();
+            this.bsVistaConfiguracionTema = new Cliente.Controles.botonSwitch();
             this.lblVistaConfiguracionIniciarConWindows = new System.Windows.Forms.Label();
+            this.bsVistaConfiguracionLatino = new Cliente.Controles.botonSwitch();
             this.lblVistaConfiguracionTema = new System.Windows.Forms.Label();
             this.lblVistaConfiguracionRutaDescarga = new System.Windows.Forms.Label();
+            this.lblVistaConfiguracionKbpsBajada = new System.Windows.Forms.Label();
+            this.lblVistaConfiguracionKbpsSubida = new System.Windows.Forms.Label();
             this.lblVistaConfiguracionLimiteSubida = new System.Windows.Forms.Label();
             this.lblVistaConfiguracionLimiteBajada = new System.Windows.Forms.Label();
             this.lblVistaConfiguracionLimiteDescargas = new System.Windows.Forms.Label();
@@ -105,18 +117,6 @@
             this.fbdNavegador = new System.Windows.Forms.FolderBrowserDialog();
             this.ttAyuda = new System.Windows.Forms.ToolTip(this.components);
             this.niMinimizar = new System.Windows.Forms.NotifyIcon(this.components);
-            this.lblVistaConfiguracionKbpsSubida = new System.Windows.Forms.Label();
-            this.lblVistaConfiguracionKbpsBajada = new System.Windows.Forms.Label();
-            this.bnudVistaConfiguracionDescargasSimultaneas = new Cliente.Controles.botonNUD();
-            this.bnudVistaConfiguracionLimiteBajada = new Cliente.Controles.botonNUD();
-            this.bnudVistaConfiguracionLimiteSubida = new Cliente.Controles.botonNUD();
-            this.bsVistaConfiguracionEfectoFade = new Cliente.Controles.botonSwitch();
-            this.bsVistaConfiguracionIniciarConWindows = new Cliente.Controles.botonSwitch();
-            this.bsVistaConfiguracionEfectoMenu = new Cliente.Controles.botonSwitch();
-            this.bsVistaConfiguracionEfectoBotones = new Cliente.Controles.botonSwitch();
-            this.bsVistaConfiguracionMinimizarBandeja = new Cliente.Controles.botonSwitch();
-            this.bsVistaConfiguracionTema = new Cliente.Controles.botonSwitch();
-            this.bsVistaConfiguracionLatino = new Cliente.Controles.botonSwitch();
             this.pnlBarra.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbCerrar)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbMinimizar)).BeginInit();
@@ -294,6 +294,48 @@
             this.pnlVistaConfiguracionGeneral.Tag = "5";
             this.pnlVistaConfiguracionGeneral.Visible = false;
             // 
+            // bnudVistaConfiguracionDescargasSimultaneas
+            // 
+            this.bnudVistaConfiguracionDescargasSimultaneas.BackColor = System.Drawing.Color.Transparent;
+            this.bnudVistaConfiguracionDescargasSimultaneas.Location = new System.Drawing.Point(712, 477);
+            this.bnudVistaConfiguracionDescargasSimultaneas.maxValor = 5;
+            this.bnudVistaConfiguracionDescargasSimultaneas.minValor = 0;
+            this.bnudVistaConfiguracionDescargasSimultaneas.Name = "bnudVistaConfiguracionDescargasSimultaneas";
+            this.bnudVistaConfiguracionDescargasSimultaneas.Size = new System.Drawing.Size(65, 35);
+            this.bnudVistaConfiguracionDescargasSimultaneas.TabIndex = 6;
+            this.bnudVistaConfiguracionDescargasSimultaneas.Tag = "33";
+            this.bnudVistaConfiguracionDescargasSimultaneas.UpDown = 1;
+            this.bnudVistaConfiguracionDescargasSimultaneas.valor = 0;
+            this.bnudVistaConfiguracionDescargasSimultaneas.CambioDeValor += new System.EventHandler(this.CambiarConfiguracion);
+            // 
+            // bnudVistaConfiguracionLimiteBajada
+            // 
+            this.bnudVistaConfiguracionLimiteBajada.BackColor = System.Drawing.Color.Transparent;
+            this.bnudVistaConfiguracionLimiteBajada.Location = new System.Drawing.Point(280, 545);
+            this.bnudVistaConfiguracionLimiteBajada.maxValor = 9999;
+            this.bnudVistaConfiguracionLimiteBajada.minValor = 0;
+            this.bnudVistaConfiguracionLimiteBajada.Name = "bnudVistaConfiguracionLimiteBajada";
+            this.bnudVistaConfiguracionLimiteBajada.Size = new System.Drawing.Size(65, 35);
+            this.bnudVistaConfiguracionLimiteBajada.TabIndex = 6;
+            this.bnudVistaConfiguracionLimiteBajada.Tag = "31";
+            this.bnudVistaConfiguracionLimiteBajada.UpDown = 5;
+            this.bnudVistaConfiguracionLimiteBajada.valor = 0;
+            this.bnudVistaConfiguracionLimiteBajada.CambioDeValor += new System.EventHandler(this.CambiarConfiguracion);
+            // 
+            // bnudVistaConfiguracionLimiteSubida
+            // 
+            this.bnudVistaConfiguracionLimiteSubida.BackColor = System.Drawing.Color.Transparent;
+            this.bnudVistaConfiguracionLimiteSubida.Location = new System.Drawing.Point(265, 502);
+            this.bnudVistaConfiguracionLimiteSubida.maxValor = 9999;
+            this.bnudVistaConfiguracionLimiteSubida.minValor = 0;
+            this.bnudVistaConfiguracionLimiteSubida.Name = "bnudVistaConfiguracionLimiteSubida";
+            this.bnudVistaConfiguracionLimiteSubida.Size = new System.Drawing.Size(65, 35);
+            this.bnudVistaConfiguracionLimiteSubida.TabIndex = 6;
+            this.bnudVistaConfiguracionLimiteSubida.Tag = "32";
+            this.bnudVistaConfiguracionLimiteSubida.UpDown = 5;
+            this.bnudVistaConfiguracionLimiteSubida.valor = 0;
+            this.bnudVistaConfiguracionLimiteSubida.CambioDeValor += new System.EventHandler(this.CambiarConfiguracion);
+            // 
             // lblVistaConfiguracionEfectoBotones
             // 
             this.lblVistaConfiguracionEfectoBotones.AutoSize = true;
@@ -329,14 +371,15 @@
             // 
             // lblVistaConfiguracionInterfaz
             // 
-            this.lblVistaConfiguracionInterfaz.AutoSize = true;
+            this.lblVistaConfiguracionInterfaz.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.lblVistaConfiguracionInterfaz.Font = new System.Drawing.Font("Roboto Lt", 24F);
             this.lblVistaConfiguracionInterfaz.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(153)))), ((int)(((byte)(153)))), ((int)(((byte)(153)))));
-            this.lblVistaConfiguracionInterfaz.Location = new System.Drawing.Point(433, 6);
+            this.lblVistaConfiguracionInterfaz.Location = new System.Drawing.Point(6, 6);
             this.lblVistaConfiguracionInterfaz.Name = "lblVistaConfiguracionInterfaz";
-            this.lblVistaConfiguracionInterfaz.Size = new System.Drawing.Size(124, 38);
+            this.lblVistaConfiguracionInterfaz.Size = new System.Drawing.Size(978, 38);
             this.lblVistaConfiguracionInterfaz.TabIndex = 1;
             this.lblVistaConfiguracionInterfaz.Text = "Interfaz";
+            this.lblVistaConfiguracionInterfaz.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // lblVistaConfiguracionEfectoFade
             // 
@@ -362,14 +405,52 @@
             // 
             // lblVistaConfiguracionTranseferecias
             // 
-            this.lblVistaConfiguracionTranseferecias.AutoSize = true;
+            this.lblVistaConfiguracionTranseferecias.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.lblVistaConfiguracionTranseferecias.Font = new System.Drawing.Font("Roboto Lt", 24F);
             this.lblVistaConfiguracionTranseferecias.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(153)))), ((int)(((byte)(153)))), ((int)(((byte)(153)))));
-            this.lblVistaConfiguracionTranseferecias.Location = new System.Drawing.Point(383, 6);
+            this.lblVistaConfiguracionTranseferecias.Location = new System.Drawing.Point(6, 6);
             this.lblVistaConfiguracionTranseferecias.Name = "lblVistaConfiguracionTranseferecias";
-            this.lblVistaConfiguracionTranseferecias.Size = new System.Drawing.Size(225, 38);
+            this.lblVistaConfiguracionTranseferecias.Size = new System.Drawing.Size(973, 38);
             this.lblVistaConfiguracionTranseferecias.TabIndex = 1;
             this.lblVistaConfiguracionTranseferecias.Text = "Transferencias";
+            this.lblVistaConfiguracionTranseferecias.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // bsVistaConfiguracionEfectoFade
+            // 
+            this.bsVistaConfiguracionEfectoFade.Activo = true;
+            this.bsVistaConfiguracionEfectoFade.BackColor = System.Drawing.Color.Transparent;
+            this.bsVistaConfiguracionEfectoFade.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.bsVistaConfiguracionEfectoFade.Location = new System.Drawing.Point(94, 284);
+            this.bsVistaConfiguracionEfectoFade.Name = "bsVistaConfiguracionEfectoFade";
+            this.bsVistaConfiguracionEfectoFade.Size = new System.Drawing.Size(36, 18);
+            this.bsVistaConfiguracionEfectoFade.TabIndex = 2;
+            this.bsVistaConfiguracionEfectoFade.Tag = "21";
+            this.bsVistaConfiguracionEfectoFade.Clickaso += new System.EventHandler(this.CambiarConfiguracion);
+            // 
+            // bsVistaConfiguracionIniciarConWindows
+            // 
+            this.bsVistaConfiguracionIniciarConWindows.Activo = false;
+            this.bsVistaConfiguracionIniciarConWindows.BackColor = System.Drawing.Color.Transparent;
+            this.bsVistaConfiguracionIniciarConWindows.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.bsVistaConfiguracionIniciarConWindows.Location = new System.Drawing.Point(126, 83);
+            this.bsVistaConfiguracionIniciarConWindows.Name = "bsVistaConfiguracionIniciarConWindows";
+            this.bsVistaConfiguracionIniciarConWindows.Size = new System.Drawing.Size(36, 18);
+            this.bsVistaConfiguracionIniciarConWindows.TabIndex = 2;
+            this.bsVistaConfiguracionIniciarConWindows.Tag = "11";
+            this.bsVistaConfiguracionIniciarConWindows.Clickaso += new System.EventHandler(this.CambiarConfiguracion);
+            this.bsVistaConfiguracionIniciarConWindows.Click += new System.EventHandler(this.CambiarConfiguracion);
+            // 
+            // bsVistaConfiguracionEfectoMenu
+            // 
+            this.bsVistaConfiguracionEfectoMenu.Activo = true;
+            this.bsVistaConfiguracionEfectoMenu.BackColor = System.Drawing.Color.Transparent;
+            this.bsVistaConfiguracionEfectoMenu.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.bsVistaConfiguracionEfectoMenu.Location = new System.Drawing.Point(94, 376);
+            this.bsVistaConfiguracionEfectoMenu.Name = "bsVistaConfiguracionEfectoMenu";
+            this.bsVistaConfiguracionEfectoMenu.Size = new System.Drawing.Size(36, 18);
+            this.bsVistaConfiguracionEfectoMenu.TabIndex = 2;
+            this.bsVistaConfiguracionEfectoMenu.Tag = "23";
+            this.bsVistaConfiguracionEfectoMenu.Clickaso += new System.EventHandler(this.CambiarConfiguracion);
             // 
             // pnlVistaComfiguracionGeneral
             // 
@@ -385,14 +466,39 @@
             // 
             // lblVistaConfiguracionGeneral
             // 
-            this.lblVistaConfiguracionGeneral.AutoSize = true;
+            this.lblVistaConfiguracionGeneral.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.lblVistaConfiguracionGeneral.Font = new System.Drawing.Font("Roboto Lt", 24F);
             this.lblVistaConfiguracionGeneral.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(153)))), ((int)(((byte)(153)))), ((int)(((byte)(153)))));
-            this.lblVistaConfiguracionGeneral.Location = new System.Drawing.Point(433, 6);
+            this.lblVistaConfiguracionGeneral.Location = new System.Drawing.Point(6, 6);
             this.lblVistaConfiguracionGeneral.Name = "lblVistaConfiguracionGeneral";
-            this.lblVistaConfiguracionGeneral.Size = new System.Drawing.Size(124, 38);
+            this.lblVistaConfiguracionGeneral.Size = new System.Drawing.Size(978, 38);
             this.lblVistaConfiguracionGeneral.TabIndex = 1;
             this.lblVistaConfiguracionGeneral.Text = "General";
+            this.lblVistaConfiguracionGeneral.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // bsVistaConfiguracionEfectoBotones
+            // 
+            this.bsVistaConfiguracionEfectoBotones.Activo = true;
+            this.bsVistaConfiguracionEfectoBotones.BackColor = System.Drawing.Color.Transparent;
+            this.bsVistaConfiguracionEfectoBotones.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.bsVistaConfiguracionEfectoBotones.Location = new System.Drawing.Point(94, 327);
+            this.bsVistaConfiguracionEfectoBotones.Name = "bsVistaConfiguracionEfectoBotones";
+            this.bsVistaConfiguracionEfectoBotones.Size = new System.Drawing.Size(36, 18);
+            this.bsVistaConfiguracionEfectoBotones.TabIndex = 2;
+            this.bsVistaConfiguracionEfectoBotones.Tag = "22";
+            this.bsVistaConfiguracionEfectoBotones.Clickaso += new System.EventHandler(this.CambiarConfiguracion);
+            // 
+            // bsVistaConfiguracionMinimizarBandeja
+            // 
+            this.bsVistaConfiguracionMinimizarBandeja.Activo = false;
+            this.bsVistaConfiguracionMinimizarBandeja.BackColor = System.Drawing.Color.Transparent;
+            this.bsVistaConfiguracionMinimizarBandeja.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.bsVistaConfiguracionMinimizarBandeja.Location = new System.Drawing.Point(125, 150);
+            this.bsVistaConfiguracionMinimizarBandeja.Name = "bsVistaConfiguracionMinimizarBandeja";
+            this.bsVistaConfiguracionMinimizarBandeja.Size = new System.Drawing.Size(36, 18);
+            this.bsVistaConfiguracionMinimizarBandeja.TabIndex = 2;
+            this.bsVistaConfiguracionMinimizarBandeja.Tag = "12";
+            this.bsVistaConfiguracionMinimizarBandeja.Clickaso += new System.EventHandler(this.CambiarConfiguracion);
             // 
             // pbVistaConfiguracionCarpetaDescarga
             // 
@@ -418,6 +524,18 @@
             this.lblVistaConfiguracionMinimizarBanjeda.TabIndex = 1;
             this.lblVistaConfiguracionMinimizarBanjeda.Text = "Minimizar a bandeja";
             // 
+            // bsVistaConfiguracionTema
+            // 
+            this.bsVistaConfiguracionTema.Activo = true;
+            this.bsVistaConfiguracionTema.BackColor = System.Drawing.Color.Transparent;
+            this.bsVistaConfiguracionTema.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.bsVistaConfiguracionTema.Location = new System.Drawing.Point(790, 347);
+            this.bsVistaConfiguracionTema.Name = "bsVistaConfiguracionTema";
+            this.bsVistaConfiguracionTema.Size = new System.Drawing.Size(36, 18);
+            this.bsVistaConfiguracionTema.TabIndex = 2;
+            this.bsVistaConfiguracionTema.Tag = "24";
+            this.bsVistaConfiguracionTema.Clickaso += new System.EventHandler(this.CambiarConfiguracion);
+            // 
             // lblVistaConfiguracionIniciarConWindows
             // 
             this.lblVistaConfiguracionIniciarConWindows.AutoSize = true;
@@ -428,6 +546,18 @@
             this.lblVistaConfiguracionIniciarConWindows.Size = new System.Drawing.Size(177, 23);
             this.lblVistaConfiguracionIniciarConWindows.TabIndex = 1;
             this.lblVistaConfiguracionIniciarConWindows.Text = "Iniciar con windows";
+            // 
+            // bsVistaConfiguracionLatino
+            // 
+            this.bsVistaConfiguracionLatino.Activo = true;
+            this.bsVistaConfiguracionLatino.BackColor = System.Drawing.Color.Transparent;
+            this.bsVistaConfiguracionLatino.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.bsVistaConfiguracionLatino.Location = new System.Drawing.Point(783, 173);
+            this.bsVistaConfiguracionLatino.Name = "bsVistaConfiguracionLatino";
+            this.bsVistaConfiguracionLatino.Size = new System.Drawing.Size(36, 18);
+            this.bsVistaConfiguracionLatino.TabIndex = 2;
+            this.bsVistaConfiguracionLatino.Tag = "13";
+            this.bsVistaConfiguracionLatino.Clickaso += new System.EventHandler(this.CambiarConfiguracion);
             // 
             // lblVistaConfiguracionTema
             // 
@@ -450,6 +580,28 @@
             this.lblVistaConfiguracionRutaDescarga.Size = new System.Drawing.Size(158, 23);
             this.lblVistaConfiguracionRutaDescarga.TabIndex = 1;
             this.lblVistaConfiguracionRutaDescarga.Text = "Ruta de descarga";
+            // 
+            // lblVistaConfiguracionKbpsBajada
+            // 
+            this.lblVistaConfiguracionKbpsBajada.AutoSize = true;
+            this.lblVistaConfiguracionKbpsBajada.Font = new System.Drawing.Font("Roboto Lt", 14F);
+            this.lblVistaConfiguracionKbpsBajada.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(153)))), ((int)(((byte)(153)))), ((int)(((byte)(153)))));
+            this.lblVistaConfiguracionKbpsBajada.Location = new System.Drawing.Point(355, 553);
+            this.lblVistaConfiguracionKbpsBajada.Name = "lblVistaConfiguracionKbpsBajada";
+            this.lblVistaConfiguracionKbpsBajada.Size = new System.Drawing.Size(54, 23);
+            this.lblVistaConfiguracionKbpsBajada.TabIndex = 1;
+            this.lblVistaConfiguracionKbpsBajada.Text = "Kbps";
+            // 
+            // lblVistaConfiguracionKbpsSubida
+            // 
+            this.lblVistaConfiguracionKbpsSubida.AutoSize = true;
+            this.lblVistaConfiguracionKbpsSubida.Font = new System.Drawing.Font("Roboto Lt", 14F);
+            this.lblVistaConfiguracionKbpsSubida.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(153)))), ((int)(((byte)(153)))), ((int)(((byte)(153)))));
+            this.lblVistaConfiguracionKbpsSubida.Location = new System.Drawing.Point(336, 502);
+            this.lblVistaConfiguracionKbpsSubida.Name = "lblVistaConfiguracionKbpsSubida";
+            this.lblVistaConfiguracionKbpsSubida.Size = new System.Drawing.Size(54, 23);
+            this.lblVistaConfiguracionKbpsSubida.TabIndex = 1;
+            this.lblVistaConfiguracionKbpsSubida.Text = "Kbps";
             // 
             // lblVistaConfiguracionLimiteSubida
             // 
@@ -1077,155 +1229,6 @@
             this.niMinimizar.Text = "bitNode";
             this.niMinimizar.Click += new System.EventHandler(this.Maximizar);
             // 
-            // lblVistaConfiguracionKbpsSubida
-            // 
-            this.lblVistaConfiguracionKbpsSubida.AutoSize = true;
-            this.lblVistaConfiguracionKbpsSubida.Font = new System.Drawing.Font("Roboto Lt", 14F);
-            this.lblVistaConfiguracionKbpsSubida.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(153)))), ((int)(((byte)(153)))), ((int)(((byte)(153)))));
-            this.lblVistaConfiguracionKbpsSubida.Location = new System.Drawing.Point(336, 502);
-            this.lblVistaConfiguracionKbpsSubida.Name = "lblVistaConfiguracionKbpsSubida";
-            this.lblVistaConfiguracionKbpsSubida.Size = new System.Drawing.Size(54, 23);
-            this.lblVistaConfiguracionKbpsSubida.TabIndex = 1;
-            this.lblVistaConfiguracionKbpsSubida.Text = "Kbps";
-            // 
-            // lblVistaConfiguracionKbpsBajada
-            // 
-            this.lblVistaConfiguracionKbpsBajada.AutoSize = true;
-            this.lblVistaConfiguracionKbpsBajada.Font = new System.Drawing.Font("Roboto Lt", 14F);
-            this.lblVistaConfiguracionKbpsBajada.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(153)))), ((int)(((byte)(153)))), ((int)(((byte)(153)))));
-            this.lblVistaConfiguracionKbpsBajada.Location = new System.Drawing.Point(355, 553);
-            this.lblVistaConfiguracionKbpsBajada.Name = "lblVistaConfiguracionKbpsBajada";
-            this.lblVistaConfiguracionKbpsBajada.Size = new System.Drawing.Size(54, 23);
-            this.lblVistaConfiguracionKbpsBajada.TabIndex = 1;
-            this.lblVistaConfiguracionKbpsBajada.Text = "Kbps";
-            // 
-            // bnudVistaConfiguracionDescargasSimultaneas
-            // 
-            this.bnudVistaConfiguracionDescargasSimultaneas.BackColor = System.Drawing.Color.Transparent;
-            this.bnudVistaConfiguracionDescargasSimultaneas.Location = new System.Drawing.Point(712, 477);
-            this.bnudVistaConfiguracionDescargasSimultaneas.maxValor = 5;
-            this.bnudVistaConfiguracionDescargasSimultaneas.minValor = 0;
-            this.bnudVistaConfiguracionDescargasSimultaneas.Name = "bnudVistaConfiguracionDescargasSimultaneas";
-            this.bnudVistaConfiguracionDescargasSimultaneas.Size = new System.Drawing.Size(65, 35);
-            this.bnudVistaConfiguracionDescargasSimultaneas.TabIndex = 6;
-            this.bnudVistaConfiguracionDescargasSimultaneas.Tag = "33";
-            this.bnudVistaConfiguracionDescargasSimultaneas.UpDown = 1;
-            this.bnudVistaConfiguracionDescargasSimultaneas.valor = 0;
-            this.bnudVistaConfiguracionDescargasSimultaneas.CambioDeValor += new System.EventHandler(this.CambiarConfiguracion);
-            // 
-            // bnudVistaConfiguracionLimiteBajada
-            // 
-            this.bnudVistaConfiguracionLimiteBajada.BackColor = System.Drawing.Color.Transparent;
-            this.bnudVistaConfiguracionLimiteBajada.Location = new System.Drawing.Point(280, 545);
-            this.bnudVistaConfiguracionLimiteBajada.maxValor = 9999;
-            this.bnudVistaConfiguracionLimiteBajada.minValor = 0;
-            this.bnudVistaConfiguracionLimiteBajada.Name = "bnudVistaConfiguracionLimiteBajada";
-            this.bnudVistaConfiguracionLimiteBajada.Size = new System.Drawing.Size(65, 35);
-            this.bnudVistaConfiguracionLimiteBajada.TabIndex = 6;
-            this.bnudVistaConfiguracionLimiteBajada.Tag = "31";
-            this.bnudVistaConfiguracionLimiteBajada.UpDown = 5;
-            this.bnudVistaConfiguracionLimiteBajada.valor = 0;
-            this.bnudVistaConfiguracionLimiteBajada.CambioDeValor += new System.EventHandler(this.CambiarConfiguracion);
-            // 
-            // bnudVistaConfiguracionLimiteSubida
-            // 
-            this.bnudVistaConfiguracionLimiteSubida.BackColor = System.Drawing.Color.Transparent;
-            this.bnudVistaConfiguracionLimiteSubida.Location = new System.Drawing.Point(265, 502);
-            this.bnudVistaConfiguracionLimiteSubida.maxValor = 9999;
-            this.bnudVistaConfiguracionLimiteSubida.minValor = 0;
-            this.bnudVistaConfiguracionLimiteSubida.Name = "bnudVistaConfiguracionLimiteSubida";
-            this.bnudVistaConfiguracionLimiteSubida.Size = new System.Drawing.Size(65, 35);
-            this.bnudVistaConfiguracionLimiteSubida.TabIndex = 6;
-            this.bnudVistaConfiguracionLimiteSubida.Tag = "32";
-            this.bnudVistaConfiguracionLimiteSubida.UpDown = 5;
-            this.bnudVistaConfiguracionLimiteSubida.valor = 0;
-            this.bnudVistaConfiguracionLimiteSubida.CambioDeValor += new System.EventHandler(this.CambiarConfiguracion);
-            // 
-            // bsVistaConfiguracionEfectoFade
-            // 
-            this.bsVistaConfiguracionEfectoFade.Activo = true;
-            this.bsVistaConfiguracionEfectoFade.BackColor = System.Drawing.Color.Transparent;
-            this.bsVistaConfiguracionEfectoFade.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.bsVistaConfiguracionEfectoFade.Location = new System.Drawing.Point(94, 284);
-            this.bsVistaConfiguracionEfectoFade.Name = "bsVistaConfiguracionEfectoFade";
-            this.bsVistaConfiguracionEfectoFade.Size = new System.Drawing.Size(36, 18);
-            this.bsVistaConfiguracionEfectoFade.TabIndex = 2;
-            this.bsVistaConfiguracionEfectoFade.Tag = "21";
-            this.bsVistaConfiguracionEfectoFade.Clickaso += new System.EventHandler(this.CambiarConfiguracion);
-            // 
-            // bsVistaConfiguracionIniciarConWindows
-            // 
-            this.bsVistaConfiguracionIniciarConWindows.Activo = false;
-            this.bsVistaConfiguracionIniciarConWindows.BackColor = System.Drawing.Color.Transparent;
-            this.bsVistaConfiguracionIniciarConWindows.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.bsVistaConfiguracionIniciarConWindows.Location = new System.Drawing.Point(126, 83);
-            this.bsVistaConfiguracionIniciarConWindows.Name = "bsVistaConfiguracionIniciarConWindows";
-            this.bsVistaConfiguracionIniciarConWindows.Size = new System.Drawing.Size(36, 18);
-            this.bsVistaConfiguracionIniciarConWindows.TabIndex = 2;
-            this.bsVistaConfiguracionIniciarConWindows.Tag = "11";
-            this.bsVistaConfiguracionIniciarConWindows.Clickaso += new System.EventHandler(this.CambiarConfiguracion);
-            this.bsVistaConfiguracionIniciarConWindows.Click += new System.EventHandler(this.CambiarConfiguracion);
-            // 
-            // bsVistaConfiguracionEfectoMenu
-            // 
-            this.bsVistaConfiguracionEfectoMenu.Activo = true;
-            this.bsVistaConfiguracionEfectoMenu.BackColor = System.Drawing.Color.Transparent;
-            this.bsVistaConfiguracionEfectoMenu.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.bsVistaConfiguracionEfectoMenu.Location = new System.Drawing.Point(94, 376);
-            this.bsVistaConfiguracionEfectoMenu.Name = "bsVistaConfiguracionEfectoMenu";
-            this.bsVistaConfiguracionEfectoMenu.Size = new System.Drawing.Size(36, 18);
-            this.bsVistaConfiguracionEfectoMenu.TabIndex = 2;
-            this.bsVistaConfiguracionEfectoMenu.Tag = "23";
-            this.bsVistaConfiguracionEfectoMenu.Clickaso += new System.EventHandler(this.CambiarConfiguracion);
-            // 
-            // bsVistaConfiguracionEfectoBotones
-            // 
-            this.bsVistaConfiguracionEfectoBotones.Activo = true;
-            this.bsVistaConfiguracionEfectoBotones.BackColor = System.Drawing.Color.Transparent;
-            this.bsVistaConfiguracionEfectoBotones.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.bsVistaConfiguracionEfectoBotones.Location = new System.Drawing.Point(94, 327);
-            this.bsVistaConfiguracionEfectoBotones.Name = "bsVistaConfiguracionEfectoBotones";
-            this.bsVistaConfiguracionEfectoBotones.Size = new System.Drawing.Size(36, 18);
-            this.bsVistaConfiguracionEfectoBotones.TabIndex = 2;
-            this.bsVistaConfiguracionEfectoBotones.Tag = "22";
-            this.bsVistaConfiguracionEfectoBotones.Clickaso += new System.EventHandler(this.CambiarConfiguracion);
-            // 
-            // bsVistaConfiguracionMinimizarBandeja
-            // 
-            this.bsVistaConfiguracionMinimizarBandeja.Activo = false;
-            this.bsVistaConfiguracionMinimizarBandeja.BackColor = System.Drawing.Color.Transparent;
-            this.bsVistaConfiguracionMinimizarBandeja.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.bsVistaConfiguracionMinimizarBandeja.Location = new System.Drawing.Point(125, 150);
-            this.bsVistaConfiguracionMinimizarBandeja.Name = "bsVistaConfiguracionMinimizarBandeja";
-            this.bsVistaConfiguracionMinimizarBandeja.Size = new System.Drawing.Size(36, 18);
-            this.bsVistaConfiguracionMinimizarBandeja.TabIndex = 2;
-            this.bsVistaConfiguracionMinimizarBandeja.Tag = "12";
-            this.bsVistaConfiguracionMinimizarBandeja.Clickaso += new System.EventHandler(this.CambiarConfiguracion);
-            // 
-            // bsVistaConfiguracionTema
-            // 
-            this.bsVistaConfiguracionTema.Activo = true;
-            this.bsVistaConfiguracionTema.BackColor = System.Drawing.Color.Transparent;
-            this.bsVistaConfiguracionTema.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.bsVistaConfiguracionTema.Location = new System.Drawing.Point(790, 347);
-            this.bsVistaConfiguracionTema.Name = "bsVistaConfiguracionTema";
-            this.bsVistaConfiguracionTema.Size = new System.Drawing.Size(36, 18);
-            this.bsVistaConfiguracionTema.TabIndex = 2;
-            this.bsVistaConfiguracionTema.Tag = "24";
-            this.bsVistaConfiguracionTema.Clickaso += new System.EventHandler(this.CambiarConfiguracion);
-            // 
-            // bsVistaConfiguracionLatino
-            // 
-            this.bsVistaConfiguracionLatino.Activo = true;
-            this.bsVistaConfiguracionLatino.BackColor = System.Drawing.Color.Transparent;
-            this.bsVistaConfiguracionLatino.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.bsVistaConfiguracionLatino.Location = new System.Drawing.Point(783, 173);
-            this.bsVistaConfiguracionLatino.Name = "bsVistaConfiguracionLatino";
-            this.bsVistaConfiguracionLatino.Size = new System.Drawing.Size(36, 18);
-            this.bsVistaConfiguracionLatino.TabIndex = 2;
-            this.bsVistaConfiguracionLatino.Tag = "13";
-            this.bsVistaConfiguracionLatino.Clickaso += new System.EventHandler(this.CambiarConfiguracion);
-            // 
             // frmCliente
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
@@ -1252,11 +1255,8 @@
             this.pnlVistaConfiguracionGeneral.ResumeLayout(false);
             this.pnlVistaConfiguracionGeneral.PerformLayout();
             this.pnlVistaComfiguracionInterfaz.ResumeLayout(false);
-            this.pnlVistaComfiguracionInterfaz.PerformLayout();
             this.pnlVistaConfiguracionTransferencias.ResumeLayout(false);
-            this.pnlVistaConfiguracionTransferencias.PerformLayout();
             this.pnlVistaComfiguracionGeneral.ResumeLayout(false);
-            this.pnlVistaComfiguracionGeneral.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbVistaConfiguracionCarpetaDescarga)).EndInit();
             this.pnlVistaAbout.ResumeLayout(false);
             this.pnlVistaAbout.PerformLayout();

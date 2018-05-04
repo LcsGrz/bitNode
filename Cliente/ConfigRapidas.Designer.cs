@@ -30,7 +30,7 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmConfigRapidas));
             this.lblTitulo = new System.Windows.Forms.Label();
-            this.panel1 = new System.Windows.Forms.Panel();
+            this.pnlContenedor = new System.Windows.Forms.Panel();
             this.lblHibernar = new System.Windows.Forms.Label();
             this.lblApagar = new System.Windows.Forms.Label();
             this.lblDescripcion = new System.Windows.Forms.Label();
@@ -38,52 +38,54 @@
             this.lblCerrarApp = new System.Windows.Forms.Label();
             this.lblDeseo = new System.Windows.Forms.Label();
             this.lblNoHacerNada = new System.Windows.Forms.Label();
-            this.botonSwitch5 = new Cliente.Controles.botonSwitch();
-            this.bsNoHacerNada = new Cliente.Controles.botonSwitch();
-            this.botonSwitch1 = new Cliente.Controles.botonSwitch();
-            this.botonSwitch4 = new Cliente.Controles.botonSwitch();
-            this.botonSwitch2 = new Cliente.Controles.botonSwitch();
             this.panel2 = new System.Windows.Forms.Panel();
             this.pbOk = new System.Windows.Forms.PictureBox();
-            this.panel1.SuspendLayout();
+            this.pnlNada = new System.Windows.Forms.Panel();
+            this.bsCerrarApp = new Cliente.Controles.botonSwitch();
+            this.bsNoHacerNada = new Cliente.Controles.botonSwitch();
+            this.bsApagar = new Cliente.Controles.botonSwitch();
+            this.bsSuspender = new Cliente.Controles.botonSwitch();
+            this.bsHibernar = new Cliente.Controles.botonSwitch();
+            this.pnlContenedor.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbOk)).BeginInit();
             this.SuspendLayout();
             // 
             // lblTitulo
             // 
-            this.lblTitulo.AutoSize = true;
             this.lblTitulo.BackColor = System.Drawing.Color.Transparent;
             this.lblTitulo.Cursor = System.Windows.Forms.Cursors.SizeAll;
+            this.lblTitulo.Dock = System.Windows.Forms.DockStyle.Top;
             this.lblTitulo.Font = new System.Drawing.Font("Roboto Lt", 16F);
             this.lblTitulo.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(42)))), ((int)(((byte)(42)))));
-            this.lblTitulo.Location = new System.Drawing.Point(77, 5);
+            this.lblTitulo.Location = new System.Drawing.Point(0, 5);
             this.lblTitulo.Name = "lblTitulo";
-            this.lblTitulo.Size = new System.Drawing.Size(245, 27);
+            this.lblTitulo.Size = new System.Drawing.Size(398, 27);
             this.lblTitulo.TabIndex = 0;
             this.lblTitulo.Text = "Configuraciones rapidas";
+            this.lblTitulo.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.lblTitulo.MouseDown += new System.Windows.Forms.MouseEventHandler(this.MoverForm);
             // 
-            // panel1
+            // pnlContenedor
             // 
-            this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(13)))), ((int)(((byte)(23)))), ((int)(((byte)(33)))));
-            this.panel1.Controls.Add(this.lblHibernar);
-            this.panel1.Controls.Add(this.lblApagar);
-            this.panel1.Controls.Add(this.lblDescripcion);
-            this.panel1.Controls.Add(this.lblSuspender);
-            this.panel1.Controls.Add(this.lblCerrarApp);
-            this.panel1.Controls.Add(this.lblDeseo);
-            this.panel1.Controls.Add(this.lblNoHacerNada);
-            this.panel1.Controls.Add(this.botonSwitch5);
-            this.panel1.Controls.Add(this.bsNoHacerNada);
-            this.panel1.Controls.Add(this.botonSwitch1);
-            this.panel1.Controls.Add(this.botonSwitch4);
-            this.panel1.Controls.Add(this.botonSwitch2);
-            this.panel1.Controls.Add(this.panel2);
-            this.panel1.Cursor = System.Windows.Forms.Cursors.Arrow;
-            this.panel1.Location = new System.Drawing.Point(10, 37);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(379, 209);
-            this.panel1.TabIndex = 1;
+            this.pnlContenedor.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(13)))), ((int)(((byte)(23)))), ((int)(((byte)(33)))));
+            this.pnlContenedor.Controls.Add(this.lblHibernar);
+            this.pnlContenedor.Controls.Add(this.lblApagar);
+            this.pnlContenedor.Controls.Add(this.lblDescripcion);
+            this.pnlContenedor.Controls.Add(this.lblSuspender);
+            this.pnlContenedor.Controls.Add(this.lblCerrarApp);
+            this.pnlContenedor.Controls.Add(this.lblDeseo);
+            this.pnlContenedor.Controls.Add(this.lblNoHacerNada);
+            this.pnlContenedor.Controls.Add(this.bsCerrarApp);
+            this.pnlContenedor.Controls.Add(this.bsNoHacerNada);
+            this.pnlContenedor.Controls.Add(this.bsApagar);
+            this.pnlContenedor.Controls.Add(this.bsSuspender);
+            this.pnlContenedor.Controls.Add(this.bsHibernar);
+            this.pnlContenedor.Controls.Add(this.panel2);
+            this.pnlContenedor.Cursor = System.Windows.Forms.Cursors.Arrow;
+            this.pnlContenedor.Location = new System.Drawing.Point(10, 37);
+            this.pnlContenedor.Name = "pnlContenedor";
+            this.pnlContenedor.Size = new System.Drawing.Size(379, 209);
+            this.pnlContenedor.TabIndex = 1;
             // 
             // lblHibernar
             // 
@@ -91,7 +93,7 @@
             this.lblHibernar.BackColor = System.Drawing.Color.Transparent;
             this.lblHibernar.Font = new System.Drawing.Font("Roboto Lt", 12F);
             this.lblHibernar.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(153)))), ((int)(((byte)(153)))), ((int)(((byte)(153)))));
-            this.lblHibernar.Location = new System.Drawing.Point(142, 156);
+            this.lblHibernar.Location = new System.Drawing.Point(142, 131);
             this.lblHibernar.Name = "lblHibernar";
             this.lblHibernar.Size = new System.Drawing.Size(121, 19);
             this.lblHibernar.TabIndex = 4;
@@ -103,7 +105,7 @@
             this.lblApagar.BackColor = System.Drawing.Color.Transparent;
             this.lblApagar.Font = new System.Drawing.Font("Roboto Lt", 12F);
             this.lblApagar.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(153)))), ((int)(((byte)(153)))), ((int)(((byte)(153)))));
-            this.lblApagar.Location = new System.Drawing.Point(142, 128);
+            this.lblApagar.Location = new System.Drawing.Point(142, 162);
             this.lblApagar.Name = "lblApagar";
             this.lblApagar.Size = new System.Drawing.Size(112, 19);
             this.lblApagar.TabIndex = 2;
@@ -111,16 +113,17 @@
             // 
             // lblDescripcion
             // 
-            this.lblDescripcion.AutoSize = true;
             this.lblDescripcion.BackColor = System.Drawing.Color.Transparent;
             this.lblDescripcion.Cursor = System.Windows.Forms.Cursors.SizeAll;
+            this.lblDescripcion.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.lblDescripcion.Font = new System.Drawing.Font("Roboto Lt", 9F);
             this.lblDescripcion.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(153)))), ((int)(((byte)(153)))), ((int)(((byte)(153)))));
-            this.lblDescripcion.Location = new System.Drawing.Point(16, 193);
+            this.lblDescripcion.Location = new System.Drawing.Point(0, 195);
             this.lblDescripcion.Name = "lblDescripcion";
-            this.lblDescripcion.Size = new System.Drawing.Size(346, 14);
+            this.lblDescripcion.Size = new System.Drawing.Size(379, 14);
             this.lblDescripcion.TabIndex = 0;
             this.lblDescripcion.Text = "Recuerda que deberás configurarlas cada vez que estés BitNode";
+            this.lblDescripcion.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.lblDescripcion.MouseDown += new System.Windows.Forms.MouseEventHandler(this.MoverForm);
             // 
             // lblSuspender
@@ -141,7 +144,7 @@
             this.lblCerrarApp.BackColor = System.Drawing.Color.Transparent;
             this.lblCerrarApp.Font = new System.Drawing.Font("Roboto Lt", 12F);
             this.lblCerrarApp.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(153)))), ((int)(((byte)(153)))), ((int)(((byte)(153)))));
-            this.lblCerrarApp.Location = new System.Drawing.Point(142, 72);
+            this.lblCerrarApp.Location = new System.Drawing.Point(142, 69);
             this.lblCerrarApp.Name = "lblCerrarApp";
             this.lblCerrarApp.Size = new System.Drawing.Size(128, 19);
             this.lblCerrarApp.TabIndex = 2;
@@ -149,15 +152,16 @@
             // 
             // lblDeseo
             // 
-            this.lblDeseo.AutoSize = true;
             this.lblDeseo.BackColor = System.Drawing.Color.Transparent;
+            this.lblDeseo.Dock = System.Windows.Forms.DockStyle.Top;
             this.lblDeseo.Font = new System.Drawing.Font("Roboto Lt", 14F);
             this.lblDeseo.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(153)))), ((int)(((byte)(153)))), ((int)(((byte)(153)))));
-            this.lblDeseo.Location = new System.Drawing.Point(63, 4);
+            this.lblDeseo.Location = new System.Drawing.Point(0, 0);
             this.lblDeseo.Name = "lblDeseo";
-            this.lblDeseo.Size = new System.Drawing.Size(252, 23);
+            this.lblDeseo.Size = new System.Drawing.Size(379, 23);
             this.lblDeseo.TabIndex = 2;
             this.lblDeseo.Text = "Al finalizar descargas, desea:";
+            this.lblDeseo.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // lblNoHacerNada
             // 
@@ -165,71 +169,11 @@
             this.lblNoHacerNada.BackColor = System.Drawing.Color.Transparent;
             this.lblNoHacerNada.Font = new System.Drawing.Font("Roboto Lt", 12F);
             this.lblNoHacerNada.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(153)))), ((int)(((byte)(153)))), ((int)(((byte)(153)))));
-            this.lblNoHacerNada.Location = new System.Drawing.Point(142, 44);
+            this.lblNoHacerNada.Location = new System.Drawing.Point(142, 38);
             this.lblNoHacerNada.Name = "lblNoHacerNada";
             this.lblNoHacerNada.Size = new System.Drawing.Size(112, 19);
             this.lblNoHacerNada.TabIndex = 2;
             this.lblNoHacerNada.Text = "No hacer nada";
-            // 
-            // botonSwitch5
-            // 
-            this.botonSwitch5.Activo = false;
-            this.botonSwitch5.BackColor = System.Drawing.Color.Transparent;
-            this.botonSwitch5.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.botonSwitch5.Location = new System.Drawing.Point(100, 72);
-            this.botonSwitch5.Name = "botonSwitch5";
-            this.botonSwitch5.Size = new System.Drawing.Size(36, 18);
-            this.botonSwitch5.TabIndex = 3;
-            this.botonSwitch5.Tag = "1";
-            this.botonSwitch5.Clickaso += new System.EventHandler(this.botonSwitch3_Clickaso);
-            // 
-            // bsNoHacerNada
-            // 
-            this.bsNoHacerNada.Activo = true;
-            this.bsNoHacerNada.BackColor = System.Drawing.Color.Transparent;
-            this.bsNoHacerNada.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.bsNoHacerNada.Location = new System.Drawing.Point(100, 44);
-            this.bsNoHacerNada.Name = "bsNoHacerNada";
-            this.bsNoHacerNada.Size = new System.Drawing.Size(36, 18);
-            this.bsNoHacerNada.TabIndex = 3;
-            this.bsNoHacerNada.Tag = "0";
-            this.bsNoHacerNada.Clickaso += new System.EventHandler(this.botonSwitch3_Clickaso);
-            // 
-            // botonSwitch1
-            // 
-            this.botonSwitch1.Activo = false;
-            this.botonSwitch1.BackColor = System.Drawing.Color.Transparent;
-            this.botonSwitch1.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.botonSwitch1.Location = new System.Drawing.Point(100, 156);
-            this.botonSwitch1.Name = "botonSwitch1";
-            this.botonSwitch1.Size = new System.Drawing.Size(36, 18);
-            this.botonSwitch1.TabIndex = 3;
-            this.botonSwitch1.Tag = "4";
-            this.botonSwitch1.Clickaso += new System.EventHandler(this.botonSwitch3_Clickaso);
-            // 
-            // botonSwitch4
-            // 
-            this.botonSwitch4.Activo = false;
-            this.botonSwitch4.BackColor = System.Drawing.Color.Transparent;
-            this.botonSwitch4.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.botonSwitch4.Location = new System.Drawing.Point(100, 100);
-            this.botonSwitch4.Name = "botonSwitch4";
-            this.botonSwitch4.Size = new System.Drawing.Size(36, 18);
-            this.botonSwitch4.TabIndex = 3;
-            this.botonSwitch4.Tag = "2";
-            this.botonSwitch4.Clickaso += new System.EventHandler(this.botonSwitch3_Clickaso);
-            // 
-            // botonSwitch2
-            // 
-            this.botonSwitch2.Activo = false;
-            this.botonSwitch2.BackColor = System.Drawing.Color.Transparent;
-            this.botonSwitch2.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.botonSwitch2.Location = new System.Drawing.Point(100, 128);
-            this.botonSwitch2.Name = "botonSwitch2";
-            this.botonSwitch2.Size = new System.Drawing.Size(36, 18);
-            this.botonSwitch2.TabIndex = 3;
-            this.botonSwitch2.Tag = "3";
-            this.botonSwitch2.Clickaso += new System.EventHandler(this.botonSwitch3_Clickaso);
             // 
             // panel2
             // 
@@ -250,15 +194,86 @@
             this.pbOk.TabIndex = 1;
             this.pbOk.TabStop = false;
             // 
+            // pnlNada
+            // 
+            this.pnlNada.BackColor = System.Drawing.Color.Transparent;
+            this.pnlNada.Dock = System.Windows.Forms.DockStyle.Top;
+            this.pnlNada.Location = new System.Drawing.Point(0, 0);
+            this.pnlNada.Name = "pnlNada";
+            this.pnlNada.Size = new System.Drawing.Size(398, 5);
+            this.pnlNada.TabIndex = 2;
+            this.pnlNada.MouseDown += new System.Windows.Forms.MouseEventHandler(this.MoverForm);
+            // 
+            // bsCerrarApp
+            // 
+            this.bsCerrarApp.Activo = false;
+            this.bsCerrarApp.BackColor = System.Drawing.Color.Transparent;
+            this.bsCerrarApp.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.bsCerrarApp.Location = new System.Drawing.Point(100, 69);
+            this.bsCerrarApp.Name = "bsCerrarApp";
+            this.bsCerrarApp.Size = new System.Drawing.Size(36, 18);
+            this.bsCerrarApp.TabIndex = 3;
+            this.bsCerrarApp.Tag = "1";
+            this.bsCerrarApp.Clickaso += new System.EventHandler(this.botonSwitch3_Clickaso);
+            // 
+            // bsNoHacerNada
+            // 
+            this.bsNoHacerNada.Activo = true;
+            this.bsNoHacerNada.BackColor = System.Drawing.Color.Transparent;
+            this.bsNoHacerNada.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.bsNoHacerNada.Location = new System.Drawing.Point(100, 38);
+            this.bsNoHacerNada.Name = "bsNoHacerNada";
+            this.bsNoHacerNada.Size = new System.Drawing.Size(36, 18);
+            this.bsNoHacerNada.TabIndex = 3;
+            this.bsNoHacerNada.Tag = "0";
+            this.bsNoHacerNada.Clickaso += new System.EventHandler(this.botonSwitch3_Clickaso);
+            // 
+            // bsApagar
+            // 
+            this.bsApagar.Activo = false;
+            this.bsApagar.BackColor = System.Drawing.Color.Transparent;
+            this.bsApagar.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.bsApagar.Location = new System.Drawing.Point(100, 162);
+            this.bsApagar.Name = "bsApagar";
+            this.bsApagar.Size = new System.Drawing.Size(36, 18);
+            this.bsApagar.TabIndex = 3;
+            this.bsApagar.Tag = "4";
+            this.bsApagar.Clickaso += new System.EventHandler(this.botonSwitch3_Clickaso);
+            // 
+            // bsSuspender
+            // 
+            this.bsSuspender.Activo = false;
+            this.bsSuspender.BackColor = System.Drawing.Color.Transparent;
+            this.bsSuspender.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.bsSuspender.Location = new System.Drawing.Point(100, 100);
+            this.bsSuspender.Name = "bsSuspender";
+            this.bsSuspender.Size = new System.Drawing.Size(36, 18);
+            this.bsSuspender.TabIndex = 3;
+            this.bsSuspender.Tag = "2";
+            this.bsSuspender.Clickaso += new System.EventHandler(this.botonSwitch3_Clickaso);
+            // 
+            // bsHibernar
+            // 
+            this.bsHibernar.Activo = false;
+            this.bsHibernar.BackColor = System.Drawing.Color.Transparent;
+            this.bsHibernar.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.bsHibernar.Location = new System.Drawing.Point(100, 131);
+            this.bsHibernar.Name = "bsHibernar";
+            this.bsHibernar.Size = new System.Drawing.Size(36, 18);
+            this.bsHibernar.TabIndex = 3;
+            this.bsHibernar.Tag = "3";
+            this.bsHibernar.Clickaso += new System.EventHandler(this.botonSwitch3_Clickaso);
+            // 
             // frmConfigRapidas
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(7)))), ((int)(((byte)(17)))), ((int)(((byte)(27)))));
             this.ClientSize = new System.Drawing.Size(398, 270);
-            this.Controls.Add(this.pbOk);
-            this.Controls.Add(this.panel1);
             this.Controls.Add(this.lblTitulo);
+            this.Controls.Add(this.pnlNada);
+            this.Controls.Add(this.pbOk);
+            this.Controls.Add(this.pnlContenedor);
             this.Cursor = System.Windows.Forms.Cursors.SizeAll;
             this.ForeColor = System.Drawing.SystemColors.Control;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
@@ -267,8 +282,8 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "ConfigRapidas";
             this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.MoverForm);
-            this.panel1.ResumeLayout(false);
-            this.panel1.PerformLayout();
+            this.pnlContenedor.ResumeLayout(false);
+            this.pnlContenedor.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbOk)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -278,20 +293,21 @@
         #endregion
 
         private System.Windows.Forms.Label lblTitulo;
-        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Panel pnlContenedor;
         private System.Windows.Forms.Label lblDescripcion;
         private System.Windows.Forms.PictureBox pbOk;
-        private Controles.botonSwitch botonSwitch5;
+        private Controles.botonSwitch bsCerrarApp;
         private Controles.botonSwitch bsNoHacerNada;
-        private Controles.botonSwitch botonSwitch4;
-        private Controles.botonSwitch botonSwitch2;
+        private Controles.botonSwitch bsSuspender;
+        private Controles.botonSwitch bsHibernar;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Label lblHibernar;
         private System.Windows.Forms.Label lblApagar;
         private System.Windows.Forms.Label lblSuspender;
         private System.Windows.Forms.Label lblCerrarApp;
         private System.Windows.Forms.Label lblNoHacerNada;
-        private Controles.botonSwitch botonSwitch1;
+        private Controles.botonSwitch bsApagar;
         private System.Windows.Forms.Label lblDeseo;
+        private System.Windows.Forms.Panel pnlNada;
     }
 }

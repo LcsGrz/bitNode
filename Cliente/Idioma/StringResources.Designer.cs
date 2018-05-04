@@ -61,11 +61,29 @@ namespace Cliente.Idioma {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Apagar equipo.
+        /// </summary>
+        internal static string lblConfiguracionesRapidasApagar {
+            get {
+                return ResourceManager.GetString("lblConfiguracionesRapidasApagar", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Cerrar aplicacion.
         /// </summary>
         internal static string lblConfiguracionesRapidasCerrarApp {
             get {
                 return ResourceManager.GetString("lblConfiguracionesRapidasCerrarApp", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Recuerda que deberás configurarlas cada vez que inicies BitNode.
+        /// </summary>
+        internal static string lblConfiguracionesRapidasDescripcion {
+            get {
+                return ResourceManager.GetString("lblConfiguracionesRapidasDescripcion", resourceCulture);
             }
         }
         
@@ -79,11 +97,29 @@ namespace Cliente.Idioma {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Hibernar equipo.
+        /// </summary>
+        internal static string lblConfiguracionesRapidasHibernar {
+            get {
+                return ResourceManager.GetString("lblConfiguracionesRapidasHibernar", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a No hacer nada.
         /// </summary>
         internal static string lblConfiguracionesRapidasNoHacerNada {
             get {
                 return ResourceManager.GetString("lblConfiguracionesRapidasNoHacerNada", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Suspender equipo.
+        /// </summary>
+        internal static string lblConfiguracionesRapidasSuspender {
+            get {
+                return ResourceManager.GetString("lblConfiguracionesRapidasSuspender", resourceCulture);
             }
         }
         

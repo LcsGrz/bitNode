@@ -32,10 +32,9 @@ namespace Cliente
         {
             InitializeComponent();
             bsAnterior = bsNoHacerNada;
+            AplicarIdioma();
             AplicarTema();
             pbOk.Click += new EventHandler((object sender, EventArgs e) => { this.Close(); });
-            Thread.CurrentThread.CurrentUICulture = new System.Globalization.CultureInfo((configuracion.latino) ? "ES-AR" : "EN-US");
-
         }
         //----------------------------------------------------------------------------------------------Funciones
         private void MoverForm(object sender, MouseEventArgs e) //Mover formulario
@@ -45,10 +44,21 @@ namespace Cliente
         }
         private void AplicarTema()
         {
-            configuracion.CambiarTema();
-            this.BackColor = (configuracion.temaOscuro) ? configuracion.colorFondo : configuracion.colorPanelesInternosVistas;
+            this.BackColor = configuracion.colorFondo;
+            pnlContenedor.BackColor = configuracion.colorVistaFondo;
         }
-
+        private void AplicarIdioma()
+        {
+            Thread.CurrentThread.CurrentUICulture = new System.Globalization.CultureInfo((configuracion.latino) ? "ES-AR" : "EN-US");
+            lblTitulo.Text = Idioma.StringResources.lblConfiguracionesRapidasTitulo;
+            lblDeseo.Text = Idioma.StringResources.lblConfiguracionesRapidasDeseo;
+            lblNoHacerNada.Text = Idioma.StringResources.lblConfiguracionesRapidasNoHacerNada;
+            lblCerrarApp.Text = Idioma.StringResources.lblConfiguracionesRapidasCerrarApp;
+            lblSuspender.Text = Idioma.StringResources.lblConfiguracionesRapidasSuspender;
+            lblHibernar.Text = Idioma.StringResources.lblConfiguracionesRapidasHibernar;
+            lblApagar.Text = Idioma.StringResources.lblConfiguracionesRapidasApagar;
+            lblDescripcion.Text = Idioma.StringResources.lblConfiguracionesRapidasDescripcion;
+        }
         private void botonSwitch3_Clickaso(object sender, EventArgs e)
         {
             bsAnterior.Activo = false;

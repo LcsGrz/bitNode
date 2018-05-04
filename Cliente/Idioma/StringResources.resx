@@ -210,4 +210,16 @@
   <data name="lblConfiguracionesRapidasTitulo" xml:space="preserve">
     <value>Configuraciones rapidas</value>
   </data>
+  <data name="lblConfiguracionesRapidasApagar" xml:space="preserve">
+    <value>Apagar equipo</value>
+  </data>
+  <data name="lblConfiguracionesRapidasDescripcion" xml:space="preserve">
+    <value>Recuerda que deberás configurarlas cada vez que inicies BitNode</value>
+  </data>
+  <data name="lblConfiguracionesRapidasHibernar" xml:space="preserve">
+    <value>Hibernar equipo</value>
+  </data>
+  <data name="lblConfiguracionesRapidasSuspender" xml:space="preserve">
+    <value>Suspender equipo</value>
+  </data>
 </root>
