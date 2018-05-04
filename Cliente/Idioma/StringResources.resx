@@ -198,4 +198,16 @@
   <data name="lblVistaConfiguracionTranseferecias" xml:space="preserve">
     <value>Transferencias</value>
   </data>
+  <data name="lblConfiguracionesRapidasCerrarApp" xml:space="preserve">
+    <value>Cerrar aplicacion</value>
+  </data>
+  <data name="lblConfiguracionesRapidasDeseo" xml:space="preserve">
+    <value>Al finalizar descargas, desea:</value>
+  </data>
+  <data name="lblConfiguracionesRapidasNoHacerNada" xml:space="preserve">
+    <value>No hacer nada</value>
+  </data>
+  <data name="lblConfiguracionesRapidasTitulo" xml:space="preserve">
+    <value>Configuraciones rapidas</value>
+  </data>
 </root>

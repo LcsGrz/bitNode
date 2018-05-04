@@ -2,7 +2,7 @@
 
 namespace Cliente
 {
-    partial class frmMensaje
+    partial class ConfiguracionesRapidas
     {
         /// <summary>
         /// Required designer variable.
@@ -30,7 +30,7 @@ namespace Cliente
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmMensaje));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ConfiguracionesRapidas));
             this.pnlMensaje = new System.Windows.Forms.Panel();
             this.panel3 = new System.Windows.Forms.Panel();
             this.panel2 = new System.Windows.Forms.Panel();

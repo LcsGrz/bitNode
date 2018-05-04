@@ -381,7 +381,7 @@
             this.pnlVistaComfiguracionGeneral.Name = "pnlVistaComfiguracionGeneral";
             this.pnlVistaComfiguracionGeneral.Size = new System.Drawing.Size(990, 50);
             this.pnlVistaComfiguracionGeneral.TabIndex = 4;
-            this.pnlVistaComfiguracionGeneral.Click += new System.EventHandler(this.CambiarConfiguracion);
+            this.pnlVistaComfiguracionGeneral.Click += new System.EventHandler(this.pnlVistaComfiguracionGeneral_Click);
             // 
             // lblVistaConfiguracionGeneral
             // 

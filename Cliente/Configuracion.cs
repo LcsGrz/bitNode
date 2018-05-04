@@ -23,6 +23,7 @@ namespace Cliente
         public bool InicioFadeDeluxe = true;
         public bool temaOscuro = true;
         //Transferencias
+        public static int FinalizoDescarga = 0;
         public int limiteDesacargas = 3;
         public int limiteSubida = 0;
         public int limiteBajada = 0;

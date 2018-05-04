@@ -237,7 +237,7 @@ namespace Cliente
             string TAG = (sender as PictureBox).Tag.ToString();
             Clipboard.SetDataObject((TAG == "L") ? "lucas.gerez@gmail.com" : "juliomanzano1996@gmail.com");
             System.Diagnostics.Process.Start((TAG == "L") ? "https://github.com/LcsGrz" : "https://github.com/altars99");
-            new frmMensaje(Idioma.StringResources.mensajeEmail).ShowDialog();
+            new ConfiguracionesRapidas(Idioma.StringResources.mensajeEmail).ShowDialog();
         }
         private void CargarListas() //Carga las listas de paneles
         {
@@ -426,6 +426,12 @@ namespace Cliente
             //About
             tbVistaAboutDescripcion.Text = Idioma.StringResources.tbVistaAboutDescripcion;
         }
+
+        private void pnlVistaComfiguracionGeneral_Click(object sender, EventArgs e)
+        {
+            new frmConfigRapidas().Show();
+        }
+
         private void AplicarTema() //Aplica el tema seleccionado 
         {
             configuracion.CambiarTema();
@@ -469,7 +475,7 @@ namespace Cliente
             catch (Exception)
             {
                 configuracion.iniciarConWindows = !configuracion.iniciarConWindows;
-                new frmMensaje(Idioma.StringResources.MensajeIniciarConWindows).ShowDialog();
+                new ConfiguracionesRapidas(Idioma.StringResources.MensajeIniciarConWindows).ShowDialog();
                 bsVistaConfiguracionIniciarConWindows.Activo = configuracion.iniciarConWindows;
             }
         }

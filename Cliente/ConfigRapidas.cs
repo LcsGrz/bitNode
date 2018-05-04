@@ -1,13 +1,21 @@
-﻿using System;
+﻿using Cliente.Controles;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
 using System.Drawing;
 using System.Drawing.Text;
+using System.Linq;
 using System.Runtime.InteropServices;
+using System.Text;
+using System.Threading;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Cliente
 {
-    public partial class ConfiguracionesRapidas : Form
-    {
+    public partial class frmConfigRapidas : Form
+    { 
         //----------------------------------------------------------------------------------------------Variables
         [DllImport("user32.DLL", EntryPoint = "ReleaseCapture")]
         private extern static void ReleaseCapture();
@@ -17,21 +25,17 @@ namespace Cliente
 
         PrivateFontCollection pfc = Configuracion.Tipografia();
         Configuracion configuracion = new Configuracion().Leer();
+
+        private botonSwitch bsAnterior;
         //----------------------------------------------------------------------------------------------Constructor del form
-        public ConfiguracionesRapidas(string mensaje)
+        public frmConfigRapidas()
         {
             InitializeComponent();
+            bsAnterior = bsNoHacerNada;
             AplicarTema();
+            pbOk.Click += new EventHandler((object sender, EventArgs e) => { this.Close(); });
+            Thread.CurrentThread.CurrentUICulture = new System.Globalization.CultureInfo((configuracion.latino) ? "ES-AR" : "EN-US");
 
-            pbCheck.Click += new EventHandler((object sender, EventArgs e) => { this.Close(); });
-
-            lblMensaje.Font = new Font(pfc.Families[0], 12);
-            lblMensaje.Text = mensaje;
-
-            if (lblMensaje.Width >= 300)
-                this.Size = new Size((lblMensaje.Size.Width + 40), 105);
-
-            lblMensaje.Location = new Point(((pnlMensaje.Size.Width - lblMensaje.Size.Width) / 2), 31);
         }
         //----------------------------------------------------------------------------------------------Funciones
         private void MoverForm(object sender, MouseEventArgs e) //Mover formulario
@@ -42,12 +46,15 @@ namespace Cliente
         private void AplicarTema()
         {
             configuracion.CambiarTema();
-            pnlMensaje.BackColor = (configuracion.temaOscuro) ? configuracion.colorVistaFondo : configuracion.colorVistaFondo;
-            pnlBarra.BackColor = (configuracion.temaOscuro) ? Color.FromArgb(255, 153, 153, 153) : Color.FromArgb(255, 197, 33, 35);
             this.BackColor = (configuracion.temaOscuro) ? configuracion.colorFondo : configuracion.colorPanelesInternosVistas;
-            panel1.BackColor = (configuracion.temaOscuro) ? configuracion.colorFondo : configuracion.colorPanelesInternosVistas;
-            panel2.BackColor = (configuracion.temaOscuro) ? configuracion.colorFondo : configuracion.colorPanelesInternosVistas;
-            panel3.BackColor = (configuracion.temaOscuro) ? configuracion.colorFondo : configuracion.colorPanelesInternosVistas;
+        }
+
+        private void botonSwitch3_Clickaso(object sender, EventArgs e)
+        {
+            bsAnterior.Activo = false;
+            bsAnterior = (botonSwitch)sender;
+            bsAnterior.Activo = true;
+            Configuracion.FinalizoDescarga = Convert.ToInt32(bsAnterior.Tag);
         }
     }
 }

@@ -61,6 +61,42 @@ namespace Cliente.Idioma {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Cerrar aplicacion.
+        /// </summary>
+        internal static string lblConfiguracionesRapidasCerrarApp {
+            get {
+                return ResourceManager.GetString("lblConfiguracionesRapidasCerrarApp", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Al finalizar descargas, desea:.
+        /// </summary>
+        internal static string lblConfiguracionesRapidasDeseo {
+            get {
+                return ResourceManager.GetString("lblConfiguracionesRapidasDeseo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a No hacer nada.
+        /// </summary>
+        internal static string lblConfiguracionesRapidasNoHacerNada {
+            get {
+                return ResourceManager.GetString("lblConfiguracionesRapidasNoHacerNada", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Configuraciones rapidas.
+        /// </summary>
+        internal static string lblConfiguracionesRapidasTitulo {
+            get {
+                return ResourceManager.GetString("lblConfiguracionesRapidasTitulo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Sobre bitNode.
         /// </summary>
         internal static string lblMenuAbout {

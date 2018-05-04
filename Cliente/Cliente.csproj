@@ -56,6 +56,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ConfigRapidas.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ConfigRapidas.Designer.cs">
+      <DependentUpon>ConfigRapidas.cs</DependentUpon>
+    </Compile>
     <Compile Include="Controles\botonMenu.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -100,6 +106,9 @@
     <Compile Include="Splash.Designer.cs">
       <DependentUpon>Splash.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="ConfigRapidas.resx">
+      <DependentUpon>ConfigRapidas.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Controles\botonMenu.resx">
       <DependentUpon>botonMenu.cs</DependentUpon>
     </EmbeddedResource>
