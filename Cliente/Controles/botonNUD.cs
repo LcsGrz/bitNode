@@ -10,7 +10,7 @@ namespace Cliente.Controles
         private PrivateFontCollection pfc = Configuracion.Tipografia();
         private int valorActual = 0;
         private int UltimoApretado = 0;
-
+        private Configuracion configuracion;
         public event EventHandler CambioDeValor;
 
         public int valor
@@ -24,13 +24,14 @@ namespace Cliente.Controles
         public int UpDown { get; set; } = 5;
         public int maxValor { get; set; } = 9999;
         public int minValor { get; set; } = 0;
-
+ 
         public botonNUD()
         {
             InitializeComponent();
             mtbNumero.Font = new Font(pfc.Families[0], 14);
+            Configuracion.CambioDeTema += new System.EventHandler(CambioDeFondo);
+            CambioDeFondo(null,null);
         }
-
         private void UP_DOWN(object sender, EventArgs e)
         {
             int tag = Convert.ToInt32((sender as Control).Tag);
@@ -42,7 +43,6 @@ namespace Cliente.Controles
             if (CambioDeValor != null)
                 CambioDeValor.Invoke(this, e);
         }
-
         private void tmrTimer_Tick(object sender, EventArgs e)
         {
             if ((valorActual >= maxValor && UltimoApretado == 1) || (valorActual <= minValor && UltimoApretado == 2))
@@ -53,25 +53,21 @@ namespace Cliente.Controles
             }
             mtbNumero.Text = (valorActual += (UltimoApretado == 1) ? UpDown : -UpDown).ToString();
         }
-
         private void EmpezarContador(object sender, MouseEventArgs e)
         {
             UltimoApretado = Convert.ToInt32((sender as Control).Tag);
             tmrTimer.Start();
         }
-
         private void TerminarContador(object sender, MouseEventArgs e)
         {
             tmrTimer.Stop();
             if (CambioDeValor != null)
                 CambioDeValor.Invoke(this, e);
         }
-
         private void BorrarMTB(object sender, EventArgs e)
         {
             mtbNumero.Clear();
         }
-
         private void mtbNumero_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (e.KeyChar == Convert.ToChar(Keys.Enter))
@@ -82,6 +78,11 @@ namespace Cliente.Controles
                 pbFondo.Focus();
             }
             e.Handled = !char.IsNumber(e.KeyChar) && e.KeyChar != Convert.ToChar(Keys.Back);
+        }
+        private void CambioDeFondo(object sender, EventArgs e)
+        {
+            configuracion = new Configuracion().Leer();
+            mtbNumero.BackColor = (configuracion.temaOscuro) ? Color.FromArgb(255,6,11,16): Color.FromArgb(255, 124, 124, 124);
         }
     }
 }

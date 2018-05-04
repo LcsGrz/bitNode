@@ -236,12 +236,12 @@
             // pnlVistaContenedor
             // 
             this.pnlVistaContenedor.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(13)))), ((int)(((byte)(23)))), ((int)(((byte)(33)))));
+            this.pnlVistaContenedor.Controls.Add(this.pnlVistaConfiguracionGeneral);
             this.pnlVistaContenedor.Controls.Add(this.pnlVistaAbout);
             this.pnlVistaContenedor.Controls.Add(this.pnlVistaDescargar);
             this.pnlVistaContenedor.Controls.Add(this.pnlVistaExplorar);
             this.pnlVistaContenedor.Controls.Add(this.pnlVistaCompartir);
             this.pnlVistaContenedor.Controls.Add(this.pnlVistaSolicitar);
-            this.pnlVistaContenedor.Controls.Add(this.pnlVistaConfiguracionGeneral);
             this.pnlVistaContenedor.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlVistaContenedor.Location = new System.Drawing.Point(65, 31);
             this.pnlVistaContenedor.Margin = new System.Windows.Forms.Padding(2);
@@ -1084,9 +1084,9 @@
             this.lblVistaConfiguracionKbpsSubida.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(153)))), ((int)(((byte)(153)))), ((int)(((byte)(153)))));
             this.lblVistaConfiguracionKbpsSubida.Location = new System.Drawing.Point(336, 502);
             this.lblVistaConfiguracionKbpsSubida.Name = "lblVistaConfiguracionKbpsSubida";
-            this.lblVistaConfiguracionKbpsSubida.Size = new System.Drawing.Size(62, 23);
+            this.lblVistaConfiguracionKbpsSubida.Size = new System.Drawing.Size(54, 23);
             this.lblVistaConfiguracionKbpsSubida.TabIndex = 1;
-            this.lblVistaConfiguracionKbpsSubida.Text = "Kbp/s";
+            this.lblVistaConfiguracionKbpsSubida.Text = "Kbps";
             // 
             // lblVistaConfiguracionKbpsBajada
             // 
@@ -1095,9 +1095,9 @@
             this.lblVistaConfiguracionKbpsBajada.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(153)))), ((int)(((byte)(153)))), ((int)(((byte)(153)))));
             this.lblVistaConfiguracionKbpsBajada.Location = new System.Drawing.Point(355, 553);
             this.lblVistaConfiguracionKbpsBajada.Name = "lblVistaConfiguracionKbpsBajada";
-            this.lblVistaConfiguracionKbpsBajada.Size = new System.Drawing.Size(62, 23);
+            this.lblVistaConfiguracionKbpsBajada.Size = new System.Drawing.Size(54, 23);
             this.lblVistaConfiguracionKbpsBajada.TabIndex = 1;
-            this.lblVistaConfiguracionKbpsBajada.Text = "Kbp/s";
+            this.lblVistaConfiguracionKbpsBajada.Text = "Kbps";
             // 
             // bnudVistaConfiguracionDescargasSimultaneas
             // 

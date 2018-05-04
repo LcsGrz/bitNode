@@ -3,6 +3,7 @@ using System;
 using System.Drawing;
 using System.Drawing.Text;
 using System.IO;
+using System.Windows.Forms;
 
 namespace Cliente
 {
@@ -34,6 +35,7 @@ namespace Cliente
         public Color colorGeneral = Color.FromArgb(255, 153, 153, 153);
         public Color colorDetalles = Color.FromArgb(255, 255, 42, 42);
         public Color colorPanelesInternosVistas = Color.FromArgb(255, 22, 31, 41);
+        public static event EventHandler CambioDeTema;
         //Metodos
         public void Guardar()
         {
@@ -67,6 +69,8 @@ namespace Cliente
             colorMenuSeleccion = (temaOscuro) ? Color.FromArgb(255, 1, 9, 17) : Color.FromArgb(255, 183, 183, 183);
             colorGeneral = (temaOscuro) ? Color.FromArgb(255, 153, 153, 153) : Color.FromArgb(255, 255, 42, 42);
             colorPanelesInternosVistas = (temaOscuro) ? Color.FromArgb(255, 22, 31, 41) : Color.FromArgb(255, 230, 230, 230);
+            Guardar();
+            CambioDeTema?.Invoke(this, null);
         }
     }
 }
