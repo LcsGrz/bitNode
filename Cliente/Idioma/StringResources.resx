@@ -222,4 +222,10 @@
   <data name="lblConfiguracionesRapidasSuspender" xml:space="preserve">
     <value>Suspender equipo</value>
   </data>
+  <data name="lblMenuConfiguracionesR" xml:space="preserve">
+    <value>Configuraciones</value>
+  </data>
+  <data name="lblMenuCRapidas" xml:space="preserve">
+    <value>Rapidas</value>
+  </data>
 </root>

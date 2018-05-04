@@ -353,6 +353,7 @@ namespace Cliente
         {
             pfc = Configuracion.Tipografia();
 
+            Font doceR = new Font(pfc.Families[0], 12);
             Font catorceR = new Font(pfc.Families[0], 14);
             Font veintiunoR = new Font(pfc.Families[0], 21);
             Font veinticuatroR = new Font(pfc.Families[0], 24);
@@ -361,6 +362,8 @@ namespace Cliente
             {
                 p.Controls[1].Font = catorceR;
             }
+            lblMenuConfiguracionesR.Font = doceR;
+            lblMenuCRapidas.Font = doceR;
             //Descargar
             //Explorar
             //Compartir
@@ -400,6 +403,8 @@ namespace Cliente
             lblMenuSolicitar.Text = Idioma.StringResources.lblMenuSolicitar;
             lblMenuConfiguracion.Text = Idioma.StringResources.lblMenuConfiguracion;
             lblMenuAbout.Text = Idioma.StringResources.lblMenuAbout;
+            lblMenuConfiguracionesR.Text = Idioma.StringResources.lblMenuConfiguracionesR;
+            lblMenuCRapidas.Text = Idioma.StringResources.lblMenuCRapidas;
             //Descargar
             //Explorar
             //Compartir
@@ -426,12 +431,10 @@ namespace Cliente
             //About
             tbVistaAboutDescripcion.Text = Idioma.StringResources.tbVistaAboutDescripcion;
         }
-
-        private void pnlVistaComfiguracionGeneral_Click(object sender, EventArgs e)
+        private void AbrirConfigRapidas(object sender, EventArgs e) //Abre el form de configuraciones rapidas
         {
-            new frmConfigRapidas().Show();
+            new frmConfigRapidas().ShowDialog();
         }
-
         private void AplicarTema() //Aplica el tema seleccionado 
         {
             configuracion.CambiarTema();
@@ -439,7 +442,7 @@ namespace Cliente
             pnlBarra.BackColor = configuracion.colorFondo;
             pnlBarraGris1Px.BackColor = (configuracion.temaOscuro) ? Color.FromArgb(255, 153, 153, 153) : Color.FromArgb(255, 197, 33, 35);
             pnlMenu.BackColor = configuracion.colorMenu;
-            for(int i = 0; i < 6; i++)
+            for (int i = 0; i < 6; i++)
             {
                 panelesMenu[i].BackColor = (tagAnterior == i) ? configuracion.colorMenuSeleccion : configuracion.colorMenu;
                 panelesMenu[i].Controls[0].BackColor = Color.Transparent;

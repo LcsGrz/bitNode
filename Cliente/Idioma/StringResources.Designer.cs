@@ -160,6 +160,24 @@ namespace Cliente.Idioma {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Configuraciones.
+        /// </summary>
+        internal static string lblMenuConfiguracionesR {
+            get {
+                return ResourceManager.GetString("lblMenuConfiguracionesR", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Rapidas.
+        /// </summary>
+        internal static string lblMenuCRapidas {
+            get {
+                return ResourceManager.GetString("lblMenuCRapidas", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Descargar.
         /// </summary>
         internal static string lblMenuDescargar {
