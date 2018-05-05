@@ -6,7 +6,7 @@ using System.Windows.Forms;
 
 namespace Cliente
 {
-    public partial class ConfiguracionesRapidas : Form
+    public partial class frmMensaje : Form
     {
         //----------------------------------------------------------------------------------------------Variables
         [DllImport("user32.DLL", EntryPoint = "ReleaseCapture")]
@@ -18,7 +18,7 @@ namespace Cliente
         PrivateFontCollection pfc = Configuracion.Tipografia();
         Configuracion configuracion = new Configuracion().Leer();
         //----------------------------------------------------------------------------------------------Constructor del form
-        public ConfiguracionesRapidas(string mensaje)
+        public frmMensaje(string mensaje)
         {
             InitializeComponent();
             AplicarTema();

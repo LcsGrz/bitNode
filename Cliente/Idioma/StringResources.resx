@@ -231,4 +231,13 @@
   <data name="lblVistaConfiguracionNombre" xml:space="preserve">
     <value>Nombre</value>
   </data>
+  <data name="mensajeErrorCompartirArchivo" xml:space="preserve">
+    <value>Se produjo un error, vuelva a interntarlo.</value>
+  </data>
+  <data name="tbVistaCompartirDescripcionArchivo" xml:space="preserve">
+    <value>Breve descripcion del archivo.</value>
+  </data>
+  <data name="lblVistaCompartirSeleccionar" xml:space="preserve">
+    <value>Seleccione el archivo que quiera compartir</value>
+  </data>
 </root>

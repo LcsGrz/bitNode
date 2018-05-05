@@ -24,6 +24,7 @@ namespace Cliente
         Configuracion configuracion = new Configuracion().Leer();
         bool cerrar, TransparenciaFull = false;
         int tagAnterior = 0;
+        Archivo archivoNuevo;
 
         List<Panel> panelesMenu, panelesVistas;
         //----------------------------------------------------------------------------------------------Constructor del form
@@ -237,7 +238,7 @@ namespace Cliente
             string TAG = (sender as PictureBox).Tag.ToString();
             Clipboard.SetDataObject((TAG == "L") ? "lucas.gerez@gmail.com" : "juliomanzano1996@gmail.com");
             System.Diagnostics.Process.Start((TAG == "L") ? "https://github.com/LcsGrz" : "https://github.com/altars99");
-            new ConfiguracionesRapidas(Idioma.StringResources.mensajeEmail).ShowDialog();
+            new frmMensaje(Idioma.StringResources.mensajeEmail).ShowDialog();
         }
         private void CargarListas() //Carga las listas de paneles
         {
@@ -359,8 +360,10 @@ namespace Cliente
         {
             pfc = Configuracion.Tipografia();
 
+            Font ochoR = new Font(pfc.Families[0], 8);
             Font doceR = new Font(pfc.Families[0], 12);
             Font catorceR = new Font(pfc.Families[0], 14);
+            Font dieciseisR = new Font(pfc.Families[0], 16);
             Font veintiunoR = new Font(pfc.Families[0], 21);
             Font veinticuatroR = new Font(pfc.Families[0], 24);
             //Menu
@@ -373,6 +376,10 @@ namespace Cliente
             //Descargar
             //Explorar
             //Compartir
+            lblVistaCompartirSeleccionar.Font = dieciseisR;
+            lblVistaCompartirNombreArchivo.Font = dieciseisR;
+            lblVistaCompartirTamañoArchivo.Font = dieciseisR;
+            tbVistaCompartirDescripcionArchivo.Font = ochoR;
             //Solicitar
             //Configuracion
             lblVistaConfiguracionGeneral.Font = veinticuatroR;
@@ -416,6 +423,7 @@ namespace Cliente
             //Descargar
             //Explorar
             //Compartir
+            lblVistaCompartirSeleccionar.Text = Idioma.StringResources.lblVistaCompartirSeleccionar;
             //Solicitar
             //Configuracion
             lblVistaConfiguracionGeneral.Text = Idioma.StringResources.lblVistaConfiguracionGeneral;
@@ -444,12 +452,41 @@ namespace Cliente
         {
             new frmConfigRapidas().ShowDialog();
         }
-
         private void BorrarTB(object sender, EventArgs e)//Borrar TextBox
         {
             (sender as TextBox).Clear();
         }
+        private void SeleccionarArchivoCompartir(object sender, EventArgs e) //Selecciona el archivo que quiere compartir y muestra sus datos
+        {
+            if (ofdArchivo.ShowDialog() == DialogResult.OK && ofdArchivo.OpenFile() != null)
+            {
+                archivoNuevo = new Archivo(ofdArchivo);
+                lblVistaCompartirNombreArchivo.Text = archivoNuevo.nombre;
+                lblVistaCompartirTamañoArchivo.Text = Archivo.KB_GB_MB(archivoNuevo.tamaño);
+                tbVistaCompartirDescripcionArchivo.Text = Idioma.StringResources.tbVistaCompartirDescripcionArchivo;
 
+                pnlVistaCompartirSeleccionarArchivo.Visible = false;
+                pnlVistaCompartirGuardarArchivo.Visible = true;
+            }
+        }
+        private void CompartirCancelarArchivo(object sender, EventArgs e) //Comparte o cancela el archivo
+        {
+            if (Convert.ToInt32((sender as PictureBox).Tag) == 1)
+            {
+                archivoNuevo.archivoMD5 = Archivo.ObtenerMD5(archivoNuevo.ruta);
+                if (archivoNuevo.archivoMD5 != string.Empty)
+                {
+
+                }
+                else
+                {
+                    new frmMensaje(Idioma.StringResources.mensajeErrorCompartirArchivo).ShowDialog();
+                }
+            }
+            pnlVistaCompartirSeleccionarArchivo.Visible = true;
+            pnlVistaCompartirGuardarArchivo.Visible = false;
+            TBSinFoco(null,null);
+        }
         private void AplicarTema() //Aplica el tema seleccionado 
         {
             configuracion.CambiarTema();
@@ -494,7 +531,7 @@ namespace Cliente
             catch (Exception)
             {
                 configuracion.iniciarConWindows = !configuracion.iniciarConWindows;
-                new ConfiguracionesRapidas(Idioma.StringResources.MensajeIniciarConWindows).ShowDialog();
+                new frmMensaje(Idioma.StringResources.MensajeIniciarConWindows).ShowDialog();
                 bsVistaConfiguracionIniciarConWindows.Activo = configuracion.iniciarConWindows;
             }
         }

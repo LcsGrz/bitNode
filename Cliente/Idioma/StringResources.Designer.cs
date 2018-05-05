@@ -205,6 +205,15 @@ namespace Cliente.Idioma {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Seleccione el archivo que quiera compartir.
+        /// </summary>
+        internal static string lblVistaCompartirSeleccionar {
+            get {
+                return ResourceManager.GetString("lblVistaCompartirSeleccionar", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Efecto transision de botones.
         /// </summary>
         internal static string lblVistaConfiguracionEfectoBotones {
@@ -385,6 +394,15 @@ namespace Cliente.Idioma {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Se produjo un error, vuelva a interntarlo..
+        /// </summary>
+        internal static string mensajeErrorCompartirArchivo {
+            get {
+                return ResourceManager.GetString("mensajeErrorCompartirArchivo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Error al configurar, intente ejecutar como administrador..
         /// </summary>
         internal static string MensajeIniciarConWindows {
@@ -399,6 +417,15 @@ namespace Cliente.Idioma {
         internal static string tbVistaAboutDescripcion {
             get {
                 return ResourceManager.GetString("tbVistaAboutDescripcion", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Breve descripcion del archivo..
+        /// </summary>
+        internal static string tbVistaCompartirDescripcionArchivo {
+            get {
+                return ResourceManager.GetString("tbVistaCompartirDescripcionArchivo", resourceCulture);
             }
         }
     }

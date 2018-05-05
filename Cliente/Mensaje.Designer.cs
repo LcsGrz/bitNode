@@ -2,7 +2,7 @@
 
 namespace Cliente
 {
-    partial class ConfiguracionesRapidas
+    partial class frmMensaje
     {
         /// <summary>
         /// Required designer variable.
@@ -30,7 +30,7 @@ namespace Cliente
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ConfiguracionesRapidas));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmMensaje));
             this.pnlMensaje = new System.Windows.Forms.Panel();
             this.panel3 = new System.Windows.Forms.Panel();
             this.panel2 = new System.Windows.Forms.Panel();
@@ -126,7 +126,7 @@ namespace Cliente
             this.pbCheck.TabIndex = 1;
             this.pbCheck.TabStop = false;
             // 
-            // ConfiguracionesRapidas
+            // frmMensaje
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(7)))), ((int)(((byte)(17)))), ((int)(((byte)(27)))));
@@ -136,7 +136,7 @@ namespace Cliente
             this.Cursor = System.Windows.Forms.Cursors.SizeAll;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Name = "ConfiguracionesRapidas";
+            this.Name = "frmMensaje";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Mensaje";
             this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.MoverForm);
