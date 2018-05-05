@@ -322,6 +322,15 @@ namespace Cliente.Idioma {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Nombre.
+        /// </summary>
+        internal static string lblVistaConfiguracionNombre {
+            get {
+                return ResourceManager.GetString("lblVistaConfiguracionNombre", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Ruta de descarga.
         /// </summary>
         internal static string lblVistaConfiguracionRutaDescarga {

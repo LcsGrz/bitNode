@@ -296,6 +296,11 @@ namespace Cliente
                         AplicarIdioma();
                         break;
                     }
+                case 14:
+                    {
+                        configuracion.nombre = (sender as TextBox).Text;
+                        break;
+                    }
                 case 21:
                     {
                         configuracion.InicioFadeDeluxe = (sender as botonSwitch).Activo;
@@ -339,6 +344,7 @@ namespace Cliente
         {
             bsVistaConfiguracionIniciarConWindows.Activo = configuracion.iniciarConWindows;
             bsVistaConfiguracionMinimizarBandeja.Activo = configuracion.minimizarBandeja;
+            tbVistaConfiguracionNombre.Text = configuracion.nombre;
             bsVistaConfiguracionLatino.Activo = configuracion.latino;
             bsVistaConfiguracionEfectoFade.Activo = configuracion.InicioFadeDeluxe;
             bsVistaConfiguracionEfectoBotones.Activo = configuracion.BotonSlideDeluxe;
@@ -372,6 +378,8 @@ namespace Cliente
             lblVistaConfiguracionGeneral.Font = veinticuatroR;
             lblVistaConfiguracionIniciarConWindows.Font = catorceR;
             lblVistaConfiguracionMinimizarBanjeda.Font = catorceR;
+            lblVistaConfiguracionNombre.Font = catorceR;
+            tbVistaConfiguracionNombre.Font = doceR;
             lblVistaConfiguracionIdioma.Font = catorceR;
             lblVistaConfiguracionIngles.Font = catorceR;
             lblVistaConfiguracionEspañol.Font = catorceR;
@@ -413,6 +421,7 @@ namespace Cliente
             lblVistaConfiguracionGeneral.Text = Idioma.StringResources.lblVistaConfiguracionGeneral;
             lblVistaConfiguracionIniciarConWindows.Text = Idioma.StringResources.lblVistaConfiguracionIniciarConWindows;
             lblVistaConfiguracionMinimizarBanjeda.Text = Idioma.StringResources.lblVistaConfiguracionMinimizarBanjeda;
+            lblVistaConfiguracionNombre.Text = Idioma.StringResources.lblVistaConfiguracionNombre;
             lblVistaConfiguracionIdioma.Text = Idioma.StringResources.lblVistaConfiguracionIdioma;
             lblVistaConfiguracionIngles.Text = Idioma.StringResources.lblVistaConfiguracionIngles;
             lblVistaConfiguracionEspañol.Text = Idioma.StringResources.lblVistaConfiguracionEspañol;
@@ -435,6 +444,12 @@ namespace Cliente
         {
             new frmConfigRapidas().ShowDialog();
         }
+
+        private void BorrarTB(object sender, EventArgs e)//Borrar TextBox
+        {
+            (sender as TextBox).Clear();
+        }
+
         private void AplicarTema() //Aplica el tema seleccionado 
         {
             configuracion.CambiarTema();
@@ -457,6 +472,7 @@ namespace Cliente
             pnlVistaComfiguracionGeneral.BackColor = configuracion.colorPanelesInternosVistas;
             pnlVistaComfiguracionInterfaz.BackColor = configuracion.colorPanelesInternosVistas;
             pnlVistaConfiguracionTransferencias.BackColor = configuracion.colorPanelesInternosVistas;
+            tbVistaConfiguracionNombre.BackColor = configuracion.colorVistaFondo;
             //About
             tbVistaAboutDescripcion.BackColor = configuracion.colorVistaFondo;
         }

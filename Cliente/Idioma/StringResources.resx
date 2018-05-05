@@ -228,4 +228,7 @@
   <data name="lblMenuCRapidas" xml:space="preserve">
     <value>Rapidas</value>
   </data>
+  <data name="lblVistaConfiguracionNombre" xml:space="preserve">
+    <value>Nombre</value>
+  </data>
 </root>

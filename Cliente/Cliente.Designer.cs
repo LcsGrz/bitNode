@@ -39,6 +39,8 @@
             this.pnlBarraGris1Px = new System.Windows.Forms.Panel();
             this.pnlVistaContenedor = new System.Windows.Forms.Panel();
             this.pnlVistaConfiguracionGeneral = new System.Windows.Forms.Panel();
+            this.tbVistaConfiguracionNombre = new System.Windows.Forms.TextBox();
+            this.lblVistaConfiguracionNombre = new System.Windows.Forms.Label();
             this.lblVistaConfiguracionEfectoBotones = new System.Windows.Forms.Label();
             this.lblVistaConfiguracionMovimientoMenu = new System.Windows.Forms.Label();
             this.pnlVistaComfiguracionInterfaz = new System.Windows.Forms.Panel();
@@ -242,12 +244,12 @@
             // pnlVistaContenedor
             // 
             this.pnlVistaContenedor.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(13)))), ((int)(((byte)(23)))), ((int)(((byte)(33)))));
+            this.pnlVistaContenedor.Controls.Add(this.pnlVistaCompartir);
+            this.pnlVistaContenedor.Controls.Add(this.pnlVistaSolicitar);
             this.pnlVistaContenedor.Controls.Add(this.pnlVistaConfiguracionGeneral);
             this.pnlVistaContenedor.Controls.Add(this.pnlVistaAbout);
             this.pnlVistaContenedor.Controls.Add(this.pnlVistaDescargar);
             this.pnlVistaContenedor.Controls.Add(this.pnlVistaExplorar);
-            this.pnlVistaContenedor.Controls.Add(this.pnlVistaCompartir);
-            this.pnlVistaContenedor.Controls.Add(this.pnlVistaSolicitar);
             this.pnlVistaContenedor.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlVistaContenedor.Location = new System.Drawing.Point(65, 31);
             this.pnlVistaContenedor.Margin = new System.Windows.Forms.Padding(2);
@@ -259,6 +261,8 @@
             // pnlVistaConfiguracionGeneral
             // 
             this.pnlVistaConfiguracionGeneral.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(13)))), ((int)(((byte)(23)))), ((int)(((byte)(33)))));
+            this.pnlVistaConfiguracionGeneral.Controls.Add(this.tbVistaConfiguracionNombre);
+            this.pnlVistaConfiguracionGeneral.Controls.Add(this.lblVistaConfiguracionNombre);
             this.pnlVistaConfiguracionGeneral.Controls.Add(this.bnudVistaConfiguracionDescargasSimultaneas);
             this.pnlVistaConfiguracionGeneral.Controls.Add(this.bnudVistaConfiguracionLimiteBajada);
             this.pnlVistaConfiguracionGeneral.Controls.Add(this.bnudVistaConfiguracionLimiteSubida);
@@ -299,6 +303,35 @@
             this.pnlVistaConfiguracionGeneral.TabIndex = 14;
             this.pnlVistaConfiguracionGeneral.Tag = "5";
             this.pnlVistaConfiguracionGeneral.Visible = false;
+            // 
+            // tbVistaConfiguracionNombre
+            // 
+            this.tbVistaConfiguracionNombre.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(31)))), ((int)(((byte)(41)))));
+            this.tbVistaConfiguracionNombre.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.tbVistaConfiguracionNombre.Font = new System.Drawing.Font("Roboto Lt", 12F);
+            this.tbVistaConfiguracionNombre.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(153)))), ((int)(((byte)(153)))), ((int)(((byte)(153)))));
+            this.tbVistaConfiguracionNombre.Location = new System.Drawing.Point(751, 86);
+            this.tbVistaConfiguracionNombre.MaxLength = 12;
+            this.tbVistaConfiguracionNombre.Name = "tbVistaConfiguracionNombre";
+            this.tbVistaConfiguracionNombre.Size = new System.Drawing.Size(178, 20);
+            this.tbVistaConfiguracionNombre.TabIndex = 9;
+            this.tbVistaConfiguracionNombre.Tag = "14";
+            this.tbVistaConfiguracionNombre.Text = "NOMBRE";
+            this.tbVistaConfiguracionNombre.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.tbVistaConfiguracionNombre.Click += new System.EventHandler(this.BorrarTB);
+            this.tbVistaConfiguracionNombre.TextChanged += new System.EventHandler(this.CambiarConfiguracion);
+            // 
+            // lblVistaConfiguracionNombre
+            // 
+            this.lblVistaConfiguracionNombre.AutoSize = true;
+            this.lblVistaConfiguracionNombre.BackColor = System.Drawing.Color.Transparent;
+            this.lblVistaConfiguracionNombre.Font = new System.Drawing.Font("Roboto Lt", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblVistaConfiguracionNombre.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(153)))), ((int)(((byte)(153)))), ((int)(((byte)(153)))));
+            this.lblVistaConfiguracionNombre.Location = new System.Drawing.Point(639, 83);
+            this.lblVistaConfiguracionNombre.Name = "lblVistaConfiguracionNombre";
+            this.lblVistaConfiguracionNombre.Size = new System.Drawing.Size(78, 23);
+            this.lblVistaConfiguracionNombre.TabIndex = 8;
+            this.lblVistaConfiguracionNombre.Text = "Nombre";
             // 
             // lblVistaConfiguracionEfectoBotones
             // 
@@ -704,7 +737,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(378, 116);
+            this.label3.Location = new System.Drawing.Point(489, 297);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(50, 13);
             this.label3.TabIndex = 0;
@@ -1454,6 +1487,8 @@
         private System.Windows.Forms.Label lblMenuCRapidas;
         private System.Windows.Forms.Label lblMenuConfiguracionesR;
         private System.Windows.Forms.PictureBox pbMenuConfiguracionesRapidas;
+        private System.Windows.Forms.Label lblVistaConfiguracionNombre;
+        private System.Windows.Forms.TextBox tbVistaConfiguracionNombre;
     }
 }
 
