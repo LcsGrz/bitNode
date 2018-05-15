@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -10,8 +11,12 @@ using System.Windows.Forms;
 
 namespace Cliente
 {
-    class Archivo
+    public class Archivo
     {
+        //Atributos de clase privados
+        private static string rutaBN = Configuracion.bitNode + "\\ArchivosCompartidos";
+        //Eventos
+        public static event EventHandler ArchivoGuardado;
         //Constructor
         public Archivo(OpenFileDialog ofd)
         {
@@ -19,6 +24,7 @@ namespace Cliente
             this.ruta = ofd.FileName;
             this.tamaño = new FileInfo(ofd.FileName).Length;
         }
+        public Archivo() { }
         //Atributos
         public string nombre { get; set; }
         public string ruta { get; set; }
@@ -32,7 +38,7 @@ namespace Cliente
             string calculado = "";
             if (peso >= 1073741824)
             {
-                calculado = Math.Round((peso / Math.Pow(1024, 3)),2).ToString() + " gb";
+                calculado = Math.Round((peso / Math.Pow(1024, 3)), 2).ToString() + " gb";
             }
             else if (peso >= 1048576)
             {
@@ -46,35 +52,60 @@ namespace Cliente
         }
         public static string ObtenerMD5(string direccion)
         {
-            MD5 md5Hash = MD5.Create();
             if (!File.Exists(direccion))
                 return string.Empty;
 
-            new Thread(() => {
-                byte[] data = md5Hash.ComputeHash(File.OpenRead(direccion));
-                StringBuilder sBuilder = new StringBuilder();
+            MD5 md5Hash = MD5.Create();
 
-                for (int i = 0; i < data.Length; i++)
-                {
-                    sBuilder.Append(data[i].ToString());
-                }
-                //return sBuilder.ToString();
-            }).Start(); 
+            byte[] data = md5Hash.ComputeHash(File.OpenRead(direccion));
+            StringBuilder sBuilder = new StringBuilder();
 
-            return "";
+            for (int i = 0; i < data.Length; i++)
+            {
+                sBuilder.Append(data[i].ToString());
+            }
+            return sBuilder.ToString();
         }
-        public static bool CompararMD5(string archivo1,string archivo2)
+        public static bool CompararMD5(string archivo1, string archivo2)
         {
             StringComparer comparador = StringComparer.OrdinalIgnoreCase;
+            return (comparador.Compare(ObtenerMD5(archivo1), ObtenerMD5(archivo2)) == 0);
+        }
+        public static List<Archivo> LeerArchivos()
+        {
+            List<Archivo> Archivos = new List<Archivo>();
 
-            if (0 == comparador.Compare(ObtenerMD5(archivo1), ObtenerMD5(archivo2)))
+            if (!Directory.Exists(rutaBN))
+                Directory.CreateDirectory(rutaBN);
+
+            foreach (var file in new DirectoryInfo(rutaBN).GetFiles())
             {
-                return true;
+                Archivos.Add(JsonConvert.DeserializeObject<Archivo>(File.ReadAllText(rutaBN + "\\" + file.Name)));
             }
-            else
+            return Archivos;
+        }
+        public void GuardarArchivo()
+        {
+            new Thread(() =>
             {
-                return false;
-            }
+                this.archivoMD5 = Archivo.ObtenerMD5(ruta);
+                if (this.archivoMD5 != string.Empty)
+                {
+                    File.WriteAllText(rutaBN + "\\" + nombre.Split('.')[0] + ".json", JsonConvert.SerializeObject(this));
+                    frmCliente.archivosCompartidos.Add(this);
+                    ArchivoGuardado?.Invoke(null, null);
+                    new frmMensaje(Idioma.StringResources.mensajeExitoCompartirArchivo).ShowDialog();
+                    return;
+                }
+                new frmMensaje(Idioma.StringResources.mensajeErrorCompartirArchivo).ShowDialog();
+            }).Start();
+        }
+        public void EliminarArchivo()
+        {
+            if (File.Exists(rutaBN + "\\" + nombre.Split('.')[0] + ".json"))
+                File.Delete(rutaBN + "\\" + nombre.Split('.')[0] + ".json");
+            frmCliente.archivosCompartidos.Remove(this);
+            ArchivoGuardado?.Invoke(null, null);
         }
     }
 }

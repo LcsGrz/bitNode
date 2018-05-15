@@ -214,6 +214,15 @@ namespace Cliente.Idioma {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a No hay archivos compartidos.
+        /// </summary>
+        internal static string lblVistaCompartirVerArchivos {
+            get {
+                return ResourceManager.GetString("lblVistaCompartirVerArchivos", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Efecto transision de botones.
         /// </summary>
         internal static string lblVistaConfiguracionEfectoBotones {
@@ -403,11 +412,29 @@ namespace Cliente.Idioma {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a El archivo fue compartido exitosamente..
+        /// </summary>
+        internal static string mensajeExitoCompartirArchivo {
+            get {
+                return ResourceManager.GetString("mensajeExitoCompartirArchivo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Error al configurar, intente ejecutar como administrador..
         /// </summary>
         internal static string MensajeIniciarConWindows {
             get {
                 return ResourceManager.GetString("MensajeIniciarConWindows", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Cargando archivos.
+        /// </summary>
+        internal static string splashCargandoArchivos {
+            get {
+                return ResourceManager.GetString("splashCargandoArchivos", resourceCulture);
             }
         }
         

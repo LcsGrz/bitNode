@@ -27,6 +27,7 @@ namespace Cliente
         Archivo archivoNuevo;
 
         List<Panel> panelesMenu, panelesVistas;
+        public static List<Archivo> archivosCompartidos = Archivo.LeerArchivos();
         //----------------------------------------------------------------------------------------------Constructor del form
         public frmCliente() //Constructor del Form - Aplica configuraciones y etc
         {
@@ -35,8 +36,11 @@ namespace Cliente
             CargarListas();
             CargarFuentes();
             CargarConfiguracion();
+            CargarArchivosCompatidos();
             AplicarIdioma();
             AplicarTema();
+
+            Archivo.ArchivoGuardado += new EventHandler((object sender, EventArgs e) => { this.Invoke(new Action(() => { CargarArchivosCompatidos(); })); });
         }
         //----------------------------------------------------------------------------------------------Funciones de form
         private void pnlBarra_MouseDown(object sender, MouseEventArgs e) //Mover form
@@ -381,6 +385,7 @@ namespace Cliente
             lblVistaCompartirNombreArchivo.Font = dieciseisR;
             lblVistaCompartirTamañoArchivo.Font = dieciseisR;
             tbVistaCompartirDescripcionArchivo.Font = doceR;
+            lblVistaCompartirVerArchivos.Font = veintiunoR;
             //Solicitar
             //Configuracion
             lblVistaConfiguracionGeneral.Font = veinticuatroR;
@@ -424,7 +429,9 @@ namespace Cliente
             //Descargar
             //Explorar
             //Compartir
+            tbVistaCompartirDescripcionArchivo.Text = Idioma.StringResources.tbVistaCompartirDescripcionArchivo;
             lblVistaCompartirSeleccionar.Text = Idioma.StringResources.lblVistaCompartirSeleccionar;
+            lblVistaCompartirVerArchivos.Text = Idioma.StringResources.lblVistaCompartirVerArchivos;
             //Solicitar
             //Configuracion
             lblVistaConfiguracionGeneral.Text = Idioma.StringResources.lblVistaConfiguracionGeneral;
@@ -474,19 +481,18 @@ namespace Cliente
         {
             if (Convert.ToInt32((sender as PictureBox).Tag) == 1)
             {
-                archivoNuevo.archivoMD5 = Archivo.ObtenerMD5(archivoNuevo.ruta);
-                if (archivoNuevo.archivoMD5 != string.Empty)
-                {
-                    MessageBox.Show(archivoNuevo.archivoMD5);
-                }
-                else
-                {
-                    new frmMensaje(Idioma.StringResources.mensajeErrorCompartirArchivo).ShowDialog();
-                }
+                archivoNuevo.descripcion = tbVistaCompartirDescripcionArchivo.Text;
+                archivoNuevo.GuardarArchivo();
+                CargarArchivosCompatidos();
             }
+            else
+            {
+                archivoNuevo = null;
+            }
+            tbVistaCompartirDescripcionArchivo.Text = Idioma.StringResources.tbVistaCompartirDescripcionArchivo;
             pnlVistaCompartirSeleccionarArchivo.Visible = true;
             pnlVistaCompartirGuardarArchivo.Visible = false;
-            TBSinFoco(null,null);
+            TBSinFoco(null, null);
         }
         private void AplicarTema() //Aplica el tema seleccionado 
         {
@@ -505,6 +511,9 @@ namespace Cliente
             //Descargar
             //Explorar
             //Compartir
+            pnlVistaCompartirSeleccionarArchivo.BackColor = configuracion.colorPanelesInternosVistas;
+            pnlVistaCompartirGuardarArchivo.BackColor = configuracion.colorPanelesInternosVistas;
+            pnlVistaCompartirMostarArchivos.BackColor = configuracion.colorPanelesInternosVistas;
             //Solicitar
             //Configuracion
             pnlVistaComfiguracionGeneral.BackColor = configuracion.colorPanelesInternosVistas;
@@ -535,6 +544,18 @@ namespace Cliente
                 new frmMensaje(Idioma.StringResources.MensajeIniciarConWindows).ShowDialog();
                 bsVistaConfiguracionIniciarConWindows.Activo = configuracion.iniciarConWindows;
             }
+        }
+        private void CargarArchivosCompatidos() //Carga los archivos compartidos en la vista
+        {
+            if (archivosCompartidos.Count > 0)
+            {
+                dgvVistaCompartirArchivos.Visible = true;
+                dgvVistaCompartirArchivos.DataSource = null;
+                dgvVistaCompartirArchivos.DataSource = archivosCompartidos;
+                return;
+            }
+            lblVistaCompartirVerArchivos.Visible = true;
+            dgvVistaCompartirArchivos.Visible = false;
         }
     }
 }

@@ -240,4 +240,13 @@
   <data name="lblVistaCompartirSeleccionar" xml:space="preserve">
     <value>Seleccione el archivo que quiera compartir</value>
   </data>
+  <data name="mensajeExitoCompartirArchivo" xml:space="preserve">
+    <value>El archivo fue compartido exitosamente.</value>
+  </data>
+  <data name="lblVistaCompartirVerArchivos" xml:space="preserve">
+    <value>No hay archivos compartidos</value>
+  </data>
+  <data name="splashCargandoArchivos" xml:space="preserve">
+    <value>Cargando archivos</value>
+  </data>
 </root>
