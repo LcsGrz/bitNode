@@ -91,13 +91,14 @@ namespace Cliente
             // lblMensaje
             // 
             this.lblMensaje.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblMensaje.AutoSize = true;
             this.lblMensaje.BackColor = System.Drawing.Color.Transparent;
             this.lblMensaje.Cursor = System.Windows.Forms.Cursors.SizeAll;
             this.lblMensaje.Font = new System.Drawing.Font("Roboto Lt", 12F);
             this.lblMensaje.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(153)))), ((int)(((byte)(153)))), ((int)(((byte)(153)))));
             this.lblMensaje.Location = new System.Drawing.Point(12, 31);
             this.lblMensaje.Name = "lblMensaje";
-            this.lblMensaje.Size = new System.Drawing.Size(279, 19);
+            this.lblMensaje.Size = new System.Drawing.Size(69, 19);
             this.lblMensaje.TabIndex = 1;
             this.lblMensaje.Text = "Mensaje";
             this.lblMensaje.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -141,6 +142,7 @@ namespace Cliente
             this.Text = "Mensaje";
             this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.MoverForm);
             this.pnlMensaje.ResumeLayout(false);
+            this.pnlMensaje.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbCheck)).EndInit();
             this.ResumeLayout(false);
 

@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -11,19 +12,21 @@ namespace Cliente
 {
     class Archivo
     {
+        //Constructor
         public Archivo(OpenFileDialog ofd)
         {
             this.nombre = ofd.SafeFileName;
             this.ruta = ofd.FileName;
             this.tamaño = new FileInfo(ofd.FileName).Length;
         }
-
+        //Atributos
         public string nombre { get; set; }
         public string ruta { get; set; }
         public string descripcion { get; set; }
         public long tamaño { get; set; }
         public string archivoMD5 { get; set; }
         public bool activo { get; set; } = true;
+        //Funciones
         public static string KB_GB_MB(long peso)
         {
             string calculado = "";
@@ -47,16 +50,18 @@ namespace Cliente
             if (!File.Exists(direccion))
                 return string.Empty;
 
-            byte[] data = md5Hash.ComputeHash(File.OpenRead(direccion));
+            new Thread(() => {
+                byte[] data = md5Hash.ComputeHash(File.OpenRead(direccion));
+                StringBuilder sBuilder = new StringBuilder();
 
-            StringBuilder sBuilder = new StringBuilder();
+                for (int i = 0; i < data.Length; i++)
+                {
+                    sBuilder.Append(data[i].ToString());
+                }
+                //return sBuilder.ToString();
+            }).Start(); 
 
-            for (int i = 0; i < data.Length; i++)
-            {
-                sBuilder.Append(data[i].ToString());
-            }
-
-            return sBuilder.ToString();
+            return "";
         }
         public static bool CompararMD5(string archivo1,string archivo2)
         {

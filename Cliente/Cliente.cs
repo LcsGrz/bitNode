@@ -361,6 +361,7 @@ namespace Cliente
             pfc = Configuracion.Tipografia();
 
             Font ochoR = new Font(pfc.Families[0], 8);
+            Font diezR = new Font(pfc.Families[0], 10);
             Font doceR = new Font(pfc.Families[0], 12);
             Font catorceR = new Font(pfc.Families[0], 14);
             Font dieciseisR = new Font(pfc.Families[0], 16);
@@ -379,7 +380,7 @@ namespace Cliente
             lblVistaCompartirSeleccionar.Font = dieciseisR;
             lblVistaCompartirNombreArchivo.Font = dieciseisR;
             lblVistaCompartirTamañoArchivo.Font = dieciseisR;
-            tbVistaCompartirDescripcionArchivo.Font = ochoR;
+            tbVistaCompartirDescripcionArchivo.Font = doceR;
             //Solicitar
             //Configuracion
             lblVistaConfiguracionGeneral.Font = veinticuatroR;
@@ -476,7 +477,7 @@ namespace Cliente
                 archivoNuevo.archivoMD5 = Archivo.ObtenerMD5(archivoNuevo.ruta);
                 if (archivoNuevo.archivoMD5 != string.Empty)
                 {
-
+                    MessageBox.Show(archivoNuevo.archivoMD5);
                 }
                 else
                 {

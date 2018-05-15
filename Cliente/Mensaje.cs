@@ -31,7 +31,7 @@ namespace Cliente
             if (lblMensaje.Width >= 300)
                 this.Size = new Size((lblMensaje.Size.Width + 40), 105);
 
-            //lblMensaje.Location = new Point(((pnlMensaje.Size.Width - lblMensaje.Size.Width) / 2), 31);
+            lblMensaje.Location = new Point(((pnlMensaje.Size.Width - lblMensaje.Size.Width) / 2), 31);
         }
         //----------------------------------------------------------------------------------------------Funciones
         private void MoverForm(object sender, MouseEventArgs e) //Mover formulario

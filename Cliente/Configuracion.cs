@@ -12,7 +12,7 @@ namespace Cliente
         //bitNode
         public static string bitNode = Environment.ExpandEnvironmentVariables("%AppData%") + "\\bitNode";
         public static string bnConfiguracion = bitNode + @"\Configuracion.json";
-        public static string userRoot = System.Environment.GetEnvironmentVariable("USERPROFILE");
+        public static string userRoot = Environment.GetEnvironmentVariable("USERPROFILE");
         public static Random r = new Random();
         //General
         public bool latino = true;
@@ -79,7 +79,7 @@ namespace Cliente
         private void GenerarNombre() //Genera nombre aleatorio a la maquina
         {
             string ABC = "Q W E R T Y U I O P A S D F G H J K L Ñ Z X C V B N M";
-            nombre = ABC.Split(' ')[r.Next(0, 28)] + ABC.Split(' ')[r.Next(0, 28)] + ABC.Split(' ')[r.Next(0, 28)] + r.Next(100, 999).ToString();
+            nombre = ABC.Split(' ')[r.Next(0, 27)] + ABC.Split(' ')[r.Next(0, 27)] + ABC.Split(' ')[r.Next(0, 27)] + r.Next(100, 999).ToString();
         }
     }
 }
