@@ -490,8 +490,7 @@ namespace Cliente
                 archivoNuevo = null;
             }
             tbVistaCompartirDescripcionArchivo.Text = Idioma.StringResources.tbVistaCompartirDescripcionArchivo;
-            pnlVistaCompartirSeleccionarArchivo.Visible = true;
-            pnlVistaCompartirGuardarArchivo.Visible = false;
+            pnlVistaCompartirSeleccionarArchivo.Visible = !(pnlVistaCompartirGuardarArchivo.Visible = false);
             TBSinFoco(null, null);
         }
         private void AplicarTema() //Aplica el tema seleccionado 
@@ -547,15 +546,9 @@ namespace Cliente
         }
         private void CargarArchivosCompatidos() //Carga los archivos compartidos en la vista
         {
-            if (archivosCompartidos.Count > 0)
-            {
-                dgvVistaCompartirArchivos.Visible = true;
-                dgvVistaCompartirArchivos.DataSource = null;
-                dgvVistaCompartirArchivos.DataSource = archivosCompartidos;
-                return;
-            }
-            lblVistaCompartirVerArchivos.Visible = true;
-            dgvVistaCompartirArchivos.Visible = false;
+            dgvVistaCompartirArchivos.Visible = !(lblVistaCompartirVerArchivos.Visible = (archivosCompartidos.Count == 0));
+            dgvVistaCompartirArchivos.DataSource = null;
+            dgvVistaCompartirArchivos.DataSource = (archivosCompartidos.Count > 0) ? archivosCompartidos : null;
         }
     }
 }

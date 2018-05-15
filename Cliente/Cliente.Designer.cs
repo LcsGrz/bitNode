@@ -296,8 +296,8 @@
             // 
             this.pnlVistaCompartirMostarArchivos.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.pnlVistaCompartirMostarArchivos.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(31)))), ((int)(((byte)(41)))));
-            this.pnlVistaCompartirMostarArchivos.Controls.Add(this.dgvVistaCompartirArchivos);
             this.pnlVistaCompartirMostarArchivos.Controls.Add(this.lblVistaCompartirVerArchivos);
+            this.pnlVistaCompartirMostarArchivos.Controls.Add(this.dgvVistaCompartirArchivos);
             this.pnlVistaCompartirMostarArchivos.Location = new System.Drawing.Point(37, 156);
             this.pnlVistaCompartirMostarArchivos.Name = "pnlVistaCompartirMostarArchivos";
             this.pnlVistaCompartirMostarArchivos.Size = new System.Drawing.Size(960, 436);
@@ -1363,9 +1363,9 @@
             // 
             this.dgvVistaCompartirArchivos.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvVistaCompartirArchivos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvVistaCompartirArchivos.Location = new System.Drawing.Point(63, 83);
+            this.dgvVistaCompartirArchivos.Location = new System.Drawing.Point(47, 23);
             this.dgvVistaCompartirArchivos.Name = "dgvVistaCompartirArchivos";
-            this.dgvVistaCompartirArchivos.Size = new System.Drawing.Size(782, 219);
+            this.dgvVistaCompartirArchivos.Size = new System.Drawing.Size(890, 386);
             this.dgvVistaCompartirArchivos.TabIndex = 6;
             this.dgvVistaCompartirArchivos.Visible = false;
             // 
