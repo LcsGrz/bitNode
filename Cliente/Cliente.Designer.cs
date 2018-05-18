@@ -41,6 +41,7 @@
             this.pnlVistaCompartir = new System.Windows.Forms.Panel();
             this.pnlVistaCompartirMostarArchivos = new System.Windows.Forms.Panel();
             this.lblVistaCompartirVerArchivos = new System.Windows.Forms.Label();
+            this.dgvVistaCompartirArchivos = new System.Windows.Forms.DataGridView();
             this.pnlVistaCompartirGuardarArchivo = new System.Windows.Forms.Panel();
             this.tbVistaCompartirDescripcionArchivo = new System.Windows.Forms.TextBox();
             this.pbVistaCompartirCancelar = new System.Windows.Forms.PictureBox();
@@ -124,7 +125,6 @@
             this.ttAyuda = new System.Windows.Forms.ToolTip(this.components);
             this.niMinimizar = new System.Windows.Forms.NotifyIcon(this.components);
             this.ofdArchivo = new System.Windows.Forms.OpenFileDialog();
-            this.dgvVistaCompartirArchivos = new System.Windows.Forms.DataGridView();
             this.bnudVistaConfiguracionDescargasSimultaneas = new Cliente.Controles.botonNUD();
             this.bnudVistaConfiguracionLimiteBajada = new Cliente.Controles.botonNUD();
             this.bnudVistaConfiguracionLimiteSubida = new Cliente.Controles.botonNUD();
@@ -143,6 +143,7 @@
             this.pnlVistaContenedor.SuspendLayout();
             this.pnlVistaCompartir.SuspendLayout();
             this.pnlVistaCompartirMostarArchivos.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvVistaCompartirArchivos)).BeginInit();
             this.pnlVistaCompartirGuardarArchivo.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbVistaCompartirCancelar)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbVistaCompartirArchivo)).BeginInit();
@@ -177,7 +178,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.pbMenuExplorar)).BeginInit();
             this.pnlMenuDescargar.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbMenuDescargar)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvVistaCompartirArchivos)).BeginInit();
             this.SuspendLayout();
             // 
             // pnlBarra
@@ -237,10 +237,10 @@
             // 
             this.pbIcono.BackColor = System.Drawing.Color.Transparent;
             this.pbIcono.Image = ((System.Drawing.Image)(resources.GetObject("pbIcono.Image")));
-            this.pbIcono.Location = new System.Drawing.Point(5, 5);
+            this.pbIcono.Location = new System.Drawing.Point(7, 7);
             this.pbIcono.Name = "pbIcono";
-            this.pbIcono.Size = new System.Drawing.Size(19, 20);
-            this.pbIcono.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pbIcono.Size = new System.Drawing.Size(16, 17);
+            this.pbIcono.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
             this.pbIcono.TabIndex = 1;
             this.pbIcono.TabStop = false;
             // 
@@ -315,6 +315,27 @@
             this.lblVistaCompartirVerArchivos.TabIndex = 5;
             this.lblVistaCompartirVerArchivos.Text = "No hay archivos compartidos";
             this.lblVistaCompartirVerArchivos.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // dgvVistaCompartirArchivos
+            // 
+            this.dgvVistaCompartirArchivos.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dgvVistaCompartirArchivos.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(7)))), ((int)(((byte)(17)))), ((int)(((byte)(27)))));
+            this.dgvVistaCompartirArchivos.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.dgvVistaCompartirArchivos.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None;
+            this.dgvVistaCompartirArchivos.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
+            this.dgvVistaCompartirArchivos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvVistaCompartirArchivos.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dgvVistaCompartirArchivos.EnableHeadersVisualStyles = false;
+            this.dgvVistaCompartirArchivos.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(31)))), ((int)(((byte)(41)))));
+            this.dgvVistaCompartirArchivos.Location = new System.Drawing.Point(0, 0);
+            this.dgvVistaCompartirArchivos.MultiSelect = false;
+            this.dgvVistaCompartirArchivos.Name = "dgvVistaCompartirArchivos";
+            this.dgvVistaCompartirArchivos.ReadOnly = true;
+            this.dgvVistaCompartirArchivos.Size = new System.Drawing.Size(960, 436);
+            this.dgvVistaCompartirArchivos.TabIndex = 6;
+            this.dgvVistaCompartirArchivos.Visible = false;
+            this.dgvVistaCompartirArchivos.DataSourceChanged += new System.EventHandler(this.dgvVistaCompartirArchivos_DataSourceChanged);
+            this.dgvVistaCompartirArchivos.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvVistaCompartirArchivos_CellClick);
             // 
             // pnlVistaCompartirGuardarArchivo
             // 
@@ -1359,16 +1380,6 @@
             // 
             this.ofdArchivo.Title = "Seleccione un archivo";
             // 
-            // dgvVistaCompartirArchivos
-            // 
-            this.dgvVistaCompartirArchivos.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.dgvVistaCompartirArchivos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvVistaCompartirArchivos.Location = new System.Drawing.Point(47, 23);
-            this.dgvVistaCompartirArchivos.Name = "dgvVistaCompartirArchivos";
-            this.dgvVistaCompartirArchivos.Size = new System.Drawing.Size(890, 386);
-            this.dgvVistaCompartirArchivos.TabIndex = 6;
-            this.dgvVistaCompartirArchivos.Visible = false;
-            // 
             // bnudVistaConfiguracionDescargasSimultaneas
             // 
             this.bnudVistaConfiguracionDescargasSimultaneas.BackColor = System.Drawing.Color.Transparent;
@@ -1514,6 +1525,7 @@
             this.Text = "Form1";
             this.SizeChanged += new System.EventHandler(this.TimerOn);
             this.pnlBarra.ResumeLayout(false);
+            this.pnlBarra.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbCerrar)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbMinimizar)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbTitulo)).EndInit();
@@ -1521,6 +1533,7 @@
             this.pnlVistaContenedor.ResumeLayout(false);
             this.pnlVistaCompartir.ResumeLayout(false);
             this.pnlVistaCompartirMostarArchivos.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dgvVistaCompartirArchivos)).EndInit();
             this.pnlVistaCompartirGuardarArchivo.ResumeLayout(false);
             this.pnlVistaCompartirGuardarArchivo.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbVistaCompartirCancelar)).EndInit();
@@ -1569,7 +1582,6 @@
             this.pnlMenuDescargar.ResumeLayout(false);
             this.pnlMenuDescargar.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbMenuDescargar)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvVistaCompartirArchivos)).EndInit();
             this.ResumeLayout(false);
 
         }

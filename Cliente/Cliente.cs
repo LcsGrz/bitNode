@@ -522,6 +522,34 @@ namespace Cliente
             //About
             tbVistaAboutDescripcion.BackColor = configuracion.colorVistaFondo;
         }
+
+        private void EliminarArchivoCompartido(object sender, EventArgs e)//Elimina el archivo compartido seleccionado
+        {
+            archivosCompartidos[0].EliminarArchivo();
+        }
+
+        private void dgvVistaCompartirArchivos_DataSourceChanged(object sender, EventArgs e)
+        {
+            Font asdR = new Font(pfc.Families[0], 14);
+            dgvVistaCompartirArchivos.DefaultCellStyle.BackColor = Color.FromArgb(255,22, 31, 41);
+            dgvVistaCompartirArchivos.DefaultCellStyle.SelectionBackColor = Color.FromArgb(255, 22, 31, 41);
+            dgvVistaCompartirArchivos.DefaultCellStyle.ForeColor = Color.FromArgb(255, 153, 153, 153);
+dgvVistaCompartirArchivos.ColumnHeadersDefaultCellStyle.BackColor = Color.FromArgb(255, 7, 17, 27);
+            dgvVistaCompartirArchivos.ColumnHeadersDefaultCellStyle.ForeColor = Color.FromArgb(255, 255, 42, 42);
+            dgvVistaCompartirArchivos.ColumnHeadersDefaultCellStyle.Font = asdR;
+            dgvVistaCompartirArchivos.ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dgvVistaCompartirArchivos.GridColor = Color.FromArgb(255, 7, 17, 27);
+            dgvVistaCompartirArchivos.RowHeadersVisible = false;
+            dgvVistaCompartirArchivos.BackgroundColor = Color.FromArgb(255, 22, 31, 41);
+            Font ochoR = new Font(pfc.Families[0], 12);
+            dgvVistaCompartirArchivos.DefaultCellStyle.Font = ochoR;
+        }
+
+        private void dgvVistaCompartirArchivos_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            //dgvVistaCompartirArchivos.ClearSelection();
+        }
+
         private void IniciarConWindows() //Iniciar con windows
         {
             string nombre = Path.GetFileName(Application.ExecutablePath);
