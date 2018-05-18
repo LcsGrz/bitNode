@@ -32,14 +32,12 @@ namespace Cliente
         public frmCliente() //Constructor del Form - Aplica configuraciones y etc
         {
             InitializeComponent();
-
             CargarListas();
             CargarFuentes();
             CargarConfiguracion();
             CargarArchivosCompatidos();
             AplicarIdioma();
             AplicarTema();
-
             Archivo.ArchivoGuardado += new EventHandler((object sender, EventArgs e) => { this.Invoke(new Action(() => { CargarArchivosCompatidos(); })); });
         }
         //----------------------------------------------------------------------------------------------Funciones de form
@@ -530,11 +528,13 @@ namespace Cliente
 
         private void dgvVistaCompartirArchivos_DataSourceChanged(object sender, EventArgs e)
         {
+
+
             Font asdR = new Font(pfc.Families[0], 14);
-            dgvVistaCompartirArchivos.DefaultCellStyle.BackColor = Color.FromArgb(255,22, 31, 41);
+            dgvVistaCompartirArchivos.DefaultCellStyle.BackColor = Color.FromArgb(255, 22, 31, 41);
             dgvVistaCompartirArchivos.DefaultCellStyle.SelectionBackColor = Color.FromArgb(255, 22, 31, 41);
             dgvVistaCompartirArchivos.DefaultCellStyle.ForeColor = Color.FromArgb(255, 153, 153, 153);
-dgvVistaCompartirArchivos.ColumnHeadersDefaultCellStyle.BackColor = Color.FromArgb(255, 7, 17, 27);
+            dgvVistaCompartirArchivos.ColumnHeadersDefaultCellStyle.BackColor = Color.FromArgb(255, 7, 17, 27);
             dgvVistaCompartirArchivos.ColumnHeadersDefaultCellStyle.ForeColor = Color.FromArgb(255, 255, 42, 42);
             dgvVistaCompartirArchivos.ColumnHeadersDefaultCellStyle.Font = asdR;
             dgvVistaCompartirArchivos.ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
@@ -574,9 +574,11 @@ dgvVistaCompartirArchivos.ColumnHeadersDefaultCellStyle.BackColor = Color.FromAr
         }
         private void CargarArchivosCompatidos() //Carga los archivos compartidos en la vista
         {
+            dgvVistaCompartirArchivos.AutoGenerateColumns = false;
             dgvVistaCompartirArchivos.Visible = !(lblVistaCompartirVerArchivos.Visible = (archivosCompartidos.Count == 0));
             dgvVistaCompartirArchivos.DataSource = null;
             dgvVistaCompartirArchivos.DataSource = (archivosCompartidos.Count > 0) ? archivosCompartidos : null;
+
         }
     }
 }
