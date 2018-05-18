@@ -281,8 +281,8 @@
             // 
             this.pnlVistaCompartir.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(13)))), ((int)(((byte)(23)))), ((int)(((byte)(33)))));
             this.pnlVistaCompartir.Controls.Add(this.pnlVistaCompartirMostarArchivos);
-            this.pnlVistaCompartir.Controls.Add(this.pnlVistaCompartirGuardarArchivo);
             this.pnlVistaCompartir.Controls.Add(this.pnlVistaCompartirSeleccionarArchivo);
+            this.pnlVistaCompartir.Controls.Add(this.pnlVistaCompartirGuardarArchivo);
             this.pnlVistaCompartir.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlVistaCompartir.Location = new System.Drawing.Point(0, 0);
             this.pnlVistaCompartir.Margin = new System.Windows.Forms.Padding(2);
@@ -319,7 +319,7 @@
             // dgvVistaCompartirArchivos
             // 
             this.dgvVistaCompartirArchivos.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.dgvVistaCompartirArchivos.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(7)))), ((int)(((byte)(17)))), ((int)(((byte)(27)))));
+            this.dgvVistaCompartirArchivos.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(31)))), ((int)(((byte)(41)))));
             this.dgvVistaCompartirArchivos.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.dgvVistaCompartirArchivos.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None;
             this.dgvVistaCompartirArchivos.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
@@ -437,6 +437,7 @@
             // 
             this.lblVistaCompartirSeleccionar.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.lblVistaCompartirSeleccionar.BackColor = System.Drawing.Color.Transparent;
+            this.lblVistaCompartirSeleccionar.Cursor = System.Windows.Forms.Cursors.Hand;
             this.lblVistaCompartirSeleccionar.Font = new System.Drawing.Font("Roboto Lt", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblVistaCompartirSeleccionar.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(153)))), ((int)(((byte)(153)))), ((int)(((byte)(153)))));
             this.lblVistaCompartirSeleccionar.Location = new System.Drawing.Point(245, 62);
@@ -445,6 +446,7 @@
             this.lblVistaCompartirSeleccionar.TabIndex = 2;
             this.lblVistaCompartirSeleccionar.Text = "Seleccione el archivo que quiera compartir";
             this.lblVistaCompartirSeleccionar.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lblVistaCompartirSeleccionar.Click += new System.EventHandler(this.SeleccionarArchivoCompartir);
             // 
             // pbVistaCompartirSeleccionarArchivo
             // 
@@ -529,14 +531,14 @@
             // 
             // tbVistaConfiguracionNombre
             // 
-            this.tbVistaConfiguracionNombre.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(31)))), ((int)(((byte)(41)))));
+            this.tbVistaConfiguracionNombre.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(7)))), ((int)(((byte)(17)))), ((int)(((byte)(27)))));
             this.tbVistaConfiguracionNombre.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.tbVistaConfiguracionNombre.Font = new System.Drawing.Font("Roboto Lt", 12F);
             this.tbVistaConfiguracionNombre.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(153)))), ((int)(((byte)(153)))), ((int)(((byte)(153)))));
             this.tbVistaConfiguracionNombre.Location = new System.Drawing.Point(751, 86);
             this.tbVistaConfiguracionNombre.MaxLength = 12;
             this.tbVistaConfiguracionNombre.Name = "tbVistaConfiguracionNombre";
-            this.tbVistaConfiguracionNombre.Size = new System.Drawing.Size(178, 20);
+            this.tbVistaConfiguracionNombre.Size = new System.Drawing.Size(127, 20);
             this.tbVistaConfiguracionNombre.TabIndex = 9;
             this.tbVistaConfiguracionNombre.Tag = "14";
             this.tbVistaConfiguracionNombre.Text = "NOMBRE";
@@ -550,7 +552,7 @@
             this.lblVistaConfiguracionNombre.BackColor = System.Drawing.Color.Transparent;
             this.lblVistaConfiguracionNombre.Font = new System.Drawing.Font("Roboto Lt", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblVistaConfiguracionNombre.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(153)))), ((int)(((byte)(153)))), ((int)(((byte)(153)))));
-            this.lblVistaConfiguracionNombre.Location = new System.Drawing.Point(639, 83);
+            this.lblVistaConfiguracionNombre.Location = new System.Drawing.Point(658, 82);
             this.lblVistaConfiguracionNombre.Name = "lblVistaConfiguracionNombre";
             this.lblVistaConfiguracionNombre.Size = new System.Drawing.Size(78, 23);
             this.lblVistaConfiguracionNombre.TabIndex = 8;

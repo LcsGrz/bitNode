@@ -518,7 +518,7 @@ namespace Cliente
             pnlVistaComfiguracionGeneral.BackColor = configuracion.colorPanelesInternosVistas;
             pnlVistaComfiguracionInterfaz.BackColor = configuracion.colorPanelesInternosVistas;
             pnlVistaConfiguracionTransferencias.BackColor = configuracion.colorPanelesInternosVistas;
-            tbVistaConfiguracionNombre.BackColor = configuracion.colorVistaFondo;
+            tbVistaConfiguracionNombre.BackColor = configuracion.colorFondo;
             //About
             tbVistaAboutDescripcion.BackColor = configuracion.colorVistaFondo;
         }
