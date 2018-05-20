@@ -323,6 +323,10 @@
             // 
             // dgvVistaCompartirArchivos
             // 
+            this.dgvVistaCompartirArchivos.AllowUserToAddRows = false;
+            this.dgvVistaCompartirArchivos.AllowUserToDeleteRows = false;
+            this.dgvVistaCompartirArchivos.AllowUserToResizeColumns = false;
+            this.dgvVistaCompartirArchivos.AllowUserToResizeRows = false;
             this.dgvVistaCompartirArchivos.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvVistaCompartirArchivos.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(31)))), ((int)(((byte)(41)))));
             this.dgvVistaCompartirArchivos.BorderStyle = System.Windows.Forms.BorderStyle.None;

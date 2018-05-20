@@ -530,11 +530,15 @@ namespace Cliente
         {
             dgvVistaCompartirArchivos.DefaultCellStyle.BackColor = configuracion.colorPanelesInternosVistas;
             dgvVistaCompartirArchivos.DefaultCellStyle.SelectionBackColor = configuracion.colorPanelesInternosVistas;
+            dgvVistaCompartirArchivos.DefaultCellStyle.SelectionForeColor = Color.FromArgb(255, 153, 153, 153);
             dgvVistaCompartirArchivos.DefaultCellStyle.ForeColor = Color.FromArgb(255, 153, 153, 153);
             dgvVistaCompartirArchivos.ColumnHeadersDefaultCellStyle.BackColor = configuracion.colorFondo;
             dgvVistaCompartirArchivos.ColumnHeadersDefaultCellStyle.ForeColor = configuracion.colorDetalles;
             dgvVistaCompartirArchivos.BackgroundColor = configuracion.colorPanelesInternosVistas;
             dgvVistaCompartirArchivos.GridColor = configuracion.colorFondo;
+
+          //  dgvVistaCompartirArchivos.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.None;
+
         }
         private void IniciarConWindows() //Iniciar con windows
         {
@@ -569,7 +573,10 @@ namespace Cliente
                 for (int i = 0; i < archivosCompartidos.Count; i++)
                 {
                     Archivo A = archivosCompartidos[i];
-                    dgvVistaCompartirArchivos.Rows.Insert(i, A.nombre, Archivo.KB_GB_MB(A.tamaño), A.descripcion, A.activo, "paco");
+                    botonSwitch BS = new botonSwitch{ Activo = A.activo };
+
+
+                    dgvVistaCompartirArchivos.Rows.Insert(i, A.nombre, Archivo.KB_GB_MB(A.tamaño), A.descripcion, BS, "paco");
                 }
                 //Vista
                 dgvVistaCompartirArchivos.ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
@@ -580,6 +587,7 @@ namespace Cliente
                 dgvVistaCompartirArchivos.Columns[2].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
                 dgvVistaCompartirArchivos.Columns[3].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
                 dgvVistaCompartirArchivos.Columns[4].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+                dgvVistaCompartirArchivos.DefaultCellStyle.WrapMode = DataGridViewTriState.True;
 
             }
         }
