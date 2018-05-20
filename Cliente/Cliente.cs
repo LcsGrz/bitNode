@@ -583,6 +583,21 @@ namespace Cliente
 
             }
         }
+        private void ActivoBorrarArchivo(object sender, EventArgs e) //Cambia Activo o elimina el archivo compartido
+        {
+            int tagControl = Convert.ToInt32((sender as Control).Tag.ToString().Split('-')[0]);
+            int tagArchivo = Convert.ToInt32((sender as Control).Tag.ToString().Split('-')[1]);
+            if (tagControl == 0) //Activo = 0
+            {
+                archivosCompartidos[tagArchivo].activo = (sender as botonSwitch).Activo;
+                archivosCompartidos[tagArchivo].GuardarArchivo();
+            }
+            else //Borrar = 1
+            {
+                archivosCompartidos[tagArchivo].EliminarArchivo();
+                archivosCompartidos.RemoveAt(tagArchivo);
+            }
+        }
     }
 }
 
@@ -596,3 +611,8 @@ namespace Cliente
      ver si puedo resumir mas los efectos
      ir agregando fonts a cargar guentes
   */
+
+/*
+    int y = x ?? -1; -> devuelve X si X no es null, si no -1
+    int length = text?.Length; // Compile Error: Cannot implicitly convert type 'int?' to 'int' -> preguntar este
+*/

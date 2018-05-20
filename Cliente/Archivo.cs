@@ -30,7 +30,7 @@ namespace Cliente
         public string ruta { get; set; }
         public string descripcion { get; set; }
         public long tamaño { get; set; }
-        public string archivoMD5 { get; set; }
+        public string archivoMD5 { get; set; } = null;
         public bool activo { get; set; } = true;
         //Funciones
         public static string KB_GB_MB(long peso)
@@ -88,8 +88,8 @@ namespace Cliente
         {
             new Thread(() =>
             {
-                this.archivoMD5 = ObtenerMD5(ruta);
-                if (this.archivoMD5 != string.Empty)
+                archivoMD5 = archivoMD5 ?? ObtenerMD5(ruta);
+                if (archivoMD5 != string.Empty)
                 {
                     File.WriteAllText(rutaBN + "\\" + nombre.Split('.')[0] + ".json", JsonConvert.SerializeObject(this));
                     if (!frmCliente.archivosCompartidos.Exists(x => x.archivoMD5.Contains(archivoMD5)))
