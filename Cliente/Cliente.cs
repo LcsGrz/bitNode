@@ -412,7 +412,7 @@ namespace Cliente
         private void AplicarIdioma() //Cambiar de idioma la aplicacion
         {
             Thread.CurrentThread.CurrentUICulture = new System.Globalization.CultureInfo((configuracion.latino) ? "ES-AR" : "EN-US");
-            
+
             //Menu
             lblMenuDescargar.Text = Idioma.StringResources.lblMenuDescargar;
             lblMenuCompartir.Text = Idioma.StringResources.lblMenuCompartir;
@@ -429,8 +429,8 @@ namespace Cliente
             lblVistaCompartirSeleccionar.Text = Idioma.StringResources.lblVistaCompartirSeleccionar;
             lblVistaCompartirVerArchivos.Text = Idioma.StringResources.lblVistaCompartirVerArchivos;
             dgvVistaCompartirArchivos.Columns.Clear();
-            foreach(string n in Idioma.StringResources.CabecerasDGVArchivoCompartido.Split('-'))
-                dgvVistaCompartirArchivos.Columns.Add(n,n);
+            foreach (string n in Idioma.StringResources.CabecerasDGVArchivoCompartido.Split('-'))
+                dgvVistaCompartirArchivos.Columns.Add(n, n);
             CargarArchivosCompatidos();
             //Solicitar
             //Configuracion
@@ -528,13 +528,13 @@ namespace Cliente
         }
         private void dgvVistaCompartirArchivos_DataSourceChanged(object sender, EventArgs e) //------------------------------este se borra a la mierda
         {
-            dgvVistaCompartirArchivos.DefaultCellStyle.BackColor = Color.FromArgb(255, 22, 31, 41);
-            dgvVistaCompartirArchivos.DefaultCellStyle.SelectionBackColor = Color.FromArgb(255, 22, 31, 41);
+            dgvVistaCompartirArchivos.DefaultCellStyle.BackColor = configuracion.colorPanelesInternosVistas;
+            dgvVistaCompartirArchivos.DefaultCellStyle.SelectionBackColor = configuracion.colorPanelesInternosVistas;
             dgvVistaCompartirArchivos.DefaultCellStyle.ForeColor = Color.FromArgb(255, 153, 153, 153);
-            dgvVistaCompartirArchivos.ColumnHeadersDefaultCellStyle.BackColor = Color.FromArgb(255, 7, 17, 27);
-            dgvVistaCompartirArchivos.ColumnHeadersDefaultCellStyle.ForeColor = Color.FromArgb(255, 255, 42, 42);
-            dgvVistaCompartirArchivos.GridColor = Color.FromArgb(255, 7, 17, 27);
-            dgvVistaCompartirArchivos.BackgroundColor = Color.FromArgb(255, 22, 31, 41);
+            dgvVistaCompartirArchivos.ColumnHeadersDefaultCellStyle.BackColor = configuracion.colorFondo;
+            dgvVistaCompartirArchivos.ColumnHeadersDefaultCellStyle.ForeColor = configuracion.colorDetalles;
+            dgvVistaCompartirArchivos.BackgroundColor = configuracion.colorPanelesInternosVistas;
+            dgvVistaCompartirArchivos.GridColor = configuracion.colorFondo;
         }
         private void IniciarConWindows() //Iniciar con windows
         {
@@ -569,7 +569,7 @@ namespace Cliente
                 for (int i = 0; i < archivosCompartidos.Count; i++)
                 {
                     Archivo A = archivosCompartidos[i];
-                    dgvVistaCompartirArchivos.Rows.Insert(i, A.nombre, Archivo.KB_GB_MB(A.tamaño), A.descripcion, A.activo,"paco");
+                    dgvVistaCompartirArchivos.Rows.Insert(i, A.nombre, Archivo.KB_GB_MB(A.tamaño), A.descripcion, A.activo, "paco");
                 }
                 //Vista
                 dgvVistaCompartirArchivos.ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
@@ -595,7 +595,7 @@ namespace Cliente
             else //Borrar = 1
             {
                 archivosCompartidos[tagArchivo].EliminarArchivo();
-                archivosCompartidos.RemoveAt(tagArchivo);
+                // archivosCompartidos.RemoveAt(tagArchivo);
             }
         }
     }
