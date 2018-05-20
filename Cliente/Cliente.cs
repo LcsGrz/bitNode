@@ -20,7 +20,7 @@ namespace Cliente
         [DllImport("user32.DLL", EntryPoint = "SendMessage")]
         private extern static void SendMessage(System.IntPtr hWnd, int wMsg, int wParam, int lParam);
 
-        PrivateFontCollection pfc;
+        PrivateFontCollection pfc = Configuracion.Tipografia();
         Configuracion configuracion = new Configuracion().Leer();
         bool cerrar, TransparenciaFull = false;
         int tagAnterior = 0;
@@ -35,7 +35,6 @@ namespace Cliente
             CargarListas();
             CargarFuentes();
             CargarConfiguracion();
-            CargarArchivosCompatidos();
             AplicarIdioma();
             AplicarTema();
             Archivo.ArchivoGuardado += new EventHandler((object sender, EventArgs e) => { this.Invoke(new Action(() => { CargarArchivosCompatidos(); })); });
@@ -202,17 +201,18 @@ namespace Cliente
                     {
                         new Thread(() =>
                         {
-                            for (int i = 0; i <= 210; i += 1)
+                            pnlMenu.Invoke(new Action(() =>
                             {
-                                pnlMenu.Invoke(new Action(() =>
+                                for (int i = 0; i <= 210; i += 1)
                                 {
                                     panelesMenu[tagViejo].Controls[0].Location = new Point(i, 58);
                                     panelesMenu[tagNuevo].Controls[0].Width = i;
-                                }));
 
-                                if (i % 8 == 0)
-                                    Thread.Sleep(1);
-                            }
+                                    if (i % 8 == 0)
+                                        Thread.Sleep(1);
+                                }
+                                panelesMenu[tagViejo].Controls[0].BackColor = configuracion.colorMenu;
+                            }));
                         }).Start();
                     }
                     else
@@ -223,8 +223,6 @@ namespace Cliente
                 }
 
                 panelesMenu[tagAnterior].BackColor = configuracion.colorMenu;
-                panelesMenu[tagAnterior].Controls[0].BackColor = configuracion.colorMenu;
-
                 panelesVistas[tagAnterior].Visible = false;
                 //------------------------------------------------------------------
                 panelesMenu[tagNuevo].BackColor = configuracion.colorMenuSeleccion;
@@ -360,8 +358,6 @@ namespace Cliente
         }
         private void CargarFuentes() //Carga las fuentes y las aplica a los componentes
         {
-            pfc = Configuracion.Tipografia();
-
             Font ochoR = new Font(pfc.Families[0], 8);
             Font diezR = new Font(pfc.Families[0], 10);
             Font doceR = new Font(pfc.Families[0], 12);
@@ -384,6 +380,8 @@ namespace Cliente
             lblVistaCompartirTamañoArchivo.Font = dieciseisR;
             tbVistaCompartirDescripcionArchivo.Font = doceR;
             lblVistaCompartirVerArchivos.Font = veintiunoR;
+            dgvVistaCompartirArchivos.ColumnHeadersDefaultCellStyle.Font = catorceR;
+            dgvVistaCompartirArchivos.DefaultCellStyle.Font = doceR;
             //Solicitar
             //Configuracion
             lblVistaConfiguracionGeneral.Font = veinticuatroR;
@@ -414,7 +412,7 @@ namespace Cliente
         private void AplicarIdioma() //Cambiar de idioma la aplicacion
         {
             Thread.CurrentThread.CurrentUICulture = new System.Globalization.CultureInfo((configuracion.latino) ? "ES-AR" : "EN-US");
-
+            
             //Menu
             lblMenuDescargar.Text = Idioma.StringResources.lblMenuDescargar;
             lblMenuCompartir.Text = Idioma.StringResources.lblMenuCompartir;
@@ -430,6 +428,10 @@ namespace Cliente
             tbVistaCompartirDescripcionArchivo.Text = Idioma.StringResources.tbVistaCompartirDescripcionArchivo;
             lblVistaCompartirSeleccionar.Text = Idioma.StringResources.lblVistaCompartirSeleccionar;
             lblVistaCompartirVerArchivos.Text = Idioma.StringResources.lblVistaCompartirVerArchivos;
+            dgvVistaCompartirArchivos.Columns.Clear();
+            foreach(string n in Idioma.StringResources.CabecerasDGVArchivoCompartido.Split('-'))
+                dgvVistaCompartirArchivos.Columns.Add(n,n);
+            CargarArchivosCompatidos();
             //Solicitar
             //Configuracion
             lblVistaConfiguracionGeneral.Text = Idioma.StringResources.lblVistaConfiguracionGeneral;
@@ -520,36 +522,20 @@ namespace Cliente
             //About
             tbVistaAboutDescripcion.BackColor = configuracion.colorVistaFondo;
         }
-
         private void EliminarArchivoCompartido(object sender, EventArgs e)//Elimina el archivo compartido seleccionado
         {
             archivosCompartidos[0].EliminarArchivo();
         }
-
-        private void dgvVistaCompartirArchivos_DataSourceChanged(object sender, EventArgs e)
+        private void dgvVistaCompartirArchivos_DataSourceChanged(object sender, EventArgs e) //------------------------------este se borra a la mierda
         {
-
-
-            Font asdR = new Font(pfc.Families[0], 14);
             dgvVistaCompartirArchivos.DefaultCellStyle.BackColor = Color.FromArgb(255, 22, 31, 41);
             dgvVistaCompartirArchivos.DefaultCellStyle.SelectionBackColor = Color.FromArgb(255, 22, 31, 41);
             dgvVistaCompartirArchivos.DefaultCellStyle.ForeColor = Color.FromArgb(255, 153, 153, 153);
             dgvVistaCompartirArchivos.ColumnHeadersDefaultCellStyle.BackColor = Color.FromArgb(255, 7, 17, 27);
             dgvVistaCompartirArchivos.ColumnHeadersDefaultCellStyle.ForeColor = Color.FromArgb(255, 255, 42, 42);
-            dgvVistaCompartirArchivos.ColumnHeadersDefaultCellStyle.Font = asdR;
-            dgvVistaCompartirArchivos.ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
             dgvVistaCompartirArchivos.GridColor = Color.FromArgb(255, 7, 17, 27);
-            dgvVistaCompartirArchivos.RowHeadersVisible = false;
             dgvVistaCompartirArchivos.BackgroundColor = Color.FromArgb(255, 22, 31, 41);
-            Font ochoR = new Font(pfc.Families[0], 12);
-            dgvVistaCompartirArchivos.DefaultCellStyle.Font = ochoR;
         }
-
-        private void dgvVistaCompartirArchivos_CellClick(object sender, DataGridViewCellEventArgs e)
-        {
-            //dgvVistaCompartirArchivos.ClearSelection();
-        }
-
         private void IniciarConWindows() //Iniciar con windows
         {
             string nombre = Path.GetFileName(Application.ExecutablePath);
@@ -574,11 +560,28 @@ namespace Cliente
         }
         private void CargarArchivosCompatidos() //Carga los archivos compartidos en la vista
         {
-            dgvVistaCompartirArchivos.AutoGenerateColumns = false;
             dgvVistaCompartirArchivos.Visible = !(lblVistaCompartirVerArchivos.Visible = (archivosCompartidos.Count == 0));
-            dgvVistaCompartirArchivos.DataSource = null;
-            dgvVistaCompartirArchivos.DataSource = (archivosCompartidos.Count > 0) ? archivosCompartidos : null;
+            if (archivosCompartidos.Count > 0)
+            {
+                //Datos
+                dgvVistaCompartirArchivos.Rows.Clear();
+                dgvVistaCompartirArchivos_DataSourceChanged(null, null);
+                for (int i = 0; i < archivosCompartidos.Count; i++)
+                {
+                    Archivo A = archivosCompartidos[i];
+                    dgvVistaCompartirArchivos.Rows.Insert(i, A.nombre, Archivo.KB_GB_MB(A.tamaño), A.descripcion, A.activo,"paco");
+                }
+                //Vista
+                dgvVistaCompartirArchivos.ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+                dgvVistaCompartirArchivos.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+                dgvVistaCompartirArchivos.RowHeadersVisible = false;
+                dgvVistaCompartirArchivos.Columns[0].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+                dgvVistaCompartirArchivos.Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+                dgvVistaCompartirArchivos.Columns[2].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+                dgvVistaCompartirArchivos.Columns[3].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+                dgvVistaCompartirArchivos.Columns[4].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
 
+            }
         }
     }
 }

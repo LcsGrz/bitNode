@@ -88,11 +88,12 @@ namespace Cliente
         {
             new Thread(() =>
             {
-                this.archivoMD5 = Archivo.ObtenerMD5(ruta);
+                this.archivoMD5 = ObtenerMD5(ruta);
                 if (this.archivoMD5 != string.Empty)
                 {
                     File.WriteAllText(rutaBN + "\\" + nombre.Split('.')[0] + ".json", JsonConvert.SerializeObject(this));
-                    frmCliente.archivosCompartidos.Add(this);
+                    if (!frmCliente.archivosCompartidos.Exists(x => x.archivoMD5.Contains(archivoMD5)))
+                        frmCliente.archivosCompartidos.Add(this);
                     ArchivoGuardado?.Invoke(null, null);
                     new frmMensaje(Idioma.StringResources.mensajeExitoCompartirArchivo).ShowDialog();
                     return;

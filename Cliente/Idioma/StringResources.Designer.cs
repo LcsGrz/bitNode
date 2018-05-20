@@ -61,6 +61,15 @@ namespace Cliente.Idioma {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Nombre-Tamaño-Descripcion-Activo-Borrar.
+        /// </summary>
+        internal static string CabecerasDGVArchivoCompartido {
+            get {
+                return ResourceManager.GetString("CabecerasDGVArchivoCompartido", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Apagar equipo.
         /// </summary>
         internal static string lblConfiguracionesRapidasApagar {

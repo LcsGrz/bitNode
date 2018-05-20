@@ -249,4 +249,7 @@
   <data name="splashCargandoArchivos" xml:space="preserve">
     <value>Cargando archivos</value>
   </data>
+  <data name="CabecerasDGVArchivoCompartido" xml:space="preserve">
+    <value>Nombre-Tamaño-Descripcion-Activo-Borrar</value>
+  </data>
 </root>

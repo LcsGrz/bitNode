@@ -42,6 +42,11 @@
             this.pnlVistaCompartirMostarArchivos = new System.Windows.Forms.Panel();
             this.lblVistaCompartirVerArchivos = new System.Windows.Forms.Label();
             this.dgvVistaCompartirArchivos = new System.Windows.Forms.DataGridView();
+            this.nombre = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.tamaño = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.descripcion = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.activo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.borrar = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.pnlVistaCompartirSeleccionarArchivo = new System.Windows.Forms.Panel();
             this.lblVistaCompartirSeleccionar = new System.Windows.Forms.Label();
             this.pbVistaCompartirSeleccionarArchivo = new System.Windows.Forms.PictureBox();
@@ -125,11 +130,6 @@
             this.ttAyuda = new System.Windows.Forms.ToolTip(this.components);
             this.niMinimizar = new System.Windows.Forms.NotifyIcon(this.components);
             this.ofdArchivo = new System.Windows.Forms.OpenFileDialog();
-            this.nombre = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.tamaño = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.descripcion = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.activo = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.borrar = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.bnudVistaConfiguracionDescargasSimultaneas = new Cliente.Controles.botonNUD();
             this.bnudVistaConfiguracionLimiteBajada = new Cliente.Controles.botonNUD();
             this.bnudVistaConfiguracionLimiteSubida = new Cliente.Controles.botonNUD();
@@ -345,8 +345,41 @@
             this.dgvVistaCompartirArchivos.Size = new System.Drawing.Size(960, 436);
             this.dgvVistaCompartirArchivos.TabIndex = 6;
             this.dgvVistaCompartirArchivos.Visible = false;
-            this.dgvVistaCompartirArchivos.DataSourceChanged += new System.EventHandler(this.dgvVistaCompartirArchivos_DataSourceChanged);
-            this.dgvVistaCompartirArchivos.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvVistaCompartirArchivos_CellClick);
+            // 
+            // nombre
+            // 
+            this.nombre.DataPropertyName = "nombre";
+            this.nombre.HeaderText = "Nombre";
+            this.nombre.Name = "nombre";
+            this.nombre.ReadOnly = true;
+            // 
+            // tamaño
+            // 
+            this.tamaño.DataPropertyName = "tamaño";
+            this.tamaño.HeaderText = "Tamaño";
+            this.tamaño.Name = "tamaño";
+            this.tamaño.ReadOnly = true;
+            // 
+            // descripcion
+            // 
+            this.descripcion.DataPropertyName = "descripcion";
+            this.descripcion.HeaderText = "Descripcion";
+            this.descripcion.Name = "descripcion";
+            this.descripcion.ReadOnly = true;
+            // 
+            // activo
+            // 
+            this.activo.DataPropertyName = "activo";
+            this.activo.HeaderText = "Activo";
+            this.activo.Name = "activo";
+            this.activo.ReadOnly = true;
+            // 
+            // borrar
+            // 
+            this.borrar.DataPropertyName = "borrar";
+            this.borrar.HeaderText = "Borrar";
+            this.borrar.Name = "borrar";
+            this.borrar.ReadOnly = true;
             // 
             // pnlVistaCompartirSeleccionarArchivo
             // 
@@ -1392,41 +1425,6 @@
             // ofdArchivo
             // 
             this.ofdArchivo.Title = "Seleccione un archivo";
-            // 
-            // nombre
-            // 
-            this.nombre.DataPropertyName = "nombre";
-            this.nombre.HeaderText = "Nombre";
-            this.nombre.Name = "nombre";
-            this.nombre.ReadOnly = true;
-            // 
-            // tamaño
-            // 
-            this.tamaño.DataPropertyName = "tamaño";
-            this.tamaño.HeaderText = "Tamaño";
-            this.tamaño.Name = "tamaño";
-            this.tamaño.ReadOnly = true;
-            // 
-            // descripcion
-            // 
-            this.descripcion.DataPropertyName = "descripcion";
-            this.descripcion.HeaderText = "Descripcion";
-            this.descripcion.Name = "descripcion";
-            this.descripcion.ReadOnly = true;
-            // 
-            // activo
-            // 
-            this.activo.DataPropertyName = "activo";
-            this.activo.HeaderText = "Activo";
-            this.activo.Name = "activo";
-            this.activo.ReadOnly = true;
-            // 
-            // borrar
-            // 
-            this.borrar.DataPropertyName = "borrar";
-            this.borrar.HeaderText = "Borrar";
-            this.borrar.Name = "borrar";
-            this.borrar.ReadOnly = true;
             // 
             // bnudVistaConfiguracionDescargasSimultaneas
             // 
