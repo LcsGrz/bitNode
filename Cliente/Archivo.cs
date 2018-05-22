@@ -20,18 +20,18 @@ namespace Cliente
         //Constructor
         public Archivo(OpenFileDialog ofd)
         {
-            this.nombre = ofd.SafeFileName;
-            this.ruta = ofd.FileName;
-            this.tamaño = new FileInfo(ofd.FileName).Length;
+            this.Nombre = ofd.SafeFileName;
+            this.Ruta = ofd.FileName;
+            this.Tamaño = new FileInfo(ofd.FileName).Length;
         }
         public Archivo() { }
         //Atributos
-        public string nombre { get; set; }
-        public string ruta { get; set; }
-        public string descripcion { get; set; }
-        public long tamaño { get; set; }
-        public string archivoMD5 { get; set; } = null;
-        public bool activo { get; set; } = true;
+        public string Nombre { get; set; }
+        public string Ruta { get; set; }
+        public string Descripcion { get; set; }
+        public long Tamaño { get; set; }
+        public string ArchivoMD5 { get; set; } = null;
+        public bool Activo { get; set; } = true;
         //Funciones
         public static string KB_GB_MB(long peso)
         {
@@ -88,11 +88,11 @@ namespace Cliente
         {
             new Thread(() =>
             {
-                archivoMD5 = archivoMD5 ?? ObtenerMD5(ruta);
-                if (archivoMD5 != string.Empty)
+                ArchivoMD5 = ArchivoMD5 ?? ObtenerMD5(Ruta);
+                if (ArchivoMD5 != string.Empty)
                 {
-                    File.WriteAllText(rutaBN + "\\" + nombre.Split('.')[0] + ".json", JsonConvert.SerializeObject(this));
-                    if (!frmCliente.archivosCompartidos.Exists(x => x.archivoMD5.Contains(archivoMD5)))
+                    File.WriteAllText(rutaBN + "\\" + Nombre.Split('.')[0] + ".json", JsonConvert.SerializeObject(this));
+                    if (!frmCliente.archivosCompartidos.Exists(x => x.ArchivoMD5.Contains(ArchivoMD5)))
                         frmCliente.archivosCompartidos.Add(this);
                     ArchivoGuardado?.Invoke(null, null);
                     new frmMensaje(Idioma.StringResources.mensajeExitoCompartirArchivo).ShowDialog();
@@ -103,14 +103,14 @@ namespace Cliente
         }
         public void EliminarArchivo(int index)
         {
-            if (File.Exists(rutaBN + "\\" + nombre.Split('.')[0] + ".json"))
-                File.Delete(rutaBN + "\\" + nombre.Split('.')[0] + ".json");
+            if (File.Exists(rutaBN + "\\" + Nombre.Split('.')[0] + ".json"))
+                File.Delete(rutaBN + "\\" + Nombre.Split('.')[0] + ".json");
             frmCliente.archivosCompartidos.RemoveAt(index);
             ArchivoGuardado?.Invoke(null, null);
         }
         public void CambiarEstado()
         {
-            File.WriteAllText(rutaBN + "\\" + nombre.Split('.')[0] + ".json", JsonConvert.SerializeObject(this));
+            File.WriteAllText(rutaBN + "\\" + Nombre.Split('.')[0] + ".json", JsonConvert.SerializeObject(this));
         }
     }
 }

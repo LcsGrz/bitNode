@@ -1,13 +1,10 @@
 ﻿using Cliente.Controles;
 using Microsoft.Win32;
-using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
-using System.Data;
 using System.Drawing;
 using System.Drawing.Text;
 using System.IO;
-using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Threading;
 using System.Windows.Forms;
@@ -23,7 +20,7 @@ namespace Cliente
         [DllImport("user32.DLL", EntryPoint = "SendMessage")]
         private extern static void SendMessage(System.IntPtr hWnd, int wMsg, int wParam, int lParam);
 
-        Image[] ImagenesArchivos = { Properties.Resources.SwitchON, Properties.Resources.SwitchOFF , Properties.Resources.Cancelar };
+        Image[] ImagenesArchivos = { Properties.Resources.SwitchON, Properties.Resources.SwitchOFF, Properties.Resources.Cancelar };
         PrivateFontCollection pfc = Configuracion.Tipografia();
         Configuracion configuracion = new Configuracion().Leer();
         bool cerrar, TransparenciaFull = false;
@@ -44,7 +41,7 @@ namespace Cliente
             Archivo.ArchivoGuardado += new EventHandler((object sender, EventArgs e) => { this.Invoke(new Action(() => { CargarArchivosCompatidos(); })); });
         }
         //----------------------------------------------------------------------------------------------Funciones de form
-        private void pnlBarra_MouseDown(object sender, MouseEventArgs e) //Mover form
+        private void MoverForm(object sender, MouseEventArgs e) //Mover form
         {
             ReleaseCapture();
             SendMessage(this.Handle, 0x112, 0xf012, 0);
@@ -266,13 +263,14 @@ namespace Cliente
             e.DrawBackground();
             e.DrawBorder();
 
-            StringFormat sf = new StringFormat();
-            sf.Alignment = StringAlignment.Center;
-            sf.LineAlignment = StringAlignment.Center;
-            sf.HotkeyPrefix = System.Drawing.Text.HotkeyPrefix.None;
-            sf.FormatFlags = StringFormatFlags.NoWrap;
+            StringFormat sf = new StringFormat
+            {
+                Alignment = StringAlignment.Center,
+                LineAlignment = StringAlignment.Center,
+                HotkeyPrefix = HotkeyPrefix.None,
+                FormatFlags = StringFormatFlags.NoWrap
+            };
             e.Graphics.DrawString(e.ToolTipText, diezR, Brushes.White, e.Bounds, sf);
-            // e.Graphics.DrawString(e.ToolTipText, diezR, Brushes.White, new PointF(2, 2));
         }
         private void ttAyuda_Popup(object sender, PopupEventArgs e) //Dibuja el tooltip
         {
@@ -475,19 +473,18 @@ namespace Cliente
             if (ofdArchivo.ShowDialog() == DialogResult.OK && ofdArchivo.OpenFile() != null)
             {
                 archivoNuevo = new Archivo(ofdArchivo);
-                lblVistaCompartirNombreArchivo.Text = archivoNuevo.nombre;
-                lblVistaCompartirTamañoArchivo.Text = Archivo.KB_GB_MB(archivoNuevo.tamaño);
+                lblVistaCompartirNombreArchivo.Text = archivoNuevo.Nombre;
+                lblVistaCompartirTamañoArchivo.Text = Archivo.KB_GB_MB(archivoNuevo.Tamaño);
                 tbVistaCompartirDescripcionArchivo.Text = Idioma.StringResources.tbVistaCompartirDescripcionArchivo;
 
-                pnlVistaCompartirSeleccionarArchivo.Visible = false;
-                pnlVistaCompartirGuardarArchivo.Visible = true;
+                pnlVistaCompartirGuardarArchivo.Visible = !(pnlVistaCompartirSeleccionarArchivo.Visible = false);
             }
         }
         private void CompartirCancelarArchivo(object sender, EventArgs e) //Comparte o cancela el archivo
         {
             if (Convert.ToInt32((sender as PictureBox).Tag) == 1)
             {
-                archivoNuevo.descripcion = tbVistaCompartirDescripcionArchivo.Text;
+                archivoNuevo.Descripcion = tbVistaCompartirDescripcionArchivo.Text;
                 archivoNuevo.GuardarArchivo();
                 CargarArchivosCompatidos();
             }
@@ -519,17 +516,7 @@ namespace Cliente
             pnlVistaCompartirSeleccionarArchivo.BackColor = configuracion.colorPanelesInternosVistas;
             pnlVistaCompartirGuardarArchivo.BackColor = configuracion.colorPanelesInternosVistas;
             pnlVistaCompartirMostarArchivos.BackColor = configuracion.colorPanelesInternosVistas;
-            //Solicitar
-            //Configuracion
-            pnlVistaComfiguracionGeneral.BackColor = configuracion.colorPanelesInternosVistas;
-            pnlVistaComfiguracionInterfaz.BackColor = configuracion.colorPanelesInternosVistas;
-            pnlVistaConfiguracionTransferencias.BackColor = configuracion.colorPanelesInternosVistas;
-            tbVistaConfiguracionNombre.BackColor = configuracion.colorFondo;
-            //About
-            tbVistaAboutDescripcion.BackColor = configuracion.colorVistaFondo;
-        }
-        private void dgvVistaCompartirArchivos_DataSourceChanged(object sender, EventArgs e) //------------------------------este se borra a la mierda
-        {
+            //-----------------------------------------------------------------------------------
             dgvVistaCompartirArchivos.DefaultCellStyle.BackColor = configuracion.colorPanelesInternosVistas;
             dgvVistaCompartirArchivos.DefaultCellStyle.SelectionBackColor = configuracion.colorPanelesInternosVistas;
             dgvVistaCompartirArchivos.DefaultCellStyle.SelectionForeColor = Color.FromArgb(255, 153, 153, 153);
@@ -538,7 +525,14 @@ namespace Cliente
             dgvVistaCompartirArchivos.ColumnHeadersDefaultCellStyle.ForeColor = configuracion.colorDetalles;
             dgvVistaCompartirArchivos.BackgroundColor = configuracion.colorPanelesInternosVistas;
             dgvVistaCompartirArchivos.GridColor = configuracion.colorFondo;
-
+            //Solicitar
+            //Configuracion
+            pnlVistaComfiguracionGeneral.BackColor = configuracion.colorPanelesInternosVistas;
+            pnlVistaComfiguracionInterfaz.BackColor = configuracion.colorPanelesInternosVistas;
+            pnlVistaConfiguracionTransferencias.BackColor = configuracion.colorPanelesInternosVistas;
+            tbVistaConfiguracionNombre.BackColor = configuracion.colorFondo;
+            //About
+            tbVistaAboutDescripcion.BackColor = configuracion.colorVistaFondo;
         }
         private void IniciarConWindows() //Iniciar con windows
         {
@@ -562,12 +556,10 @@ namespace Cliente
                 bsVistaConfiguracionIniciarConWindows.Activo = configuracion.iniciarConWindows;
             }
         }
-
         private void CambiarCursorDgvArchivos(object sender, DataGridViewCellMouseEventArgs e) //Cambiar de cursor dgvArchivos
         {
             dgvVistaCompartirArchivos.Cursor = ((e.ColumnIndex.Equals(3) || e.ColumnIndex.Equals(4)) && e.RowIndex != -1) ? Cursors.Hand : Cursors.Arrow;
         }
-
         private void ActivoBorrarArchivo(object sender, DataGridViewCellEventArgs e) //Click en Activo-Eliminar
         {
             if ((e.ColumnIndex.Equals(3) || e.ColumnIndex.Equals(4)) && e.RowIndex != -1)
@@ -576,8 +568,8 @@ namespace Cliente
                 {
                     if (e.ColumnIndex.Equals(3)) //Activo = 3
                     {
-                        archivosCompartidos[e.RowIndex].activo = !archivosCompartidos[e.RowIndex].activo;
-                        dgvVistaCompartirArchivos.CurrentCell.Value = ImagenesArchivos[(archivosCompartidos[e.RowIndex].activo) ? 0 : 1];
+                        archivosCompartidos[e.RowIndex].Activo = !archivosCompartidos[e.RowIndex].Activo;
+                        dgvVistaCompartirArchivos.CurrentCell.Value = ImagenesArchivos[(archivosCompartidos[e.RowIndex].Activo) ? 0 : 1];
                         archivosCompartidos[e.RowIndex].CambiarEstado();
                     }
                     else //Borrar = 4
@@ -587,7 +579,6 @@ namespace Cliente
                 }
             }
         }
-
         private void CargarArchivosCompatidos() //Carga los archivos compartidos en la vista
         {
             dgvVistaCompartirArchivos.Visible = !(lblVistaCompartirVerArchivos.Visible = (archivosCompartidos.Count == 0));
@@ -595,12 +586,11 @@ namespace Cliente
             {
                 //Datos
                 dgvVistaCompartirArchivos.Rows.Clear();
-                dgvVistaCompartirArchivos_DataSourceChanged(null, null);
                 Image Eliminar = Properties.Resources.Cancelar;
                 for (int i = 0; i < archivosCompartidos.Count; i++)
                 {
                     Archivo A = archivosCompartidos[i];
-                    dgvVistaCompartirArchivos.Rows.Insert(i, A.nombre, Archivo.KB_GB_MB(A.tamaño), A.descripcion, ImagenesArchivos[(A.activo) ? 0 : 1], ImagenesArchivos[2]);
+                    dgvVistaCompartirArchivos.Rows.Insert(i, A.Nombre, Archivo.KB_GB_MB(A.Tamaño), A.Descripcion, ImagenesArchivos[(A.Activo) ? 0 : 1], ImagenesArchivos[2]);
                 }
                 //Vista
                 dgvVistaCompartirArchivos.ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;

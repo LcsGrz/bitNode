@@ -199,7 +199,7 @@
             this.pnlBarra.Name = "pnlBarra";
             this.pnlBarra.Size = new System.Drawing.Size(1100, 30);
             this.pnlBarra.TabIndex = 0;
-            this.pnlBarra.MouseDown += new System.Windows.Forms.MouseEventHandler(this.pnlBarra_MouseDown);
+            this.pnlBarra.MouseDown += new System.Windows.Forms.MouseEventHandler(this.MoverForm);
             // 
             // pbCerrar
             // 
@@ -237,7 +237,7 @@
             this.pbTitulo.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pbTitulo.TabIndex = 1;
             this.pbTitulo.TabStop = false;
-            this.pbTitulo.MouseDown += new System.Windows.Forms.MouseEventHandler(this.pnlBarra_MouseDown);
+            this.pbTitulo.MouseDown += new System.Windows.Forms.MouseEventHandler(this.MoverForm);
             // 
             // pbIcono
             // 

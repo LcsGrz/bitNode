@@ -88,6 +88,7 @@
     <Compile Include="Controles\botonSwitch.Designer.cs">
       <DependentUpon>botonSwitch.cs</DependentUpon>
     </Compile>
+    <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="Idioma\StringResources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
