@@ -61,11 +61,29 @@ namespace Cliente.Idioma {
         }
         
         /// <summary>
-        ///   Busca una cadena traducida similar a Nombre-Tamaño-Descripcion-Activo-Borrar.
+        ///   Busca una cadena traducida similar a Activo.
         /// </summary>
-        internal static string CabecerasDGVArchivoCompartido {
+        internal static string CabecerasDGVArchivoCompartidoActivo {
             get {
-                return ResourceManager.GetString("CabecerasDGVArchivoCompartido", resourceCulture);
+                return ResourceManager.GetString("CabecerasDGVArchivoCompartidoActivo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Nombre-Tamaño-Descripcion.
+        /// </summary>
+        internal static string CabecerasDGVArchivoCompartidoArreglo {
+            get {
+                return ResourceManager.GetString("CabecerasDGVArchivoCompartidoArreglo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Eliminar.
+        /// </summary>
+        internal static string CabecerasDGVArchivoCompartidoEliminar {
+            get {
+                return ResourceManager.GetString("CabecerasDGVArchivoCompartidoEliminar", resourceCulture);
             }
         }
         

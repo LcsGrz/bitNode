@@ -158,6 +158,9 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\boton_cancelar_mini.png" />
+    <None Include="Resources\imagen_vista_switch_botonoff_v2.png" />
+    <None Include="Resources\imagen_vista_switch_botonon_v2.png" />
     <None Include="Resources\Newtonsoft.Json.dll" />
     <None Include="bin\Debug\Newtonsoft.Json.dll" />
     <Content Include="icono.ico" />

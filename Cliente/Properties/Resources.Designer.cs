@@ -61,6 +61,16 @@ namespace Cliente.Properties {
         }
         
         /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Cancelar {
+            get {
+                object obj = ResourceManager.GetObject("Cancelar", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
         ///   Busca un recurso adaptado de tipo System.Byte[].
         /// </summary>
         internal static byte[] Newtonsoft_Json {
@@ -77,6 +87,26 @@ namespace Cliente.Properties {
             get {
                 object obj = ResourceManager.GetObject("Roboto_Light", resourceCulture);
                 return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap SwitchOFF {
+            get {
+                object obj = ResourceManager.GetObject("SwitchOFF", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap SwitchON {
+            get {
+                object obj = ResourceManager.GetObject("SwitchON", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
             }
         }
     }

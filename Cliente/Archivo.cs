@@ -14,7 +14,7 @@ namespace Cliente
     public class Archivo
     {
         //Atributos de clase privados
-        private static string rutaBN = Configuracion.bitNode + "\\ArchivosCompartidos";
+        public static string rutaBN = Configuracion.bitNode + "\\ArchivosCompartidos";
         //Eventos
         public static event EventHandler ArchivoGuardado;
         //Constructor
@@ -101,12 +101,16 @@ namespace Cliente
                 new frmMensaje(Idioma.StringResources.mensajeErrorCompartirArchivo).ShowDialog();
             }).Start();
         }
-        public void EliminarArchivo()
+        public void EliminarArchivo(int index)
         {
             if (File.Exists(rutaBN + "\\" + nombre.Split('.')[0] + ".json"))
                 File.Delete(rutaBN + "\\" + nombre.Split('.')[0] + ".json");
-            frmCliente.archivosCompartidos.Remove(this);
+            frmCliente.archivosCompartidos.RemoveAt(index);
             ArchivoGuardado?.Invoke(null, null);
+        }
+        public void CambiarEstado()
+        {
+            File.WriteAllText(rutaBN + "\\" + nombre.Split('.')[0] + ".json", JsonConvert.SerializeObject(this));
         }
     }
 }

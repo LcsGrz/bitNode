@@ -1,10 +1,13 @@
 ﻿using Cliente.Controles;
 using Microsoft.Win32;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Drawing;
 using System.Drawing.Text;
 using System.IO;
+using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Threading;
 using System.Windows.Forms;
@@ -20,6 +23,7 @@ namespace Cliente
         [DllImport("user32.DLL", EntryPoint = "SendMessage")]
         private extern static void SendMessage(System.IntPtr hWnd, int wMsg, int wParam, int lParam);
 
+        Image[] ImagenesArchivos = { Properties.Resources.SwitchON, Properties.Resources.SwitchOFF , Properties.Resources.Cancelar };
         PrivateFontCollection pfc = Configuracion.Tipografia();
         Configuracion configuracion = new Configuracion().Leer();
         bool cerrar, TransparenciaFull = false;
@@ -429,8 +433,10 @@ namespace Cliente
             lblVistaCompartirSeleccionar.Text = Idioma.StringResources.lblVistaCompartirSeleccionar;
             lblVistaCompartirVerArchivos.Text = Idioma.StringResources.lblVistaCompartirVerArchivos;
             dgvVistaCompartirArchivos.Columns.Clear();
-            foreach (string n in Idioma.StringResources.CabecerasDGVArchivoCompartido.Split('-'))
+            foreach (string n in Idioma.StringResources.CabecerasDGVArchivoCompartidoArreglo.Split('-'))
                 dgvVistaCompartirArchivos.Columns.Add(n, n);
+            dgvVistaCompartirArchivos.Columns.Add(new DataGridViewImageColumn() { Name = Idioma.StringResources.CabecerasDGVArchivoCompartidoActivo });
+            dgvVistaCompartirArchivos.Columns.Add(new DataGridViewImageColumn() { Name = Idioma.StringResources.CabecerasDGVArchivoCompartidoEliminar });
             CargarArchivosCompatidos();
             //Solicitar
             //Configuracion
@@ -522,10 +528,6 @@ namespace Cliente
             //About
             tbVistaAboutDescripcion.BackColor = configuracion.colorVistaFondo;
         }
-        private void EliminarArchivoCompartido(object sender, EventArgs e)//Elimina el archivo compartido seleccionado
-        {
-            archivosCompartidos[0].EliminarArchivo();
-        }
         private void dgvVistaCompartirArchivos_DataSourceChanged(object sender, EventArgs e) //------------------------------este se borra a la mierda
         {
             dgvVistaCompartirArchivos.DefaultCellStyle.BackColor = configuracion.colorPanelesInternosVistas;
@@ -536,8 +538,6 @@ namespace Cliente
             dgvVistaCompartirArchivos.ColumnHeadersDefaultCellStyle.ForeColor = configuracion.colorDetalles;
             dgvVistaCompartirArchivos.BackgroundColor = configuracion.colorPanelesInternosVistas;
             dgvVistaCompartirArchivos.GridColor = configuracion.colorFondo;
-
-          //  dgvVistaCompartirArchivos.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.None;
 
         }
         private void IniciarConWindows() //Iniciar con windows
@@ -562,6 +562,32 @@ namespace Cliente
                 bsVistaConfiguracionIniciarConWindows.Activo = configuracion.iniciarConWindows;
             }
         }
+
+        private void CambiarCursorDgvArchivos(object sender, DataGridViewCellMouseEventArgs e) //Cambiar de cursor dgvArchivos
+        {
+            dgvVistaCompartirArchivos.Cursor = ((e.ColumnIndex.Equals(3) || e.ColumnIndex.Equals(4)) && e.RowIndex != -1) ? Cursors.Hand : Cursors.Arrow;
+        }
+
+        private void ActivoBorrarArchivo(object sender, DataGridViewCellEventArgs e) //Click en Activo-Eliminar
+        {
+            if ((e.ColumnIndex.Equals(3) || e.ColumnIndex.Equals(4)) && e.RowIndex != -1)
+            {
+                if (dgvVistaCompartirArchivos.CurrentCell != null && dgvVistaCompartirArchivos.CurrentCell.Value != null)
+                {
+                    if (e.ColumnIndex.Equals(3)) //Activo = 3
+                    {
+                        archivosCompartidos[e.RowIndex].activo = !archivosCompartidos[e.RowIndex].activo;
+                        dgvVistaCompartirArchivos.CurrentCell.Value = ImagenesArchivos[(archivosCompartidos[e.RowIndex].activo) ? 0 : 1];
+                        archivosCompartidos[e.RowIndex].CambiarEstado();
+                    }
+                    else //Borrar = 4
+                    {
+                        archivosCompartidos[e.RowIndex].EliminarArchivo(e.RowIndex);
+                    }
+                }
+            }
+        }
+
         private void CargarArchivosCompatidos() //Carga los archivos compartidos en la vista
         {
             dgvVistaCompartirArchivos.Visible = !(lblVistaCompartirVerArchivos.Visible = (archivosCompartidos.Count == 0));
@@ -570,40 +596,20 @@ namespace Cliente
                 //Datos
                 dgvVistaCompartirArchivos.Rows.Clear();
                 dgvVistaCompartirArchivos_DataSourceChanged(null, null);
+                Image Eliminar = Properties.Resources.Cancelar;
                 for (int i = 0; i < archivosCompartidos.Count; i++)
                 {
                     Archivo A = archivosCompartidos[i];
-                    botonSwitch BS = new botonSwitch{ Activo = A.activo };
-
-
-                    dgvVistaCompartirArchivos.Rows.Insert(i, A.nombre, Archivo.KB_GB_MB(A.tamaño), A.descripcion, BS, "paco");
+                    dgvVistaCompartirArchivos.Rows.Insert(i, A.nombre, Archivo.KB_GB_MB(A.tamaño), A.descripcion, ImagenesArchivos[(A.activo) ? 0 : 1], ImagenesArchivos[2]);
                 }
                 //Vista
                 dgvVistaCompartirArchivos.ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
                 dgvVistaCompartirArchivos.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
-                dgvVistaCompartirArchivos.RowHeadersVisible = false;
                 dgvVistaCompartirArchivos.Columns[0].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
                 dgvVistaCompartirArchivos.Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
                 dgvVistaCompartirArchivos.Columns[2].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
                 dgvVistaCompartirArchivos.Columns[3].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
                 dgvVistaCompartirArchivos.Columns[4].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-                dgvVistaCompartirArchivos.DefaultCellStyle.WrapMode = DataGridViewTriState.True;
-
-            }
-        }
-        private void ActivoBorrarArchivo(object sender, EventArgs e) //Cambia Activo o elimina el archivo compartido
-        {
-            int tagControl = Convert.ToInt32((sender as Control).Tag.ToString().Split('-')[0]);
-            int tagArchivo = Convert.ToInt32((sender as Control).Tag.ToString().Split('-')[1]);
-            if (tagControl == 0) //Activo = 0
-            {
-                archivosCompartidos[tagArchivo].activo = (sender as botonSwitch).Activo;
-                archivosCompartidos[tagArchivo].GuardarArchivo();
-            }
-            else //Borrar = 1
-            {
-                archivosCompartidos[tagArchivo].EliminarArchivo();
-                // archivosCompartidos.RemoveAt(tagArchivo);
             }
         }
     }
