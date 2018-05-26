@@ -29,10 +29,14 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmCliente));
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmCliente));
             this.pnlBarra = new System.Windows.Forms.Panel();
+            this.pbCerrar = new System.Windows.Forms.PictureBox();
+            this.pbMinimizar = new System.Windows.Forms.PictureBox();
+            this.pbTitulo = new System.Windows.Forms.PictureBox();
+            this.pbIcono = new System.Windows.Forms.PictureBox();
             this.tmrFader = new System.Windows.Forms.Timer(this.components);
             this.pnlBarraGris1Px = new System.Windows.Forms.Panel();
             this.pnlVistaContenedor = new System.Windows.Forms.Panel();
@@ -47,10 +51,14 @@
             this.pnlVistaSolicitarCompartirSolicitud = new System.Windows.Forms.Panel();
             this.lblVistaSolicitarInformacion = new System.Windows.Forms.Label();
             this.tbVistaSolicitarDescripcion = new System.Windows.Forms.TextBox();
+            this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.label4 = new System.Windows.Forms.Label();
             this.pnlVistaConfiguracionGeneral = new System.Windows.Forms.Panel();
             this.tbVistaConfiguracionNombre = new System.Windows.Forms.TextBox();
             this.lblVistaConfiguracionNombre = new System.Windows.Forms.Label();
+            this.bnudVistaConfiguracionDescargasSimultaneas = new Cliente.Controles.botonNUD();
+            this.bnudVistaConfiguracionLimiteBajada = new Cliente.Controles.botonNUD();
+            this.bnudVistaConfiguracionLimiteSubida = new Cliente.Controles.botonNUD();
             this.lblVistaConfiguracionEfectoBotones = new System.Windows.Forms.Label();
             this.lblVistaConfiguracionMovimientoMenu = new System.Windows.Forms.Label();
             this.pnlVistaComfiguracionInterfaz = new System.Windows.Forms.Panel();
@@ -58,10 +66,18 @@
             this.lblVistaConfiguracionEfectoFade = new System.Windows.Forms.Label();
             this.pnlVistaConfiguracionTransferencias = new System.Windows.Forms.Panel();
             this.lblVistaConfiguracionTranseferecias = new System.Windows.Forms.Label();
+            this.bsVistaConfiguracionEfectoFade = new Cliente.Controles.botonSwitch();
+            this.bsVistaConfiguracionIniciarConWindows = new Cliente.Controles.botonSwitch();
+            this.bsVistaConfiguracionEfectoMenu = new Cliente.Controles.botonSwitch();
             this.pnlVistaComfiguracionGeneral = new System.Windows.Forms.Panel();
             this.lblVistaConfiguracionGeneral = new System.Windows.Forms.Label();
+            this.bsVistaConfiguracionEfectoBotones = new Cliente.Controles.botonSwitch();
+            this.bsVistaConfiguracionMinimizarBandeja = new Cliente.Controles.botonSwitch();
+            this.pbVistaConfiguracionCarpetaDescarga = new System.Windows.Forms.PictureBox();
             this.lblVistaConfiguracionMinimizarBanjeda = new System.Windows.Forms.Label();
+            this.bsVistaConfiguracionTema = new Cliente.Controles.botonSwitch();
             this.lblVistaConfiguracionIniciarConWindows = new System.Windows.Forms.Label();
+            this.bsVistaConfiguracionLatino = new Cliente.Controles.botonSwitch();
             this.lblVistaConfiguracionTema = new System.Windows.Forms.Label();
             this.lblVistaConfiguracionRutaDescarga = new System.Windows.Forms.Label();
             this.lblVistaConfiguracionKbpsBajada = new System.Windows.Forms.Label();
@@ -76,6 +92,9 @@
             this.lblVistaConfiguracionIdioma = new System.Windows.Forms.Label();
             this.pnlVistaAbout = new System.Windows.Forms.Panel();
             this.tbVistaAboutDescripcion = new System.Windows.Forms.TextBox();
+            this.pbVistaAboutBotonJulio = new System.Windows.Forms.PictureBox();
+            this.pbVistaBotonLcs = new System.Windows.Forms.PictureBox();
+            this.pbVistaAbout = new System.Windows.Forms.PictureBox();
             this.pnlVistaDescargar = new System.Windows.Forms.Panel();
             this.button2 = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
@@ -94,115 +113,96 @@
             this.borrar = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.pnlVistaCompartirSeleccionarArchivo = new System.Windows.Forms.Panel();
             this.lblVistaCompartirSeleccionar = new System.Windows.Forms.Label();
+            this.pbVistaCompartirSeleccionarArchivo = new System.Windows.Forms.PictureBox();
             this.pnlVistaCompartirGuardarArchivo = new System.Windows.Forms.Panel();
             this.tbVistaCompartirDescripcionArchivo = new System.Windows.Forms.TextBox();
+            this.pbVistaCompartirCancelar = new System.Windows.Forms.PictureBox();
+            this.pbVistaCompartirArchivo = new System.Windows.Forms.PictureBox();
             this.lblVistaCompartirTamañoArchivo = new System.Windows.Forms.Label();
             this.lblVistaCompartirNombreArchivo = new System.Windows.Forms.Label();
             this.pnlMenu = new System.Windows.Forms.Panel();
             this.pnlMenuConfiguracionesRapidas = new System.Windows.Forms.Panel();
             this.lblMenuCRapidas = new System.Windows.Forms.Label();
             this.lblMenuConfiguracionesR = new System.Windows.Forms.Label();
+            this.pbMenuConfiguracionesRapidas = new System.Windows.Forms.PictureBox();
             this.pnlRojoMenu = new System.Windows.Forms.Panel();
             this.pnlMenuExpandir = new System.Windows.Forms.Panel();
+            this.pbMenuExpandir = new System.Windows.Forms.PictureBox();
             this.pnlMenuAbout = new System.Windows.Forms.Panel();
             this.pnlMenuRojoAbout = new System.Windows.Forms.Panel();
             this.lblMenuAbout = new System.Windows.Forms.Label();
+            this.pbMenuAbout = new System.Windows.Forms.PictureBox();
             this.pnlMenuConfiguracion = new System.Windows.Forms.Panel();
             this.pnlMenuRojoConfiguracion = new System.Windows.Forms.Panel();
             this.lblMenuConfiguracion = new System.Windows.Forms.Label();
+            this.pbMenuConfiguracion = new System.Windows.Forms.PictureBox();
             this.pnlMenuSolicitar = new System.Windows.Forms.Panel();
             this.pnlMenuRojoSolicitar = new System.Windows.Forms.Panel();
             this.lblMenuSolicitar = new System.Windows.Forms.Label();
+            this.pbMenuSolicitar = new System.Windows.Forms.PictureBox();
             this.pnlMenuCompartir = new System.Windows.Forms.Panel();
             this.pnlMenuRojoCompartir = new System.Windows.Forms.Panel();
             this.lblMenuCompartir = new System.Windows.Forms.Label();
+            this.pbMenuCompartir = new System.Windows.Forms.PictureBox();
             this.pnlMenuExplorar = new System.Windows.Forms.Panel();
             this.pnlMenuRojoExplorar = new System.Windows.Forms.Panel();
             this.lblMenuExplorar = new System.Windows.Forms.Label();
+            this.pbMenuExplorar = new System.Windows.Forms.PictureBox();
             this.pnlMenuDescargar = new System.Windows.Forms.Panel();
             this.pnlMenuRojoDescargar = new System.Windows.Forms.Panel();
             this.lblMenuDescargar = new System.Windows.Forms.Label();
+            this.pbMenuDescargar = new System.Windows.Forms.PictureBox();
             this.fbdNavegador = new System.Windows.Forms.FolderBrowserDialog();
             this.ttAyuda = new System.Windows.Forms.ToolTip(this.components);
             this.niMinimizar = new System.Windows.Forms.NotifyIcon(this.components);
             this.ofdArchivo = new System.Windows.Forms.OpenFileDialog();
-            this.pictureBox2 = new System.Windows.Forms.PictureBox();
-            this.pbVistaConfiguracionCarpetaDescarga = new System.Windows.Forms.PictureBox();
-            this.pbVistaAboutBotonJulio = new System.Windows.Forms.PictureBox();
-            this.pbVistaBotonLcs = new System.Windows.Forms.PictureBox();
-            this.pbVistaAbout = new System.Windows.Forms.PictureBox();
-            this.pbVistaCompartirSeleccionarArchivo = new System.Windows.Forms.PictureBox();
-            this.pbVistaCompartirCancelar = new System.Windows.Forms.PictureBox();
-            this.pbVistaCompartirArchivo = new System.Windows.Forms.PictureBox();
-            this.pbMenuConfiguracionesRapidas = new System.Windows.Forms.PictureBox();
-            this.pbMenuExpandir = new System.Windows.Forms.PictureBox();
-            this.pbMenuAbout = new System.Windows.Forms.PictureBox();
-            this.pbMenuConfiguracion = new System.Windows.Forms.PictureBox();
-            this.pbMenuSolicitar = new System.Windows.Forms.PictureBox();
-            this.pbMenuCompartir = new System.Windows.Forms.PictureBox();
-            this.pbMenuExplorar = new System.Windows.Forms.PictureBox();
-            this.pbMenuDescargar = new System.Windows.Forms.PictureBox();
-            this.pbCerrar = new System.Windows.Forms.PictureBox();
-            this.pbMinimizar = new System.Windows.Forms.PictureBox();
-            this.pbTitulo = new System.Windows.Forms.PictureBox();
-            this.pbIcono = new System.Windows.Forms.PictureBox();
-            this.bnudVistaConfiguracionDescargasSimultaneas = new Cliente.Controles.botonNUD();
-            this.bnudVistaConfiguracionLimiteBajada = new Cliente.Controles.botonNUD();
-            this.bnudVistaConfiguracionLimiteSubida = new Cliente.Controles.botonNUD();
-            this.bsVistaConfiguracionEfectoFade = new Cliente.Controles.botonSwitch();
-            this.bsVistaConfiguracionIniciarConWindows = new Cliente.Controles.botonSwitch();
-            this.bsVistaConfiguracionEfectoMenu = new Cliente.Controles.botonSwitch();
-            this.bsVistaConfiguracionEfectoBotones = new Cliente.Controles.botonSwitch();
-            this.bsVistaConfiguracionMinimizarBandeja = new Cliente.Controles.botonSwitch();
-            this.bsVistaConfiguracionTema = new Cliente.Controles.botonSwitch();
-            this.bsVistaConfiguracionLatino = new Cliente.Controles.botonSwitch();
             this.pnlBarra.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pbCerrar)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbMinimizar)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbTitulo)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbIcono)).BeginInit();
             this.pnlVistaContenedor.SuspendLayout();
             this.pnlVistaSolicitar.SuspendLayout();
             this.pnlVistaSolicitarVerSolicitudes.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvVistaSolicitar)).BeginInit();
             this.pnlVistaSolicitarCompartirSolicitud.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             this.pnlVistaConfiguracionGeneral.SuspendLayout();
             this.pnlVistaComfiguracionInterfaz.SuspendLayout();
             this.pnlVistaConfiguracionTransferencias.SuspendLayout();
             this.pnlVistaComfiguracionGeneral.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pbVistaConfiguracionCarpetaDescarga)).BeginInit();
             this.pnlVistaAbout.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pbVistaAboutBotonJulio)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbVistaBotonLcs)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbVistaAbout)).BeginInit();
             this.pnlVistaDescargar.SuspendLayout();
             this.pnlVistaExplorar.SuspendLayout();
             this.pnlVistaCompartir.SuspendLayout();
             this.pnlVistaCompartirMostarArchivos.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvVistaCompartirArchivos)).BeginInit();
             this.pnlVistaCompartirSeleccionarArchivo.SuspendLayout();
-            this.pnlVistaCompartirGuardarArchivo.SuspendLayout();
-            this.pnlMenu.SuspendLayout();
-            this.pnlMenuConfiguracionesRapidas.SuspendLayout();
-            this.pnlMenuExpandir.SuspendLayout();
-            this.pnlMenuAbout.SuspendLayout();
-            this.pnlMenuConfiguracion.SuspendLayout();
-            this.pnlMenuSolicitar.SuspendLayout();
-            this.pnlMenuCompartir.SuspendLayout();
-            this.pnlMenuExplorar.SuspendLayout();
-            this.pnlMenuDescargar.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pbVistaConfiguracionCarpetaDescarga)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pbVistaAboutBotonJulio)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pbVistaBotonLcs)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pbVistaAbout)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbVistaCompartirSeleccionarArchivo)).BeginInit();
+            this.pnlVistaCompartirGuardarArchivo.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbVistaCompartirCancelar)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbVistaCompartirArchivo)).BeginInit();
+            this.pnlMenu.SuspendLayout();
+            this.pnlMenuConfiguracionesRapidas.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbMenuConfiguracionesRapidas)).BeginInit();
+            this.pnlMenuExpandir.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbMenuExpandir)).BeginInit();
+            this.pnlMenuAbout.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbMenuAbout)).BeginInit();
+            this.pnlMenuConfiguracion.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbMenuConfiguracion)).BeginInit();
+            this.pnlMenuSolicitar.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbMenuSolicitar)).BeginInit();
+            this.pnlMenuCompartir.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbMenuCompartir)).BeginInit();
+            this.pnlMenuExplorar.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbMenuExplorar)).BeginInit();
+            this.pnlMenuDescargar.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbMenuDescargar)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pbCerrar)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pbMinimizar)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pbTitulo)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pbIcono)).BeginInit();
             this.SuspendLayout();
             // 
             // pnlBarra
@@ -219,6 +219,55 @@
             this.pnlBarra.Size = new System.Drawing.Size(1100, 30);
             this.pnlBarra.TabIndex = 0;
             this.pnlBarra.MouseDown += new System.Windows.Forms.MouseEventHandler(this.MoverForm);
+            // 
+            // pbCerrar
+            // 
+            this.pbCerrar.BackColor = System.Drawing.Color.Transparent;
+            this.pbCerrar.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.pbCerrar.Image = ((System.Drawing.Image)(resources.GetObject("pbCerrar.Image")));
+            this.pbCerrar.Location = new System.Drawing.Point(1072, 4);
+            this.pbCerrar.Name = "pbCerrar";
+            this.pbCerrar.Size = new System.Drawing.Size(22, 22);
+            this.pbCerrar.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pbCerrar.TabIndex = 4;
+            this.pbCerrar.TabStop = false;
+            this.pbCerrar.Click += new System.EventHandler(this.TimerOn);
+            // 
+            // pbMinimizar
+            // 
+            this.pbMinimizar.BackColor = System.Drawing.Color.Transparent;
+            this.pbMinimizar.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.pbMinimizar.Image = ((System.Drawing.Image)(resources.GetObject("pbMinimizar.Image")));
+            this.pbMinimizar.Location = new System.Drawing.Point(1044, 4);
+            this.pbMinimizar.Name = "pbMinimizar";
+            this.pbMinimizar.Size = new System.Drawing.Size(22, 22);
+            this.pbMinimizar.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pbMinimizar.TabIndex = 3;
+            this.pbMinimizar.TabStop = false;
+            this.pbMinimizar.Click += new System.EventHandler(this.TimerOn);
+            // 
+            // pbTitulo
+            // 
+            this.pbTitulo.BackColor = System.Drawing.Color.Transparent;
+            this.pbTitulo.Image = ((System.Drawing.Image)(resources.GetObject("pbTitulo.Image")));
+            this.pbTitulo.Location = new System.Drawing.Point(509, 5);
+            this.pbTitulo.Name = "pbTitulo";
+            this.pbTitulo.Size = new System.Drawing.Size(83, 20);
+            this.pbTitulo.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pbTitulo.TabIndex = 1;
+            this.pbTitulo.TabStop = false;
+            this.pbTitulo.MouseDown += new System.Windows.Forms.MouseEventHandler(this.MoverForm);
+            // 
+            // pbIcono
+            // 
+            this.pbIcono.BackColor = System.Drawing.Color.Transparent;
+            this.pbIcono.Image = ((System.Drawing.Image)(resources.GetObject("pbIcono.Image")));
+            this.pbIcono.Location = new System.Drawing.Point(7, 7);
+            this.pbIcono.Name = "pbIcono";
+            this.pbIcono.Size = new System.Drawing.Size(16, 17);
+            this.pbIcono.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
+            this.pbIcono.TabIndex = 1;
+            this.pbIcono.TabStop = false;
             // 
             // tmrFader
             // 
@@ -327,7 +376,10 @@
             this.dgvVistaSolicitar.RowHeadersVisible = false;
             this.dgvVistaSolicitar.Size = new System.Drawing.Size(960, 436);
             this.dgvVistaSolicitar.TabIndex = 6;
+            this.dgvVistaSolicitar.Tag = "S";
             this.dgvVistaSolicitar.Visible = false;
+            this.dgvVistaSolicitar.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.CompartirBorrarSolicitud);
+            this.dgvVistaSolicitar.CellMouseMove += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.CambiarCursorDGV);
             // 
             // dataGridViewTextBoxColumn1
             // 
@@ -397,6 +449,20 @@
             this.tbVistaSolicitarDescripcion.Tag = "";
             this.tbVistaSolicitarDescripcion.Text = "Breve descripcion del archivo.";
             this.tbVistaSolicitarDescripcion.Click += new System.EventHandler(this.BorrarTB);
+            // 
+            // pictureBox2
+            // 
+            this.pictureBox2.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.pictureBox2.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.pictureBox2.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox2.Image")));
+            this.pictureBox2.Location = new System.Drawing.Point(898, 48);
+            this.pictureBox2.Name = "pictureBox2";
+            this.pictureBox2.Size = new System.Drawing.Size(38, 38);
+            this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
+            this.pictureBox2.TabIndex = 3;
+            this.pictureBox2.TabStop = false;
+            this.pictureBox2.Tag = "1";
+            this.pictureBox2.Click += new System.EventHandler(this.SolicitarArchivo);
             // 
             // label4
             // 
@@ -482,6 +548,48 @@
             this.lblVistaConfiguracionNombre.TabIndex = 8;
             this.lblVistaConfiguracionNombre.Text = "Nombre";
             // 
+            // bnudVistaConfiguracionDescargasSimultaneas
+            // 
+            this.bnudVistaConfiguracionDescargasSimultaneas.BackColor = System.Drawing.Color.Transparent;
+            this.bnudVistaConfiguracionDescargasSimultaneas.Location = new System.Drawing.Point(712, 477);
+            this.bnudVistaConfiguracionDescargasSimultaneas.maxValor = 5;
+            this.bnudVistaConfiguracionDescargasSimultaneas.minValor = 0;
+            this.bnudVistaConfiguracionDescargasSimultaneas.Name = "bnudVistaConfiguracionDescargasSimultaneas";
+            this.bnudVistaConfiguracionDescargasSimultaneas.Size = new System.Drawing.Size(65, 35);
+            this.bnudVistaConfiguracionDescargasSimultaneas.TabIndex = 6;
+            this.bnudVistaConfiguracionDescargasSimultaneas.Tag = "33";
+            this.bnudVistaConfiguracionDescargasSimultaneas.UpDown = 1;
+            this.bnudVistaConfiguracionDescargasSimultaneas.valor = 0;
+            this.bnudVistaConfiguracionDescargasSimultaneas.CambioDeValor += new System.EventHandler(this.CambiarConfiguracion);
+            // 
+            // bnudVistaConfiguracionLimiteBajada
+            // 
+            this.bnudVistaConfiguracionLimiteBajada.BackColor = System.Drawing.Color.Transparent;
+            this.bnudVistaConfiguracionLimiteBajada.Location = new System.Drawing.Point(280, 545);
+            this.bnudVistaConfiguracionLimiteBajada.maxValor = 9999;
+            this.bnudVistaConfiguracionLimiteBajada.minValor = 0;
+            this.bnudVistaConfiguracionLimiteBajada.Name = "bnudVistaConfiguracionLimiteBajada";
+            this.bnudVistaConfiguracionLimiteBajada.Size = new System.Drawing.Size(65, 35);
+            this.bnudVistaConfiguracionLimiteBajada.TabIndex = 6;
+            this.bnudVistaConfiguracionLimiteBajada.Tag = "31";
+            this.bnudVistaConfiguracionLimiteBajada.UpDown = 5;
+            this.bnudVistaConfiguracionLimiteBajada.valor = 0;
+            this.bnudVistaConfiguracionLimiteBajada.CambioDeValor += new System.EventHandler(this.CambiarConfiguracion);
+            // 
+            // bnudVistaConfiguracionLimiteSubida
+            // 
+            this.bnudVistaConfiguracionLimiteSubida.BackColor = System.Drawing.Color.Transparent;
+            this.bnudVistaConfiguracionLimiteSubida.Location = new System.Drawing.Point(265, 502);
+            this.bnudVistaConfiguracionLimiteSubida.maxValor = 9999;
+            this.bnudVistaConfiguracionLimiteSubida.minValor = 0;
+            this.bnudVistaConfiguracionLimiteSubida.Name = "bnudVistaConfiguracionLimiteSubida";
+            this.bnudVistaConfiguracionLimiteSubida.Size = new System.Drawing.Size(65, 35);
+            this.bnudVistaConfiguracionLimiteSubida.TabIndex = 6;
+            this.bnudVistaConfiguracionLimiteSubida.Tag = "32";
+            this.bnudVistaConfiguracionLimiteSubida.UpDown = 5;
+            this.bnudVistaConfiguracionLimiteSubida.valor = 0;
+            this.bnudVistaConfiguracionLimiteSubida.CambioDeValor += new System.EventHandler(this.CambiarConfiguracion);
+            // 
             // lblVistaConfiguracionEfectoBotones
             // 
             this.lblVistaConfiguracionEfectoBotones.AutoSize = true;
@@ -561,6 +669,43 @@
             this.lblVistaConfiguracionTranseferecias.Text = "Transferencias";
             this.lblVistaConfiguracionTranseferecias.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
+            // bsVistaConfiguracionEfectoFade
+            // 
+            this.bsVistaConfiguracionEfectoFade.Activo = true;
+            this.bsVistaConfiguracionEfectoFade.BackColor = System.Drawing.Color.Transparent;
+            this.bsVistaConfiguracionEfectoFade.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.bsVistaConfiguracionEfectoFade.Location = new System.Drawing.Point(94, 284);
+            this.bsVistaConfiguracionEfectoFade.Name = "bsVistaConfiguracionEfectoFade";
+            this.bsVistaConfiguracionEfectoFade.Size = new System.Drawing.Size(36, 18);
+            this.bsVistaConfiguracionEfectoFade.TabIndex = 2;
+            this.bsVistaConfiguracionEfectoFade.Tag = "21";
+            this.bsVistaConfiguracionEfectoFade.Clickaso += new System.EventHandler(this.CambiarConfiguracion);
+            // 
+            // bsVistaConfiguracionIniciarConWindows
+            // 
+            this.bsVistaConfiguracionIniciarConWindows.Activo = false;
+            this.bsVistaConfiguracionIniciarConWindows.BackColor = System.Drawing.Color.Transparent;
+            this.bsVistaConfiguracionIniciarConWindows.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.bsVistaConfiguracionIniciarConWindows.Location = new System.Drawing.Point(126, 83);
+            this.bsVistaConfiguracionIniciarConWindows.Name = "bsVistaConfiguracionIniciarConWindows";
+            this.bsVistaConfiguracionIniciarConWindows.Size = new System.Drawing.Size(36, 18);
+            this.bsVistaConfiguracionIniciarConWindows.TabIndex = 2;
+            this.bsVistaConfiguracionIniciarConWindows.Tag = "11";
+            this.bsVistaConfiguracionIniciarConWindows.Clickaso += new System.EventHandler(this.CambiarConfiguracion);
+            this.bsVistaConfiguracionIniciarConWindows.Click += new System.EventHandler(this.CambiarConfiguracion);
+            // 
+            // bsVistaConfiguracionEfectoMenu
+            // 
+            this.bsVistaConfiguracionEfectoMenu.Activo = true;
+            this.bsVistaConfiguracionEfectoMenu.BackColor = System.Drawing.Color.Transparent;
+            this.bsVistaConfiguracionEfectoMenu.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.bsVistaConfiguracionEfectoMenu.Location = new System.Drawing.Point(94, 376);
+            this.bsVistaConfiguracionEfectoMenu.Name = "bsVistaConfiguracionEfectoMenu";
+            this.bsVistaConfiguracionEfectoMenu.Size = new System.Drawing.Size(36, 18);
+            this.bsVistaConfiguracionEfectoMenu.TabIndex = 2;
+            this.bsVistaConfiguracionEfectoMenu.Tag = "23";
+            this.bsVistaConfiguracionEfectoMenu.Clickaso += new System.EventHandler(this.CambiarConfiguracion);
+            // 
             // pnlVistaComfiguracionGeneral
             // 
             this.pnlVistaComfiguracionGeneral.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
@@ -584,6 +729,43 @@
             this.lblVistaConfiguracionGeneral.Text = "General";
             this.lblVistaConfiguracionGeneral.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
+            // bsVistaConfiguracionEfectoBotones
+            // 
+            this.bsVistaConfiguracionEfectoBotones.Activo = true;
+            this.bsVistaConfiguracionEfectoBotones.BackColor = System.Drawing.Color.Transparent;
+            this.bsVistaConfiguracionEfectoBotones.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.bsVistaConfiguracionEfectoBotones.Location = new System.Drawing.Point(94, 327);
+            this.bsVistaConfiguracionEfectoBotones.Name = "bsVistaConfiguracionEfectoBotones";
+            this.bsVistaConfiguracionEfectoBotones.Size = new System.Drawing.Size(36, 18);
+            this.bsVistaConfiguracionEfectoBotones.TabIndex = 2;
+            this.bsVistaConfiguracionEfectoBotones.Tag = "22";
+            this.bsVistaConfiguracionEfectoBotones.Clickaso += new System.EventHandler(this.CambiarConfiguracion);
+            // 
+            // bsVistaConfiguracionMinimizarBandeja
+            // 
+            this.bsVistaConfiguracionMinimizarBandeja.Activo = false;
+            this.bsVistaConfiguracionMinimizarBandeja.BackColor = System.Drawing.Color.Transparent;
+            this.bsVistaConfiguracionMinimizarBandeja.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.bsVistaConfiguracionMinimizarBandeja.Location = new System.Drawing.Point(125, 150);
+            this.bsVistaConfiguracionMinimizarBandeja.Name = "bsVistaConfiguracionMinimizarBandeja";
+            this.bsVistaConfiguracionMinimizarBandeja.Size = new System.Drawing.Size(36, 18);
+            this.bsVistaConfiguracionMinimizarBandeja.TabIndex = 2;
+            this.bsVistaConfiguracionMinimizarBandeja.Tag = "12";
+            this.bsVistaConfiguracionMinimizarBandeja.Clickaso += new System.EventHandler(this.CambiarConfiguracion);
+            // 
+            // pbVistaConfiguracionCarpetaDescarga
+            // 
+            this.pbVistaConfiguracionCarpetaDescarga.BackColor = System.Drawing.Color.Transparent;
+            this.pbVistaConfiguracionCarpetaDescarga.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.pbVistaConfiguracionCarpetaDescarga.Image = ((System.Drawing.Image)(resources.GetObject("pbVistaConfiguracionCarpetaDescarga.Image")));
+            this.pbVistaConfiguracionCarpetaDescarga.Location = new System.Drawing.Point(662, 553);
+            this.pbVistaConfiguracionCarpetaDescarga.Name = "pbVistaConfiguracionCarpetaDescarga";
+            this.pbVistaConfiguracionCarpetaDescarga.Size = new System.Drawing.Size(55, 42);
+            this.pbVistaConfiguracionCarpetaDescarga.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
+            this.pbVistaConfiguracionCarpetaDescarga.TabIndex = 3;
+            this.pbVistaConfiguracionCarpetaDescarga.TabStop = false;
+            this.pbVistaConfiguracionCarpetaDescarga.Click += new System.EventHandler(this.SeleccionarCarpetaDescargas);
+            // 
             // lblVistaConfiguracionMinimizarBanjeda
             // 
             this.lblVistaConfiguracionMinimizarBanjeda.AutoSize = true;
@@ -595,6 +777,18 @@
             this.lblVistaConfiguracionMinimizarBanjeda.TabIndex = 1;
             this.lblVistaConfiguracionMinimizarBanjeda.Text = "Minimizar a bandeja";
             // 
+            // bsVistaConfiguracionTema
+            // 
+            this.bsVistaConfiguracionTema.Activo = true;
+            this.bsVistaConfiguracionTema.BackColor = System.Drawing.Color.Transparent;
+            this.bsVistaConfiguracionTema.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.bsVistaConfiguracionTema.Location = new System.Drawing.Point(790, 347);
+            this.bsVistaConfiguracionTema.Name = "bsVistaConfiguracionTema";
+            this.bsVistaConfiguracionTema.Size = new System.Drawing.Size(36, 18);
+            this.bsVistaConfiguracionTema.TabIndex = 2;
+            this.bsVistaConfiguracionTema.Tag = "24";
+            this.bsVistaConfiguracionTema.Clickaso += new System.EventHandler(this.CambiarConfiguracion);
+            // 
             // lblVistaConfiguracionIniciarConWindows
             // 
             this.lblVistaConfiguracionIniciarConWindows.AutoSize = true;
@@ -605,6 +799,18 @@
             this.lblVistaConfiguracionIniciarConWindows.Size = new System.Drawing.Size(177, 23);
             this.lblVistaConfiguracionIniciarConWindows.TabIndex = 1;
             this.lblVistaConfiguracionIniciarConWindows.Text = "Iniciar con windows";
+            // 
+            // bsVistaConfiguracionLatino
+            // 
+            this.bsVistaConfiguracionLatino.Activo = true;
+            this.bsVistaConfiguracionLatino.BackColor = System.Drawing.Color.Transparent;
+            this.bsVistaConfiguracionLatino.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.bsVistaConfiguracionLatino.Location = new System.Drawing.Point(783, 173);
+            this.bsVistaConfiguracionLatino.Name = "bsVistaConfiguracionLatino";
+            this.bsVistaConfiguracionLatino.Size = new System.Drawing.Size(36, 18);
+            this.bsVistaConfiguracionLatino.TabIndex = 2;
+            this.bsVistaConfiguracionLatino.Tag = "13";
+            this.bsVistaConfiguracionLatino.Clickaso += new System.EventHandler(this.CambiarConfiguracion);
             // 
             // lblVistaConfiguracionTema
             // 
@@ -774,6 +980,46 @@
             this.tbVistaAboutDescripcion.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.tbVistaAboutDescripcion.Enter += new System.EventHandler(this.TBSinFoco);
             // 
+            // pbVistaAboutBotonJulio
+            // 
+            this.pbVistaAboutBotonJulio.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.pbVistaAboutBotonJulio.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.pbVistaAboutBotonJulio.Image = ((System.Drawing.Image)(resources.GetObject("pbVistaAboutBotonJulio.Image")));
+            this.pbVistaAboutBotonJulio.Location = new System.Drawing.Point(595, 528);
+            this.pbVistaAboutBotonJulio.Name = "pbVistaAboutBotonJulio";
+            this.pbVistaAboutBotonJulio.Size = new System.Drawing.Size(378, 67);
+            this.pbVistaAboutBotonJulio.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
+            this.pbVistaAboutBotonJulio.TabIndex = 2;
+            this.pbVistaAboutBotonJulio.TabStop = false;
+            this.pbVistaAboutBotonJulio.Tag = "J";
+            this.pbVistaAboutBotonJulio.Click += new System.EventHandler(this.MostrarInformacionPersonal);
+            // 
+            // pbVistaBotonLcs
+            // 
+            this.pbVistaBotonLcs.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.pbVistaBotonLcs.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.pbVistaBotonLcs.Image = ((System.Drawing.Image)(resources.GetObject("pbVistaBotonLcs.Image")));
+            this.pbVistaBotonLcs.Location = new System.Drawing.Point(62, 528);
+            this.pbVistaBotonLcs.Name = "pbVistaBotonLcs";
+            this.pbVistaBotonLcs.Size = new System.Drawing.Size(378, 67);
+            this.pbVistaBotonLcs.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
+            this.pbVistaBotonLcs.TabIndex = 1;
+            this.pbVistaBotonLcs.TabStop = false;
+            this.pbVistaBotonLcs.Tag = "L";
+            this.pbVistaBotonLcs.Click += new System.EventHandler(this.MostrarInformacionPersonal);
+            // 
+            // pbVistaAbout
+            // 
+            this.pbVistaAbout.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.pbVistaAbout.Image = ((System.Drawing.Image)(resources.GetObject("pbVistaAbout.Image")));
+            this.pbVistaAbout.Location = new System.Drawing.Point(193, 24);
+            this.pbVistaAbout.Name = "pbVistaAbout";
+            this.pbVistaAbout.Size = new System.Drawing.Size(649, 317);
+            this.pbVistaAbout.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
+            this.pbVistaAbout.TabIndex = 0;
+            this.pbVistaAbout.TabStop = false;
+            // 
             // pnlVistaDescargar
             // 
             this.pnlVistaDescargar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(13)))), ((int)(((byte)(23)))), ((int)(((byte)(33)))));
@@ -927,7 +1173,7 @@
             this.dgvVistaCompartirArchivos.TabIndex = 6;
             this.dgvVistaCompartirArchivos.Visible = false;
             this.dgvVistaCompartirArchivos.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.ActivoBorrarArchivo);
-            this.dgvVistaCompartirArchivos.CellMouseMove += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.CambiarCursorDgvArchivos);
+            this.dgvVistaCompartirArchivos.CellMouseMove += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.CambiarCursorDGV);
             // 
             // nombre
             // 
@@ -990,6 +1236,19 @@
             this.lblVistaCompartirSeleccionar.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.lblVistaCompartirSeleccionar.Click += new System.EventHandler(this.SeleccionarArchivoCompartir);
             // 
+            // pbVistaCompartirSeleccionarArchivo
+            // 
+            this.pbVistaCompartirSeleccionarArchivo.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.pbVistaCompartirSeleccionarArchivo.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.pbVistaCompartirSeleccionarArchivo.Image = ((System.Drawing.Image)(resources.GetObject("pbVistaCompartirSeleccionarArchivo.Image")));
+            this.pbVistaCompartirSeleccionarArchivo.Location = new System.Drawing.Point(453, 14);
+            this.pbVistaCompartirSeleccionarArchivo.Name = "pbVistaCompartirSeleccionarArchivo";
+            this.pbVistaCompartirSeleccionarArchivo.Size = new System.Drawing.Size(55, 42);
+            this.pbVistaCompartirSeleccionarArchivo.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
+            this.pbVistaCompartirSeleccionarArchivo.TabIndex = 3;
+            this.pbVistaCompartirSeleccionarArchivo.TabStop = false;
+            this.pbVistaCompartirSeleccionarArchivo.Click += new System.EventHandler(this.SeleccionarArchivoCompartir);
+            // 
             // pnlVistaCompartirGuardarArchivo
             // 
             this.pnlVistaCompartirGuardarArchivo.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
@@ -1020,6 +1279,34 @@
             this.tbVistaCompartirDescripcionArchivo.Tag = "";
             this.tbVistaCompartirDescripcionArchivo.Text = "Breve descripcion del archivo.";
             this.tbVistaCompartirDescripcionArchivo.Click += new System.EventHandler(this.BorrarTB);
+            // 
+            // pbVistaCompartirCancelar
+            // 
+            this.pbVistaCompartirCancelar.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.pbVistaCompartirCancelar.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.pbVistaCompartirCancelar.Image = ((System.Drawing.Image)(resources.GetObject("pbVistaCompartirCancelar.Image")));
+            this.pbVistaCompartirCancelar.Location = new System.Drawing.Point(910, 54);
+            this.pbVistaCompartirCancelar.Name = "pbVistaCompartirCancelar";
+            this.pbVistaCompartirCancelar.Size = new System.Drawing.Size(38, 38);
+            this.pbVistaCompartirCancelar.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
+            this.pbVistaCompartirCancelar.TabIndex = 3;
+            this.pbVistaCompartirCancelar.TabStop = false;
+            this.pbVistaCompartirCancelar.Tag = "0";
+            this.pbVistaCompartirCancelar.Click += new System.EventHandler(this.CompartirCancelarArchivo);
+            // 
+            // pbVistaCompartirArchivo
+            // 
+            this.pbVistaCompartirArchivo.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.pbVistaCompartirArchivo.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.pbVistaCompartirArchivo.Image = ((System.Drawing.Image)(resources.GetObject("pbVistaCompartirArchivo.Image")));
+            this.pbVistaCompartirArchivo.Location = new System.Drawing.Point(910, 9);
+            this.pbVistaCompartirArchivo.Name = "pbVistaCompartirArchivo";
+            this.pbVistaCompartirArchivo.Size = new System.Drawing.Size(38, 38);
+            this.pbVistaCompartirArchivo.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
+            this.pbVistaCompartirArchivo.TabIndex = 3;
+            this.pbVistaCompartirArchivo.TabStop = false;
+            this.pbVistaCompartirArchivo.Tag = "1";
+            this.pbVistaCompartirArchivo.Click += new System.EventHandler(this.CompartirCancelarArchivo);
             // 
             // lblVistaCompartirTamañoArchivo
             // 
@@ -1110,6 +1397,19 @@
             this.lblMenuConfiguracionesR.Text = "Configuraciones";
             this.lblMenuConfiguracionesR.Click += new System.EventHandler(this.AbrirConfigRapidas);
             // 
+            // pbMenuConfiguracionesRapidas
+            // 
+            this.pbMenuConfiguracionesRapidas.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.pbMenuConfiguracionesRapidas.Image = ((System.Drawing.Image)(resources.GetObject("pbMenuConfiguracionesRapidas.Image")));
+            this.pbMenuConfiguracionesRapidas.Location = new System.Drawing.Point(12, 10);
+            this.pbMenuConfiguracionesRapidas.Name = "pbMenuConfiguracionesRapidas";
+            this.pbMenuConfiguracionesRapidas.Size = new System.Drawing.Size(41, 40);
+            this.pbMenuConfiguracionesRapidas.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
+            this.pbMenuConfiguracionesRapidas.TabIndex = 1;
+            this.pbMenuConfiguracionesRapidas.TabStop = false;
+            this.pbMenuConfiguracionesRapidas.Tag = "6";
+            this.pbMenuConfiguracionesRapidas.Click += new System.EventHandler(this.AbrirConfigRapidas);
+            // 
             // pnlRojoMenu
             // 
             this.pnlRojoMenu.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(42)))), ((int)(((byte)(42)))));
@@ -1132,6 +1432,19 @@
             this.pnlMenuExpandir.TabIndex = 6;
             this.pnlMenuExpandir.Tag = "0";
             this.pnlMenuExpandir.Click += new System.EventHandler(this.ExpandirMenu);
+            // 
+            // pbMenuExpandir
+            // 
+            this.pbMenuExpandir.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.pbMenuExpandir.Image = ((System.Drawing.Image)(resources.GetObject("pbMenuExpandir.Image")));
+            this.pbMenuExpandir.Location = new System.Drawing.Point(15, 27);
+            this.pbMenuExpandir.Name = "pbMenuExpandir";
+            this.pbMenuExpandir.Size = new System.Drawing.Size(36, 7);
+            this.pbMenuExpandir.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pbMenuExpandir.TabIndex = 6;
+            this.pbMenuExpandir.TabStop = false;
+            this.pbMenuExpandir.Tag = "0";
+            this.pbMenuExpandir.Click += new System.EventHandler(this.ExpandirMenu);
             // 
             // pnlMenuAbout
             // 
@@ -1171,6 +1484,19 @@
             this.lblMenuAbout.Text = "Sobre bitNode";
             this.lblMenuAbout.Click += new System.EventHandler(this.ClickMenu);
             // 
+            // pbMenuAbout
+            // 
+            this.pbMenuAbout.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.pbMenuAbout.Image = ((System.Drawing.Image)(resources.GetObject("pbMenuAbout.Image")));
+            this.pbMenuAbout.Location = new System.Drawing.Point(18, 16);
+            this.pbMenuAbout.Name = "pbMenuAbout";
+            this.pbMenuAbout.Size = new System.Drawing.Size(29, 29);
+            this.pbMenuAbout.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pbMenuAbout.TabIndex = 1;
+            this.pbMenuAbout.TabStop = false;
+            this.pbMenuAbout.Tag = "6";
+            this.pbMenuAbout.Click += new System.EventHandler(this.ClickMenu);
+            // 
             // pnlMenuConfiguracion
             // 
             this.pnlMenuConfiguracion.BackColor = System.Drawing.Color.Transparent;
@@ -1208,6 +1534,19 @@
             this.lblMenuConfiguracion.Tag = "5";
             this.lblMenuConfiguracion.Text = "Configuracion";
             this.lblMenuConfiguracion.Click += new System.EventHandler(this.ClickMenu);
+            // 
+            // pbMenuConfiguracion
+            // 
+            this.pbMenuConfiguracion.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.pbMenuConfiguracion.Image = ((System.Drawing.Image)(resources.GetObject("pbMenuConfiguracion.Image")));
+            this.pbMenuConfiguracion.Location = new System.Drawing.Point(18, 16);
+            this.pbMenuConfiguracion.Name = "pbMenuConfiguracion";
+            this.pbMenuConfiguracion.Size = new System.Drawing.Size(29, 29);
+            this.pbMenuConfiguracion.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pbMenuConfiguracion.TabIndex = 1;
+            this.pbMenuConfiguracion.TabStop = false;
+            this.pbMenuConfiguracion.Tag = "5";
+            this.pbMenuConfiguracion.Click += new System.EventHandler(this.ClickMenu);
             // 
             // pnlMenuSolicitar
             // 
@@ -1247,6 +1586,19 @@
             this.lblMenuSolicitar.Text = "Solicitar";
             this.lblMenuSolicitar.Click += new System.EventHandler(this.ClickMenu);
             // 
+            // pbMenuSolicitar
+            // 
+            this.pbMenuSolicitar.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.pbMenuSolicitar.Image = ((System.Drawing.Image)(resources.GetObject("pbMenuSolicitar.Image")));
+            this.pbMenuSolicitar.Location = new System.Drawing.Point(18, 16);
+            this.pbMenuSolicitar.Name = "pbMenuSolicitar";
+            this.pbMenuSolicitar.Size = new System.Drawing.Size(29, 29);
+            this.pbMenuSolicitar.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pbMenuSolicitar.TabIndex = 1;
+            this.pbMenuSolicitar.TabStop = false;
+            this.pbMenuSolicitar.Tag = "4";
+            this.pbMenuSolicitar.Click += new System.EventHandler(this.ClickMenu);
+            // 
             // pnlMenuCompartir
             // 
             this.pnlMenuCompartir.BackColor = System.Drawing.Color.Transparent;
@@ -1284,6 +1636,19 @@
             this.lblMenuCompartir.Tag = "3";
             this.lblMenuCompartir.Text = "Compartir";
             this.lblMenuCompartir.Click += new System.EventHandler(this.ClickMenu);
+            // 
+            // pbMenuCompartir
+            // 
+            this.pbMenuCompartir.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.pbMenuCompartir.Image = ((System.Drawing.Image)(resources.GetObject("pbMenuCompartir.Image")));
+            this.pbMenuCompartir.Location = new System.Drawing.Point(18, 16);
+            this.pbMenuCompartir.Name = "pbMenuCompartir";
+            this.pbMenuCompartir.Size = new System.Drawing.Size(29, 29);
+            this.pbMenuCompartir.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pbMenuCompartir.TabIndex = 1;
+            this.pbMenuCompartir.TabStop = false;
+            this.pbMenuCompartir.Tag = "3";
+            this.pbMenuCompartir.Click += new System.EventHandler(this.ClickMenu);
             // 
             // pnlMenuExplorar
             // 
@@ -1323,6 +1688,19 @@
             this.lblMenuExplorar.Text = "Explorar";
             this.lblMenuExplorar.Click += new System.EventHandler(this.ClickMenu);
             // 
+            // pbMenuExplorar
+            // 
+            this.pbMenuExplorar.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.pbMenuExplorar.Image = ((System.Drawing.Image)(resources.GetObject("pbMenuExplorar.Image")));
+            this.pbMenuExplorar.Location = new System.Drawing.Point(18, 16);
+            this.pbMenuExplorar.Name = "pbMenuExplorar";
+            this.pbMenuExplorar.Size = new System.Drawing.Size(29, 29);
+            this.pbMenuExplorar.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pbMenuExplorar.TabIndex = 1;
+            this.pbMenuExplorar.TabStop = false;
+            this.pbMenuExplorar.Tag = "2";
+            this.pbMenuExplorar.Click += new System.EventHandler(this.ClickMenu);
+            // 
             // pnlMenuDescargar
             // 
             this.pnlMenuDescargar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(1)))), ((int)(((byte)(9)))), ((int)(((byte)(17)))));
@@ -1361,6 +1739,19 @@
             this.lblMenuDescargar.Text = "Descargar";
             this.lblMenuDescargar.Click += new System.EventHandler(this.ClickMenu);
             // 
+            // pbMenuDescargar
+            // 
+            this.pbMenuDescargar.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.pbMenuDescargar.Image = ((System.Drawing.Image)(resources.GetObject("pbMenuDescargar.Image")));
+            this.pbMenuDescargar.Location = new System.Drawing.Point(18, 16);
+            this.pbMenuDescargar.Name = "pbMenuDescargar";
+            this.pbMenuDescargar.Size = new System.Drawing.Size(29, 29);
+            this.pbMenuDescargar.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pbMenuDescargar.TabIndex = 1;
+            this.pbMenuDescargar.TabStop = false;
+            this.pbMenuDescargar.Tag = "1";
+            this.pbMenuDescargar.Click += new System.EventHandler(this.ClickMenu);
+            // 
             // ttAyuda
             // 
             this.ttAyuda.BackColor = System.Drawing.Color.Silver;
@@ -1378,394 +1769,6 @@
             // ofdArchivo
             // 
             this.ofdArchivo.Title = "Seleccione un archivo";
-            // 
-            // pictureBox2
-            // 
-            this.pictureBox2.Anchor = System.Windows.Forms.AnchorStyles.Right;
-            this.pictureBox2.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.pictureBox2.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox2.Image")));
-            this.pictureBox2.Location = new System.Drawing.Point(898, 48);
-            this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(38, 38);
-            this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
-            this.pictureBox2.TabIndex = 3;
-            this.pictureBox2.TabStop = false;
-            this.pictureBox2.Tag = "1";
-            this.pictureBox2.Click += new System.EventHandler(this.SolicitarArchivo);
-            // 
-            // pbVistaConfiguracionCarpetaDescarga
-            // 
-            this.pbVistaConfiguracionCarpetaDescarga.BackColor = System.Drawing.Color.Transparent;
-            this.pbVistaConfiguracionCarpetaDescarga.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.pbVistaConfiguracionCarpetaDescarga.Image = ((System.Drawing.Image)(resources.GetObject("pbVistaConfiguracionCarpetaDescarga.Image")));
-            this.pbVistaConfiguracionCarpetaDescarga.Location = new System.Drawing.Point(662, 553);
-            this.pbVistaConfiguracionCarpetaDescarga.Name = "pbVistaConfiguracionCarpetaDescarga";
-            this.pbVistaConfiguracionCarpetaDescarga.Size = new System.Drawing.Size(55, 42);
-            this.pbVistaConfiguracionCarpetaDescarga.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
-            this.pbVistaConfiguracionCarpetaDescarga.TabIndex = 3;
-            this.pbVistaConfiguracionCarpetaDescarga.TabStop = false;
-            this.pbVistaConfiguracionCarpetaDescarga.Click += new System.EventHandler(this.SeleccionarCarpetaDescargas);
-            // 
-            // pbVistaAboutBotonJulio
-            // 
-            this.pbVistaAboutBotonJulio.Anchor = System.Windows.Forms.AnchorStyles.Right;
-            this.pbVistaAboutBotonJulio.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.pbVistaAboutBotonJulio.Image = ((System.Drawing.Image)(resources.GetObject("pbVistaAboutBotonJulio.Image")));
-            this.pbVistaAboutBotonJulio.Location = new System.Drawing.Point(595, 528);
-            this.pbVistaAboutBotonJulio.Name = "pbVistaAboutBotonJulio";
-            this.pbVistaAboutBotonJulio.Size = new System.Drawing.Size(378, 67);
-            this.pbVistaAboutBotonJulio.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
-            this.pbVistaAboutBotonJulio.TabIndex = 2;
-            this.pbVistaAboutBotonJulio.TabStop = false;
-            this.pbVistaAboutBotonJulio.Tag = "J";
-            this.pbVistaAboutBotonJulio.Click += new System.EventHandler(this.MostrarInformacionPersonal);
-            // 
-            // pbVistaBotonLcs
-            // 
-            this.pbVistaBotonLcs.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.pbVistaBotonLcs.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.pbVistaBotonLcs.Image = ((System.Drawing.Image)(resources.GetObject("pbVistaBotonLcs.Image")));
-            this.pbVistaBotonLcs.Location = new System.Drawing.Point(62, 528);
-            this.pbVistaBotonLcs.Name = "pbVistaBotonLcs";
-            this.pbVistaBotonLcs.Size = new System.Drawing.Size(378, 67);
-            this.pbVistaBotonLcs.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
-            this.pbVistaBotonLcs.TabIndex = 1;
-            this.pbVistaBotonLcs.TabStop = false;
-            this.pbVistaBotonLcs.Tag = "L";
-            this.pbVistaBotonLcs.Click += new System.EventHandler(this.MostrarInformacionPersonal);
-            // 
-            // pbVistaAbout
-            // 
-            this.pbVistaAbout.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.pbVistaAbout.Image = ((System.Drawing.Image)(resources.GetObject("pbVistaAbout.Image")));
-            this.pbVistaAbout.Location = new System.Drawing.Point(193, 24);
-            this.pbVistaAbout.Name = "pbVistaAbout";
-            this.pbVistaAbout.Size = new System.Drawing.Size(649, 317);
-            this.pbVistaAbout.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
-            this.pbVistaAbout.TabIndex = 0;
-            this.pbVistaAbout.TabStop = false;
-            // 
-            // pbVistaCompartirSeleccionarArchivo
-            // 
-            this.pbVistaCompartirSeleccionarArchivo.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.pbVistaCompartirSeleccionarArchivo.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.pbVistaCompartirSeleccionarArchivo.Image = ((System.Drawing.Image)(resources.GetObject("pbVistaCompartirSeleccionarArchivo.Image")));
-            this.pbVistaCompartirSeleccionarArchivo.Location = new System.Drawing.Point(453, 14);
-            this.pbVistaCompartirSeleccionarArchivo.Name = "pbVistaCompartirSeleccionarArchivo";
-            this.pbVistaCompartirSeleccionarArchivo.Size = new System.Drawing.Size(55, 42);
-            this.pbVistaCompartirSeleccionarArchivo.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
-            this.pbVistaCompartirSeleccionarArchivo.TabIndex = 3;
-            this.pbVistaCompartirSeleccionarArchivo.TabStop = false;
-            this.pbVistaCompartirSeleccionarArchivo.Click += new System.EventHandler(this.SeleccionarArchivoCompartir);
-            // 
-            // pbVistaCompartirCancelar
-            // 
-            this.pbVistaCompartirCancelar.Anchor = System.Windows.Forms.AnchorStyles.Right;
-            this.pbVistaCompartirCancelar.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.pbVistaCompartirCancelar.Image = ((System.Drawing.Image)(resources.GetObject("pbVistaCompartirCancelar.Image")));
-            this.pbVistaCompartirCancelar.Location = new System.Drawing.Point(910, 54);
-            this.pbVistaCompartirCancelar.Name = "pbVistaCompartirCancelar";
-            this.pbVistaCompartirCancelar.Size = new System.Drawing.Size(38, 38);
-            this.pbVistaCompartirCancelar.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
-            this.pbVistaCompartirCancelar.TabIndex = 3;
-            this.pbVistaCompartirCancelar.TabStop = false;
-            this.pbVistaCompartirCancelar.Tag = "0";
-            this.pbVistaCompartirCancelar.Click += new System.EventHandler(this.CompartirCancelarArchivo);
-            // 
-            // pbVistaCompartirArchivo
-            // 
-            this.pbVistaCompartirArchivo.Anchor = System.Windows.Forms.AnchorStyles.Right;
-            this.pbVistaCompartirArchivo.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.pbVistaCompartirArchivo.Image = ((System.Drawing.Image)(resources.GetObject("pbVistaCompartirArchivo.Image")));
-            this.pbVistaCompartirArchivo.Location = new System.Drawing.Point(910, 9);
-            this.pbVistaCompartirArchivo.Name = "pbVistaCompartirArchivo";
-            this.pbVistaCompartirArchivo.Size = new System.Drawing.Size(38, 38);
-            this.pbVistaCompartirArchivo.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
-            this.pbVistaCompartirArchivo.TabIndex = 3;
-            this.pbVistaCompartirArchivo.TabStop = false;
-            this.pbVistaCompartirArchivo.Tag = "1";
-            this.pbVistaCompartirArchivo.Click += new System.EventHandler(this.CompartirCancelarArchivo);
-            // 
-            // pbMenuConfiguracionesRapidas
-            // 
-            this.pbMenuConfiguracionesRapidas.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.pbMenuConfiguracionesRapidas.Image = ((System.Drawing.Image)(resources.GetObject("pbMenuConfiguracionesRapidas.Image")));
-            this.pbMenuConfiguracionesRapidas.Location = new System.Drawing.Point(12, 10);
-            this.pbMenuConfiguracionesRapidas.Name = "pbMenuConfiguracionesRapidas";
-            this.pbMenuConfiguracionesRapidas.Size = new System.Drawing.Size(41, 40);
-            this.pbMenuConfiguracionesRapidas.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
-            this.pbMenuConfiguracionesRapidas.TabIndex = 1;
-            this.pbMenuConfiguracionesRapidas.TabStop = false;
-            this.pbMenuConfiguracionesRapidas.Tag = "6";
-            this.pbMenuConfiguracionesRapidas.Click += new System.EventHandler(this.AbrirConfigRapidas);
-            // 
-            // pbMenuExpandir
-            // 
-            this.pbMenuExpandir.Anchor = System.Windows.Forms.AnchorStyles.Right;
-            this.pbMenuExpandir.Image = ((System.Drawing.Image)(resources.GetObject("pbMenuExpandir.Image")));
-            this.pbMenuExpandir.Location = new System.Drawing.Point(15, 27);
-            this.pbMenuExpandir.Name = "pbMenuExpandir";
-            this.pbMenuExpandir.Size = new System.Drawing.Size(36, 7);
-            this.pbMenuExpandir.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pbMenuExpandir.TabIndex = 6;
-            this.pbMenuExpandir.TabStop = false;
-            this.pbMenuExpandir.Tag = "0";
-            this.pbMenuExpandir.Click += new System.EventHandler(this.ExpandirMenu);
-            // 
-            // pbMenuAbout
-            // 
-            this.pbMenuAbout.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.pbMenuAbout.Image = ((System.Drawing.Image)(resources.GetObject("pbMenuAbout.Image")));
-            this.pbMenuAbout.Location = new System.Drawing.Point(18, 16);
-            this.pbMenuAbout.Name = "pbMenuAbout";
-            this.pbMenuAbout.Size = new System.Drawing.Size(29, 29);
-            this.pbMenuAbout.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pbMenuAbout.TabIndex = 1;
-            this.pbMenuAbout.TabStop = false;
-            this.pbMenuAbout.Tag = "6";
-            this.pbMenuAbout.Click += new System.EventHandler(this.ClickMenu);
-            // 
-            // pbMenuConfiguracion
-            // 
-            this.pbMenuConfiguracion.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.pbMenuConfiguracion.Image = ((System.Drawing.Image)(resources.GetObject("pbMenuConfiguracion.Image")));
-            this.pbMenuConfiguracion.Location = new System.Drawing.Point(18, 16);
-            this.pbMenuConfiguracion.Name = "pbMenuConfiguracion";
-            this.pbMenuConfiguracion.Size = new System.Drawing.Size(29, 29);
-            this.pbMenuConfiguracion.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pbMenuConfiguracion.TabIndex = 1;
-            this.pbMenuConfiguracion.TabStop = false;
-            this.pbMenuConfiguracion.Tag = "5";
-            this.pbMenuConfiguracion.Click += new System.EventHandler(this.ClickMenu);
-            // 
-            // pbMenuSolicitar
-            // 
-            this.pbMenuSolicitar.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.pbMenuSolicitar.Image = ((System.Drawing.Image)(resources.GetObject("pbMenuSolicitar.Image")));
-            this.pbMenuSolicitar.Location = new System.Drawing.Point(18, 16);
-            this.pbMenuSolicitar.Name = "pbMenuSolicitar";
-            this.pbMenuSolicitar.Size = new System.Drawing.Size(29, 29);
-            this.pbMenuSolicitar.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pbMenuSolicitar.TabIndex = 1;
-            this.pbMenuSolicitar.TabStop = false;
-            this.pbMenuSolicitar.Tag = "4";
-            this.pbMenuSolicitar.Click += new System.EventHandler(this.ClickMenu);
-            // 
-            // pbMenuCompartir
-            // 
-            this.pbMenuCompartir.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.pbMenuCompartir.Image = ((System.Drawing.Image)(resources.GetObject("pbMenuCompartir.Image")));
-            this.pbMenuCompartir.Location = new System.Drawing.Point(18, 16);
-            this.pbMenuCompartir.Name = "pbMenuCompartir";
-            this.pbMenuCompartir.Size = new System.Drawing.Size(29, 29);
-            this.pbMenuCompartir.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pbMenuCompartir.TabIndex = 1;
-            this.pbMenuCompartir.TabStop = false;
-            this.pbMenuCompartir.Tag = "3";
-            this.pbMenuCompartir.Click += new System.EventHandler(this.ClickMenu);
-            // 
-            // pbMenuExplorar
-            // 
-            this.pbMenuExplorar.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.pbMenuExplorar.Image = ((System.Drawing.Image)(resources.GetObject("pbMenuExplorar.Image")));
-            this.pbMenuExplorar.Location = new System.Drawing.Point(18, 16);
-            this.pbMenuExplorar.Name = "pbMenuExplorar";
-            this.pbMenuExplorar.Size = new System.Drawing.Size(29, 29);
-            this.pbMenuExplorar.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pbMenuExplorar.TabIndex = 1;
-            this.pbMenuExplorar.TabStop = false;
-            this.pbMenuExplorar.Tag = "2";
-            this.pbMenuExplorar.Click += new System.EventHandler(this.ClickMenu);
-            // 
-            // pbMenuDescargar
-            // 
-            this.pbMenuDescargar.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.pbMenuDescargar.Image = ((System.Drawing.Image)(resources.GetObject("pbMenuDescargar.Image")));
-            this.pbMenuDescargar.Location = new System.Drawing.Point(18, 16);
-            this.pbMenuDescargar.Name = "pbMenuDescargar";
-            this.pbMenuDescargar.Size = new System.Drawing.Size(29, 29);
-            this.pbMenuDescargar.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pbMenuDescargar.TabIndex = 1;
-            this.pbMenuDescargar.TabStop = false;
-            this.pbMenuDescargar.Tag = "1";
-            this.pbMenuDescargar.Click += new System.EventHandler(this.ClickMenu);
-            // 
-            // pbCerrar
-            // 
-            this.pbCerrar.BackColor = System.Drawing.Color.Transparent;
-            this.pbCerrar.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.pbCerrar.Image = ((System.Drawing.Image)(resources.GetObject("pbCerrar.Image")));
-            this.pbCerrar.Location = new System.Drawing.Point(1072, 4);
-            this.pbCerrar.Name = "pbCerrar";
-            this.pbCerrar.Size = new System.Drawing.Size(22, 22);
-            this.pbCerrar.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pbCerrar.TabIndex = 4;
-            this.pbCerrar.TabStop = false;
-            this.pbCerrar.Click += new System.EventHandler(this.TimerOn);
-            // 
-            // pbMinimizar
-            // 
-            this.pbMinimizar.BackColor = System.Drawing.Color.Transparent;
-            this.pbMinimizar.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.pbMinimizar.Image = ((System.Drawing.Image)(resources.GetObject("pbMinimizar.Image")));
-            this.pbMinimizar.Location = new System.Drawing.Point(1044, 4);
-            this.pbMinimizar.Name = "pbMinimizar";
-            this.pbMinimizar.Size = new System.Drawing.Size(22, 22);
-            this.pbMinimizar.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pbMinimizar.TabIndex = 3;
-            this.pbMinimizar.TabStop = false;
-            this.pbMinimizar.Click += new System.EventHandler(this.TimerOn);
-            // 
-            // pbTitulo
-            // 
-            this.pbTitulo.BackColor = System.Drawing.Color.Transparent;
-            this.pbTitulo.Image = ((System.Drawing.Image)(resources.GetObject("pbTitulo.Image")));
-            this.pbTitulo.Location = new System.Drawing.Point(509, 5);
-            this.pbTitulo.Name = "pbTitulo";
-            this.pbTitulo.Size = new System.Drawing.Size(83, 20);
-            this.pbTitulo.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pbTitulo.TabIndex = 1;
-            this.pbTitulo.TabStop = false;
-            this.pbTitulo.MouseDown += new System.Windows.Forms.MouseEventHandler(this.MoverForm);
-            // 
-            // pbIcono
-            // 
-            this.pbIcono.BackColor = System.Drawing.Color.Transparent;
-            this.pbIcono.Image = ((System.Drawing.Image)(resources.GetObject("pbIcono.Image")));
-            this.pbIcono.Location = new System.Drawing.Point(7, 7);
-            this.pbIcono.Name = "pbIcono";
-            this.pbIcono.Size = new System.Drawing.Size(16, 17);
-            this.pbIcono.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
-            this.pbIcono.TabIndex = 1;
-            this.pbIcono.TabStop = false;
-            // 
-            // bnudVistaConfiguracionDescargasSimultaneas
-            // 
-            this.bnudVistaConfiguracionDescargasSimultaneas.BackColor = System.Drawing.Color.Transparent;
-            this.bnudVistaConfiguracionDescargasSimultaneas.Location = new System.Drawing.Point(712, 477);
-            this.bnudVistaConfiguracionDescargasSimultaneas.maxValor = 5;
-            this.bnudVistaConfiguracionDescargasSimultaneas.minValor = 0;
-            this.bnudVistaConfiguracionDescargasSimultaneas.Name = "bnudVistaConfiguracionDescargasSimultaneas";
-            this.bnudVistaConfiguracionDescargasSimultaneas.Size = new System.Drawing.Size(65, 35);
-            this.bnudVistaConfiguracionDescargasSimultaneas.TabIndex = 6;
-            this.bnudVistaConfiguracionDescargasSimultaneas.Tag = "33";
-            this.bnudVistaConfiguracionDescargasSimultaneas.UpDown = 1;
-            this.bnudVistaConfiguracionDescargasSimultaneas.valor = 0;
-            this.bnudVistaConfiguracionDescargasSimultaneas.CambioDeValor += new System.EventHandler(this.CambiarConfiguracion);
-            // 
-            // bnudVistaConfiguracionLimiteBajada
-            // 
-            this.bnudVistaConfiguracionLimiteBajada.BackColor = System.Drawing.Color.Transparent;
-            this.bnudVistaConfiguracionLimiteBajada.Location = new System.Drawing.Point(280, 545);
-            this.bnudVistaConfiguracionLimiteBajada.maxValor = 9999;
-            this.bnudVistaConfiguracionLimiteBajada.minValor = 0;
-            this.bnudVistaConfiguracionLimiteBajada.Name = "bnudVistaConfiguracionLimiteBajada";
-            this.bnudVistaConfiguracionLimiteBajada.Size = new System.Drawing.Size(65, 35);
-            this.bnudVistaConfiguracionLimiteBajada.TabIndex = 6;
-            this.bnudVistaConfiguracionLimiteBajada.Tag = "31";
-            this.bnudVistaConfiguracionLimiteBajada.UpDown = 5;
-            this.bnudVistaConfiguracionLimiteBajada.valor = 0;
-            this.bnudVistaConfiguracionLimiteBajada.CambioDeValor += new System.EventHandler(this.CambiarConfiguracion);
-            // 
-            // bnudVistaConfiguracionLimiteSubida
-            // 
-            this.bnudVistaConfiguracionLimiteSubida.BackColor = System.Drawing.Color.Transparent;
-            this.bnudVistaConfiguracionLimiteSubida.Location = new System.Drawing.Point(265, 502);
-            this.bnudVistaConfiguracionLimiteSubida.maxValor = 9999;
-            this.bnudVistaConfiguracionLimiteSubida.minValor = 0;
-            this.bnudVistaConfiguracionLimiteSubida.Name = "bnudVistaConfiguracionLimiteSubida";
-            this.bnudVistaConfiguracionLimiteSubida.Size = new System.Drawing.Size(65, 35);
-            this.bnudVistaConfiguracionLimiteSubida.TabIndex = 6;
-            this.bnudVistaConfiguracionLimiteSubida.Tag = "32";
-            this.bnudVistaConfiguracionLimiteSubida.UpDown = 5;
-            this.bnudVistaConfiguracionLimiteSubida.valor = 0;
-            this.bnudVistaConfiguracionLimiteSubida.CambioDeValor += new System.EventHandler(this.CambiarConfiguracion);
-            // 
-            // bsVistaConfiguracionEfectoFade
-            // 
-            this.bsVistaConfiguracionEfectoFade.Activo = true;
-            this.bsVistaConfiguracionEfectoFade.BackColor = System.Drawing.Color.Transparent;
-            this.bsVistaConfiguracionEfectoFade.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.bsVistaConfiguracionEfectoFade.Location = new System.Drawing.Point(94, 284);
-            this.bsVistaConfiguracionEfectoFade.Name = "bsVistaConfiguracionEfectoFade";
-            this.bsVistaConfiguracionEfectoFade.Size = new System.Drawing.Size(36, 18);
-            this.bsVistaConfiguracionEfectoFade.TabIndex = 2;
-            this.bsVistaConfiguracionEfectoFade.Tag = "21";
-            this.bsVistaConfiguracionEfectoFade.Clickaso += new System.EventHandler(this.CambiarConfiguracion);
-            // 
-            // bsVistaConfiguracionIniciarConWindows
-            // 
-            this.bsVistaConfiguracionIniciarConWindows.Activo = false;
-            this.bsVistaConfiguracionIniciarConWindows.BackColor = System.Drawing.Color.Transparent;
-            this.bsVistaConfiguracionIniciarConWindows.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.bsVistaConfiguracionIniciarConWindows.Location = new System.Drawing.Point(126, 83);
-            this.bsVistaConfiguracionIniciarConWindows.Name = "bsVistaConfiguracionIniciarConWindows";
-            this.bsVistaConfiguracionIniciarConWindows.Size = new System.Drawing.Size(36, 18);
-            this.bsVistaConfiguracionIniciarConWindows.TabIndex = 2;
-            this.bsVistaConfiguracionIniciarConWindows.Tag = "11";
-            this.bsVistaConfiguracionIniciarConWindows.Clickaso += new System.EventHandler(this.CambiarConfiguracion);
-            this.bsVistaConfiguracionIniciarConWindows.Click += new System.EventHandler(this.CambiarConfiguracion);
-            // 
-            // bsVistaConfiguracionEfectoMenu
-            // 
-            this.bsVistaConfiguracionEfectoMenu.Activo = true;
-            this.bsVistaConfiguracionEfectoMenu.BackColor = System.Drawing.Color.Transparent;
-            this.bsVistaConfiguracionEfectoMenu.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.bsVistaConfiguracionEfectoMenu.Location = new System.Drawing.Point(94, 376);
-            this.bsVistaConfiguracionEfectoMenu.Name = "bsVistaConfiguracionEfectoMenu";
-            this.bsVistaConfiguracionEfectoMenu.Size = new System.Drawing.Size(36, 18);
-            this.bsVistaConfiguracionEfectoMenu.TabIndex = 2;
-            this.bsVistaConfiguracionEfectoMenu.Tag = "23";
-            this.bsVistaConfiguracionEfectoMenu.Clickaso += new System.EventHandler(this.CambiarConfiguracion);
-            // 
-            // bsVistaConfiguracionEfectoBotones
-            // 
-            this.bsVistaConfiguracionEfectoBotones.Activo = true;
-            this.bsVistaConfiguracionEfectoBotones.BackColor = System.Drawing.Color.Transparent;
-            this.bsVistaConfiguracionEfectoBotones.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.bsVistaConfiguracionEfectoBotones.Location = new System.Drawing.Point(94, 327);
-            this.bsVistaConfiguracionEfectoBotones.Name = "bsVistaConfiguracionEfectoBotones";
-            this.bsVistaConfiguracionEfectoBotones.Size = new System.Drawing.Size(36, 18);
-            this.bsVistaConfiguracionEfectoBotones.TabIndex = 2;
-            this.bsVistaConfiguracionEfectoBotones.Tag = "22";
-            this.bsVistaConfiguracionEfectoBotones.Clickaso += new System.EventHandler(this.CambiarConfiguracion);
-            // 
-            // bsVistaConfiguracionMinimizarBandeja
-            // 
-            this.bsVistaConfiguracionMinimizarBandeja.Activo = false;
-            this.bsVistaConfiguracionMinimizarBandeja.BackColor = System.Drawing.Color.Transparent;
-            this.bsVistaConfiguracionMinimizarBandeja.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.bsVistaConfiguracionMinimizarBandeja.Location = new System.Drawing.Point(125, 150);
-            this.bsVistaConfiguracionMinimizarBandeja.Name = "bsVistaConfiguracionMinimizarBandeja";
-            this.bsVistaConfiguracionMinimizarBandeja.Size = new System.Drawing.Size(36, 18);
-            this.bsVistaConfiguracionMinimizarBandeja.TabIndex = 2;
-            this.bsVistaConfiguracionMinimizarBandeja.Tag = "12";
-            this.bsVistaConfiguracionMinimizarBandeja.Clickaso += new System.EventHandler(this.CambiarConfiguracion);
-            // 
-            // bsVistaConfiguracionTema
-            // 
-            this.bsVistaConfiguracionTema.Activo = true;
-            this.bsVistaConfiguracionTema.BackColor = System.Drawing.Color.Transparent;
-            this.bsVistaConfiguracionTema.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.bsVistaConfiguracionTema.Location = new System.Drawing.Point(790, 347);
-            this.bsVistaConfiguracionTema.Name = "bsVistaConfiguracionTema";
-            this.bsVistaConfiguracionTema.Size = new System.Drawing.Size(36, 18);
-            this.bsVistaConfiguracionTema.TabIndex = 2;
-            this.bsVistaConfiguracionTema.Tag = "24";
-            this.bsVistaConfiguracionTema.Clickaso += new System.EventHandler(this.CambiarConfiguracion);
-            // 
-            // bsVistaConfiguracionLatino
-            // 
-            this.bsVistaConfiguracionLatino.Activo = true;
-            this.bsVistaConfiguracionLatino.BackColor = System.Drawing.Color.Transparent;
-            this.bsVistaConfiguracionLatino.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.bsVistaConfiguracionLatino.Location = new System.Drawing.Point(783, 173);
-            this.bsVistaConfiguracionLatino.Name = "bsVistaConfiguracionLatino";
-            this.bsVistaConfiguracionLatino.Size = new System.Drawing.Size(36, 18);
-            this.bsVistaConfiguracionLatino.TabIndex = 2;
-            this.bsVistaConfiguracionLatino.Tag = "13";
-            this.bsVistaConfiguracionLatino.Clickaso += new System.EventHandler(this.CambiarConfiguracion);
             // 
             // frmCliente
             // 
@@ -1786,6 +1789,10 @@
             this.SizeChanged += new System.EventHandler(this.TimerOn);
             this.pnlBarra.ResumeLayout(false);
             this.pnlBarra.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pbCerrar)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbMinimizar)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbTitulo)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbIcono)).EndInit();
             this.pnlVistaContenedor.ResumeLayout(false);
             this.pnlVistaSolicitar.ResumeLayout(false);
             this.pnlVistaSolicitar.PerformLayout();
@@ -1793,13 +1800,18 @@
             ((System.ComponentModel.ISupportInitialize)(this.dgvVistaSolicitar)).EndInit();
             this.pnlVistaSolicitarCompartirSolicitud.ResumeLayout(false);
             this.pnlVistaSolicitarCompartirSolicitud.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             this.pnlVistaConfiguracionGeneral.ResumeLayout(false);
             this.pnlVistaConfiguracionGeneral.PerformLayout();
             this.pnlVistaComfiguracionInterfaz.ResumeLayout(false);
             this.pnlVistaConfiguracionTransferencias.ResumeLayout(false);
             this.pnlVistaComfiguracionGeneral.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.pbVistaConfiguracionCarpetaDescarga)).EndInit();
             this.pnlVistaAbout.ResumeLayout(false);
             this.pnlVistaAbout.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pbVistaAboutBotonJulio)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbVistaBotonLcs)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbVistaAbout)).EndInit();
             this.pnlVistaDescargar.ResumeLayout(false);
             this.pnlVistaDescargar.PerformLayout();
             this.pnlVistaExplorar.ResumeLayout(false);
@@ -1809,44 +1821,35 @@
             ((System.ComponentModel.ISupportInitialize)(this.dgvVistaCompartirArchivos)).EndInit();
             this.pnlVistaCompartirSeleccionarArchivo.ResumeLayout(false);
             this.pnlVistaCompartirSeleccionarArchivo.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pbVistaCompartirSeleccionarArchivo)).EndInit();
             this.pnlVistaCompartirGuardarArchivo.ResumeLayout(false);
             this.pnlVistaCompartirGuardarArchivo.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pbVistaCompartirCancelar)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbVistaCompartirArchivo)).EndInit();
             this.pnlMenu.ResumeLayout(false);
             this.pnlMenuConfiguracionesRapidas.ResumeLayout(false);
             this.pnlMenuConfiguracionesRapidas.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pbMenuConfiguracionesRapidas)).EndInit();
             this.pnlMenuExpandir.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.pbMenuExpandir)).EndInit();
             this.pnlMenuAbout.ResumeLayout(false);
             this.pnlMenuAbout.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pbMenuAbout)).EndInit();
             this.pnlMenuConfiguracion.ResumeLayout(false);
             this.pnlMenuConfiguracion.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pbMenuConfiguracion)).EndInit();
             this.pnlMenuSolicitar.ResumeLayout(false);
             this.pnlMenuSolicitar.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pbMenuSolicitar)).EndInit();
             this.pnlMenuCompartir.ResumeLayout(false);
             this.pnlMenuCompartir.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pbMenuCompartir)).EndInit();
             this.pnlMenuExplorar.ResumeLayout(false);
             this.pnlMenuExplorar.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pbMenuExplorar)).EndInit();
             this.pnlMenuDescargar.ResumeLayout(false);
             this.pnlMenuDescargar.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pbVistaConfiguracionCarpetaDescarga)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pbVistaAboutBotonJulio)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pbVistaBotonLcs)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pbVistaAbout)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pbVistaCompartirSeleccionarArchivo)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pbVistaCompartirCancelar)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pbVistaCompartirArchivo)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pbMenuConfiguracionesRapidas)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pbMenuExpandir)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pbMenuAbout)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pbMenuConfiguracion)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pbMenuSolicitar)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pbMenuCompartir)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pbMenuExplorar)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbMenuDescargar)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pbCerrar)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pbMinimizar)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pbTitulo)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pbIcono)).EndInit();
             this.ResumeLayout(false);
 
         }

@@ -22,7 +22,7 @@ namespace Cliente
         [DllImport("user32.DLL", EntryPoint = "SendMessage")]
         private extern static void SendMessage(System.IntPtr hWnd, int wMsg, int wParam, int lParam);
 
-        Image[] ImagenesArchivos = { Properties.Resources.SwitchON, Properties.Resources.SwitchOFF, Properties.Resources.Cancelar,Properties.Resources.Compartir };
+        Image[] ImagenesArchivos = { Properties.Resources.SwitchON, Properties.Resources.SwitchOFF, Properties.Resources.Cancelar, Properties.Resources.Compartir };
         PrivateFontCollection pfc = Configuracion.Tipografia();
         Configuracion configuracion = new Configuracion().Leer();
         bool cerrar, TransparenciaFull = false;
@@ -584,9 +584,30 @@ namespace Cliente
                 bsVistaConfiguracionIniciarConWindows.Activo = configuracion.iniciarConWindows;
             }
         }
-        private void CambiarCursorDgvArchivos(object sender, DataGridViewCellMouseEventArgs e) //Cambiar de cursor dgvArchivos
+        private void CambiarCursorDGV(object sender, DataGridViewCellMouseEventArgs e) //Cambiar de cursor en DGV
         {
-            dgvVistaCompartirArchivos.Cursor = ((e.ColumnIndex.Equals(3) || e.ColumnIndex.Equals(4)) && e.RowIndex != -1) ? Cursors.Hand : Cursors.Arrow;
+            switch ((sender as DataGridView).Tag.ToString())
+            {
+                case "D":
+                    {
+                        break;
+                    }
+                case "E":
+                    {
+                        break;
+                    }
+                case "C":
+                    {
+                        dgvVistaCompartirArchivos.Cursor = ((e.ColumnIndex.Equals(3) || e.ColumnIndex.Equals(4)) && e.RowIndex != -1) ? Cursors.Hand : Cursors.Arrow;
+                        break;
+                    }
+                case "S":
+                    {
+                        dgvVistaSolicitar.Cursor = ((e.ColumnIndex.Equals(2) || e.ColumnIndex.Equals(3)) && e.RowIndex != -1) ? Cursors.Hand : Cursors.Arrow;
+                        break;
+                    }
+            }
+
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -617,7 +638,7 @@ namespace Cliente
         private void CargarSolicitudes() //Carga las solicitudes en la vista
         {
             dgvVistaSolicitar.Visible = !(lblVistaSolicitarNuevasSolicitudes.Visible = (Servidor.Solicitudes.Count == 0));
-            pbMenuSolicitar.Image = (Servidor.Solicitudes.Count > 0) ?Properties.Resources.SolicitarON: Properties.Resources.SolictarOFF;
+            pbMenuSolicitar.Image = (Servidor.Solicitudes.Count > 0) ? Properties.Resources.SolicitarON : Properties.Resources.SolictarOFF;
             if (Servidor.Solicitudes.Count > 0)
             {
                 //Datos
@@ -636,23 +657,31 @@ namespace Cliente
                 dgvVistaSolicitar.Columns[3].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
             }
         }
-        private void ActivoBorrarArchivo(object sender, DataGridViewCellEventArgs e) //Click en Activo-Eliminar
+        private void ActivoBorrarArchivo(object sender, DataGridViewCellEventArgs e) //Click en Activo-Eliminar DGVCompatir
         {
-            if ((e.ColumnIndex.Equals(3) || e.ColumnIndex.Equals(4)) && e.RowIndex != -1)
+            if (dgvVistaCompartirArchivos.CurrentCell != null && dgvVistaCompartirArchivos.CurrentCell.Value != null && e.RowIndex != -1)
             {
-                if (dgvVistaCompartirArchivos.CurrentCell != null && dgvVistaCompartirArchivos.CurrentCell.Value != null)
+                if (e.ColumnIndex.Equals(3)) //Activo = 3
                 {
-                    if (e.ColumnIndex.Equals(3)) //Activo = 3
-                    {
-                        archivosCompartidos[e.RowIndex].Activo = !archivosCompartidos[e.RowIndex].Activo;
-                        dgvVistaCompartirArchivos.CurrentCell.Value = ImagenesArchivos[(archivosCompartidos[e.RowIndex].Activo) ? 0 : 1];
-                        archivosCompartidos[e.RowIndex].CambiarEstado();
-                    }
-                    else //Borrar = 4
-                    {
-                        archivosCompartidos[e.RowIndex].EliminarArchivo(e.RowIndex);
-                    }
+                    archivosCompartidos[e.RowIndex].Activo = !archivosCompartidos[e.RowIndex].Activo;
+                    dgvVistaCompartirArchivos.CurrentCell.Value = ImagenesArchivos[(archivosCompartidos[e.RowIndex].Activo) ? 0 : 1];
+                    archivosCompartidos[e.RowIndex].CambiarEstado();
                 }
+                else if (e.ColumnIndex.Equals(4))//Borrar = 4
+                {
+                    archivosCompartidos[e.RowIndex].EliminarArchivo(e.RowIndex);
+                }
+            }
+        }
+        private void CompartirBorrarSolicitud(object sender, DataGridViewCellEventArgs e) //Click en Compartir-Eliminar DGVSolicitar
+        {
+            if (dgvVistaSolicitar.CurrentCell != null && dgvVistaSolicitar.CurrentCell.Value != null && e.RowIndex != -1)
+            {
+                if (e.ColumnIndex.Equals(2)) //Compartir = 2
+                {
+                    ClickMenu(new Control() { Tag = 3 }, null);
+                }
+                Servidor.Solicitudes.RemoveAt(e.RowIndex);
             }
         }
         private void CargarArchivosCompatidos() //Carga los archivos compartidos en la vista
