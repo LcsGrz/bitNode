@@ -12,7 +12,7 @@ namespace Cliente
     {
         //Variables
         public static bool PermitirRecibir = true;
-        private ManualResetEvent TodoHecho = new ManualResetEvent(false);
+        private ManualResetEvent TodoHecho = new ManualResetEvent(true);
         public int puerto { get; set; } = 420;
         Servidor server = new Servidor();
         //Clase
