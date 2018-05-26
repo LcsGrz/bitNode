@@ -102,12 +102,14 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Servidor.cs" />
     <Compile Include="Splash.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Splash.Designer.cs">
       <DependentUpon>Splash.cs</DependentUpon>
     </Compile>
+    <Compile Include="UDP.cs" />
     <EmbeddedResource Include="ConfigRapidas.resx">
       <DependentUpon>ConfigRapidas.cs</DependentUpon>
     </EmbeddedResource>

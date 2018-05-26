@@ -5,7 +5,9 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Text;
 using System.IO;
+using System.Net;
 using System.Runtime.InteropServices;
+using System.Text;
 using System.Threading;
 using System.Windows.Forms;
 
@@ -26,7 +28,7 @@ namespace Cliente
         bool cerrar, TransparenciaFull = false;
         int tagAnterior = 0;
         Archivo archivoNuevo;
-
+        Servidor server = new Servidor();
         List<Panel> panelesMenu, panelesVistas;
         public static List<Archivo> archivosCompartidos = Archivo.LeerArchivos();
         //----------------------------------------------------------------------------------------------Constructor del form
@@ -38,6 +40,7 @@ namespace Cliente
             CargarConfiguracion();
             AplicarIdioma();
             AplicarTema();
+            server.IniciarEjecuciones();
             Archivo.ArchivoGuardado += new EventHandler((object sender, EventArgs e) => { this.Invoke(new Action(() => { CargarArchivosCompatidos(); })); });
         }
         //----------------------------------------------------------------------------------------------Funciones de form
@@ -61,6 +64,7 @@ namespace Cliente
         }
         private void TimerOn(object sender, EventArgs e) // Inicia el timer para efecto FADE
         {
+            server.FrenarEjecuciones();
             cerrar = ((sender as Control).Name == "pbCerrar") ? true : false;
             tmrFader.Start();
         }
@@ -560,6 +564,33 @@ namespace Cliente
         {
             dgvVistaCompartirArchivos.Cursor = ((e.ColumnIndex.Equals(3) || e.ColumnIndex.Equals(4)) && e.RowIndex != -1) ? Cursors.Hand : Cursors.Arrow;
         }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+           // server.IniciarEjecuciones();
+            
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show(Servidor.IPSVecinas.Count.ToString());
+            foreach (IPAddress item in Servidor.IPSVecinas)
+            {
+                MessageBox.Show(item.ToString());
+            }
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            server.EnviarUDP(IPAddress.Broadcast, "bitNode@PING@asd");
+        }
+
+        private void pictureBox2_Click(object sender, EventArgs e)
+        {
+            string pepe = "bitNode@SOLICITAR@" + textBox1.Text;
+            MessageBox.Show(Encoding.ASCII.GetBytes(pepe).Length.ToString());
+        }
+
         private void ActivoBorrarArchivo(object sender, DataGridViewCellEventArgs e) //Click en Activo-Eliminar
         {
             if ((e.ColumnIndex.Equals(3) || e.ColumnIndex.Equals(4)) && e.RowIndex != -1)
@@ -614,6 +645,7 @@ namespace Cliente
     mejoras:
      ver si puedo resumir mas los efectos
      ir agregando fonts a cargar guentes
+     Cuando se resube un archivo, no actualiza la lista y muestra datos viejos
   */
 
 /*
