@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Net;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading;
@@ -30,6 +31,7 @@ namespace Cliente
         public long Tamaño { get; set; }
         public string ArchivoMD5 { get; set; } = null;
         public bool Activo { get; set; } = true;
+        public IPAddress IPPropietario { get; set; }
         //Funciones
         public static string KB_GB_MB(long peso)
         {
@@ -110,6 +112,7 @@ namespace Cliente
         public void CambiarEstado()
         {
             File.WriteAllText(rutaBN + "\\" + Nombre.Split('.')[0] + ".json", JsonConvert.SerializeObject(this));
+            ArchivoGuardado?.Invoke(null, null);
         }
     }
 }

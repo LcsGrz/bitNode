@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Net;
 using System.Net.Sockets;
 using System.Text;
@@ -13,6 +14,7 @@ namespace Cliente
         public static bool PermitirRecibir = true;
         private ManualResetEvent TodoHecho = new ManualResetEvent(false);
         public int puerto { get; set; } = 420;
+        Servidor server = new Servidor();
         //Clase
         class StateObject
         {
@@ -25,7 +27,7 @@ namespace Cliente
         {
             Socket socket = new Socket(AddressFamily.InterNetwork, SocketType.Dgram, ProtocolType.Udp);
             IPEndPoint iep1 = new IPEndPoint(ip, puerto);
-            
+
             socket.SetSocketOption(SocketOptionLevel.Socket, SocketOptionName.Broadcast, 1);
             socket.SendTo(Encoding.ASCII.GetBytes(msj), iep1);
             socket.Close();
@@ -67,16 +69,29 @@ namespace Cliente
                 string[] stringData = Encoding.ASCII.GetString(SO.buffer, 0, read).Split('@');
                 if (stringData[0] == "bitNode")
                 {
-                    new Servidor().AgregarIP(IPRecibida);
+                    server.AgregarIP(IPRecibida);
                     //--------------------------------------
-                    if (stringData[1] == "PING")
+                    switch (stringData[1])
                     {
-                        EnviarMSJ_UDP(IPRecibida, "bitNode@PONG@");
-                    }
-                    else if (stringData[1] == "SOLICITAR")
-                    {
-                        Servidor.Solicitudes.Add(stringData[2]);
-                        Servidor.InformarSolicitud();
+                        case "PING":
+                            {
+                                EnviarMSJ_UDP(IPRecibida, "bitNode@PONG@");
+                                break;
+                            }
+                        case "SOLICITAR":
+                            {
+                                Servidor.Solicitudes.Add(stringData[2]);
+                                Servidor.InformarSolicitud();
+                                break;
+                            }
+                        case "ACV":
+                            {
+                                server.EliminarArchivosCompartidosDeIP(IPRecibida);
+                                Archivo a = JsonConvert.DeserializeObject<Archivo>(stringData[2]);
+                                a.IPPropietario = IPRecibida;
+                                server.AgregarArchivosCompartidos(a);
+                                break;
+                            }
                     }
                 }
             }
