@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Net;
 using System.Net.NetworkInformation;
+using System.Net.Sockets;
 using System.Threading;
 using System.Timers;
 
@@ -24,6 +25,18 @@ namespace Cliente
             temporizador = new System.Timers.Timer(60000) { AutoReset = true, Enabled = true };
             temporizador.Elapsed += bitNodersVivos;
             temporizador.Start();
+        }
+        public static IPAddress ObtenerIPLocal()
+        {
+            var host = Dns.GetHostEntry(Dns.GetHostName());
+            foreach (var IP in host.AddressList)
+            {
+                if (IP.AddressFamily == AddressFamily.InterNetwork)
+                {
+                    return IP;
+                }
+            }
+            throw new Exception("No network adapters with an IPv4 address in the system!");
         }
         public void AgregarIP(IPAddress ip)
         {
@@ -49,7 +62,17 @@ namespace Cliente
         //-----------------------------------------------UDP
         public void EnviarUDP(IPAddress ip, string msj)
         {
-            SUDP.EnviarMSJ_UDP(ip, msj);
+            if (ip != null)
+            {
+                SUDP.EnviarMSJ_UDP(ip, msj);
+            }
+            else
+            {
+                foreach (IPAddress ipv in IPSVecinas)
+                {
+                    SUDP.EnviarMSJ_UDP(ipv, msj);
+                }
+            }
         }
         public void SolicitarArchivosCompartidos()
         {

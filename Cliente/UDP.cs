@@ -61,7 +61,7 @@ namespace Cliente
 
             int read = s.EndReceiveFrom(ar, ref tempRemoteEP);
             IPAddress IPRecibida = IPAddress.Parse(tempRemoteEP.ToString().Split(':')[0]);
-            if (!IPRecibida.Equals(Configuracion.ObtenerIPLocal()))
+            if (!IPRecibida.Equals(Servidor.ObtenerIPLocal()))
             {
                 byte[] data = new byte[1024];
                 string stringData = Encoding.ASCII.GetString(SO.buffer, 0, read);

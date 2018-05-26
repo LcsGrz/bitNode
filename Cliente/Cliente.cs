@@ -585,10 +585,9 @@ namespace Cliente
             server.EnviarUDP(IPAddress.Broadcast, "bitNode@PING@asd");
         }
 
-        private void pictureBox2_Click(object sender, EventArgs e)
+        private void SolicitarArchivo(object sender, EventArgs e) //Enviar solicitud de archivo
         {
-            string pepe = "bitNode@SOLICITAR@" + textBox1.Text;
-            MessageBox.Show(Encoding.ASCII.GetBytes(pepe).Length.ToString());
+            server.EnviarUDP(null, "bitNode@SOLICITAR@" + textBox1.Text);
         }
 
         private void ActivoBorrarArchivo(object sender, DataGridViewCellEventArgs e) //Click en Activo-Eliminar
