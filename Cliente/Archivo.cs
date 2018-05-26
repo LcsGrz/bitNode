@@ -93,7 +93,7 @@ namespace Cliente
                     if (!frmCliente.archivosCompartidos.Exists(x => x.ArchivoMD5.Contains(ArchivoMD5)))
                         frmCliente.archivosCompartidos.Add(this);
                     ArchivoGuardado?.Invoke(null, null);
-                    //para mostrar el mensaje como showdialos puedo crear en el form una funcion para mostrar mensajes
+
                     new frmMensaje(Idioma.StringResources.mensajeExitoCompartirArchivo).ShowDialog();
                     return;
                 }

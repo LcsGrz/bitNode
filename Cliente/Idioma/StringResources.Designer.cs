@@ -88,6 +88,24 @@ namespace Cliente.Idioma {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Usuario-Descripcion.
+        /// </summary>
+        internal static string CabecerasDGVSolcitarArreglo {
+            get {
+                return ResourceManager.GetString("CabecerasDGVSolcitarArreglo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Compartir.
+        /// </summary>
+        internal static string CabecerasDGVSolicitarCompartir {
+            get {
+                return ResourceManager.GetString("CabecerasDGVSolicitarCompartir", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Apagar equipo.
         /// </summary>
         internal static string lblConfiguracionesRapidasApagar {
@@ -421,6 +439,24 @@ namespace Cliente.Idioma {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a ¡Solicita el archivo que necesites!.
+        /// </summary>
+        internal static string lblVistaSolicitarInformacion {
+            get {
+                return ResourceManager.GetString("lblVistaSolicitarInformacion", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a No hay nuevas solicitudes.
+        /// </summary>
+        internal static string lblVistaSolicitarNuevasSolicitudes {
+            get {
+                return ResourceManager.GetString("lblVistaSolicitarNuevasSolicitudes", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Email copiado al portapapeles..
         /// </summary>
         internal static string mensajeEmail {
@@ -453,6 +489,15 @@ namespace Cliente.Idioma {
         internal static string MensajeIniciarConWindows {
             get {
                 return ResourceManager.GetString("MensajeIniciarConWindows", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a La solicitud fue enviada, solo queda esperar..
+        /// </summary>
+        internal static string msgSolicitarArchivo {
+            get {
+                return ResourceManager.GetString("msgSolicitarArchivo", resourceCulture);
             }
         }
         

@@ -22,7 +22,7 @@ namespace Cliente
         [DllImport("user32.DLL", EntryPoint = "SendMessage")]
         private extern static void SendMessage(System.IntPtr hWnd, int wMsg, int wParam, int lParam);
 
-        Image[] ImagenesArchivos = { Properties.Resources.SwitchON, Properties.Resources.SwitchOFF, Properties.Resources.Cancelar };
+        Image[] ImagenesArchivos = { Properties.Resources.SwitchON, Properties.Resources.SwitchOFF, Properties.Resources.Cancelar,Properties.Resources.Compartir };
         PrivateFontCollection pfc = Configuracion.Tipografia();
         Configuracion configuracion = new Configuracion().Leer();
         bool cerrar, TransparenciaFull = false;
@@ -390,6 +390,11 @@ namespace Cliente
             dgvVistaCompartirArchivos.ColumnHeadersDefaultCellStyle.Font = catorceR;
             dgvVistaCompartirArchivos.DefaultCellStyle.Font = doceR;
             //Solicitar
+            lblVistaSolicitarInformacion.Font = dieciseisR;
+            tbVistaSolicitarDescripcion.Font = doceR;
+            lblVistaSolicitarNuevasSolicitudes.Font = veintiunoR;
+            dgvVistaSolicitar.ColumnHeadersDefaultCellStyle.Font = catorceR;
+            dgvVistaSolicitar.DefaultCellStyle.Font = doceR;
             //Configuracion
             lblVistaConfiguracionGeneral.Font = veinticuatroR;
             lblVistaConfiguracionIniciarConWindows.Font = catorceR;
@@ -442,6 +447,13 @@ namespace Cliente
             dgvVistaCompartirArchivos.Columns.Add(new DataGridViewImageColumn() { Name = Idioma.StringResources.CabecerasDGVArchivoCompartidoEliminar });
             CargarArchivosCompatidos();
             //Solicitar
+            lblVistaSolicitarInformacion.Text = Idioma.StringResources.lblVistaSolicitarInformacion;
+            tbVistaSolicitarDescripcion.Text = Idioma.StringResources.tbVistaCompartirDescripcionArchivo;
+            lblVistaSolicitarNuevasSolicitudes.Text = Idioma.StringResources.lblVistaSolicitarNuevasSolicitudes;
+            foreach (string n in Idioma.StringResources.CabecerasDGVSolcitarArreglo.Split('-'))
+                dgvVistaSolicitar.Columns.Add(n, n);
+            dgvVistaSolicitar.Columns.Add(new DataGridViewImageColumn() { Name = Idioma.StringResources.CabecerasDGVSolicitarCompartir });
+            dgvVistaSolicitar.Columns.Add(new DataGridViewImageColumn() { Name = Idioma.StringResources.CabecerasDGVArchivoCompartidoEliminar });
             //Configuracion
             lblVistaConfiguracionGeneral.Text = Idioma.StringResources.lblVistaConfiguracionGeneral;
             lblVistaConfiguracionIniciarConWindows.Text = Idioma.StringResources.lblVistaConfiguracionIniciarConWindows;
@@ -531,6 +543,17 @@ namespace Cliente
             dgvVistaCompartirArchivos.BackgroundColor = configuracion.colorPanelesInternosVistas;
             dgvVistaCompartirArchivos.GridColor = configuracion.colorFondo;
             //Solicitar
+            pnlVistaSolicitarCompartirSolicitud.BackColor = configuracion.colorPanelesInternosVistas;
+            pnlVistaSolicitarVerSolicitudes.BackColor = configuracion.colorPanelesInternosVistas;
+            //-----------------------------------------------------------------------------------
+            dgvVistaSolicitar.DefaultCellStyle.BackColor = configuracion.colorPanelesInternosVistas;
+            dgvVistaSolicitar.DefaultCellStyle.SelectionBackColor = configuracion.colorPanelesInternosVistas;
+            dgvVistaSolicitar.DefaultCellStyle.SelectionForeColor = Color.FromArgb(255, 153, 153, 153);
+            dgvVistaSolicitar.DefaultCellStyle.ForeColor = Color.FromArgb(255, 153, 153, 153);
+            dgvVistaSolicitar.ColumnHeadersDefaultCellStyle.BackColor = configuracion.colorFondo;
+            dgvVistaSolicitar.ColumnHeadersDefaultCellStyle.ForeColor = configuracion.colorDetalles;
+            dgvVistaSolicitar.BackgroundColor = configuracion.colorPanelesInternosVistas;
+            dgvVistaSolicitar.GridColor = configuracion.colorFondo;
             //Configuracion
             pnlVistaComfiguracionGeneral.BackColor = configuracion.colorPanelesInternosVistas;
             pnlVistaComfiguracionInterfaz.BackColor = configuracion.colorPanelesInternosVistas;
@@ -588,29 +611,29 @@ namespace Cliente
 
         private void SolicitarArchivo(object sender, EventArgs e) //Enviar solicitud de archivo
         {
-            server.EnviarUDP(null, "bitNode@SOLICITAR@" + configuracion.nombre + "|" + textBox1.Text);
+            server.EnviarUDP(null, "bitNode@SOLICITAR@" + configuracion.nombre + "|" + tbVistaSolicitarDescripcion.Text);
+            new frmMensaje(Idioma.StringResources.msgSolicitarArchivo).ShowDialog();
         }
         private void CargarSolicitudes() //Carga las solicitudes en la vista
         {
-            dgvVistaCompartirArchivos.Visible = !(lblVistaCompartirVerArchivos.Visible = (archivosCompartidos.Count == 0));
-            if (archivosCompartidos.Count > 0)
+            dgvVistaSolicitar.Visible = !(lblVistaSolicitarNuevasSolicitudes.Visible = (Servidor.Solicitudes.Count == 0));
+            pbMenuSolicitar.Image = (Servidor.Solicitudes.Count > 0) ?Properties.Resources.SolicitarON: Properties.Resources.SolictarOFF;
+            if (Servidor.Solicitudes.Count > 0)
             {
                 //Datos
-                dgvVistaCompartirArchivos.Rows.Clear();
-                Image Eliminar = Properties.Resources.Cancelar;
-                for (int i = 0; i < archivosCompartidos.Count; i++)
+                dgvVistaSolicitar.Rows.Clear();
+                for (int i = 0; i < Servidor.Solicitudes.Count; i++)
                 {
-                    Archivo A = archivosCompartidos[i];
-                    dgvVistaCompartirArchivos.Rows.Insert(i, A.Nombre, Archivo.KB_GB_MB(A.Tamaño), A.Descripcion, ImagenesArchivos[(A.Activo) ? 0 : 1], ImagenesArchivos[2]);
+                    string[] S = Servidor.Solicitudes[i].Split('|');
+                    dgvVistaSolicitar.Rows.Insert(i, S[0], S[1], ImagenesArchivos[3], ImagenesArchivos[2]);
                 }
                 //Vista
-                dgvVistaCompartirArchivos.ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
-                dgvVistaCompartirArchivos.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
-                dgvVistaCompartirArchivos.Columns[0].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-                dgvVistaCompartirArchivos.Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-                dgvVistaCompartirArchivos.Columns[2].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-                dgvVistaCompartirArchivos.Columns[3].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-                dgvVistaCompartirArchivos.Columns[4].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+                dgvVistaSolicitar.ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+                dgvVistaSolicitar.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+                dgvVistaSolicitar.Columns[0].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+                dgvVistaSolicitar.Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+                dgvVistaSolicitar.Columns[2].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+                dgvVistaSolicitar.Columns[3].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
             }
         }
         private void ActivoBorrarArchivo(object sender, DataGridViewCellEventArgs e) //Click en Activo-Eliminar
@@ -639,7 +662,6 @@ namespace Cliente
             {
                 //Datos
                 dgvVistaCompartirArchivos.Rows.Clear();
-                Image Eliminar = Properties.Resources.Cancelar;
                 for (int i = 0; i < archivosCompartidos.Count; i++)
                 {
                     Archivo A = archivosCompartidos[i];

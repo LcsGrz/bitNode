@@ -258,4 +258,19 @@
   <data name="CabecerasDGVArchivoCompartidoEliminar" xml:space="preserve">
     <value>Eliminar</value>
   </data>
+  <data name="CabecerasDGVSolcitarArreglo" xml:space="preserve">
+    <value>Usuario-Descripcion</value>
+  </data>
+  <data name="CabecerasDGVSolicitarCompartir" xml:space="preserve">
+    <value>Compartir</value>
+  </data>
+  <data name="lblVistaSolicitarInformacion" xml:space="preserve">
+    <value>¡Solicita el archivo que necesites!</value>
+  </data>
+  <data name="lblVistaSolicitarNuevasSolicitudes" xml:space="preserve">
+    <value>No hay nuevas solicitudes</value>
+  </data>
+  <data name="msgSolicitarArchivo" xml:space="preserve">
+    <value>La solicitud fue enviada, solo queda esperar.</value>
+  </data>
 </root>
