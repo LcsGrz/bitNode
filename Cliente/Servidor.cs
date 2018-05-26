@@ -1,5 +1,4 @@
-﻿using Newtonsoft.Json;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Net;
 using System.Net.NetworkInformation;
@@ -16,7 +15,6 @@ namespace Cliente
         Ping pingSender = new Ping();
         public static List<IPAddress> IPSVecinas = new List<IPAddress>();
         public static List<string> Solicitudes = new List<string>();
-        public static List<Archivo> ArchivosCompartidosVecinos = new List<Archivo>();
         Thread EscucharUDP;
         private static System.Timers.Timer temporizador;
         public static event EventHandler informarSolicitud;
@@ -29,8 +27,6 @@ namespace Cliente
             temporizador = new System.Timers.Timer(60000) { AutoReset = true, Enabled = true };
             temporizador.Elapsed += bitNodersVivos;
             temporizador.Start();
-            EnviarUDP(IPAddress.Broadcast, "bitNode@PING@");
-            EnviarArchivosCompartidos();
         }
         public static IPAddress ObtenerIPLocal()
         {
@@ -84,34 +80,9 @@ namespace Cliente
                 }
             }
         }
-        public void AgregarArchivosCompartidos(Archivo a)
+        public void SolicitarArchivosCompartidos()
         {
-            if (!ArchivosCompartidosVecinos.Exists(x => (Archivo.CompararMD5(x.ArchivoMD5,a.ArchivoMD5) && x.IPPropietario.Equals(a.IPPropietario))))
-                ArchivosCompartidosVecinos.Add(a);
-        }
-        public void EliminarArchivosCompartidosDeIP(IPAddress ip)
-        {
-            for (int i = 0; i < ArchivosCompartidosVecinos.Count; i++)
-            {
-                if (ArchivosCompartidosVecinos[i].IPPropietario == ip)
-                {
-                    ArchivosCompartidosVecinos.RemoveAt(i);
-                    i = 0;
-                }
-            }
-        }
-        public void EnviarArchivosCompartidos()
-        {
-            foreach (IPAddress ip in IPSVecinas)
-            {
-                foreach (Archivo a in frmCliente.archivosCompartidos)
-                {
-                    if (a.Activo) {
-                        string sa = "bitNode@ACV@" + JsonConvert.SerializeObject(a);
-                        EnviarUDP(ip, sa);
-                    }
-                }
-            }
+
         }
         //-----------------------------------------------TCP
     }

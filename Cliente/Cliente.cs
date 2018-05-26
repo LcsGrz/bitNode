@@ -1,6 +1,5 @@
 ﻿using Cliente.Controles;
 using Microsoft.Win32;
-using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -8,7 +7,6 @@ using System.Drawing.Text;
 using System.IO;
 using System.Net;
 using System.Runtime.InteropServices;
-using System.Text;
 using System.Threading;
 using System.Windows.Forms;
 
@@ -42,8 +40,7 @@ namespace Cliente
             AplicarIdioma();
             AplicarTema();
             server.IniciarEjecuciones();
-
-            Archivo.ArchivoGuardado += new EventHandler((object sender, EventArgs e) => { this.Invoke(new Action(() => { CargarArchivosCompatidos(); server.EnviarArchivosCompartidos(); })); });
+            Archivo.ArchivoGuardado += new EventHandler((object sender, EventArgs e) => { this.Invoke(new Action(() => { CargarArchivosCompatidos(); })); });
             Servidor.informarSolicitud += new EventHandler((object sender, EventArgs e) => { this.Invoke(new Action(() => { CargarSolicitudes(); })); });
         }
         //----------------------------------------------------------------------------------------------Funciones de form
@@ -716,10 +713,6 @@ namespace Cliente
                 dgvVistaCompartirArchivos.Columns[3].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
                 dgvVistaCompartirArchivos.Columns[4].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
             }
-        }
-        private void MostarArchivosCompartidosVecinos() //Carga los archivos en la vista Explorar
-        {
-
         }
     }
 }

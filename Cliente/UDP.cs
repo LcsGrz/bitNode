@@ -1,5 +1,4 @@
-﻿using Newtonsoft.Json;
-using System;
+﻿using System;
 using System.Net;
 using System.Net.Sockets;
 using System.Text;
@@ -14,7 +13,6 @@ namespace Cliente
         public static bool PermitirRecibir = true;
         private ManualResetEvent TodoHecho = new ManualResetEvent(false);
         public int puerto { get; set; } = 420;
-        Servidor server = new Servidor();
         //Clase
         class StateObject
         {
@@ -27,7 +25,7 @@ namespace Cliente
         {
             Socket socket = new Socket(AddressFamily.InterNetwork, SocketType.Dgram, ProtocolType.Udp);
             IPEndPoint iep1 = new IPEndPoint(ip, puerto);
-
+            
             socket.SetSocketOption(SocketOptionLevel.Socket, SocketOptionName.Broadcast, 1);
             socket.SendTo(Encoding.ASCII.GetBytes(msj), iep1);
             socket.Close();
@@ -60,38 +58,25 @@ namespace Cliente
             Socket s = SO.socket;
             IPEndPoint sender = new IPEndPoint(IPAddress.Any, 420);
             EndPoint tempRemoteEP = sender;
-
-            int read = s.EndReceiveFrom(ar, ref tempRemoteEP);
             IPAddress IPRecibida = IPAddress.Parse(tempRemoteEP.ToString().Split(':')[0]);
             if (!IPRecibida.Equals(Servidor.ObtenerIPLocal()))
             {
                 byte[] data = new byte[1024];
+
+                int read = s.EndReceiveFrom(ar, ref tempRemoteEP);
                 string[] stringData = Encoding.ASCII.GetString(SO.buffer, 0, read).Split('@');
                 if (stringData[0] == "bitNode")
                 {
-                    server.AgregarIP(IPRecibida);
+                    new Servidor().AgregarIP(IPRecibida);
                     //--------------------------------------
-                    switch (stringData[1])
+                    if (stringData[1] == "PING")
                     {
-                        case "PING":
-                            {
-                                EnviarMSJ_UDP(IPRecibida, "bitNode@PONG@");
-                                break;
-                            }
-                        case "SOLICITAR":
-                            {
-                                Servidor.Solicitudes.Add(stringData[2]);
-                                Servidor.InformarSolicitud();
-                                break;
-                            }
-                        case "ACV":
-                            {
-                                server.EliminarArchivosCompartidosDeIP(IPRecibida);
-                                Archivo a = JsonConvert.DeserializeObject<Archivo>(stringData[2]);
-                                a.IPPropietario = IPRecibida;
-                                server.AgregarArchivosCompartidos(a);
-                                break;
-                            }
+                        EnviarMSJ_UDP(IPRecibida, "bitNode@PONG@");
+                    }
+                    else if (stringData[1] == "SOLICITAR")
+                    {
+                        Servidor.Solicitudes.Add(stringData[2]);
+                        Servidor.InformarSolicitud();
                     }
                 }
             }
