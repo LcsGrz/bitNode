@@ -51,7 +51,7 @@ namespace Cliente
             {
                 if (pingSender.Send(IPSVecinas[i]).Status != IPStatus.Success)
                 {
-                    IPSVecinas.RemoveAt(i);
+                    IPSVecinas.RemoveAt(i); //tendria que hacer ping desde udp por que si la persona cierra el cliente, va estar activo igual
                 }
             }
         }

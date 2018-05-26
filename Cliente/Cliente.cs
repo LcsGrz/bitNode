@@ -7,7 +7,6 @@ using System.Drawing.Text;
 using System.IO;
 using System.Net;
 using System.Runtime.InteropServices;
-using System.Text;
 using System.Threading;
 using System.Windows.Forms;
 
@@ -65,8 +64,11 @@ namespace Cliente
         }
         private void TimerOn(object sender, EventArgs e) // Inicia el timer para efecto FADE
         {
-            server.FrenarEjecuciones();
-            cerrar = ((sender as Control).Name == "pbCerrar") ? true : false;
+            if ((sender as Control).Name == "pbCerrar")
+            {
+                server.FrenarEjecuciones();
+                cerrar = true;
+            }
             tmrFader.Start();
         }
         private void ExpandirMenu(object sender, EventArgs e) //Inicia la funcion de expandir el menu Lite - Deluxe
@@ -214,8 +216,8 @@ namespace Cliente
                                     panelesMenu[tagViejo].Controls[0].Location = new Point(i, 58);
                                     panelesMenu[tagNuevo].Controls[0].Width = i;
 
-                                    if (i % 8 == 0)
-                                        Thread.Sleep(1);
+                                    if (i % 20 == 0)
+                                        this.Refresh(); //Thread.Sleep(1);
                                 }
                                 panelesMenu[tagViejo].Controls[0].BackColor = configuracion.colorMenu;
                             }));
@@ -450,6 +452,7 @@ namespace Cliente
             lblVistaSolicitarInformacion.Text = Idioma.StringResources.lblVistaSolicitarInformacion;
             tbVistaSolicitarDescripcion.Text = Idioma.StringResources.tbVistaCompartirDescripcionArchivo;
             lblVistaSolicitarNuevasSolicitudes.Text = Idioma.StringResources.lblVistaSolicitarNuevasSolicitudes;
+            dgvVistaSolicitar.Columns.Clear();
             foreach (string n in Idioma.StringResources.CabecerasDGVSolcitarArreglo.Split('-'))
                 dgvVistaSolicitar.Columns.Add(n, n);
             dgvVistaSolicitar.Columns.Add(new DataGridViewImageColumn() { Name = Idioma.StringResources.CabecerasDGVSolicitarCompartir });
@@ -533,6 +536,7 @@ namespace Cliente
             pnlVistaCompartirSeleccionarArchivo.BackColor = configuracion.colorPanelesInternosVistas;
             pnlVistaCompartirGuardarArchivo.BackColor = configuracion.colorPanelesInternosVistas;
             pnlVistaCompartirMostarArchivos.BackColor = configuracion.colorPanelesInternosVistas;
+            tbVistaCompartirDescripcionArchivo.BackColor = configuracion.colorMenuSeleccion;
             //-----------------------------------------------------------------------------------
             dgvVistaCompartirArchivos.DefaultCellStyle.BackColor = configuracion.colorPanelesInternosVistas;
             dgvVistaCompartirArchivos.DefaultCellStyle.SelectionBackColor = configuracion.colorPanelesInternosVistas;
@@ -545,6 +549,7 @@ namespace Cliente
             //Solicitar
             pnlVistaSolicitarCompartirSolicitud.BackColor = configuracion.colorPanelesInternosVistas;
             pnlVistaSolicitarVerSolicitudes.BackColor = configuracion.colorPanelesInternosVistas;
+            tbVistaSolicitarDescripcion.BackColor = configuracion.colorMenuSeleccion;
             //-----------------------------------------------------------------------------------
             dgvVistaSolicitar.DefaultCellStyle.BackColor = configuracion.colorPanelesInternosVistas;
             dgvVistaSolicitar.DefaultCellStyle.SelectionBackColor = configuracion.colorPanelesInternosVistas;
@@ -634,6 +639,7 @@ namespace Cliente
         {
             server.EnviarUDP(null, "bitNode@SOLICITAR@" + configuracion.nombre + "|" + tbVistaSolicitarDescripcion.Text);
             new frmMensaje(Idioma.StringResources.msgSolicitarArchivo).ShowDialog();
+            tbVistaSolicitarDescripcion.Text = Idioma.StringResources.tbVistaCompartirDescripcionArchivo;
         }
         private void CargarSolicitudes() //Carga las solicitudes en la vista
         {
@@ -682,7 +688,9 @@ namespace Cliente
                     ClickMenu(new Control() { Tag = 3 }, null);
                 }
                 Servidor.Solicitudes.RemoveAt(e.RowIndex);
+                CargarSolicitudes();
             }
+            TBSinFoco(null,null);
         }
         private void CargarArchivosCompatidos() //Carga los archivos compartidos en la vista
         {

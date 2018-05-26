@@ -82,6 +82,5 @@ namespace Cliente
             string ABC = "Q W E R T Y U I O P A S D F G H J K L Ñ Z X C V B N M";
             nombre = ABC.Split(' ')[r.Next(0, 27)] + ABC.Split(' ')[r.Next(0, 27)] + ABC.Split(' ')[r.Next(0, 27)] + r.Next(100, 999).ToString();
         }
-
     }
 }

@@ -25,7 +25,7 @@ namespace Cliente
         {
             Socket socket = new Socket(AddressFamily.InterNetwork, SocketType.Dgram, ProtocolType.Udp);
             IPEndPoint iep1 = new IPEndPoint(ip, puerto);
-
+            
             socket.SetSocketOption(SocketOptionLevel.Socket, SocketOptionName.Broadcast, 1);
             socket.SendTo(Encoding.ASCII.GetBytes(msj), iep1);
             socket.Close();
@@ -33,7 +33,7 @@ namespace Cliente
         public void RecibirUDP()
         {
             Socket socket = new Socket(AddressFamily.InterNetwork, SocketType.Dgram, ProtocolType.Udp);
-            IPEndPoint iep = new IPEndPoint(IPAddress.Any, puerto);
+            IPEndPoint iep = new IPEndPoint(IPAddress.Any, 420);
             EndPoint ep = iep;
             socket.Bind(iep);
             try
@@ -56,7 +56,7 @@ namespace Cliente
         {
             StateObject SO = (StateObject)ar.AsyncState;
             Socket s = SO.socket;
-            IPEndPoint sender = new IPEndPoint(IPAddress.Any, puerto);
+            IPEndPoint sender = new IPEndPoint(IPAddress.Any, 420);
             EndPoint tempRemoteEP = sender;
 
             int read = s.EndReceiveFrom(ar, ref tempRemoteEP);
