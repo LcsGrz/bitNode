@@ -161,6 +161,7 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\boton_descargar_mini.png" />
     <None Include="Resources\imagen_menu_solicitar_rojo.png" />
     <None Include="Resources\imagen_menu_solicitar_gris.png" />
     <None Include="Resources\boton_compartir_mini.png" />
