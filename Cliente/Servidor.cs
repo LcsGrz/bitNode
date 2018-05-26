@@ -14,8 +14,10 @@ namespace Cliente
         SocketUDP SUDP = new SocketUDP();
         Ping pingSender = new Ping();
         public static List<IPAddress> IPSVecinas = new List<IPAddress>();
+        public static List<string> Solicitudes = new List<string>();
         Thread EscucharUDP;
         private static System.Timers.Timer temporizador;
+        public static event EventHandler informarSolicitud;
         //----------------------------------------------------------------------------------------------Funciones
         //-----------------------------------------------Server
         public void IniciarEjecuciones()
@@ -58,6 +60,10 @@ namespace Cliente
             SUDP.FrenarEscucha();
             temporizador.Stop();
             temporizador.Dispose();
+        }
+        public static void InformarSolicitud()
+        {
+            informarSolicitud?.Invoke(null,null);
         }
         //-----------------------------------------------UDP
         public void EnviarUDP(IPAddress ip, string msj)

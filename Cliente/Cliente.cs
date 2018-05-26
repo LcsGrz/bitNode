@@ -42,6 +42,7 @@ namespace Cliente
             AplicarTema();
             server.IniciarEjecuciones();
             Archivo.ArchivoGuardado += new EventHandler((object sender, EventArgs e) => { this.Invoke(new Action(() => { CargarArchivosCompatidos(); })); });
+            Servidor.informarSolicitud += new EventHandler((object sender, EventArgs e) => { this.Invoke(new Action(() => { CargarSolicitudes(); })); });
         }
         //----------------------------------------------------------------------------------------------Funciones de form
         private void MoverForm(object sender, MouseEventArgs e) //Mover form
@@ -567,8 +568,8 @@ namespace Cliente
 
         private void button1_Click(object sender, EventArgs e)
         {
-           // server.IniciarEjecuciones();
-            
+            // server.IniciarEjecuciones();
+
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -587,9 +588,31 @@ namespace Cliente
 
         private void SolicitarArchivo(object sender, EventArgs e) //Enviar solicitud de archivo
         {
-            server.EnviarUDP(null, "bitNode@SOLICITAR@" + textBox1.Text);
+            server.EnviarUDP(null, "bitNode@SOLICITAR@" + configuracion.nombre + "|" + textBox1.Text);
         }
-
+        private void CargarSolicitudes() //Carga las solicitudes en la vista
+        {
+            dgvVistaCompartirArchivos.Visible = !(lblVistaCompartirVerArchivos.Visible = (archivosCompartidos.Count == 0));
+            if (archivosCompartidos.Count > 0)
+            {
+                //Datos
+                dgvVistaCompartirArchivos.Rows.Clear();
+                Image Eliminar = Properties.Resources.Cancelar;
+                for (int i = 0; i < archivosCompartidos.Count; i++)
+                {
+                    Archivo A = archivosCompartidos[i];
+                    dgvVistaCompartirArchivos.Rows.Insert(i, A.Nombre, Archivo.KB_GB_MB(A.Tamaño), A.Descripcion, ImagenesArchivos[(A.Activo) ? 0 : 1], ImagenesArchivos[2]);
+                }
+                //Vista
+                dgvVistaCompartirArchivos.ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+                dgvVistaCompartirArchivos.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+                dgvVistaCompartirArchivos.Columns[0].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+                dgvVistaCompartirArchivos.Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+                dgvVistaCompartirArchivos.Columns[2].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+                dgvVistaCompartirArchivos.Columns[3].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+                dgvVistaCompartirArchivos.Columns[4].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            }
+        }
         private void ActivoBorrarArchivo(object sender, DataGridViewCellEventArgs e) //Click en Activo-Eliminar
         {
             if ((e.ColumnIndex.Equals(3) || e.ColumnIndex.Equals(4)) && e.RowIndex != -1)

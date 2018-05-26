@@ -64,14 +64,19 @@ namespace Cliente
             if (!IPRecibida.Equals(Servidor.ObtenerIPLocal()))
             {
                 byte[] data = new byte[1024];
-                string stringData = Encoding.ASCII.GetString(SO.buffer, 0, read);
-                if (stringData.Split('@')[0] == "bitNode")
+                string[] stringData = Encoding.ASCII.GetString(SO.buffer, 0, read).Split('@');
+                if (stringData[0] == "bitNode")
                 {
                     new Servidor().AgregarIP(IPRecibida);
                     //--------------------------------------
-                    if (stringData.Split('@')[1] == "PING")
+                    if (stringData[1] == "PING")
                     {
                         EnviarMSJ_UDP(IPRecibida, "bitNode@PONG@");
+                    }
+                    else if (stringData[1] == "SOLICITAR")
+                    {
+                        Servidor.Solicitudes.Add(stringData[2]);
+                        Servidor.InformarSolicitud();
                     }
                 }
             }
