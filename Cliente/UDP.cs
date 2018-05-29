@@ -14,7 +14,7 @@ namespace Cliente
         public static bool PermitirRecibir = true;
         private ManualResetEvent TodoHecho = new ManualResetEvent(true);
         public int puerto { get; set; } = 420;
-        Controlador server = new Controlador();
+        Servidor server = new Servidor();
         //Clase
         class StateObject
         {
@@ -65,7 +65,7 @@ namespace Cliente
 
             int read = s.EndReceiveFrom(ar, ref tempRemoteEP);
             IPAddress IPRecibida = IPAddress.Parse(tempRemoteEP.ToString().Split(':')[0]);
-            if (!IPRecibida.Equals(Controlador.ObtenerIPLocal()))
+            if (!IPRecibida.Equals(Servidor.ObtenerIPLocal()))
             {
                 byte[] data = new byte[1024];
                 string[] stringData = Encoding.UTF8.GetString(SO.buffer, 0, read).Split('@');
@@ -87,8 +87,8 @@ namespace Cliente
                             }
                         case "SOLICITAR": //Hay una solicitud
                             {
-                                Controlador.Solicitudes.Add(stringData[2]);
-                                Controlador.InformarSolicitud();
+                                Servidor.Solicitudes.Add(stringData[2]);
+                                Servidor.InformarSolicitud();
                                 break;
                             }
                         case "AACV": // AgregarArchivosCompartidosVecinos
@@ -107,6 +107,11 @@ namespace Cliente
                         case "CEACV": // ConfirmadoEliminoArchivosCompartidosVecinos
                             {
                                 server.EnviarArchivosCompartidos(IPRecibida);
+                                break;
+                            }
+                        case "SAD": // Solicitar Archivo a Descargar
+                            {
+                                server.EnviarArchivo(stringData[2], IPRecibida);
                                 break;
                             }
                     }

@@ -3,6 +3,8 @@ using System;
 using System.Drawing;
 using System.Drawing.Text;
 using System.IO;
+using System.Net;
+using System.Net.Sockets;
 
 namespace Cliente
 {
@@ -39,7 +41,10 @@ namespace Cliente
         public Color colorPanelesInternosVistas = Color.FromArgb(255, 22, 31, 41);
         public static event EventHandler CambioDeTema;
         //Metodos
-        public void Guardar() => File.WriteAllText(bnConfiguracion, JsonConvert.SerializeObject(this));
+        public void Guardar()
+        {
+            File.WriteAllText(bnConfiguracion, JsonConvert.SerializeObject(this));
+        }
         public Configuracion Leer()
         {
             if (!File.Exists(bitNode + "\\Newtonsoft_Json.dll"))

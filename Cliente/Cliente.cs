@@ -43,8 +43,8 @@ namespace Cliente
             AplicarTema();
             server.IniciarEjecuciones();
 
-            Archivo.ArchivoGuardado += new EventHandler((object sender, EventArgs e) => { this.Invoke(new Action(() => { CargarArchivosCompatidos(); })); });
-            Controlador.informarSolicitud += new EventHandler((object sender, EventArgs e) => { this.Invoke(new Action(() => { CargarSolicitudes(); })); });
+            Archivo.ArchivoGuardado += new EventHandler((object sender, EventArgs e) => { this.Invoke(new Action(() => { CargarArchivosCompatidos(); server.EnviarUDP(null,"bitNode@EACV@"); })); });
+            Servidor.informarSolicitud += new EventHandler((object sender, EventArgs e) => { this.Invoke(new Action(() => { CargarSolicitudes(); })); });
         }
         //----------------------------------------------------------------------------------------------Funciones de form
         private void MoverForm(object sender, MouseEventArgs e) //Mover form
@@ -173,10 +173,8 @@ namespace Cliente
         {
             int tagNuevo = Convert.ToInt32((sender as Control).Tag) - 1;
 
-            if (tagNuevo == 1)
+            if (tagNuevo == 2)
                 CargarArchivosCompartidosVecinos();
-            if (tagNuevo == 3)
-                pbMenuSolicitar.Image = Properties.Resources.SolictarOFF;
 
             if (tagAnterior != tagNuevo)
             {
@@ -644,13 +642,17 @@ namespace Cliente
 
         private void button1_Click(object sender, EventArgs e)
         {
-            MessageBox.Show(Controlador.ArchivosCompartidosVecinos.Count.ToString());
+            MessageBox.Show(Servidor.ArchivosCompartidosVecinos.Count.ToString());
 
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
-            MessageBox.Show(Controlador.IPSVecinas.Count.ToString());
+            MessageBox.Show(Servidor.IPSVecinas.Count.ToString());
+            foreach (IPAddress item in Servidor.IPSVecinas)
+            {
+                MessageBox.Show(item.ToString());
+            }
         }
 
         private void button3_Click(object sender, EventArgs e)
@@ -668,15 +670,15 @@ namespace Cliente
         }
         private void CargarSolicitudes() //Carga las solicitudes en la vista
         {
-            dgvVistaSolicitar.Visible = !(lblVistaSolicitarNuevasSolicitudes.Visible = (Controlador.Solicitudes.Count == 0));
-            pbMenuSolicitar.Image = (Controlador.Solicitudes.Count > 0) ? Properties.Resources.SolicitarON : Properties.Resources.SolictarOFF;
-            if (Controlador.Solicitudes.Count > 0)
+            dgvVistaSolicitar.Visible = !(lblVistaSolicitarNuevasSolicitudes.Visible = (Servidor.Solicitudes.Count == 0));
+            pbMenuSolicitar.Image = (Servidor.Solicitudes.Count > 0) ? Properties.Resources.SolicitarON : Properties.Resources.SolictarOFF;
+            if (Servidor.Solicitudes.Count > 0)
             {
                 //Datos
                 dgvVistaSolicitar.Rows.Clear();
-                for (int i = 0; i < Controlador.Solicitudes.Count; i++)
+                for (int i = 0; i < Servidor.Solicitudes.Count; i++)
                 {
-                    string[] S = Controlador.Solicitudes[i].Split('|');
+                    string[] S = Servidor.Solicitudes[i].Split('|');
                     dgvVistaSolicitar.Rows.Insert(i, S[0], S[1], ImagenesArchivos[3], ImagenesArchivos[2]);
                 }
                 //Vista
@@ -712,11 +714,25 @@ namespace Cliente
                 {
                     ClickMenu(new Control() { Tag = 3 }, null);
                 }
-                Controlador.Solicitudes.RemoveAt(e.RowIndex);
+                Servidor.Solicitudes.RemoveAt(e.RowIndex);
                 CargarSolicitudes();
             }
             TBSinFoco(null,null);
         }
+
+        private void dgvVistaExplorarArchivosCompartidosVecinos_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (dgvVistaExplorarArchivosCompartidosVecinos.CurrentCell != null && dgvVistaExplorarArchivosCompartidosVecinos.CurrentCell.Value != null && e.RowIndex != -1)
+            {
+                if (e.ColumnIndex.Equals(3)) //Activo = 3
+                {
+                    Servidor.tcpSC.recibeFile(Servidor.ArchivosCompartidosVecinos[e.RowIndex]); //abriendo puerto para recibir archivo
+                    server.EnviarUDP(Servidor.ArchivosCompartidosVecinos[e.RowIndex].IPPropietario, 
+                    "bitNode@SAD@" + Servidor.ArchivosCompartidosVecinos[e.RowIndex].ArchivoMD5+"@0"); //SolicitarArchivo
+                }
+            }
+        }
+
         private void CargarArchivosCompatidos() //Carga los archivos compartidos en la vista
         {
             dgvVistaCompartirArchivos.Visible = !(lblVistaCompartirVerArchivos.Visible = (archivosCompartidos.Count == 0));
@@ -741,15 +757,22 @@ namespace Cliente
         }
         private void CargarArchivosCompartidosVecinos() //Carga los archivos en la vista Explorar
         {
-            dgvVistaExplorarArchivosCompartidosVecinos.Visible = !(lblVistaExplorarArchivosCompartidosVecinos.Visible = (Controlador.ArchivosCompartidosVecinos.Count == 0));
-            if (Controlador.ArchivosCompartidosVecinos.Count > 0)
+            dgvVistaExplorarArchivosCompartidosVecinos.Visible = !(lblVistaExplorarArchivosCompartidosVecinos.Visible = (Servidor.ArchivosCompartidosVecinos.Count == 0));
+            if (Servidor.ArchivosCompartidosVecinos.Count > 0)
             {
                 //Datos
                 dgvVistaExplorarArchivosCompartidosVecinos.Rows.Clear();
-                for (int i = 0; i < Controlador.ArchivosCompartidosVecinos.Count; i++)
+                for (int i = 0; i < Servidor.ArchivosCompartidosVecinos.Count; i++)
                 {
-                    Archivo A = Controlador.ArchivosCompartidosVecinos[i];
-                    dgvVistaExplorarArchivosCompartidosVecinos.Rows.Insert(i, A.Nombre, Archivo.KB_GB_MB(A.Tamaño), A.Descripcion, Properties.Resources.Descargar);
+                    Archivo A = Servidor.ArchivosCompartidosVecinos[i];
+                    //foreach (DataGridViewRow dgv in dgvVistaExplorarArchivosCompartidosVecinos.Rows)
+                    {
+                        //if ((dgv.Cells["nombre"].Value.ToString() == A.Nombre) && (dgv.Cells["descripcion"].Value.ToString() == A.Descripcion))
+                        {
+                            dgvVistaExplorarArchivosCompartidosVecinos.Rows.Insert(i, A.Nombre, Archivo.KB_GB_MB(A.Tamaño), A.Descripcion, Properties.Resources.Descargar);
+                        }
+                    }
+                    
                 }
                 //Vista
                 dgvVistaExplorarArchivosCompartidosVecinos.ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
