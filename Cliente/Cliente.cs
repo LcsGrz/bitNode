@@ -29,7 +29,7 @@ namespace Cliente
         bool cerrar, TransparenciaFull = false;
         int tagAnterior = 0;
         Archivo archivoNuevo;
-        Servidor server = new Servidor();
+        Controlador server = new Controlador();
         List<Panel> panelesMenu, panelesVistas;
         public static List<Archivo> archivosCompartidos = Archivo.LeerArchivos();
         //----------------------------------------------------------------------------------------------Constructor del form
@@ -44,7 +44,7 @@ namespace Cliente
             server.IniciarEjecuciones();
 
             Archivo.ArchivoGuardado += new EventHandler((object sender, EventArgs e) => { this.Invoke(new Action(() => { CargarArchivosCompatidos(); })); });
-            Servidor.informarSolicitud += new EventHandler((object sender, EventArgs e) => { this.Invoke(new Action(() => { CargarSolicitudes(); })); });
+            Controlador.informarSolicitud += new EventHandler((object sender, EventArgs e) => { this.Invoke(new Action(() => { CargarSolicitudes(); })); });
         }
         //----------------------------------------------------------------------------------------------Funciones de form
         private void MoverForm(object sender, MouseEventArgs e) //Mover form
@@ -173,8 +173,10 @@ namespace Cliente
         {
             int tagNuevo = Convert.ToInt32((sender as Control).Tag) - 1;
 
-            if (tagNuevo == 2)
+            if (tagNuevo == 1)
                 CargarArchivosCompartidosVecinos();
+            if (tagNuevo == 3)
+                pbMenuSolicitar.Image = Properties.Resources.SolictarOFF;
 
             if (tagAnterior != tagNuevo)
             {
@@ -642,14 +644,14 @@ namespace Cliente
 
         private void button1_Click(object sender, EventArgs e)
         {
-            MessageBox.Show(Servidor.ArchivosCompartidosVecinos.Count.ToString());
+            MessageBox.Show(Controlador.ArchivosCompartidosVecinos.Count.ToString());
 
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
-            MessageBox.Show(Servidor.IPSVecinas.Count.ToString());
-            foreach (IPAddress item in Servidor.IPSVecinas)
+            MessageBox.Show(Controlador.IPSVecinas.Count.ToString());
+            foreach (IPAddress item in Controlador.IPSVecinas)
             {
                 MessageBox.Show(item.ToString());
             }
@@ -670,15 +672,15 @@ namespace Cliente
         }
         private void CargarSolicitudes() //Carga las solicitudes en la vista
         {
-            dgvVistaSolicitar.Visible = !(lblVistaSolicitarNuevasSolicitudes.Visible = (Servidor.Solicitudes.Count == 0));
-            pbMenuSolicitar.Image = (Servidor.Solicitudes.Count > 0) ? Properties.Resources.SolicitarON : Properties.Resources.SolictarOFF;
-            if (Servidor.Solicitudes.Count > 0)
+            dgvVistaSolicitar.Visible = !(lblVistaSolicitarNuevasSolicitudes.Visible = (Controlador.Solicitudes.Count == 0));
+            pbMenuSolicitar.Image = (Controlador.Solicitudes.Count > 0) ? Properties.Resources.SolicitarON : Properties.Resources.SolictarOFF;
+            if (Controlador.Solicitudes.Count > 0)
             {
                 //Datos
                 dgvVistaSolicitar.Rows.Clear();
-                for (int i = 0; i < Servidor.Solicitudes.Count; i++)
+                for (int i = 0; i < Controlador.Solicitudes.Count; i++)
                 {
-                    string[] S = Servidor.Solicitudes[i].Split('|');
+                    string[] S = Controlador.Solicitudes[i].Split('|');
                     dgvVistaSolicitar.Rows.Insert(i, S[0], S[1], ImagenesArchivos[3], ImagenesArchivos[2]);
                 }
                 //Vista
@@ -714,7 +716,7 @@ namespace Cliente
                 {
                     ClickMenu(new Control() { Tag = 3 }, null);
                 }
-                Servidor.Solicitudes.RemoveAt(e.RowIndex);
+                Controlador.Solicitudes.RemoveAt(e.RowIndex);
                 CargarSolicitudes();
             }
             TBSinFoco(null,null);
@@ -743,14 +745,14 @@ namespace Cliente
         }
         private void CargarArchivosCompartidosVecinos() //Carga los archivos en la vista Explorar
         {
-            dgvVistaExplorarArchivosCompartidosVecinos.Visible = !(lblVistaExplorarArchivosCompartidosVecinos.Visible = (Servidor.ArchivosCompartidosVecinos.Count == 0));
-            if (Servidor.ArchivosCompartidosVecinos.Count > 0)
+            dgvVistaExplorarArchivosCompartidosVecinos.Visible = !(lblVistaExplorarArchivosCompartidosVecinos.Visible = (Controlador.ArchivosCompartidosVecinos.Count == 0));
+            if (Controlador.ArchivosCompartidosVecinos.Count > 0)
             {
                 //Datos
                 dgvVistaExplorarArchivosCompartidosVecinos.Rows.Clear();
-                for (int i = 0; i < Servidor.ArchivosCompartidosVecinos.Count; i++)
+                for (int i = 0; i < Controlador.ArchivosCompartidosVecinos.Count; i++)
                 {
-                    Archivo A = Servidor.ArchivosCompartidosVecinos[i];
+                    Archivo A = Controlador.ArchivosCompartidosVecinos[i];
                     dgvVistaExplorarArchivosCompartidosVecinos.Rows.Insert(i, A.Nombre, Archivo.KB_GB_MB(A.Tamaño), A.Descripcion, Properties.Resources.Descargar);
                 }
                 //Vista

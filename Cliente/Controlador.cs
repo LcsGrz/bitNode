@@ -10,7 +10,7 @@ using System.Windows.Forms;
 
 namespace Cliente
 {
-    class Servidor
+    class Controlador
     {
         //----------------------------------------------------------------------------------------------Variables y atributos
         public static SocketUDP SUDP;
@@ -102,7 +102,6 @@ namespace Cliente
                     i = 0;
                 }
             }
-            MessageBox.Show(ArchivosCompartidosVecinos.Count.ToString());
         }
         public void EnviarArchivosCompartidos(IPAddress iPAddress)
         {
