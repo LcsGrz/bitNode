@@ -43,7 +43,10 @@ namespace Cliente
             {
                 return Math.Round((peso / Math.Pow(1024, 2)), 2).ToString() + " mb";
             }
-            return Math.Round((peso / 1024F), 2).ToString() + " kb";            
+            else
+            {
+                return Math.Round((peso / 1024F), 2).ToString() + " kb";
+            }
         }
         public static string ObtenerMD5(string direccion)
         {
@@ -61,7 +64,11 @@ namespace Cliente
             }
             return sBuilder.ToString();
         }
-        public static bool CompararMD5(string archivo1, string archivo2) => (StringComparer.OrdinalIgnoreCase.Compare(ObtenerMD5(archivo1), ObtenerMD5(archivo2)) == 0);
+        public static bool CompararMD5(string archivo1, string archivo2)
+        {
+            StringComparer comparador = StringComparer.OrdinalIgnoreCase;
+            return (comparador.Compare(ObtenerMD5(archivo1), ObtenerMD5(archivo2)) == 0);
+        }
         public static List<Archivo> LeerArchivos()
         {
             List<Archivo> Archivos = new List<Archivo>();
@@ -75,21 +82,24 @@ namespace Cliente
             }
             return Archivos;
         }
-        public void GuardarArchivo() => new Thread(() =>
+        public void GuardarArchivo()
         {
-            ArchivoMD5 = ArchivoMD5 ?? ObtenerMD5(Ruta);
-            if (ArchivoMD5 != string.Empty)
+            new Thread(() =>
             {
-                File.WriteAllText(rutaBN + "\\" + Nombre.Split('.')[0] + ".json", JsonConvert.SerializeObject(this));
-                if (!frmCliente.archivosCompartidos.Exists(x => x.ArchivoMD5.Contains(ArchivoMD5)))
-                    frmCliente.archivosCompartidos.Add(this);
-                ArchivoGuardado?.Invoke(null, null);
+                ArchivoMD5 = ArchivoMD5 ?? ObtenerMD5(Ruta);
+                if (ArchivoMD5 != string.Empty)
+                {
+                    File.WriteAllText(rutaBN + "\\" + Nombre.Split('.')[0] + ".json", JsonConvert.SerializeObject(this));
+                    if (!frmCliente.archivosCompartidos.Exists(x => x.ArchivoMD5.Contains(ArchivoMD5)))
+                        frmCliente.archivosCompartidos.Add(this);
+                    ArchivoGuardado?.Invoke(null, null);
 
-                new frmMensaje(Idioma.StringResources.mensajeExitoCompartirArchivo).ShowDialog();
-                return;
-            }
-            new frmMensaje(Idioma.StringResources.mensajeErrorCompartirArchivo).ShowDialog();
-        }).Start();
+                    new frmMensaje(Idioma.StringResources.mensajeExitoCompartirArchivo).ShowDialog();
+                    return;
+                }
+                new frmMensaje(Idioma.StringResources.mensajeErrorCompartirArchivo).ShowDialog();
+            }).Start();
+        }
         public void EliminarArchivo(int index)
         {
             if (File.Exists(rutaBN + "\\" + Nombre.Split('.')[0] + ".json"))

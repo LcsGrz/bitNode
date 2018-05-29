@@ -36,6 +36,7 @@ namespace Cliente
         {
             Socket socket = new Socket(AddressFamily.InterNetwork, SocketType.Dgram, ProtocolType.Udp);
             IPEndPoint iep = new IPEndPoint(IPAddress.Any, 420);
+            EndPoint ep = iep;
             socket.Bind(iep);
             try
             {
@@ -44,7 +45,6 @@ namespace Cliente
                     TodoHecho.Reset();
                     StateObject SO = new StateObject() { socket = socket };
 
-                    EndPoint ep = iep;
                     socket.BeginReceiveFrom(SO.buffer, 0, StateObject.TamañoBuffer, 0, ref ep, new AsyncCallback(cbRecibir), SO);
                     TodoHecho.WaitOne();
                 }
@@ -62,12 +62,12 @@ namespace Cliente
             Socket s = SO.socket;
             IPEndPoint sender = new IPEndPoint(IPAddress.Any, 420);
             EndPoint tempRemoteEP = sender;
+
+            int read = s.EndReceiveFrom(ar, ref tempRemoteEP);
             IPAddress IPRecibida = IPAddress.Parse(tempRemoteEP.ToString().Split(':')[0]);
             if (!IPRecibida.Equals(Servidor.ObtenerIPLocal()))
             {
                 byte[] data = new byte[1024];
-
-                int read = s.EndReceiveFrom(ar, ref tempRemoteEP);
                 string[] stringData = Encoding.ASCII.GetString(SO.buffer, 0, read).Split('@');
                 if (stringData[0] == "bitNode")
                 {

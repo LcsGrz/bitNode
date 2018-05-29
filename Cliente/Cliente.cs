@@ -751,7 +751,7 @@ namespace Cliente
                 for (int i = 0; i < Servidor.ArchivosCompartidosVecinos.Count; i++)
                 {
                     Archivo A = Servidor.ArchivosCompartidosVecinos[i];
-                    MessageBox.Show(A.Tamaño.ToString() + " - - -"+ Archivo.KB_GB_MB(A.Tamaño));
+                    MessageBox.Show(Servidor.ArchivosCompartidosVecinos[i].Tamaño.ToString() + " - - -"+ Archivo.KB_GB_MB(Servidor.ArchivosCompartidosVecinos[i].Tamaño));
                     dgvVistaExplorarArchivosCompartidosVecinos.Rows.Insert(i, A.Nombre, Archivo.KB_GB_MB(A.Tamaño), A.Descripcion, Properties.Resources.Descargar);
                 }
                 //Vista

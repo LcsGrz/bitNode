@@ -72,7 +72,10 @@ namespace Cliente
             temporizadorPing.Stop();
             temporizadorPing.Dispose();
         }
-        public static void InformarSolicitud() => informarSolicitud?.Invoke(null, null);
+        public static void InformarSolicitud()
+        {
+            informarSolicitud?.Invoke(null,null);
+        }
         //-----------------------------------------------UDP
         public void EnviarUDP(IPAddress ip, string msj)
         {

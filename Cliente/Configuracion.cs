@@ -41,7 +41,10 @@ namespace Cliente
         public Color colorPanelesInternosVistas = Color.FromArgb(255, 22, 31, 41);
         public static event EventHandler CambioDeTema;
         //Metodos
-        public void Guardar() => File.WriteAllText(bnConfiguracion, JsonConvert.SerializeObject(this));
+        public void Guardar()
+        {
+            File.WriteAllText(bnConfiguracion, JsonConvert.SerializeObject(this));
+        }
         public Configuracion Leer()
         {
             if (!File.Exists(bitNode + "\\Newtonsoft_Json.dll"))
@@ -65,27 +68,14 @@ namespace Cliente
         }
         public void CambiarTema()
         {
-            if (temaOscuro)
-            {
-                colorFondo = Color.FromArgb(255, 7, 17, 27) ;
-                colorVistaFondo = Color.FromArgb(255, 13, 23, 33) ;
-                colorMenu = Color.FromArgb(255, 7, 17, 27) ;
-                colorMenuSeleccion = Color.FromArgb(255, 1, 9, 17) ;
-                colorGeneral = Color.FromArgb(255, 153, 153, 153) ;
-                colorPanelesInternosVistas = Color.FromArgb(255, 22, 31, 41) ;
-            }
-            else
-            {
-                colorFondo = Color.FromArgb(255, 102, 102, 102);
-                colorVistaFondo = Color.FromArgb(255, 249, 249, 249);
-                colorMenu =  Color.FromArgb(255, 230, 230, 230);
-                colorMenuSeleccion = Color.FromArgb(255, 183, 183, 183);
-                colorGeneral = Color.FromArgb(255, 255, 42, 42);
-                colorPanelesInternosVistas = Color.FromArgb(255, 230, 230, 230);
-            }
+            colorFondo = (temaOscuro) ? Color.FromArgb(255, 7, 17, 27) : Color.FromArgb(255, 102, 102, 102);
+            colorVistaFondo = (temaOscuro) ? Color.FromArgb(255, 13, 23, 33) : Color.FromArgb(255, 249, 249, 249);
+            colorMenu = (temaOscuro) ? Color.FromArgb(255, 7, 17, 27) : Color.FromArgb(255, 230, 230, 230);
+            colorMenuSeleccion = (temaOscuro) ? Color.FromArgb(255, 1, 9, 17) : Color.FromArgb(255, 183, 183, 183);
+            colorGeneral = (temaOscuro) ? Color.FromArgb(255, 153, 153, 153) : Color.FromArgb(255, 255, 42, 42);
+            colorPanelesInternosVistas = (temaOscuro) ? Color.FromArgb(255, 22, 31, 41) : Color.FromArgb(255, 230, 230, 230);
             Guardar();
             CambioDeTema?.Invoke(this, null);
-
         }
         private void GenerarNombre() //Genera nombre aleatorio a la maquina
         {
