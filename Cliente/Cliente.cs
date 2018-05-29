@@ -651,10 +651,6 @@ namespace Cliente
         private void button2_Click(object sender, EventArgs e)
         {
             MessageBox.Show(Controlador.IPSVecinas.Count.ToString());
-            foreach (IPAddress item in Controlador.IPSVecinas)
-            {
-                MessageBox.Show(item.ToString());
-            }
         }
 
         private void button3_Click(object sender, EventArgs e)
