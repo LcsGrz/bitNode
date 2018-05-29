@@ -43,7 +43,7 @@ namespace Cliente
             AplicarTema();
             server.IniciarEjecuciones();
 
-            Archivo.ArchivoGuardado += new EventHandler((object sender, EventArgs e) => { this.Invoke(new Action(() => { CargarArchivosCompatidos(); server.EnviarUDP(null,"bitNode@EACV@"); })); });
+            Archivo.ArchivoGuardado += new EventHandler((object sender, EventArgs e) => { this.Invoke(new Action(() => { CargarArchivosCompatidos(); })); });
             Servidor.informarSolicitud += new EventHandler((object sender, EventArgs e) => { this.Invoke(new Action(() => { CargarSolicitudes(); })); });
         }
         //----------------------------------------------------------------------------------------------Funciones de form
@@ -751,7 +751,6 @@ namespace Cliente
                 for (int i = 0; i < Servidor.ArchivosCompartidosVecinos.Count; i++)
                 {
                     Archivo A = Servidor.ArchivosCompartidosVecinos[i];
-                    MessageBox.Show(Servidor.ArchivosCompartidosVecinos[i].Tamaño.ToString() + " - - -"+ Archivo.KB_GB_MB(Servidor.ArchivosCompartidosVecinos[i].Tamaño));
                     dgvVistaExplorarArchivosCompartidosVecinos.Rows.Insert(i, A.Nombre, Archivo.KB_GB_MB(A.Tamaño), A.Descripcion, Properties.Resources.Descargar);
                 }
                 //Vista

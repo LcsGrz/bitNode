@@ -25,9 +25,11 @@ namespace Cliente
         //-----------------------------------------------Server
         public void IniciarEjecuciones()
         {
+            Archivo.EnviarArchivo += new EventHandler((object sender, EventArgs e) => {  EnviarUDP(null, "bitNode@EACV@"); });
             SUDP = new SocketUDP();
             EscucharUDP = new Thread(() => { SUDP.RecibirUDP(); });
             EscucharUDP.Start();
+          
             temporizadorPing = new System.Timers.Timer(60000) { AutoReset = true, Enabled = true };
             temporizadorPing.Elapsed += bitNodersVivos;
            // temporizadorPing.Start();
@@ -72,10 +74,7 @@ namespace Cliente
             temporizadorPing.Stop();
             temporizadorPing.Dispose();
         }
-        public static void InformarSolicitud()
-        {
-            informarSolicitud?.Invoke(null,null);
-        }
+        public static void InformarSolicitud() => informarSolicitud?.Invoke(null, null);
         //-----------------------------------------------UDP
         public void EnviarUDP(IPAddress ip, string msj)
         {
@@ -91,21 +90,19 @@ namespace Cliente
                 }
             }
         }
-        public void AgregarArchivosCompartidos(Archivo a)
-        {
-                ArchivosCompartidosVecinos.Add(a);
-        }
-        public bool EliminarArchivosCompartidosDeIP(IPAddress ip)
+        public void AgregarArchivosCompartidos(Archivo a) => ArchivosCompartidosVecinos.Add(a);
+        public void EliminarArchivosCompartidosDeIP(IPAddress ip)
         {
             for (int i = 0; i < ArchivosCompartidosVecinos.Count; i++)
             {
                 if (ArchivosCompartidosVecinos[i].IPPropietario.Equals(ip))
                 {
-                    ArchivosCompartidosVecinos.RemoveAt(i);
+                    // ArchivosCompartidosVecinos.RemoveAt(i);
+                    ArchivosCompartidosVecinos.Remove(ArchivosCompartidosVecinos[i]);
                     i = 0;
                 }
             }
-            return true;
+            MessageBox.Show(ArchivosCompartidosVecinos.Count.ToString());
         }
         public void EnviarArchivosCompartidos(IPAddress iPAddress)
         {

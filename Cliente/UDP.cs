@@ -29,7 +29,7 @@ namespace Cliente
             IPEndPoint iep1 = new IPEndPoint(ip, puerto);
 
             socket.SetSocketOption(SocketOptionLevel.Socket, SocketOptionName.Broadcast, 1);
-            socket.SendTo(Encoding.ASCII.GetBytes(msj), iep1);
+            socket.SendTo(Encoding.UTF8.GetBytes(msj), iep1);
             socket.Close();
         }
         public void RecibirUDP()
@@ -68,7 +68,7 @@ namespace Cliente
             if (!IPRecibida.Equals(Servidor.ObtenerIPLocal()))
             {
                 byte[] data = new byte[1024];
-                string[] stringData = Encoding.ASCII.GetString(SO.buffer, 0, read).Split('@');
+                string[] stringData = Encoding.UTF8.GetString(SO.buffer, 0, read).Split('@');
                 if (stringData[0] == "bitNode")
                 {
                     server.AgregarIP(IPRecibida);
