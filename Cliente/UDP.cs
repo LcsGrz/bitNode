@@ -56,6 +56,8 @@ namespace Cliente
         }
         private void cbRecibir(IAsyncResult ar)
         {
+            TodoHecho.Set();
+
             StateObject SO = (StateObject)ar.AsyncState;
             Socket s = SO.socket;
             IPEndPoint sender = new IPEndPoint(IPAddress.Any, 420);
@@ -73,29 +75,43 @@ namespace Cliente
                     //--------------------------------------
                     switch (stringData[1])
                     {
-                        case "PING":
+                        case "PPING": // PrimerPing
+                            {
+                                EnviarMSJ_UDP(IPRecibida, "bitNode@EACV@");
+                                break;
+                            }
+                        case "PING": //Estoy vivo?
                             {
                                 EnviarMSJ_UDP(IPRecibida, "bitNode@PONG@");
                                 break;
                             }
-                        case "SOLICITAR":
+                        case "SOLICITAR": //Hay una solicitud
                             {
                                 Servidor.Solicitudes.Add(stringData[2]);
                                 Servidor.InformarSolicitud();
                                 break;
                             }
-                        case "ACV":
+                        case "AACV": // AgregarArchivosCompartidosVecinos
                             {
-                                server.EliminarArchivosCompartidosDeIP(IPRecibida);
                                 Archivo a = JsonConvert.DeserializeObject<Archivo>(stringData[2]);
                                 a.IPPropietario = IPRecibida;
                                 server.AgregarArchivosCompartidos(a);
                                 break;
                             }
+                        case "EACV": // EliminarArchivosCompartidosVecinos
+                            {
+                                server.EliminarArchivosCompartidosDeIP(IPRecibida);
+                                server.EnviarUDP(IPRecibida,"bitNode@CEACV@");
+                                break;
+                            }
+                        case "CEACV": // ConfirmadoEliminoArchivosCompartidosVecinos
+                            {
+                                server.EnviarArchivosCompartidos(IPRecibida);
+                                break;
+                            }
                     }
                 }
             }
-            TodoHecho.Set();
         }
         public void FrenarEscucha()
         {

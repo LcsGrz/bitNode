@@ -6,31 +6,32 @@ using System.Net.NetworkInformation;
 using System.Net.Sockets;
 using System.Threading;
 using System.Timers;
+using System.Windows.Forms;
 
 namespace Cliente
 {
     class Servidor
     {
         //----------------------------------------------------------------------------------------------Variables y atributos
-        SocketUDP SUDP = new SocketUDP();
+        public static SocketUDP SUDP;
         Ping pingSender = new Ping();
         public static List<IPAddress> IPSVecinas = new List<IPAddress>();
         public static List<string> Solicitudes = new List<string>();
         public static List<Archivo> ArchivosCompartidosVecinos = new List<Archivo>();
         Thread EscucharUDP;
-        private static System.Timers.Timer temporizador;
+        private static System.Timers.Timer temporizadorPing;
         public static event EventHandler informarSolicitud;
         //----------------------------------------------------------------------------------------------Funciones
         //-----------------------------------------------Server
         public void IniciarEjecuciones()
         {
+            SUDP = new SocketUDP();
             EscucharUDP = new Thread(() => { SUDP.RecibirUDP(); });
             EscucharUDP.Start();
-            temporizador = new System.Timers.Timer(60000) { AutoReset = true, Enabled = true };
-            temporizador.Elapsed += bitNodersVivos;
-            temporizador.Start();
-            EnviarUDP(IPAddress.Broadcast, "bitNode@PING@");
-            EnviarArchivosCompartidos();
+            temporizadorPing = new System.Timers.Timer(60000) { AutoReset = true, Enabled = true };
+            temporizadorPing.Elapsed += bitNodersVivos;
+           // temporizadorPing.Start();
+            EnviarUDP(IPAddress.Broadcast, "bitNode@PPING@"); //Primer ping
         }
         public static IPAddress ObtenerIPLocal()
         {
@@ -47,23 +48,29 @@ namespace Cliente
         public void AgregarIP(IPAddress ip)
         {
             if (!IPSVecinas.Exists(x => x.Equals(ip)))
+            {
                 IPSVecinas.Add(ip);
+                EnviarArchivosCompartidos(ip);
+            }
         }
         private void bitNodersVivos(Object source, ElapsedEventArgs e)
         {
-            for (int i = 0; i < IPSVecinas.Count; i++)
+            List<IPAddress> aux = new List<IPAddress>();
+            foreach (IPAddress ip in IPSVecinas)
             {
-                if (pingSender.Send(IPSVecinas[i]).Status != IPStatus.Success)
-                {
-                    IPSVecinas.RemoveAt(i); //tendria que hacer ping desde udp por que si la persona cierra el cliente, va estar activo igual
-                }
+                aux.Add(ip);
+            }
+            IPSVecinas.Clear();
+            for (int i = 0; i < aux.Count; i++)
+            {
+                EnviarUDP(aux[i], "bitNode@PING@");
             }
         }
         public void FrenarEjecuciones()
         {
             SUDP.FrenarEscucha();
-            temporizador.Stop();
-            temporizador.Dispose();
+            temporizadorPing.Stop();
+            temporizadorPing.Dispose();
         }
         public static void InformarSolicitud()
         {
@@ -86,29 +93,44 @@ namespace Cliente
         }
         public void AgregarArchivosCompartidos(Archivo a)
         {
-            if (!ArchivosCompartidosVecinos.Exists(x => (Archivo.CompararMD5(x.ArchivoMD5,a.ArchivoMD5) && x.IPPropietario.Equals(a.IPPropietario))))
                 ArchivosCompartidosVecinos.Add(a);
         }
-        public void EliminarArchivosCompartidosDeIP(IPAddress ip)
+        public bool EliminarArchivosCompartidosDeIP(IPAddress ip)
         {
             for (int i = 0; i < ArchivosCompartidosVecinos.Count; i++)
             {
-                if (ArchivosCompartidosVecinos[i].IPPropietario == ip)
+                if (ArchivosCompartidosVecinos[i].IPPropietario.Equals(ip))
                 {
                     ArchivosCompartidosVecinos.RemoveAt(i);
                     i = 0;
                 }
             }
+            return true;
         }
-        public void EnviarArchivosCompartidos()
+        public void EnviarArchivosCompartidos(IPAddress iPAddress)
         {
-            foreach (IPAddress ip in IPSVecinas)
+            if (iPAddress == null)
+            {
+                foreach (IPAddress ip in IPSVecinas)
+                {
+                    foreach (Archivo a in frmCliente.archivosCompartidos)
+                    {
+                        if (a.Activo)
+                        {
+                            string sa = "bitNode@AACV@" + JsonConvert.SerializeObject(a);
+                            EnviarUDP(ip, sa);
+                        }
+                    }
+                }
+            }
+            else
             {
                 foreach (Archivo a in frmCliente.archivosCompartidos)
                 {
-                    if (a.Activo) {
-                        string sa = "bitNode@ACV@" + JsonConvert.SerializeObject(a);
-                        EnviarUDP(ip, sa);
+                    if (a.Activo)
+                    {
+                        string sa = "bitNode@AACV@" + JsonConvert.SerializeObject(a);
+                        EnviarUDP(iPAddress, sa);
                     }
                 }
             }

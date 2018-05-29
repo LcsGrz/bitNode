@@ -43,7 +43,7 @@ namespace Cliente
             AplicarTema();
             server.IniciarEjecuciones();
 
-            Archivo.ArchivoGuardado += new EventHandler((object sender, EventArgs e) => { this.Invoke(new Action(() => { CargarArchivosCompatidos(); server.EnviarArchivosCompartidos(); })); });
+            Archivo.ArchivoGuardado += new EventHandler((object sender, EventArgs e) => { this.Invoke(new Action(() => { CargarArchivosCompatidos(); server.EnviarUDP(null,"bitNode@EACV@"); })); });
             Servidor.informarSolicitud += new EventHandler((object sender, EventArgs e) => { this.Invoke(new Action(() => { CargarSolicitudes(); })); });
         }
         //----------------------------------------------------------------------------------------------Funciones de form
@@ -172,6 +172,9 @@ namespace Cliente
         private void ClickMenu(object sender, EventArgs e) //Click en los paneles de menu
         {
             int tagNuevo = Convert.ToInt32((sender as Control).Tag) - 1;
+
+            if (tagNuevo == 2)
+                CargarArchivosCompartidosVecinos();
 
             if (tagAnterior != tagNuevo)
             {
@@ -386,6 +389,9 @@ namespace Cliente
             lblMenuCRapidas.Font = doceR;
             //Descargar
             //Explorar
+            lblVistaExplorarArchivosCompartidosVecinos.Font = veintiunoR;
+            dgvVistaExplorarArchivosCompartidosVecinos.ColumnHeadersDefaultCellStyle.Font = catorceR;
+            dgvVistaExplorarArchivosCompartidosVecinos.DefaultCellStyle.Font = doceR;
             //Compartir
             lblVistaCompartirSeleccionar.Font = dieciseisR;
             lblVistaCompartirNombreArchivo.Font = dieciseisR;
@@ -441,6 +447,11 @@ namespace Cliente
             lblMenuCRapidas.Text = Idioma.StringResources.lblMenuCRapidas;
             //Descargar
             //Explorar
+            lblVistaExplorarArchivosCompartidosVecinos.Text = Idioma.StringResources.lblVistaExplorarArchivosCompartidosVecinos;
+            dgvVistaExplorarArchivosCompartidosVecinos.Columns.Clear();
+            foreach (string n in Idioma.StringResources.CabecerasDGVArchivoCompartidoArreglo.Split('-'))
+                dgvVistaExplorarArchivosCompartidosVecinos.Columns.Add(n, n);
+            dgvVistaExplorarArchivosCompartidosVecinos.Columns.Add(new DataGridViewImageColumn() { Name = Idioma.StringResources.lblMenuDescargar });
             //Compartir
             tbVistaCompartirDescripcionArchivo.Text = Idioma.StringResources.tbVistaCompartirDescripcionArchivo;
             lblVistaCompartirSeleccionar.Text = Idioma.StringResources.lblVistaCompartirSeleccionar;
@@ -535,6 +546,16 @@ namespace Cliente
             panelesMenu[tagAnterior].Controls[0].BackColor = (pnlMenu.Width == 65) ? Color.Transparent : configuracion.colorDetalles;
             //Descargar
             //Explorar
+            pnlVistaExplorarDGV.BackColor = configuracion.colorPanelesInternosVistas;
+            //-----------------------------------------------------------------------------------
+            dgvVistaExplorarArchivosCompartidosVecinos.DefaultCellStyle.BackColor = configuracion.colorPanelesInternosVistas;
+            dgvVistaExplorarArchivosCompartidosVecinos.DefaultCellStyle.SelectionBackColor = configuracion.colorPanelesInternosVistas;
+            dgvVistaExplorarArchivosCompartidosVecinos.DefaultCellStyle.SelectionForeColor = Color.FromArgb(255, 153, 153, 153);
+            dgvVistaExplorarArchivosCompartidosVecinos.DefaultCellStyle.ForeColor = Color.FromArgb(255, 153, 153, 153);
+            dgvVistaExplorarArchivosCompartidosVecinos.ColumnHeadersDefaultCellStyle.BackColor = configuracion.colorFondo;
+            dgvVistaExplorarArchivosCompartidosVecinos.ColumnHeadersDefaultCellStyle.ForeColor = configuracion.colorDetalles;
+            dgvVistaExplorarArchivosCompartidosVecinos.BackgroundColor = configuracion.colorPanelesInternosVistas;
+            dgvVistaExplorarArchivosCompartidosVecinos.GridColor = configuracion.colorFondo;
             //Compartir
             pnlVistaCompartirSeleccionarArchivo.BackColor = configuracion.colorPanelesInternosVistas;
             pnlVistaCompartirGuardarArchivo.BackColor = configuracion.colorPanelesInternosVistas;
@@ -602,6 +623,7 @@ namespace Cliente
                     }
                 case "E":
                     {
+                        dgvVistaExplorarArchivosCompartidosVecinos.Cursor = (e.ColumnIndex.Equals(3) && e.RowIndex != -1) ? Cursors.Hand : Cursors.Arrow;
                         break;
                     }
                 case "C":
@@ -620,7 +642,7 @@ namespace Cliente
 
         private void button1_Click(object sender, EventArgs e)
         {
-            // server.IniciarEjecuciones();
+            MessageBox.Show(Servidor.ArchivosCompartidosVecinos.Count.ToString());
 
         }
 
@@ -635,7 +657,8 @@ namespace Cliente
 
         private void button3_Click(object sender, EventArgs e)
         {
-            server.EnviarUDP(IPAddress.Broadcast, "bitNode@PING@asd");
+            //server.EnviarUDP(IPAddress.Broadcast, "bitNode@PING@asd");
+            server.EnviarUDP(null, "bitNode@SOLICITAR@gato|perro");
         }
 
         private void SolicitarArchivo(object sender, EventArgs e) //Enviar solicitud de archivo
@@ -643,6 +666,7 @@ namespace Cliente
             server.EnviarUDP(null, "bitNode@SOLICITAR@" + configuracion.nombre + "|" + tbVistaSolicitarDescripcion.Text);
             new frmMensaje(Idioma.StringResources.msgSolicitarArchivo).ShowDialog();
             tbVistaSolicitarDescripcion.Text = Idioma.StringResources.tbVistaCompartirDescripcionArchivo;
+            TBSinFoco(null,null);
         }
         private void CargarSolicitudes() //Carga las solicitudes en la vista
         {
@@ -717,9 +741,27 @@ namespace Cliente
                 dgvVistaCompartirArchivos.Columns[4].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
             }
         }
-        private void MostarArchivosCompartidosVecinos() //Carga los archivos en la vista Explorar
+        private void CargarArchivosCompartidosVecinos() //Carga los archivos en la vista Explorar
         {
-
+            dgvVistaExplorarArchivosCompartidosVecinos.Visible = !(lblVistaExplorarArchivosCompartidosVecinos.Visible = (Servidor.ArchivosCompartidosVecinos.Count == 0));
+            if (Servidor.ArchivosCompartidosVecinos.Count > 0)
+            {
+                //Datos
+                dgvVistaExplorarArchivosCompartidosVecinos.Rows.Clear();
+                for (int i = 0; i < Servidor.ArchivosCompartidosVecinos.Count; i++)
+                {
+                    Archivo A = Servidor.ArchivosCompartidosVecinos[i];
+                    MessageBox.Show(A.Tamaño.ToString() + " - - -"+ Archivo.KB_GB_MB(A.Tamaño));
+                    dgvVistaExplorarArchivosCompartidosVecinos.Rows.Insert(i, A.Nombre, Archivo.KB_GB_MB(A.Tamaño), A.Descripcion, Properties.Resources.Descargar);
+                }
+                //Vista
+                dgvVistaExplorarArchivosCompartidosVecinos.ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+                dgvVistaExplorarArchivosCompartidosVecinos.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+                dgvVistaExplorarArchivosCompartidosVecinos.Columns[0].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+                dgvVistaExplorarArchivosCompartidosVecinos.Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+                dgvVistaExplorarArchivosCompartidosVecinos.Columns[2].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+                dgvVistaExplorarArchivosCompartidosVecinos.Columns[3].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            }
         }
     }
 }
