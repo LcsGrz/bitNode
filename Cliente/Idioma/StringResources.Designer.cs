@@ -439,6 +439,15 @@ namespace Cliente.Idioma {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a No hay archivos disponibles para descargar.
+        /// </summary>
+        internal static string lblVistaExplorarArchivosCompartidosVecinos {
+            get {
+                return ResourceManager.GetString("lblVistaExplorarArchivosCompartidosVecinos", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a ¡Solicita el archivo que necesites!.
         /// </summary>
         internal static string lblVistaSolicitarInformacion {

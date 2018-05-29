@@ -273,4 +273,7 @@
   <data name="msgSolicitarArchivo" xml:space="preserve">
     <value>La solicitud fue enviada, solo queda esperar.</value>
   </data>
+  <data name="lblVistaExplorarArchivosCompartidosVecinos" xml:space="preserve">
+    <value>No hay archivos disponibles para descargar</value>
+  </data>
 </root>
