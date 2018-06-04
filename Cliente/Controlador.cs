@@ -40,7 +40,7 @@ namespace Cliente
             temporizadorPing.Elapsed += bitNodersVivos;
             temporizadorPing.Start();
             IPAddress ConectarmeIP = IPAddress.Parse(configuracion.IPConeccion);
-            EnviarUDP(ConectarmeIP, "bitNode@PPING@" + (IPAddress.Broadcast.Equals(ConectarmeIP) ? "BROADCAST" : "IPFIJA") + "|" + RecivirACV); //Primer ping      
+            EnviarUDP(ConectarmeIP, "bitNode@PPING@" + (IPAddress.Broadcast.Equals(ConectarmeIP) ? "OK" : "IPFIJA") + "|" + RecivirACV); //Primer ping      
         }
         public static IPAddress ObtenerIPLocal()
         {
@@ -62,8 +62,6 @@ namespace Cliente
                     IPSVecinas.Add(ip);
                     informarBitNoders?.Invoke(null, null);
                     return true; 
-                    // EnviarUDP(ip, "bitNode@SAC@");
-                    //EnviarUDP(ip, "bitNode@PONG@");
                 }
             }
             return false;
@@ -132,10 +130,10 @@ namespace Cliente
         {
             for (int i = 0; i < ArchivosCompartidosVecinos.Count; i++)
             {
-                if (!ArchivosCompartidosVecinos[i].IPPropietario.Remove(ip))
+                ArchivosCompartidosVecinos[i].IPPropietario.Remove(ip);
+                if (ArchivosCompartidosVecinos[i].IPPropietario.Count == 0)
                 {
                     ArchivosCompartidosVecinos.RemoveAt(i);
-                    MessageBox.Show("elimine ip");
                     i = -1;
                 }
             }
@@ -147,12 +145,11 @@ namespace Cliente
             {
                 if (Archivo.CompararMD5(ArchivosCompartidosVecinos[i].ArchivoMD5, MD5))
                 {
-                    if (!ArchivosCompartidosVecinos[i].IPPropietario.Remove(ip))
+                    ArchivosCompartidosVecinos[i].IPPropietario.Remove(ip);
+                    if (ArchivosCompartidosVecinos[i].IPPropietario.Count == 0)
                     {
                         ArchivosCompartidosVecinos.RemoveAt(i);
-                        MessageBox.Show("elimine md5");
-                        informarArchivo?.Invoke(null, null);
-                        return;
+                        break;
                     }
                 }
             }

@@ -182,7 +182,7 @@ namespace Cliente
                     Controlador.RecivirACV = true;
                     server.EnviarUDP(null, "bitNode@SAC@");
                 }
-               // CargarArchivosCompartidosVecinos();
+                CargarArchivosCompartidosVecinos();
             }
             if (tagNuevo == 3)
                 pbMenuSolicitar.Image = Properties.Resources.SolictarOFF;
@@ -698,6 +698,7 @@ namespace Cliente
                     archivosCompartidos[e.RowIndex].Activo = !archivosCompartidos[e.RowIndex].Activo;
                     dgvVistaCompartirArchivos.CurrentCell.Value = ImagenesArchivos[(archivosCompartidos[e.RowIndex].Activo) ? 0 : 1];
                     archivosCompartidos[e.RowIndex].CambiarEstado();
+                    MessageBox.Show(archivosCompartidos[e.RowIndex].Activo.ToString());
                     if (archivosCompartidos[e.RowIndex].Activo)
                         server.EnviarUnicoArchivoCompartido(archivosCompartidos[e.RowIndex]);
                     else
@@ -744,7 +745,7 @@ namespace Cliente
                 server.VaciarIPS();
                 server.VaciarACV();
                 lblVistaConfiguracionBitNoders.Text = "0" + Idioma.StringResources.lblVistaConfiguracionBitNoders;
-                server.EnviarUDP(ip, "bitNode@PPING@" + (IPAddress.Broadcast.Equals(IPAddress.Parse(configuracion.IPConeccion)) ? "BROADCAST" : "IPFIJA") + "|" + Controlador.RecivirACV);
+                server.EnviarUDP(ip, "bitNode@PPING@" + (IPAddress.Broadcast.Equals(IPAddress.Parse(configuracion.IPConeccion)) ? "OK" : "IPFIJA") + "|" + Controlador.RecivirACV);
             }
             else
             {

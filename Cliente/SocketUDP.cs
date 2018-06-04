@@ -27,7 +27,7 @@ namespace Cliente
         {
             Socket socket = new Socket(AddressFamily.InterNetwork, SocketType.Dgram, ProtocolType.Udp);
             IPEndPoint iep1 = new IPEndPoint(ip, puerto);
-
+            Console.WriteLine("ENVIE: -IP: "+ip+ " -MSJ: " +msj);
             socket.SetSocketOption(SocketOptionLevel.Socket, SocketOptionName.Broadcast, 1);
             socket.SendTo(Encoding.UTF8.GetBytes(msj), iep1);
             socket.Close();
@@ -69,28 +69,36 @@ namespace Cliente
             {
                 byte[] data = new byte[1024];
                 string[] stringData = Encoding.UTF8.GetString(SO.buffer, 0, read).Split('@');
+
                 if (stringData[0] == "bitNode")
                 {
-                    controlador.AgregarIP(IPRecibida);
+                    Console.WriteLine("RECIBI: -IP: " + IPRecibida + " -MSJ: " + Encoding.UTF8.GetString(SO.buffer, 0, read));
+                    bool primeraVez = controlador.AgregarIP(IPRecibida);
                     //--------------------------------------
                     switch (stringData[1])
                     {
                         case "PPING": // PrimerPing
                             {
                                 string[] msj = stringData[2].Split('|');
-                                if (msj[0] == "BROADCAST")
+                                if (msj[0] == "OK")
                                 {
-                                    if (bool.Parse(msj[1]))
+                                    if (bool.Parse(msj[1])) //true
                                         EnviarMSJ_UDP(IPRecibida, "bitNode@ETACV@");
-                                    else if(Controlador.RecivirACV)
-                                        EnviarMSJ_UDP(IPRecibida, "bitNode@SAC@");
-                                    else
-                                        EnviarMSJ_UDP(IPRecibida, "bitNode@PONG@");
+                                    else if (!(Controlador.RecivirACV && primeraVez))
+                                            EnviarMSJ_UDP(IPRecibida, "bitNode@PONG@");
                                 }
                                 else //IPFIJA
+                                { 
                                     controlador.EnviarListaIPS(IPRecibida);
+                                    if (bool.Parse(msj[1])) //true
+                                        EnviarMSJ_UDP(IPRecibida, "bitNode@ETACV@");
+                                }
+
+                                if (Controlador.RecivirACV && primeraVez)
+                                    EnviarMSJ_UDP(IPRecibida, "bitNode@PPING@OK|true");
                                 break;
                             }
+                        //------------------------------------------------------------------------------
                         case "PING": //Estoy vivo?
                             {
                                 EnviarMSJ_UDP(IPRecibida, "bitNode@PONG@");
@@ -125,13 +133,7 @@ namespace Cliente
                         case "IPV": // Añadir IPVecinas
                             {
                                 if (controlador.AgregarIP(IPAddress.Parse(stringData[2])))
-                                {
-                                    EnviarMSJ_UDP(IPAddress.Parse(stringData[2]), "bitNode@PPING@");
-                                }
-                                else
-                                {
-                                    EnviarMSJ_UDP(IPAddress.Parse(stringData[2]), "bitNode@PONG@"); // es necesario?
-                                }
+                                    EnviarMSJ_UDP(IPAddress.Parse(stringData[2]), "bitNode@PPING@OK|"+Controlador.RecivirACV);
                                 break;
                             }
                         case "BYE": // Se desconecto un bitNoder
@@ -158,7 +160,8 @@ namespace Cliente
                             }
                         case "EAC": // EliminarArchivoCompartido
                             {
-                                controlador.EliminarArchivosCompartidosDeMD5(stringData[2], IPRecibida);
+                                if (Controlador.RecivirACV)
+                                    controlador.EliminarArchivosCompartidosDeMD5(stringData[2], IPRecibida);
                                 break;
                             }
                     }
