@@ -276,4 +276,25 @@
   <data name="lblVistaExplorarArchivosCompartidosVecinos" xml:space="preserve">
     <value>No hay archivos disponibles para descargar</value>
   </data>
+  <data name="lblVistaConfiguracionBitNoders" xml:space="preserve">
+    <value> bitNoders vivos</value>
+  </data>
+  <data name="lblVistaConfiguracionIP" xml:space="preserve">
+    <value>IP de coneccion</value>
+  </data>
+  <data name="mensajeErrorIP" xml:space="preserve">
+    <value>La IP introducida no es valida.</value>
+  </data>
+  <data name="miIP" xml:space="preserve">
+    <value>Mi IP: </value>
+  </data>
+  <data name="msjIPPortapapeles" xml:space="preserve">
+    <value>Direccion IP copiada a portapapeles.</value>
+  </data>
+  <data name="ttReconectar" xml:space="preserve">
+    <value>Reconectar</value>
+  </data>
+  <data name="msjASNULL" xml:space="preserve">
+    <value>El archivo solicitado no existe.</value>
+  </data>
 </root>

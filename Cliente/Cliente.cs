@@ -7,8 +7,10 @@ using System.Drawing;
 using System.Drawing.Text;
 using System.IO;
 using System.Net;
+using System.Net.NetworkInformation;
 using System.Runtime.InteropServices;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading;
 using System.Windows.Forms;
 
@@ -43,8 +45,13 @@ namespace Cliente
             AplicarTema();
             server.IniciarEjecuciones();
 
-            Archivo.ArchivoGuardado += new EventHandler((object sender, EventArgs e) => { this.Invoke(new Action(() => { CargarArchivosCompatidos(); server.EnviarUDP(null,"bitNode@EACV@"); })); });
-            Servidor.informarSolicitud += new EventHandler((object sender, EventArgs e) => { this.Invoke(new Action(() => { CargarSolicitudes(); })); });
+            Archivo.ArchivoGuardado += new EventHandler((object sender, EventArgs e) => { this.Invoke(new Action(() => { CargarArchivosCompatidos(); })); });
+            Controlador.informarSolicitud += new EventHandler((object sender, EventArgs e) => { this.Invoke(new Action(() => { CargarSolicitudes(); })); });
+            NetworkChange.NetworkAddressChanged += new NetworkAddressChangedEventHandler((object sender, EventArgs e) => {
+                tbVistaConfiguracionIP.Text = "255.255.255.255";
+                lblVistaConfiguracionMiIP.Text = Idioma.StringResources.miIP + Controlador.ObtenerIPLocal();
+                Reconectar(null, null); });
+            Controlador.informarBitNoders += new EventHandler((object sender, EventArgs e) => { this.Invoke(new Action(() => { lblVistaConfiguracionBitNoders.Text = Controlador.IPSVecinas.Count + Idioma.StringResources.lblVistaConfiguracionBitNoders; })); });
         }
         //----------------------------------------------------------------------------------------------Funciones de form
         private void MoverForm(object sender, MouseEventArgs e) //Mover form
@@ -67,11 +74,7 @@ namespace Cliente
         }
         private void TimerOn(object sender, EventArgs e) // Inicia el timer para efecto FADE
         {
-            if ((sender as Control).Name == "pbCerrar")
-            {
-                server.FrenarEjecuciones();
-                cerrar = true;
-            }
+            cerrar = ((sender as Control).Name == "pbCerrar");
             tmrFader.Start();
         }
         private void ExpandirMenu(object sender, EventArgs e) //Inicia la funcion de expandir el menu Lite - Deluxe
@@ -126,10 +129,7 @@ namespace Cliente
                 }
             }
         }
-        private void TBSinFoco(object sender, EventArgs e) //Saca de seleccion el TB de about
-        {
-            pbTitulo.Focus();
-        }
+        private void TBSinFoco(object sender, EventArgs e) => pbTitulo.Focus();//Saca de seleccion el TB de about
         private void tmrFader_Tick(object sender, EventArgs e) //Faded
         {
             if (TransparenciaFull)
@@ -173,8 +173,17 @@ namespace Cliente
         {
             int tagNuevo = Convert.ToInt32((sender as Control).Tag) - 1;
 
-            if (tagNuevo == 2)
+            if (tagNuevo == 1)
+            {
+                if (!Controlador.RecivirACV)
+                {
+                    Controlador.RecivirACV = true;
+                    server.EnviarUDP(null, "bitNode@SAC@");
+                }
                 CargarArchivosCompartidosVecinos();
+            }
+            if (tagNuevo == 3)
+                pbMenuSolicitar.Image = Properties.Resources.SolictarOFF;
 
             if (tagAnterior != tagNuevo)
             {
@@ -246,6 +255,7 @@ namespace Cliente
                 tagAnterior = tagNuevo;
             }
         }
+        private void bitNodeClosing(object sender, FormClosingEventArgs e) => server.FrenarEjecuciones(); //Evento de cerrado del form
         //----------------------------------------------------------------------------------------------Funciones
         private void MostrarInformacionPersonal(object sender, EventArgs e) //Mostrar GITHUB - MAIL propio
         {
@@ -370,6 +380,7 @@ namespace Cliente
             bnudVistaConfiguracionLimiteBajada.valor = configuracion.limiteBajada;
             bnudVistaConfiguracionDescargasSimultaneas.valor = configuracion.limiteDesacargas;
             ttAyuda.SetToolTip(pbVistaConfiguracionCarpetaDescarga, configuracion.rutaDescarga);
+            tbVistaConfiguracionIP.Text = configuracion.IPConeccion;
         }
         private void CargarFuentes() //Carga las fuentes y las aplica a los componentes
         {
@@ -429,6 +440,9 @@ namespace Cliente
             lblVistaConfiguracionKbpsBajada.Font = catorceR;
             lblVistaConfiguracionLimiteDescargas.Font = catorceR;
             lblVistaConfiguracionRutaDescarga.Font = catorceR;
+            lblVistaConfiguracionIP.Font = catorceR;
+            tbVistaConfiguracionIP.Font = doceR;
+            lblVistaConfiguracionBitNoders.Font = catorceR;
             //About
             tbVistaAboutDescripcion.Font = veintiunoR;
         }
@@ -491,6 +505,10 @@ namespace Cliente
             lblVistaConfiguracionLimiteBajada.Text = Idioma.StringResources.lblVistaConfiguracionLimiteBajada;
             lblVistaConfiguracionLimiteDescargas.Text = Idioma.StringResources.lblVistaConfiguracionLimiteDescargas;
             lblVistaConfiguracionRutaDescarga.Text = Idioma.StringResources.lblVistaConfiguracionRutaDescarga;
+            lblVistaConfiguracionIP.Text = Idioma.StringResources.lblVistaConfiguracionIP;
+            ttAyuda.SetToolTip(pbVistaConfiguracionReconectar, Idioma.StringResources.ttReconectar);
+            lblVistaConfiguracionMiIP.Text = Idioma.StringResources.miIP + Controlador.ObtenerIPLocal();
+            lblVistaConfiguracionBitNoders.Text = Controlador.IPSVecinas.Count + Idioma.StringResources.lblVistaConfiguracionBitNoders;
             //About
             tbVistaAboutDescripcion.Text = Idioma.StringResources.tbVistaAboutDescripcion;
         }
@@ -588,6 +606,7 @@ namespace Cliente
             pnlVistaComfiguracionInterfaz.BackColor = configuracion.colorPanelesInternosVistas;
             pnlVistaConfiguracionTransferencias.BackColor = configuracion.colorPanelesInternosVistas;
             tbVistaConfiguracionNombre.BackColor = configuracion.colorFondo;
+            tbVistaConfiguracionIP.BackColor = configuracion.colorFondo;
             //About
             tbVistaAboutDescripcion.BackColor = configuracion.colorVistaFondo;
         }
@@ -642,19 +661,13 @@ namespace Cliente
 
         private void button1_Click(object sender, EventArgs e)
         {
-            MessageBox.Show(Servidor.ArchivosCompartidosVecinos.Count.ToString());
+            MessageBox.Show(Controlador.ArchivosCompartidosVecinos.Count.ToString());
 
         }
-
         private void button2_Click(object sender, EventArgs e)
         {
-            MessageBox.Show(Servidor.IPSVecinas.Count.ToString());
-            foreach (IPAddress item in Servidor.IPSVecinas)
-            {
-                MessageBox.Show(item.ToString());
-            }
+            server.EnviarUDP(IPAddress.Parse("10.62.245.9"),"bitNode@PING@");
         }
-
         private void button3_Click(object sender, EventArgs e)
         {
             //server.EnviarUDP(IPAddress.Broadcast, "bitNode@PING@asd");
@@ -666,19 +679,19 @@ namespace Cliente
             server.EnviarUDP(null, "bitNode@SOLICITAR@" + configuracion.nombre + "|" + tbVistaSolicitarDescripcion.Text);
             new frmMensaje(Idioma.StringResources.msgSolicitarArchivo).ShowDialog();
             tbVistaSolicitarDescripcion.Text = Idioma.StringResources.tbVistaCompartirDescripcionArchivo;
-            TBSinFoco(null,null);
+            TBSinFoco(null, null);
         }
         private void CargarSolicitudes() //Carga las solicitudes en la vista
         {
-            dgvVistaSolicitar.Visible = !(lblVistaSolicitarNuevasSolicitudes.Visible = (Servidor.Solicitudes.Count == 0));
-            pbMenuSolicitar.Image = (Servidor.Solicitudes.Count > 0) ? Properties.Resources.SolicitarON : Properties.Resources.SolictarOFF;
-            if (Servidor.Solicitudes.Count > 0)
+            dgvVistaSolicitar.Visible = !(lblVistaSolicitarNuevasSolicitudes.Visible = (Controlador.Solicitudes.Count == 0));
+            pbMenuSolicitar.Image = (Controlador.Solicitudes.Count > 0) ? Properties.Resources.SolicitarON : Properties.Resources.SolictarOFF;
+            if (Controlador.Solicitudes.Count > 0)
             {
                 //Datos
                 dgvVistaSolicitar.Rows.Clear();
-                for (int i = 0; i < Servidor.Solicitudes.Count; i++)
+                for (int i = 0; i < Controlador.Solicitudes.Count; i++)
                 {
-                    string[] S = Servidor.Solicitudes[i].Split('|');
+                    string[] S = Controlador.Solicitudes[i].Split('|');
                     dgvVistaSolicitar.Rows.Insert(i, S[0], S[1], ImagenesArchivos[3], ImagenesArchivos[2]);
                 }
                 //Vista
@@ -714,23 +727,43 @@ namespace Cliente
                 {
                     ClickMenu(new Control() { Tag = 3 }, null);
                 }
-                Servidor.Solicitudes.RemoveAt(e.RowIndex);
+                Controlador.Solicitudes.RemoveAt(e.RowIndex);
                 CargarSolicitudes();
             }
-            TBSinFoco(null,null);
+            TBSinFoco(null, null);
         }
-
-        private void dgvVistaExplorarArchivosCompartidosVecinos_CellClick(object sender, DataGridViewCellEventArgs e)
+        private void DescargarArchivo(object sender, DataGridViewCellEventArgs e) //Click en descargar archivo
         {
             if (dgvVistaExplorarArchivosCompartidosVecinos.CurrentCell != null && dgvVistaExplorarArchivosCompartidosVecinos.CurrentCell.Value != null && e.RowIndex != -1)
             {
                 if (e.ColumnIndex.Equals(3)) //Activo = 3
                 {
-                    Servidor.tcpSC.recibeFile(Servidor.ArchivosCompartidosVecinos[e.RowIndex]); //abriendo puerto para recibir archivo
-                    server.EnviarUDP(Servidor.ArchivosCompartidosVecinos[e.RowIndex].IPPropietario, 
-                    "bitNode@SAD@" + Servidor.ArchivosCompartidosVecinos[e.RowIndex].ArchivoMD5+"@0"); //SolicitarArchivo
+                    server.SolicitarArchivo(e.RowIndex);
                 }
             }
+        }
+        private void Reconectar(object sender, EventArgs e) //Iniciar la reconeccion
+        {
+            if (IPAddress.TryParse(tbVistaConfiguracionIP.Text, out IPAddress ip))
+            {
+                configuracion.IPConeccion = tbVistaConfiguracionIP.Text;
+                configuracion.Guardar();
+                Controlador.RecivirACV = false;
+                server.VaciarIPS();
+                server.VaciarACV();
+                server.EnviarUDP(ip, "bitNode@PPING@" + (IPAddress.Broadcast.Equals(IPAddress.Parse(tbVistaConfiguracionIP.Text)) ? "BROADCAST" : "IPFIJA"));
+            }
+            else
+            {
+                tbVistaConfiguracionIP.Text = IPAddress.Broadcast.ToString();
+                new frmMensaje(Idioma.StringResources.mensajeErrorIP).ShowDialog();
+            }
+            TBSinFoco(null, null);
+        }
+        private void IPaPortapapeles(object sender, EventArgs e) //Copiar direccion IP propia a portapapeles
+        {
+            Clipboard.SetDataObject(Controlador.ObtenerIPLocal().ToString());
+            new frmMensaje(Idioma.StringResources.msjIPPortapapeles).ShowDialog();
         }
 
         private void CargarArchivosCompatidos() //Carga los archivos compartidos en la vista
@@ -757,22 +790,15 @@ namespace Cliente
         }
         private void CargarArchivosCompartidosVecinos() //Carga los archivos en la vista Explorar
         {
-            dgvVistaExplorarArchivosCompartidosVecinos.Visible = !(lblVistaExplorarArchivosCompartidosVecinos.Visible = (Servidor.ArchivosCompartidosVecinos.Count == 0));
-            if (Servidor.ArchivosCompartidosVecinos.Count > 0)
+            dgvVistaExplorarArchivosCompartidosVecinos.Visible = !(lblVistaExplorarArchivosCompartidosVecinos.Visible = (Controlador.ArchivosCompartidosVecinos.Count == 0));
+            if (Controlador.ArchivosCompartidosVecinos.Count > 0)
             {
                 //Datos
                 dgvVistaExplorarArchivosCompartidosVecinos.Rows.Clear();
-                for (int i = 0; i < Servidor.ArchivosCompartidosVecinos.Count; i++)
+                for (int i = 0; i < Controlador.ArchivosCompartidosVecinos.Count; i++)
                 {
-                    Archivo A = Servidor.ArchivosCompartidosVecinos[i];
-                    //foreach (DataGridViewRow dgv in dgvVistaExplorarArchivosCompartidosVecinos.Rows)
-                    {
-                        //if ((dgv.Cells["nombre"].Value.ToString() == A.Nombre) && (dgv.Cells["descripcion"].Value.ToString() == A.Descripcion))
-                        {
-                            dgvVistaExplorarArchivosCompartidosVecinos.Rows.Insert(i, A.Nombre, Archivo.KB_GB_MB(A.Tamaño), A.Descripcion, Properties.Resources.Descargar);
-                        }
-                    }
-                    
+                    Archivo A = Controlador.ArchivosCompartidosVecinos[i];
+                    dgvVistaExplorarArchivosCompartidosVecinos.Rows.Insert(i, A.Nombre, Archivo.KB_GB_MB(A.Tamaño), A.Descripcion, Properties.Resources.Descargar);
                 }
                 //Vista
                 dgvVistaExplorarArchivosCompartidosVecinos.ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;

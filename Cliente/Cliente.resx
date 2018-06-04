@@ -352,6 +352,26 @@
         rkJggg==
 </value>
   </data>
+  <data name="pbVistaConfiguracionReconectar.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAO
+        nAAADpwBB5RT3QAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAAAJ5SURBVDhPlZVd
+        SBRRFMenbVibVVg/l9mdhtUdmK96iiKI6CG03it66qGnIOgDgh4KhLEHRYVUrJdKMvqgHkT6gDKKyAKD
+        ICgMonoLCpNMRPze1fO/3juOs01bB34wc87/nJ17zz13pQjbSGwlDhIniPMcPMO3hYDmn8wlThNekOa6
+        unv9mczTgO8U4RCRFiP2EX4RKx7vaE2lBu5q2osZ255Zdt3lvkxmKKghkLOBKDK/2DZFuTjS0PAh77oF
+        FAlROFtbe0doOU3EOsMyWfBwMnllyrang0UWXXcx+D7nOPObZblN5HBsghk2F/vhbacvm+bFlhwnf1/X
+        X8M3Zprj3Lf0zTS/P85mRxKx2AXkBMC+s0ahm8z5NpcbFcXO1NTcEv6ditLVmEj0biouEgbdlw7hZQcl
+        UTG2ZwO6/pIL/pcDhHQSLz2q+gDFClTULivr5IK/IktSi7tei3PKDqw3qOvDKDhhWZM8WJLh+vp3yGlP
+        pQa5D7VWC6IBCP6yrAkeLAlpfyOHPuYV950jVpd8WVUfIZinhhjxeDsXRAKNOKe9qvqQ+9mSMZve7vLy
+        HgTBTU17xgWR3Na050K/S1G6uZ81Ba1molHD+AzBAh3kI8nkNeEPc7Sysk8c9ve53KdADAOydrD30lmb
+        dZw5UfQ6zW1allsRA5gOXBCIQUPzPbuHVsbj/sGG4dZgScerqm7QaLGiANPxwzR/AjwLP374WHV1v8gj
+        /NET5l8OmIqPhvFVJIeh2BesRuiJRqLIcAXh1hAib39FxaWr6fSToWz2DcBzE/mCGgI5f7y+hOHT2Z6W
+        AJqiZUYZNhfdxzEI/wXAh276DVgzSVoBzXhJR3yFduEAAAAASUVORK5CYII=
+</value>
+  </data>
+  <metadata name="ttAyuda.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>209, 3</value>
+  </metadata>
   <data name="pbVistaConfiguracionCarpetaDescarga.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAADcAAAAqCAYAAAAXk8MDAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAO
@@ -1055,9 +1075,6 @@
   </data>
   <metadata name="fbdNavegador.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>81, -2</value>
-  </metadata>
-  <metadata name="ttAyuda.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>209, 3</value>
   </metadata>
   <metadata name="niMinimizar.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>292, 6</value>

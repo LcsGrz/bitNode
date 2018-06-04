@@ -41,6 +41,58 @@
             this.tmrFader = new System.Windows.Forms.Timer(this.components);
             this.pnlBarraGris1Px = new System.Windows.Forms.Panel();
             this.pnlVistaContenedor = new System.Windows.Forms.Panel();
+            this.pnlVistaConfiguracionGeneral = new System.Windows.Forms.Panel();
+            this.lblVistaConfiguracionBitNoders = new System.Windows.Forms.Label();
+            this.lblVistaConfiguracionMiIP = new System.Windows.Forms.Label();
+            this.pbVistaConfiguracionReconectar = new System.Windows.Forms.PictureBox();
+            this.tbVistaConfiguracionIP = new System.Windows.Forms.TextBox();
+            this.lblVistaConfiguracionIP = new System.Windows.Forms.Label();
+            this.tbVistaConfiguracionNombre = new System.Windows.Forms.TextBox();
+            this.lblVistaConfiguracionNombre = new System.Windows.Forms.Label();
+            this.bnudVistaConfiguracionDescargasSimultaneas = new Cliente.Controles.botonNUD();
+            this.bnudVistaConfiguracionLimiteBajada = new Cliente.Controles.botonNUD();
+            this.bnudVistaConfiguracionLimiteSubida = new Cliente.Controles.botonNUD();
+            this.lblVistaConfiguracionEfectoBotones = new System.Windows.Forms.Label();
+            this.lblVistaConfiguracionMovimientoMenu = new System.Windows.Forms.Label();
+            this.pnlVistaComfiguracionInterfaz = new System.Windows.Forms.Panel();
+            this.lblVistaConfiguracionInterfaz = new System.Windows.Forms.Label();
+            this.lblVistaConfiguracionEfectoFade = new System.Windows.Forms.Label();
+            this.pnlVistaConfiguracionTransferencias = new System.Windows.Forms.Panel();
+            this.lblVistaConfiguracionTranseferecias = new System.Windows.Forms.Label();
+            this.bsVistaConfiguracionEfectoFade = new Cliente.Controles.botonSwitch();
+            this.bsVistaConfiguracionIniciarConWindows = new Cliente.Controles.botonSwitch();
+            this.bsVistaConfiguracionEfectoMenu = new Cliente.Controles.botonSwitch();
+            this.pnlVistaComfiguracionGeneral = new System.Windows.Forms.Panel();
+            this.lblVistaConfiguracionGeneral = new System.Windows.Forms.Label();
+            this.bsVistaConfiguracionEfectoBotones = new Cliente.Controles.botonSwitch();
+            this.bsVistaConfiguracionMinimizarBandeja = new Cliente.Controles.botonSwitch();
+            this.pbVistaConfiguracionCarpetaDescarga = new System.Windows.Forms.PictureBox();
+            this.lblVistaConfiguracionMinimizarBanjeda = new System.Windows.Forms.Label();
+            this.bsVistaConfiguracionTema = new Cliente.Controles.botonSwitch();
+            this.lblVistaConfiguracionIniciarConWindows = new System.Windows.Forms.Label();
+            this.bsVistaConfiguracionLatino = new Cliente.Controles.botonSwitch();
+            this.lblVistaConfiguracionTema = new System.Windows.Forms.Label();
+            this.lblVistaConfiguracionRutaDescarga = new System.Windows.Forms.Label();
+            this.lblVistaConfiguracionKbpsBajada = new System.Windows.Forms.Label();
+            this.lblVistaConfiguracionKbpsSubida = new System.Windows.Forms.Label();
+            this.lblVistaConfiguracionLimiteSubida = new System.Windows.Forms.Label();
+            this.lblVistaConfiguracionLimiteBajada = new System.Windows.Forms.Label();
+            this.lblVistaConfiguracionLimiteDescargas = new System.Windows.Forms.Label();
+            this.lblVistaConfiguracionTemaClaro = new System.Windows.Forms.Label();
+            this.lblVistaConfiguracionIngles = new System.Windows.Forms.Label();
+            this.lblVistaConfiguracionTemaOscuro = new System.Windows.Forms.Label();
+            this.lblVistaConfiguracionEspañol = new System.Windows.Forms.Label();
+            this.lblVistaConfiguracionIdioma = new System.Windows.Forms.Label();
+            this.pnlVistaAbout = new System.Windows.Forms.Panel();
+            this.tbVistaAboutDescripcion = new System.Windows.Forms.TextBox();
+            this.pbVistaAboutBotonJulio = new System.Windows.Forms.PictureBox();
+            this.pbVistaBotonLcs = new System.Windows.Forms.PictureBox();
+            this.pbVistaAbout = new System.Windows.Forms.PictureBox();
+            this.pnlVistaDescargar = new System.Windows.Forms.Panel();
+            this.button2 = new System.Windows.Forms.Button();
+            this.button3 = new System.Windows.Forms.Button();
+            this.button1 = new System.Windows.Forms.Button();
+            this.label1 = new System.Windows.Forms.Label();
             this.pnlVistaExplorar = new System.Windows.Forms.Panel();
             this.pnlVistaExplorarDGV = new System.Windows.Forms.Panel();
             this.lblVistaExplorarArchivosCompartidosVecinos = new System.Windows.Forms.Label();
@@ -79,43 +131,6 @@
             this.lblVistaSolicitarInformacion = new System.Windows.Forms.Label();
             this.tbVistaSolicitarDescripcion = new System.Windows.Forms.TextBox();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
-            this.pnlVistaConfiguracionGeneral = new System.Windows.Forms.Panel();
-            this.tbVistaConfiguracionNombre = new System.Windows.Forms.TextBox();
-            this.lblVistaConfiguracionNombre = new System.Windows.Forms.Label();
-            this.lblVistaConfiguracionEfectoBotones = new System.Windows.Forms.Label();
-            this.lblVistaConfiguracionMovimientoMenu = new System.Windows.Forms.Label();
-            this.pnlVistaComfiguracionInterfaz = new System.Windows.Forms.Panel();
-            this.lblVistaConfiguracionInterfaz = new System.Windows.Forms.Label();
-            this.lblVistaConfiguracionEfectoFade = new System.Windows.Forms.Label();
-            this.pnlVistaConfiguracionTransferencias = new System.Windows.Forms.Panel();
-            this.lblVistaConfiguracionTranseferecias = new System.Windows.Forms.Label();
-            this.pnlVistaComfiguracionGeneral = new System.Windows.Forms.Panel();
-            this.lblVistaConfiguracionGeneral = new System.Windows.Forms.Label();
-            this.pbVistaConfiguracionCarpetaDescarga = new System.Windows.Forms.PictureBox();
-            this.lblVistaConfiguracionMinimizarBanjeda = new System.Windows.Forms.Label();
-            this.lblVistaConfiguracionIniciarConWindows = new System.Windows.Forms.Label();
-            this.lblVistaConfiguracionTema = new System.Windows.Forms.Label();
-            this.lblVistaConfiguracionRutaDescarga = new System.Windows.Forms.Label();
-            this.lblVistaConfiguracionKbpsBajada = new System.Windows.Forms.Label();
-            this.lblVistaConfiguracionKbpsSubida = new System.Windows.Forms.Label();
-            this.lblVistaConfiguracionLimiteSubida = new System.Windows.Forms.Label();
-            this.lblVistaConfiguracionLimiteBajada = new System.Windows.Forms.Label();
-            this.lblVistaConfiguracionLimiteDescargas = new System.Windows.Forms.Label();
-            this.lblVistaConfiguracionTemaClaro = new System.Windows.Forms.Label();
-            this.lblVistaConfiguracionIngles = new System.Windows.Forms.Label();
-            this.lblVistaConfiguracionTemaOscuro = new System.Windows.Forms.Label();
-            this.lblVistaConfiguracionEspañol = new System.Windows.Forms.Label();
-            this.lblVistaConfiguracionIdioma = new System.Windows.Forms.Label();
-            this.pnlVistaAbout = new System.Windows.Forms.Panel();
-            this.tbVistaAboutDescripcion = new System.Windows.Forms.TextBox();
-            this.pbVistaAboutBotonJulio = new System.Windows.Forms.PictureBox();
-            this.pbVistaBotonLcs = new System.Windows.Forms.PictureBox();
-            this.pbVistaAbout = new System.Windows.Forms.PictureBox();
-            this.pnlVistaDescargar = new System.Windows.Forms.Panel();
-            this.button2 = new System.Windows.Forms.Button();
-            this.button3 = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
-            this.label1 = new System.Windows.Forms.Label();
             this.pnlMenu = new System.Windows.Forms.Panel();
             this.pnlMenuConfiguracionesRapidas = new System.Windows.Forms.Panel();
             this.lblMenuCRapidas = new System.Windows.Forms.Label();
@@ -152,22 +167,23 @@
             this.ttAyuda = new System.Windows.Forms.ToolTip(this.components);
             this.niMinimizar = new System.Windows.Forms.NotifyIcon(this.components);
             this.ofdArchivo = new System.Windows.Forms.OpenFileDialog();
-            this.bnudVistaConfiguracionDescargasSimultaneas = new Cliente.Controles.botonNUD();
-            this.bnudVistaConfiguracionLimiteBajada = new Cliente.Controles.botonNUD();
-            this.bnudVistaConfiguracionLimiteSubida = new Cliente.Controles.botonNUD();
-            this.bsVistaConfiguracionEfectoFade = new Cliente.Controles.botonSwitch();
-            this.bsVistaConfiguracionIniciarConWindows = new Cliente.Controles.botonSwitch();
-            this.bsVistaConfiguracionEfectoMenu = new Cliente.Controles.botonSwitch();
-            this.bsVistaConfiguracionEfectoBotones = new Cliente.Controles.botonSwitch();
-            this.bsVistaConfiguracionMinimizarBandeja = new Cliente.Controles.botonSwitch();
-            this.bsVistaConfiguracionTema = new Cliente.Controles.botonSwitch();
-            this.bsVistaConfiguracionLatino = new Cliente.Controles.botonSwitch();
             this.pnlBarra.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbCerrar)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbMinimizar)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbTitulo)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbIcono)).BeginInit();
             this.pnlVistaContenedor.SuspendLayout();
+            this.pnlVistaConfiguracionGeneral.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pbVistaConfiguracionReconectar)).BeginInit();
+            this.pnlVistaComfiguracionInterfaz.SuspendLayout();
+            this.pnlVistaConfiguracionTransferencias.SuspendLayout();
+            this.pnlVistaComfiguracionGeneral.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pbVistaConfiguracionCarpetaDescarga)).BeginInit();
+            this.pnlVistaAbout.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pbVistaAboutBotonJulio)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbVistaBotonLcs)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbVistaAbout)).BeginInit();
+            this.pnlVistaDescargar.SuspendLayout();
             this.pnlVistaExplorar.SuspendLayout();
             this.pnlVistaExplorarDGV.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvVistaExplorarArchivosCompartidosVecinos)).BeginInit();
@@ -184,16 +200,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.dgvVistaSolicitar)).BeginInit();
             this.pnlVistaSolicitarCompartirSolicitud.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
-            this.pnlVistaConfiguracionGeneral.SuspendLayout();
-            this.pnlVistaComfiguracionInterfaz.SuspendLayout();
-            this.pnlVistaConfiguracionTransferencias.SuspendLayout();
-            this.pnlVistaComfiguracionGeneral.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pbVistaConfiguracionCarpetaDescarga)).BeginInit();
-            this.pnlVistaAbout.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pbVistaAboutBotonJulio)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pbVistaBotonLcs)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pbVistaAbout)).BeginInit();
-            this.pnlVistaDescargar.SuspendLayout();
             this.pnlMenu.SuspendLayout();
             this.pnlMenuConfiguracionesRapidas.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbMenuConfiguracionesRapidas)).BeginInit();
@@ -310,514 +316,14 @@
             this.pnlVistaContenedor.TabIndex = 12;
             this.pnlVistaContenedor.Tag = "0";
             // 
-            // pnlVistaExplorar
-            // 
-            this.pnlVistaExplorar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(13)))), ((int)(((byte)(23)))), ((int)(((byte)(33)))));
-            this.pnlVistaExplorar.Controls.Add(this.pnlVistaExplorarDGV);
-            this.pnlVistaExplorar.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pnlVistaExplorar.Location = new System.Drawing.Point(0, 0);
-            this.pnlVistaExplorar.Margin = new System.Windows.Forms.Padding(2);
-            this.pnlVistaExplorar.Name = "pnlVistaExplorar";
-            this.pnlVistaExplorar.Size = new System.Drawing.Size(1035, 619);
-            this.pnlVistaExplorar.TabIndex = 17;
-            this.pnlVistaExplorar.Tag = "2";
-            this.pnlVistaExplorar.Visible = false;
-            // 
-            // pnlVistaExplorarDGV
-            // 
-            this.pnlVistaExplorarDGV.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.pnlVistaExplorarDGV.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(31)))), ((int)(((byte)(41)))));
-            this.pnlVistaExplorarDGV.Controls.Add(this.lblVistaExplorarArchivosCompartidosVecinos);
-            this.pnlVistaExplorarDGV.Controls.Add(this.dgvVistaExplorarArchivosCompartidosVecinos);
-            this.pnlVistaExplorarDGV.Location = new System.Drawing.Point(37, 26);
-            this.pnlVistaExplorarDGV.Name = "pnlVistaExplorarDGV";
-            this.pnlVistaExplorarDGV.Size = new System.Drawing.Size(960, 566);
-            this.pnlVistaExplorarDGV.TabIndex = 7;
-            // 
-            // lblVistaExplorarArchivosCompartidosVecinos
-            // 
-            this.lblVistaExplorarArchivosCompartidosVecinos.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.lblVistaExplorarArchivosCompartidosVecinos.BackColor = System.Drawing.Color.Transparent;
-            this.lblVistaExplorarArchivosCompartidosVecinos.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F);
-            this.lblVistaExplorarArchivosCompartidosVecinos.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(153)))), ((int)(((byte)(153)))), ((int)(((byte)(153)))));
-            this.lblVistaExplorarArchivosCompartidosVecinos.Location = new System.Drawing.Point(147, 80);
-            this.lblVistaExplorarArchivosCompartidosVecinos.Name = "lblVistaExplorarArchivosCompartidosVecinos";
-            this.lblVistaExplorarArchivosCompartidosVecinos.Size = new System.Drawing.Size(666, 43);
-            this.lblVistaExplorarArchivosCompartidosVecinos.TabIndex = 5;
-            this.lblVistaExplorarArchivosCompartidosVecinos.Text = "No hay archivos disponibles para descargar";
-            this.lblVistaExplorarArchivosCompartidosVecinos.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // dgvVistaExplorarArchivosCompartidosVecinos
-            // 
-            this.dgvVistaExplorarArchivosCompartidosVecinos.AllowUserToAddRows = false;
-            this.dgvVistaExplorarArchivosCompartidosVecinos.AllowUserToDeleteRows = false;
-            this.dgvVistaExplorarArchivosCompartidosVecinos.AllowUserToResizeColumns = false;
-            this.dgvVistaExplorarArchivosCompartidosVecinos.AllowUserToResizeRows = false;
-            this.dgvVistaExplorarArchivosCompartidosVecinos.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.dgvVistaExplorarArchivosCompartidosVecinos.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(31)))), ((int)(((byte)(41)))));
-            this.dgvVistaExplorarArchivosCompartidosVecinos.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.dgvVistaExplorarArchivosCompartidosVecinos.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None;
-            this.dgvVistaExplorarArchivosCompartidosVecinos.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
-            this.dgvVistaExplorarArchivosCompartidosVecinos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvVistaExplorarArchivosCompartidosVecinos.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.dataGridViewTextBoxColumn2,
-            this.dataGridViewTextBoxColumn6,
-            this.dataGridViewTextBoxColumn7,
-            this.dataGridViewTextBoxColumn8});
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvVistaExplorarArchivosCompartidosVecinos.DefaultCellStyle = dataGridViewCellStyle1;
-            this.dgvVistaExplorarArchivosCompartidosVecinos.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dgvVistaExplorarArchivosCompartidosVecinos.EnableHeadersVisualStyles = false;
-            this.dgvVistaExplorarArchivosCompartidosVecinos.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(31)))), ((int)(((byte)(41)))));
-            this.dgvVistaExplorarArchivosCompartidosVecinos.Location = new System.Drawing.Point(0, 0);
-            this.dgvVistaExplorarArchivosCompartidosVecinos.MultiSelect = false;
-            this.dgvVistaExplorarArchivosCompartidosVecinos.Name = "dgvVistaExplorarArchivosCompartidosVecinos";
-            this.dgvVistaExplorarArchivosCompartidosVecinos.ReadOnly = true;
-            this.dgvVistaExplorarArchivosCompartidosVecinos.RowHeadersVisible = false;
-            this.dgvVistaExplorarArchivosCompartidosVecinos.Size = new System.Drawing.Size(960, 566);
-            this.dgvVistaExplorarArchivosCompartidosVecinos.TabIndex = 6;
-            this.dgvVistaExplorarArchivosCompartidosVecinos.Tag = "E";
-            this.dgvVistaExplorarArchivosCompartidosVecinos.Visible = false;
-            this.dgvVistaExplorarArchivosCompartidosVecinos.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvVistaExplorarArchivosCompartidosVecinos_CellClick);
-            this.dgvVistaExplorarArchivosCompartidosVecinos.CellMouseMove += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.CambiarCursorDGV);
-            // 
-            // dataGridViewTextBoxColumn2
-            // 
-            this.dataGridViewTextBoxColumn2.DataPropertyName = "nombre";
-            this.dataGridViewTextBoxColumn2.HeaderText = "Nombre";
-            this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
-            this.dataGridViewTextBoxColumn2.ReadOnly = true;
-            // 
-            // dataGridViewTextBoxColumn6
-            // 
-            this.dataGridViewTextBoxColumn6.DataPropertyName = "tamaño";
-            this.dataGridViewTextBoxColumn6.HeaderText = "Tamaño";
-            this.dataGridViewTextBoxColumn6.Name = "dataGridViewTextBoxColumn6";
-            this.dataGridViewTextBoxColumn6.ReadOnly = true;
-            // 
-            // dataGridViewTextBoxColumn7
-            // 
-            this.dataGridViewTextBoxColumn7.DataPropertyName = "descripcion";
-            this.dataGridViewTextBoxColumn7.HeaderText = "Descripcion";
-            this.dataGridViewTextBoxColumn7.Name = "dataGridViewTextBoxColumn7";
-            this.dataGridViewTextBoxColumn7.ReadOnly = true;
-            // 
-            // dataGridViewTextBoxColumn8
-            // 
-            this.dataGridViewTextBoxColumn8.DataPropertyName = "activo";
-            this.dataGridViewTextBoxColumn8.HeaderText = "Descargar";
-            this.dataGridViewTextBoxColumn8.Name = "dataGridViewTextBoxColumn8";
-            this.dataGridViewTextBoxColumn8.ReadOnly = true;
-            // 
-            // pnlVistaCompartir
-            // 
-            this.pnlVistaCompartir.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(13)))), ((int)(((byte)(23)))), ((int)(((byte)(33)))));
-            this.pnlVistaCompartir.Controls.Add(this.pnlVistaCompartirMostarArchivos);
-            this.pnlVistaCompartir.Controls.Add(this.pnlVistaCompartirSeleccionarArchivo);
-            this.pnlVistaCompartir.Controls.Add(this.pnlVistaCompartirGuardarArchivo);
-            this.pnlVistaCompartir.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pnlVistaCompartir.Location = new System.Drawing.Point(0, 0);
-            this.pnlVistaCompartir.Margin = new System.Windows.Forms.Padding(2);
-            this.pnlVistaCompartir.Name = "pnlVistaCompartir";
-            this.pnlVistaCompartir.Size = new System.Drawing.Size(1035, 619);
-            this.pnlVistaCompartir.TabIndex = 16;
-            this.pnlVistaCompartir.Tag = "3";
-            this.pnlVistaCompartir.Visible = false;
-            // 
-            // pnlVistaCompartirMostarArchivos
-            // 
-            this.pnlVistaCompartirMostarArchivos.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.pnlVistaCompartirMostarArchivos.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(31)))), ((int)(((byte)(41)))));
-            this.pnlVistaCompartirMostarArchivos.Controls.Add(this.lblVistaCompartirVerArchivos);
-            this.pnlVistaCompartirMostarArchivos.Controls.Add(this.dgvVistaCompartirArchivos);
-            this.pnlVistaCompartirMostarArchivos.Location = new System.Drawing.Point(37, 156);
-            this.pnlVistaCompartirMostarArchivos.Name = "pnlVistaCompartirMostarArchivos";
-            this.pnlVistaCompartirMostarArchivos.Size = new System.Drawing.Size(960, 436);
-            this.pnlVistaCompartirMostarArchivos.TabIndex = 6;
-            // 
-            // lblVistaCompartirVerArchivos
-            // 
-            this.lblVistaCompartirVerArchivos.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.lblVistaCompartirVerArchivos.BackColor = System.Drawing.Color.Transparent;
-            this.lblVistaCompartirVerArchivos.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F);
-            this.lblVistaCompartirVerArchivos.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(153)))), ((int)(((byte)(153)))), ((int)(((byte)(153)))));
-            this.lblVistaCompartirVerArchivos.Location = new System.Drawing.Point(203, 15);
-            this.lblVistaCompartirVerArchivos.Name = "lblVistaCompartirVerArchivos";
-            this.lblVistaCompartirVerArchivos.Size = new System.Drawing.Size(554, 43);
-            this.lblVistaCompartirVerArchivos.TabIndex = 5;
-            this.lblVistaCompartirVerArchivos.Text = "No hay archivos compartidos";
-            this.lblVistaCompartirVerArchivos.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // dgvVistaCompartirArchivos
-            // 
-            this.dgvVistaCompartirArchivos.AllowUserToAddRows = false;
-            this.dgvVistaCompartirArchivos.AllowUserToDeleteRows = false;
-            this.dgvVistaCompartirArchivos.AllowUserToResizeColumns = false;
-            this.dgvVistaCompartirArchivos.AllowUserToResizeRows = false;
-            this.dgvVistaCompartirArchivos.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.dgvVistaCompartirArchivos.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(31)))), ((int)(((byte)(41)))));
-            this.dgvVistaCompartirArchivos.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.dgvVistaCompartirArchivos.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None;
-            this.dgvVistaCompartirArchivos.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
-            this.dgvVistaCompartirArchivos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvVistaCompartirArchivos.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.nombre,
-            this.tamaño,
-            this.descripcion,
-            this.activo,
-            this.borrar});
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvVistaCompartirArchivos.DefaultCellStyle = dataGridViewCellStyle2;
-            this.dgvVistaCompartirArchivos.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dgvVistaCompartirArchivos.EnableHeadersVisualStyles = false;
-            this.dgvVistaCompartirArchivos.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(31)))), ((int)(((byte)(41)))));
-            this.dgvVistaCompartirArchivos.Location = new System.Drawing.Point(0, 0);
-            this.dgvVistaCompartirArchivos.MultiSelect = false;
-            this.dgvVistaCompartirArchivos.Name = "dgvVistaCompartirArchivos";
-            this.dgvVistaCompartirArchivos.ReadOnly = true;
-            this.dgvVistaCompartirArchivos.RowHeadersVisible = false;
-            this.dgvVistaCompartirArchivos.Size = new System.Drawing.Size(960, 436);
-            this.dgvVistaCompartirArchivos.TabIndex = 6;
-            this.dgvVistaCompartirArchivos.Tag = "C";
-            this.dgvVistaCompartirArchivos.Visible = false;
-            this.dgvVistaCompartirArchivos.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.ActivoBorrarArchivo);
-            this.dgvVistaCompartirArchivos.CellMouseMove += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.CambiarCursorDGV);
-            // 
-            // nombre
-            // 
-            this.nombre.DataPropertyName = "nombre";
-            this.nombre.HeaderText = "Nombre";
-            this.nombre.Name = "nombre";
-            this.nombre.ReadOnly = true;
-            // 
-            // tamaño
-            // 
-            this.tamaño.DataPropertyName = "tamaño";
-            this.tamaño.HeaderText = "Tamaño";
-            this.tamaño.Name = "tamaño";
-            this.tamaño.ReadOnly = true;
-            // 
-            // descripcion
-            // 
-            this.descripcion.DataPropertyName = "descripcion";
-            this.descripcion.HeaderText = "Descripcion";
-            this.descripcion.Name = "descripcion";
-            this.descripcion.ReadOnly = true;
-            // 
-            // activo
-            // 
-            this.activo.DataPropertyName = "activo";
-            this.activo.HeaderText = "Activo";
-            this.activo.Name = "activo";
-            this.activo.ReadOnly = true;
-            // 
-            // borrar
-            // 
-            this.borrar.DataPropertyName = "borrar";
-            this.borrar.HeaderText = "Borrar";
-            this.borrar.Name = "borrar";
-            this.borrar.ReadOnly = true;
-            // 
-            // pnlVistaCompartirSeleccionarArchivo
-            // 
-            this.pnlVistaCompartirSeleccionarArchivo.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.pnlVistaCompartirSeleccionarArchivo.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(31)))), ((int)(((byte)(41)))));
-            this.pnlVistaCompartirSeleccionarArchivo.Controls.Add(this.lblVistaCompartirSeleccionar);
-            this.pnlVistaCompartirSeleccionarArchivo.Controls.Add(this.pbVistaCompartirSeleccionarArchivo);
-            this.pnlVistaCompartirSeleccionarArchivo.Location = new System.Drawing.Point(37, 26);
-            this.pnlVistaCompartirSeleccionarArchivo.Name = "pnlVistaCompartirSeleccionarArchivo";
-            this.pnlVistaCompartirSeleccionarArchivo.Size = new System.Drawing.Size(960, 100);
-            this.pnlVistaCompartirSeleccionarArchivo.TabIndex = 4;
-            // 
-            // lblVistaCompartirSeleccionar
-            // 
-            this.lblVistaCompartirSeleccionar.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.lblVistaCompartirSeleccionar.BackColor = System.Drawing.Color.Transparent;
-            this.lblVistaCompartirSeleccionar.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.lblVistaCompartirSeleccionar.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblVistaCompartirSeleccionar.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(153)))), ((int)(((byte)(153)))), ((int)(((byte)(153)))));
-            this.lblVistaCompartirSeleccionar.Location = new System.Drawing.Point(245, 62);
-            this.lblVistaCompartirSeleccionar.Name = "lblVistaCompartirSeleccionar";
-            this.lblVistaCompartirSeleccionar.Size = new System.Drawing.Size(470, 25);
-            this.lblVistaCompartirSeleccionar.TabIndex = 2;
-            this.lblVistaCompartirSeleccionar.Text = "Seleccione el archivo que quiera compartir";
-            this.lblVistaCompartirSeleccionar.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.lblVistaCompartirSeleccionar.Click += new System.EventHandler(this.SeleccionarArchivoCompartir);
-            // 
-            // pbVistaCompartirSeleccionarArchivo
-            // 
-            this.pbVistaCompartirSeleccionarArchivo.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.pbVistaCompartirSeleccionarArchivo.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.pbVistaCompartirSeleccionarArchivo.Image = ((System.Drawing.Image)(resources.GetObject("pbVistaCompartirSeleccionarArchivo.Image")));
-            this.pbVistaCompartirSeleccionarArchivo.Location = new System.Drawing.Point(453, 14);
-            this.pbVistaCompartirSeleccionarArchivo.Name = "pbVistaCompartirSeleccionarArchivo";
-            this.pbVistaCompartirSeleccionarArchivo.Size = new System.Drawing.Size(55, 42);
-            this.pbVistaCompartirSeleccionarArchivo.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
-            this.pbVistaCompartirSeleccionarArchivo.TabIndex = 3;
-            this.pbVistaCompartirSeleccionarArchivo.TabStop = false;
-            this.pbVistaCompartirSeleccionarArchivo.Click += new System.EventHandler(this.SeleccionarArchivoCompartir);
-            // 
-            // pnlVistaCompartirGuardarArchivo
-            // 
-            this.pnlVistaCompartirGuardarArchivo.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.pnlVistaCompartirGuardarArchivo.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(31)))), ((int)(((byte)(41)))));
-            this.pnlVistaCompartirGuardarArchivo.Controls.Add(this.tbVistaCompartirDescripcionArchivo);
-            this.pnlVistaCompartirGuardarArchivo.Controls.Add(this.pbVistaCompartirCancelar);
-            this.pnlVistaCompartirGuardarArchivo.Controls.Add(this.pbVistaCompartirArchivo);
-            this.pnlVistaCompartirGuardarArchivo.Controls.Add(this.lblVistaCompartirTamañoArchivo);
-            this.pnlVistaCompartirGuardarArchivo.Controls.Add(this.lblVistaCompartirNombreArchivo);
-            this.pnlVistaCompartirGuardarArchivo.Location = new System.Drawing.Point(37, 26);
-            this.pnlVistaCompartirGuardarArchivo.Name = "pnlVistaCompartirGuardarArchivo";
-            this.pnlVistaCompartirGuardarArchivo.Size = new System.Drawing.Size(960, 100);
-            this.pnlVistaCompartirGuardarArchivo.TabIndex = 1;
-            this.pnlVistaCompartirGuardarArchivo.Visible = false;
-            // 
-            // tbVistaCompartirDescripcionArchivo
-            // 
-            this.tbVistaCompartirDescripcionArchivo.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.tbVistaCompartirDescripcionArchivo.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(1)))), ((int)(((byte)(9)))), ((int)(((byte)(17)))));
-            this.tbVistaCompartirDescripcionArchivo.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
-            this.tbVistaCompartirDescripcionArchivo.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(153)))), ((int)(((byte)(153)))), ((int)(((byte)(153)))));
-            this.tbVistaCompartirDescripcionArchivo.Location = new System.Drawing.Point(449, 9);
-            this.tbVistaCompartirDescripcionArchivo.MaxLength = 128;
-            this.tbVistaCompartirDescripcionArchivo.Multiline = true;
-            this.tbVistaCompartirDescripcionArchivo.Name = "tbVistaCompartirDescripcionArchivo";
-            this.tbVistaCompartirDescripcionArchivo.Size = new System.Drawing.Size(443, 83);
-            this.tbVistaCompartirDescripcionArchivo.TabIndex = 4;
-            this.tbVistaCompartirDescripcionArchivo.Tag = "";
-            this.tbVistaCompartirDescripcionArchivo.Text = "Breve descripcion del archivo.";
-            this.tbVistaCompartirDescripcionArchivo.Click += new System.EventHandler(this.BorrarTB);
-            // 
-            // pbVistaCompartirCancelar
-            // 
-            this.pbVistaCompartirCancelar.Anchor = System.Windows.Forms.AnchorStyles.Right;
-            this.pbVistaCompartirCancelar.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.pbVistaCompartirCancelar.Image = ((System.Drawing.Image)(resources.GetObject("pbVistaCompartirCancelar.Image")));
-            this.pbVistaCompartirCancelar.Location = new System.Drawing.Point(910, 54);
-            this.pbVistaCompartirCancelar.Name = "pbVistaCompartirCancelar";
-            this.pbVistaCompartirCancelar.Size = new System.Drawing.Size(38, 38);
-            this.pbVistaCompartirCancelar.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
-            this.pbVistaCompartirCancelar.TabIndex = 3;
-            this.pbVistaCompartirCancelar.TabStop = false;
-            this.pbVistaCompartirCancelar.Tag = "0";
-            this.pbVistaCompartirCancelar.Click += new System.EventHandler(this.CompartirCancelarArchivo);
-            // 
-            // pbVistaCompartirArchivo
-            // 
-            this.pbVistaCompartirArchivo.Anchor = System.Windows.Forms.AnchorStyles.Right;
-            this.pbVistaCompartirArchivo.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.pbVistaCompartirArchivo.Image = ((System.Drawing.Image)(resources.GetObject("pbVistaCompartirArchivo.Image")));
-            this.pbVistaCompartirArchivo.Location = new System.Drawing.Point(910, 9);
-            this.pbVistaCompartirArchivo.Name = "pbVistaCompartirArchivo";
-            this.pbVistaCompartirArchivo.Size = new System.Drawing.Size(38, 38);
-            this.pbVistaCompartirArchivo.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
-            this.pbVistaCompartirArchivo.TabIndex = 3;
-            this.pbVistaCompartirArchivo.TabStop = false;
-            this.pbVistaCompartirArchivo.Tag = "1";
-            this.pbVistaCompartirArchivo.Click += new System.EventHandler(this.CompartirCancelarArchivo);
-            // 
-            // lblVistaCompartirTamañoArchivo
-            // 
-            this.lblVistaCompartirTamañoArchivo.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.lblVistaCompartirTamañoArchivo.BackColor = System.Drawing.Color.Transparent;
-            this.lblVistaCompartirTamañoArchivo.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblVistaCompartirTamañoArchivo.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(153)))), ((int)(((byte)(153)))), ((int)(((byte)(153)))));
-            this.lblVistaCompartirTamañoArchivo.Location = new System.Drawing.Point(161, 56);
-            this.lblVistaCompartirTamañoArchivo.Name = "lblVistaCompartirTamañoArchivo";
-            this.lblVistaCompartirTamañoArchivo.Size = new System.Drawing.Size(120, 34);
-            this.lblVistaCompartirTamañoArchivo.TabIndex = 2;
-            this.lblVistaCompartirTamañoArchivo.Text = "Tamaño";
-            this.lblVistaCompartirTamañoArchivo.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // lblVistaCompartirNombreArchivo
-            // 
-            this.lblVistaCompartirNombreArchivo.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.lblVistaCompartirNombreArchivo.BackColor = System.Drawing.Color.Transparent;
-            this.lblVistaCompartirNombreArchivo.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblVistaCompartirNombreArchivo.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(153)))), ((int)(((byte)(153)))), ((int)(((byte)(153)))));
-            this.lblVistaCompartirNombreArchivo.Location = new System.Drawing.Point(12, 11);
-            this.lblVistaCompartirNombreArchivo.Name = "lblVistaCompartirNombreArchivo";
-            this.lblVistaCompartirNombreArchivo.Size = new System.Drawing.Size(419, 34);
-            this.lblVistaCompartirNombreArchivo.TabIndex = 2;
-            this.lblVistaCompartirNombreArchivo.Text = "Nombre";
-            this.lblVistaCompartirNombreArchivo.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // pnlVistaSolicitar
-            // 
-            this.pnlVistaSolicitar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(13)))), ((int)(((byte)(23)))), ((int)(((byte)(33)))));
-            this.pnlVistaSolicitar.Controls.Add(this.pnlVistaSolicitarVerSolicitudes);
-            this.pnlVistaSolicitar.Controls.Add(this.pnlVistaSolicitarCompartirSolicitud);
-            this.pnlVistaSolicitar.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pnlVistaSolicitar.Location = new System.Drawing.Point(0, 0);
-            this.pnlVistaSolicitar.Margin = new System.Windows.Forms.Padding(2);
-            this.pnlVistaSolicitar.Name = "pnlVistaSolicitar";
-            this.pnlVistaSolicitar.Size = new System.Drawing.Size(1035, 619);
-            this.pnlVistaSolicitar.TabIndex = 15;
-            this.pnlVistaSolicitar.Tag = "4";
-            this.pnlVistaSolicitar.Visible = false;
-            // 
-            // pnlVistaSolicitarVerSolicitudes
-            // 
-            this.pnlVistaSolicitarVerSolicitudes.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.pnlVistaSolicitarVerSolicitudes.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(31)))), ((int)(((byte)(41)))));
-            this.pnlVistaSolicitarVerSolicitudes.Controls.Add(this.lblVistaSolicitarNuevasSolicitudes);
-            this.pnlVistaSolicitarVerSolicitudes.Controls.Add(this.dgvVistaSolicitar);
-            this.pnlVistaSolicitarVerSolicitudes.Location = new System.Drawing.Point(37, 156);
-            this.pnlVistaSolicitarVerSolicitudes.Name = "pnlVistaSolicitarVerSolicitudes";
-            this.pnlVistaSolicitarVerSolicitudes.Size = new System.Drawing.Size(960, 436);
-            this.pnlVistaSolicitarVerSolicitudes.TabIndex = 7;
-            // 
-            // lblVistaSolicitarNuevasSolicitudes
-            // 
-            this.lblVistaSolicitarNuevasSolicitudes.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.lblVistaSolicitarNuevasSolicitudes.BackColor = System.Drawing.Color.Transparent;
-            this.lblVistaSolicitarNuevasSolicitudes.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F);
-            this.lblVistaSolicitarNuevasSolicitudes.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(153)))), ((int)(((byte)(153)))), ((int)(((byte)(153)))));
-            this.lblVistaSolicitarNuevasSolicitudes.Location = new System.Drawing.Point(203, 15);
-            this.lblVistaSolicitarNuevasSolicitudes.Name = "lblVistaSolicitarNuevasSolicitudes";
-            this.lblVistaSolicitarNuevasSolicitudes.Size = new System.Drawing.Size(554, 43);
-            this.lblVistaSolicitarNuevasSolicitudes.TabIndex = 5;
-            this.lblVistaSolicitarNuevasSolicitudes.Text = "No hay nuevas solicitudes";
-            this.lblVistaSolicitarNuevasSolicitudes.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // dgvVistaSolicitar
-            // 
-            this.dgvVistaSolicitar.AllowUserToAddRows = false;
-            this.dgvVistaSolicitar.AllowUserToDeleteRows = false;
-            this.dgvVistaSolicitar.AllowUserToResizeColumns = false;
-            this.dgvVistaSolicitar.AllowUserToResizeRows = false;
-            this.dgvVistaSolicitar.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.dgvVistaSolicitar.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(31)))), ((int)(((byte)(41)))));
-            this.dgvVistaSolicitar.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.dgvVistaSolicitar.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None;
-            this.dgvVistaSolicitar.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
-            this.dgvVistaSolicitar.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvVistaSolicitar.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.dataGridViewTextBoxColumn1,
-            this.dataGridViewTextBoxColumn3,
-            this.dataGridViewTextBoxColumn4,
-            this.dataGridViewTextBoxColumn5});
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvVistaSolicitar.DefaultCellStyle = dataGridViewCellStyle3;
-            this.dgvVistaSolicitar.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dgvVistaSolicitar.EnableHeadersVisualStyles = false;
-            this.dgvVistaSolicitar.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(31)))), ((int)(((byte)(41)))));
-            this.dgvVistaSolicitar.Location = new System.Drawing.Point(0, 0);
-            this.dgvVistaSolicitar.MultiSelect = false;
-            this.dgvVistaSolicitar.Name = "dgvVistaSolicitar";
-            this.dgvVistaSolicitar.ReadOnly = true;
-            this.dgvVistaSolicitar.RowHeadersVisible = false;
-            this.dgvVistaSolicitar.Size = new System.Drawing.Size(960, 436);
-            this.dgvVistaSolicitar.TabIndex = 6;
-            this.dgvVistaSolicitar.Tag = "S";
-            this.dgvVistaSolicitar.Visible = false;
-            this.dgvVistaSolicitar.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.CompartirBorrarSolicitud);
-            this.dgvVistaSolicitar.CellMouseMove += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.CambiarCursorDGV);
-            // 
-            // dataGridViewTextBoxColumn1
-            // 
-            this.dataGridViewTextBoxColumn1.DataPropertyName = "nombre";
-            this.dataGridViewTextBoxColumn1.HeaderText = "Usuario";
-            this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
-            this.dataGridViewTextBoxColumn1.ReadOnly = true;
-            // 
-            // dataGridViewTextBoxColumn3
-            // 
-            this.dataGridViewTextBoxColumn3.DataPropertyName = "descripcion";
-            this.dataGridViewTextBoxColumn3.HeaderText = "Descripcion";
-            this.dataGridViewTextBoxColumn3.Name = "dataGridViewTextBoxColumn3";
-            this.dataGridViewTextBoxColumn3.ReadOnly = true;
-            // 
-            // dataGridViewTextBoxColumn4
-            // 
-            this.dataGridViewTextBoxColumn4.DataPropertyName = "activo";
-            this.dataGridViewTextBoxColumn4.HeaderText = "Compartir";
-            this.dataGridViewTextBoxColumn4.Name = "dataGridViewTextBoxColumn4";
-            this.dataGridViewTextBoxColumn4.ReadOnly = true;
-            // 
-            // dataGridViewTextBoxColumn5
-            // 
-            this.dataGridViewTextBoxColumn5.DataPropertyName = "borrar";
-            this.dataGridViewTextBoxColumn5.HeaderText = "Borrar";
-            this.dataGridViewTextBoxColumn5.Name = "dataGridViewTextBoxColumn5";
-            this.dataGridViewTextBoxColumn5.ReadOnly = true;
-            // 
-            // pnlVistaSolicitarCompartirSolicitud
-            // 
-            this.pnlVistaSolicitarCompartirSolicitud.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.pnlVistaSolicitarCompartirSolicitud.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(31)))), ((int)(((byte)(41)))));
-            this.pnlVistaSolicitarCompartirSolicitud.Controls.Add(this.lblVistaSolicitarInformacion);
-            this.pnlVistaSolicitarCompartirSolicitud.Controls.Add(this.tbVistaSolicitarDescripcion);
-            this.pnlVistaSolicitarCompartirSolicitud.Controls.Add(this.pictureBox2);
-            this.pnlVistaSolicitarCompartirSolicitud.Location = new System.Drawing.Point(37, 26);
-            this.pnlVistaSolicitarCompartirSolicitud.Name = "pnlVistaSolicitarCompartirSolicitud";
-            this.pnlVistaSolicitarCompartirSolicitud.Size = new System.Drawing.Size(960, 100);
-            this.pnlVistaSolicitarCompartirSolicitud.TabIndex = 2;
-            // 
-            // lblVistaSolicitarInformacion
-            // 
-            this.lblVistaSolicitarInformacion.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.lblVistaSolicitarInformacion.BackColor = System.Drawing.Color.Transparent;
-            this.lblVistaSolicitarInformacion.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F);
-            this.lblVistaSolicitarInformacion.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(153)))), ((int)(((byte)(153)))), ((int)(((byte)(153)))));
-            this.lblVistaSolicitarInformacion.Location = new System.Drawing.Point(203, 7);
-            this.lblVistaSolicitarInformacion.Name = "lblVistaSolicitarInformacion";
-            this.lblVistaSolicitarInformacion.Size = new System.Drawing.Size(554, 33);
-            this.lblVistaSolicitarInformacion.TabIndex = 6;
-            this.lblVistaSolicitarInformacion.Text = "¡Solicita el archivo que necesites!";
-            this.lblVistaSolicitarInformacion.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // tbVistaSolicitarDescripcion
-            // 
-            this.tbVistaSolicitarDescripcion.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.tbVistaSolicitarDescripcion.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(1)))), ((int)(((byte)(9)))), ((int)(((byte)(17)))));
-            this.tbVistaSolicitarDescripcion.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
-            this.tbVistaSolicitarDescripcion.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(153)))), ((int)(((byte)(153)))), ((int)(((byte)(153)))));
-            this.tbVistaSolicitarDescripcion.Location = new System.Drawing.Point(21, 44);
-            this.tbVistaSolicitarDescripcion.MaxLength = 128;
-            this.tbVistaSolicitarDescripcion.Multiline = true;
-            this.tbVistaSolicitarDescripcion.Name = "tbVistaSolicitarDescripcion";
-            this.tbVistaSolicitarDescripcion.Size = new System.Drawing.Size(867, 50);
-            this.tbVistaSolicitarDescripcion.TabIndex = 4;
-            this.tbVistaSolicitarDescripcion.Tag = "";
-            this.tbVistaSolicitarDescripcion.Text = "Breve descripcion del archivo.";
-            this.tbVistaSolicitarDescripcion.Click += new System.EventHandler(this.BorrarTB);
-            // 
-            // pictureBox2
-            // 
-            this.pictureBox2.Anchor = System.Windows.Forms.AnchorStyles.Right;
-            this.pictureBox2.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.pictureBox2.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox2.Image")));
-            this.pictureBox2.Location = new System.Drawing.Point(902, 50);
-            this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(38, 38);
-            this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
-            this.pictureBox2.TabIndex = 3;
-            this.pictureBox2.TabStop = false;
-            this.pictureBox2.Tag = "1";
-            this.pictureBox2.Click += new System.EventHandler(this.SolicitarArchivo);
-            // 
             // pnlVistaConfiguracionGeneral
             // 
             this.pnlVistaConfiguracionGeneral.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(13)))), ((int)(((byte)(23)))), ((int)(((byte)(33)))));
+            this.pnlVistaConfiguracionGeneral.Controls.Add(this.lblVistaConfiguracionBitNoders);
+            this.pnlVistaConfiguracionGeneral.Controls.Add(this.lblVistaConfiguracionMiIP);
+            this.pnlVistaConfiguracionGeneral.Controls.Add(this.pbVistaConfiguracionReconectar);
+            this.pnlVistaConfiguracionGeneral.Controls.Add(this.tbVistaConfiguracionIP);
+            this.pnlVistaConfiguracionGeneral.Controls.Add(this.lblVistaConfiguracionIP);
             this.pnlVistaConfiguracionGeneral.Controls.Add(this.tbVistaConfiguracionNombre);
             this.pnlVistaConfiguracionGeneral.Controls.Add(this.lblVistaConfiguracionNombre);
             this.pnlVistaConfiguracionGeneral.Controls.Add(this.bnudVistaConfiguracionDescargasSimultaneas);
@@ -861,16 +367,80 @@
             this.pnlVistaConfiguracionGeneral.Tag = "5";
             this.pnlVistaConfiguracionGeneral.Visible = false;
             // 
+            // lblVistaConfiguracionBitNoders
+            // 
+            this.lblVistaConfiguracionBitNoders.Font = new System.Drawing.Font("Roboto Lt", 14F);
+            this.lblVistaConfiguracionBitNoders.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(42)))), ((int)(((byte)(42)))));
+            this.lblVistaConfiguracionBitNoders.Location = new System.Drawing.Point(415, 592);
+            this.lblVistaConfiguracionBitNoders.Name = "lblVistaConfiguracionBitNoders";
+            this.lblVistaConfiguracionBitNoders.Size = new System.Drawing.Size(205, 23);
+            this.lblVistaConfiguracionBitNoders.TabIndex = 16;
+            this.lblVistaConfiguracionBitNoders.Text = "X bitNoders activos";
+            this.lblVistaConfiguracionBitNoders.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // lblVistaConfiguracionMiIP
+            // 
+            this.lblVistaConfiguracionMiIP.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.lblVistaConfiguracionMiIP.Font = new System.Drawing.Font("Roboto Lt", 14F);
+            this.lblVistaConfiguracionMiIP.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(153)))), ((int)(((byte)(153)))), ((int)(((byte)(153)))));
+            this.lblVistaConfiguracionMiIP.Location = new System.Drawing.Point(683, 584);
+            this.lblVistaConfiguracionMiIP.Name = "lblVistaConfiguracionMiIP";
+            this.lblVistaConfiguracionMiIP.Size = new System.Drawing.Size(220, 23);
+            this.lblVistaConfiguracionMiIP.TabIndex = 15;
+            this.lblVistaConfiguracionMiIP.Text = "Mi IP: \"255.255.255.255\"";
+            this.lblVistaConfiguracionMiIP.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lblVistaConfiguracionMiIP.Click += new System.EventHandler(this.IPaPortapapeles);
+            // 
+            // pbVistaConfiguracionReconectar
+            // 
+            this.pbVistaConfiguracionReconectar.BackColor = System.Drawing.Color.Transparent;
+            this.pbVistaConfiguracionReconectar.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.pbVistaConfiguracionReconectar.Image = ((System.Drawing.Image)(resources.GetObject("pbVistaConfiguracionReconectar.Image")));
+            this.pbVistaConfiguracionReconectar.Location = new System.Drawing.Point(374, 585);
+            this.pbVistaConfiguracionReconectar.Name = "pbVistaConfiguracionReconectar";
+            this.pbVistaConfiguracionReconectar.Size = new System.Drawing.Size(20, 20);
+            this.pbVistaConfiguracionReconectar.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
+            this.pbVistaConfiguracionReconectar.TabIndex = 14;
+            this.pbVistaConfiguracionReconectar.TabStop = false;
+            this.ttAyuda.SetToolTip(this.pbVistaConfiguracionReconectar, "Reconectar");
+            this.pbVistaConfiguracionReconectar.Click += new System.EventHandler(this.Reconectar);
+            // 
+            // tbVistaConfiguracionIP
+            // 
+            this.tbVistaConfiguracionIP.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(7)))), ((int)(((byte)(17)))), ((int)(((byte)(27)))));
+            this.tbVistaConfiguracionIP.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.tbVistaConfiguracionIP.Font = new System.Drawing.Font("Roboto Lt", 12F);
+            this.tbVistaConfiguracionIP.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(153)))), ((int)(((byte)(153)))), ((int)(((byte)(153)))));
+            this.tbVistaConfiguracionIP.Location = new System.Drawing.Point(241, 585);
+            this.tbVistaConfiguracionIP.MaxLength = 15;
+            this.tbVistaConfiguracionIP.Name = "tbVistaConfiguracionIP";
+            this.tbVistaConfiguracionIP.Size = new System.Drawing.Size(127, 20);
+            this.tbVistaConfiguracionIP.TabIndex = 13;
+            this.tbVistaConfiguracionIP.Tag = "14";
+            this.tbVistaConfiguracionIP.Text = "255.255.255.255";
+            this.tbVistaConfiguracionIP.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // lblVistaConfiguracionIP
+            // 
+            this.lblVistaConfiguracionIP.AutoSize = true;
+            this.lblVistaConfiguracionIP.Font = new System.Drawing.Font("Roboto Lt", 14F);
+            this.lblVistaConfiguracionIP.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(153)))), ((int)(((byte)(153)))), ((int)(((byte)(153)))));
+            this.lblVistaConfiguracionIP.Location = new System.Drawing.Point(89, 584);
+            this.lblVistaConfiguracionIP.Name = "lblVistaConfiguracionIP";
+            this.lblVistaConfiguracionIP.Size = new System.Drawing.Size(146, 23);
+            this.lblVistaConfiguracionIP.TabIndex = 12;
+            this.lblVistaConfiguracionIP.Text = "IP de coneccion";
+            // 
             // tbVistaConfiguracionNombre
             // 
             this.tbVistaConfiguracionNombre.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(7)))), ((int)(((byte)(17)))), ((int)(((byte)(27)))));
             this.tbVistaConfiguracionNombre.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.tbVistaConfiguracionNombre.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
+            this.tbVistaConfiguracionNombre.Font = new System.Drawing.Font("Roboto Lt", 12F);
             this.tbVistaConfiguracionNombre.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(153)))), ((int)(((byte)(153)))), ((int)(((byte)(153)))));
             this.tbVistaConfiguracionNombre.Location = new System.Drawing.Point(751, 151);
             this.tbVistaConfiguracionNombre.MaxLength = 12;
             this.tbVistaConfiguracionNombre.Name = "tbVistaConfiguracionNombre";
-            this.tbVistaConfiguracionNombre.Size = new System.Drawing.Size(127, 23);
+            this.tbVistaConfiguracionNombre.Size = new System.Drawing.Size(127, 20);
             this.tbVistaConfiguracionNombre.TabIndex = 9;
             this.tbVistaConfiguracionNombre.Tag = "14";
             this.tbVistaConfiguracionNombre.Text = "NOMBRE";
@@ -882,33 +452,75 @@
             // 
             this.lblVistaConfiguracionNombre.AutoSize = true;
             this.lblVistaConfiguracionNombre.BackColor = System.Drawing.Color.Transparent;
-            this.lblVistaConfiguracionNombre.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblVistaConfiguracionNombre.Font = new System.Drawing.Font("Roboto Lt", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblVistaConfiguracionNombre.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(153)))), ((int)(((byte)(153)))), ((int)(((byte)(153)))));
             this.lblVistaConfiguracionNombre.Location = new System.Drawing.Point(658, 150);
             this.lblVistaConfiguracionNombre.Name = "lblVistaConfiguracionNombre";
-            this.lblVistaConfiguracionNombre.Size = new System.Drawing.Size(101, 29);
+            this.lblVistaConfiguracionNombre.Size = new System.Drawing.Size(78, 23);
             this.lblVistaConfiguracionNombre.TabIndex = 8;
             this.lblVistaConfiguracionNombre.Text = "Nombre";
+            // 
+            // bnudVistaConfiguracionDescargasSimultaneas
+            // 
+            this.bnudVistaConfiguracionDescargasSimultaneas.BackColor = System.Drawing.Color.Transparent;
+            this.bnudVistaConfiguracionDescargasSimultaneas.Location = new System.Drawing.Point(848, 479);
+            this.bnudVistaConfiguracionDescargasSimultaneas.maxValor = 5;
+            this.bnudVistaConfiguracionDescargasSimultaneas.minValor = 0;
+            this.bnudVistaConfiguracionDescargasSimultaneas.Name = "bnudVistaConfiguracionDescargasSimultaneas";
+            this.bnudVistaConfiguracionDescargasSimultaneas.Size = new System.Drawing.Size(65, 35);
+            this.bnudVistaConfiguracionDescargasSimultaneas.TabIndex = 6;
+            this.bnudVistaConfiguracionDescargasSimultaneas.Tag = "33";
+            this.bnudVistaConfiguracionDescargasSimultaneas.UpDown = 1;
+            this.bnudVistaConfiguracionDescargasSimultaneas.valor = 0;
+            this.bnudVistaConfiguracionDescargasSimultaneas.CambioDeValor += new System.EventHandler(this.CambiarConfiguracion);
+            // 
+            // bnudVistaConfiguracionLimiteBajada
+            // 
+            this.bnudVistaConfiguracionLimiteBajada.BackColor = System.Drawing.Color.Transparent;
+            this.bnudVistaConfiguracionLimiteBajada.Location = new System.Drawing.Point(251, 532);
+            this.bnudVistaConfiguracionLimiteBajada.maxValor = 9999;
+            this.bnudVistaConfiguracionLimiteBajada.minValor = 0;
+            this.bnudVistaConfiguracionLimiteBajada.Name = "bnudVistaConfiguracionLimiteBajada";
+            this.bnudVistaConfiguracionLimiteBajada.Size = new System.Drawing.Size(65, 35);
+            this.bnudVistaConfiguracionLimiteBajada.TabIndex = 6;
+            this.bnudVistaConfiguracionLimiteBajada.Tag = "31";
+            this.bnudVistaConfiguracionLimiteBajada.UpDown = 5;
+            this.bnudVistaConfiguracionLimiteBajada.valor = 0;
+            this.bnudVistaConfiguracionLimiteBajada.CambioDeValor += new System.EventHandler(this.CambiarConfiguracion);
+            // 
+            // bnudVistaConfiguracionLimiteSubida
+            // 
+            this.bnudVistaConfiguracionLimiteSubida.BackColor = System.Drawing.Color.Transparent;
+            this.bnudVistaConfiguracionLimiteSubida.Location = new System.Drawing.Point(251, 479);
+            this.bnudVistaConfiguracionLimiteSubida.maxValor = 9999;
+            this.bnudVistaConfiguracionLimiteSubida.minValor = 0;
+            this.bnudVistaConfiguracionLimiteSubida.Name = "bnudVistaConfiguracionLimiteSubida";
+            this.bnudVistaConfiguracionLimiteSubida.Size = new System.Drawing.Size(65, 35);
+            this.bnudVistaConfiguracionLimiteSubida.TabIndex = 6;
+            this.bnudVistaConfiguracionLimiteSubida.Tag = "32";
+            this.bnudVistaConfiguracionLimiteSubida.UpDown = 5;
+            this.bnudVistaConfiguracionLimiteSubida.valor = 0;
+            this.bnudVistaConfiguracionLimiteSubida.CambioDeValor += new System.EventHandler(this.CambiarConfiguracion);
             // 
             // lblVistaConfiguracionEfectoBotones
             // 
             this.lblVistaConfiguracionEfectoBotones.AutoSize = true;
-            this.lblVistaConfiguracionEfectoBotones.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F);
+            this.lblVistaConfiguracionEfectoBotones.Font = new System.Drawing.Font("Roboto Lt", 14F);
             this.lblVistaConfiguracionEfectoBotones.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(153)))), ((int)(((byte)(153)))), ((int)(((byte)(153)))));
             this.lblVistaConfiguracionEfectoBotones.Location = new System.Drawing.Point(136, 323);
             this.lblVistaConfiguracionEfectoBotones.Name = "lblVistaConfiguracionEfectoBotones";
-            this.lblVistaConfiguracionEfectoBotones.Size = new System.Drawing.Size(317, 29);
+            this.lblVistaConfiguracionEfectoBotones.Size = new System.Drawing.Size(252, 23);
             this.lblVistaConfiguracionEfectoBotones.TabIndex = 1;
             this.lblVistaConfiguracionEfectoBotones.Text = "Efecto transision de botones";
             // 
             // lblVistaConfiguracionMovimientoMenu
             // 
             this.lblVistaConfiguracionMovimientoMenu.AutoSize = true;
-            this.lblVistaConfiguracionMovimientoMenu.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F);
+            this.lblVistaConfiguracionMovimientoMenu.Font = new System.Drawing.Font("Roboto Lt", 14F);
             this.lblVistaConfiguracionMovimientoMenu.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(153)))), ((int)(((byte)(153)))), ((int)(((byte)(153)))));
             this.lblVistaConfiguracionMovimientoMenu.Location = new System.Drawing.Point(136, 369);
             this.lblVistaConfiguracionMovimientoMenu.Name = "lblVistaConfiguracionMovimientoMenu";
-            this.lblVistaConfiguracionMovimientoMenu.Size = new System.Drawing.Size(296, 29);
+            this.lblVistaConfiguracionMovimientoMenu.Size = new System.Drawing.Size(233, 23);
             this.lblVistaConfiguracionMovimientoMenu.TabIndex = 1;
             this.lblVistaConfiguracionMovimientoMenu.Text = "Efecto deslizante de menu";
             // 
@@ -926,7 +538,7 @@
             // lblVistaConfiguracionInterfaz
             // 
             this.lblVistaConfiguracionInterfaz.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.lblVistaConfiguracionInterfaz.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F);
+            this.lblVistaConfiguracionInterfaz.Font = new System.Drawing.Font("Roboto Lt", 24F);
             this.lblVistaConfiguracionInterfaz.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(153)))), ((int)(((byte)(153)))), ((int)(((byte)(153)))));
             this.lblVistaConfiguracionInterfaz.Location = new System.Drawing.Point(6, 6);
             this.lblVistaConfiguracionInterfaz.Name = "lblVistaConfiguracionInterfaz";
@@ -938,11 +550,11 @@
             // lblVistaConfiguracionEfectoFade
             // 
             this.lblVistaConfiguracionEfectoFade.AutoSize = true;
-            this.lblVistaConfiguracionEfectoFade.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F);
+            this.lblVistaConfiguracionEfectoFade.Font = new System.Drawing.Font("Roboto Lt", 14F);
             this.lblVistaConfiguracionEfectoFade.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(153)))), ((int)(((byte)(153)))), ((int)(((byte)(153)))));
             this.lblVistaConfiguracionEfectoFade.Location = new System.Drawing.Point(136, 277);
             this.lblVistaConfiguracionEfectoFade.Name = "lblVistaConfiguracionEfectoFade";
-            this.lblVistaConfiguracionEfectoFade.Size = new System.Drawing.Size(355, 29);
+            this.lblVistaConfiguracionEfectoFade.Size = new System.Drawing.Size(281, 23);
             this.lblVistaConfiguracionEfectoFade.TabIndex = 1;
             this.lblVistaConfiguracionEfectoFade.Text = "Efecto transparencia de sistema";
             // 
@@ -960,7 +572,7 @@
             // lblVistaConfiguracionTranseferecias
             // 
             this.lblVistaConfiguracionTranseferecias.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.lblVistaConfiguracionTranseferecias.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F);
+            this.lblVistaConfiguracionTranseferecias.Font = new System.Drawing.Font("Roboto Lt", 24F);
             this.lblVistaConfiguracionTranseferecias.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(153)))), ((int)(((byte)(153)))), ((int)(((byte)(153)))));
             this.lblVistaConfiguracionTranseferecias.Location = new System.Drawing.Point(6, 6);
             this.lblVistaConfiguracionTranseferecias.Name = "lblVistaConfiguracionTranseferecias";
@@ -968,6 +580,43 @@
             this.lblVistaConfiguracionTranseferecias.TabIndex = 1;
             this.lblVistaConfiguracionTranseferecias.Text = "Transferencias";
             this.lblVistaConfiguracionTranseferecias.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // bsVistaConfiguracionEfectoFade
+            // 
+            this.bsVistaConfiguracionEfectoFade.Activo = true;
+            this.bsVistaConfiguracionEfectoFade.BackColor = System.Drawing.Color.Transparent;
+            this.bsVistaConfiguracionEfectoFade.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.bsVistaConfiguracionEfectoFade.Location = new System.Drawing.Point(94, 279);
+            this.bsVistaConfiguracionEfectoFade.Name = "bsVistaConfiguracionEfectoFade";
+            this.bsVistaConfiguracionEfectoFade.Size = new System.Drawing.Size(36, 18);
+            this.bsVistaConfiguracionEfectoFade.TabIndex = 2;
+            this.bsVistaConfiguracionEfectoFade.Tag = "21";
+            this.bsVistaConfiguracionEfectoFade.Clickaso += new System.EventHandler(this.CambiarConfiguracion);
+            // 
+            // bsVistaConfiguracionIniciarConWindows
+            // 
+            this.bsVistaConfiguracionIniciarConWindows.Activo = false;
+            this.bsVistaConfiguracionIniciarConWindows.BackColor = System.Drawing.Color.Transparent;
+            this.bsVistaConfiguracionIniciarConWindows.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.bsVistaConfiguracionIniciarConWindows.Location = new System.Drawing.Point(126, 90);
+            this.bsVistaConfiguracionIniciarConWindows.Name = "bsVistaConfiguracionIniciarConWindows";
+            this.bsVistaConfiguracionIniciarConWindows.Size = new System.Drawing.Size(36, 18);
+            this.bsVistaConfiguracionIniciarConWindows.TabIndex = 2;
+            this.bsVistaConfiguracionIniciarConWindows.Tag = "11";
+            this.bsVistaConfiguracionIniciarConWindows.Clickaso += new System.EventHandler(this.CambiarConfiguracion);
+            this.bsVistaConfiguracionIniciarConWindows.Click += new System.EventHandler(this.CambiarConfiguracion);
+            // 
+            // bsVistaConfiguracionEfectoMenu
+            // 
+            this.bsVistaConfiguracionEfectoMenu.Activo = true;
+            this.bsVistaConfiguracionEfectoMenu.BackColor = System.Drawing.Color.Transparent;
+            this.bsVistaConfiguracionEfectoMenu.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.bsVistaConfiguracionEfectoMenu.Location = new System.Drawing.Point(94, 371);
+            this.bsVistaConfiguracionEfectoMenu.Name = "bsVistaConfiguracionEfectoMenu";
+            this.bsVistaConfiguracionEfectoMenu.Size = new System.Drawing.Size(36, 18);
+            this.bsVistaConfiguracionEfectoMenu.TabIndex = 2;
+            this.bsVistaConfiguracionEfectoMenu.Tag = "23";
+            this.bsVistaConfiguracionEfectoMenu.Clickaso += new System.EventHandler(this.CambiarConfiguracion);
             // 
             // pnlVistaComfiguracionGeneral
             // 
@@ -983,7 +632,7 @@
             // lblVistaConfiguracionGeneral
             // 
             this.lblVistaConfiguracionGeneral.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.lblVistaConfiguracionGeneral.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F);
+            this.lblVistaConfiguracionGeneral.Font = new System.Drawing.Font("Roboto Lt", 24F);
             this.lblVistaConfiguracionGeneral.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(153)))), ((int)(((byte)(153)))), ((int)(((byte)(153)))));
             this.lblVistaConfiguracionGeneral.Location = new System.Drawing.Point(6, 6);
             this.lblVistaConfiguracionGeneral.Name = "lblVistaConfiguracionGeneral";
@@ -992,12 +641,36 @@
             this.lblVistaConfiguracionGeneral.Text = "General";
             this.lblVistaConfiguracionGeneral.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
+            // bsVistaConfiguracionEfectoBotones
+            // 
+            this.bsVistaConfiguracionEfectoBotones.Activo = true;
+            this.bsVistaConfiguracionEfectoBotones.BackColor = System.Drawing.Color.Transparent;
+            this.bsVistaConfiguracionEfectoBotones.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.bsVistaConfiguracionEfectoBotones.Location = new System.Drawing.Point(94, 325);
+            this.bsVistaConfiguracionEfectoBotones.Name = "bsVistaConfiguracionEfectoBotones";
+            this.bsVistaConfiguracionEfectoBotones.Size = new System.Drawing.Size(36, 18);
+            this.bsVistaConfiguracionEfectoBotones.TabIndex = 2;
+            this.bsVistaConfiguracionEfectoBotones.Tag = "22";
+            this.bsVistaConfiguracionEfectoBotones.Clickaso += new System.EventHandler(this.CambiarConfiguracion);
+            // 
+            // bsVistaConfiguracionMinimizarBandeja
+            // 
+            this.bsVistaConfiguracionMinimizarBandeja.Activo = false;
+            this.bsVistaConfiguracionMinimizarBandeja.BackColor = System.Drawing.Color.Transparent;
+            this.bsVistaConfiguracionMinimizarBandeja.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.bsVistaConfiguracionMinimizarBandeja.Location = new System.Drawing.Point(126, 148);
+            this.bsVistaConfiguracionMinimizarBandeja.Name = "bsVistaConfiguracionMinimizarBandeja";
+            this.bsVistaConfiguracionMinimizarBandeja.Size = new System.Drawing.Size(36, 18);
+            this.bsVistaConfiguracionMinimizarBandeja.TabIndex = 2;
+            this.bsVistaConfiguracionMinimizarBandeja.Tag = "12";
+            this.bsVistaConfiguracionMinimizarBandeja.Clickaso += new System.EventHandler(this.CambiarConfiguracion);
+            // 
             // pbVistaConfiguracionCarpetaDescarga
             // 
             this.pbVistaConfiguracionCarpetaDescarga.BackColor = System.Drawing.Color.Transparent;
             this.pbVistaConfiguracionCarpetaDescarga.Cursor = System.Windows.Forms.Cursors.Hand;
             this.pbVistaConfiguracionCarpetaDescarga.Image = ((System.Drawing.Image)(resources.GetObject("pbVistaConfiguracionCarpetaDescarga.Image")));
-            this.pbVistaConfiguracionCarpetaDescarga.Location = new System.Drawing.Point(848, 547);
+            this.pbVistaConfiguracionCarpetaDescarga.Location = new System.Drawing.Point(848, 528);
             this.pbVistaConfiguracionCarpetaDescarga.Name = "pbVistaConfiguracionCarpetaDescarga";
             this.pbVistaConfiguracionCarpetaDescarga.Size = new System.Drawing.Size(55, 42);
             this.pbVistaConfiguracionCarpetaDescarga.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
@@ -1008,154 +681,178 @@
             // lblVistaConfiguracionMinimizarBanjeda
             // 
             this.lblVistaConfiguracionMinimizarBanjeda.AutoSize = true;
-            this.lblVistaConfiguracionMinimizarBanjeda.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F);
+            this.lblVistaConfiguracionMinimizarBanjeda.Font = new System.Drawing.Font("Roboto Lt", 14F);
             this.lblVistaConfiguracionMinimizarBanjeda.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(153)))), ((int)(((byte)(153)))), ((int)(((byte)(153)))));
             this.lblVistaConfiguracionMinimizarBanjeda.Location = new System.Drawing.Point(167, 146);
             this.lblVistaConfiguracionMinimizarBanjeda.Name = "lblVistaConfiguracionMinimizarBanjeda";
-            this.lblVistaConfiguracionMinimizarBanjeda.Size = new System.Drawing.Size(228, 29);
+            this.lblVistaConfiguracionMinimizarBanjeda.Size = new System.Drawing.Size(178, 23);
             this.lblVistaConfiguracionMinimizarBanjeda.TabIndex = 1;
             this.lblVistaConfiguracionMinimizarBanjeda.Text = "Minimizar a bandeja";
+            // 
+            // bsVistaConfiguracionTema
+            // 
+            this.bsVistaConfiguracionTema.Activo = true;
+            this.bsVistaConfiguracionTema.BackColor = System.Drawing.Color.Transparent;
+            this.bsVistaConfiguracionTema.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.bsVistaConfiguracionTema.Location = new System.Drawing.Point(746, 338);
+            this.bsVistaConfiguracionTema.Name = "bsVistaConfiguracionTema";
+            this.bsVistaConfiguracionTema.Size = new System.Drawing.Size(36, 18);
+            this.bsVistaConfiguracionTema.TabIndex = 2;
+            this.bsVistaConfiguracionTema.Tag = "24";
+            this.bsVistaConfiguracionTema.Clickaso += new System.EventHandler(this.CambiarConfiguracion);
             // 
             // lblVistaConfiguracionIniciarConWindows
             // 
             this.lblVistaConfiguracionIniciarConWindows.AutoSize = true;
-            this.lblVistaConfiguracionIniciarConWindows.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F);
+            this.lblVistaConfiguracionIniciarConWindows.Font = new System.Drawing.Font("Roboto Lt", 14F);
             this.lblVistaConfiguracionIniciarConWindows.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(153)))), ((int)(((byte)(153)))), ((int)(((byte)(153)))));
             this.lblVistaConfiguracionIniciarConWindows.Location = new System.Drawing.Point(167, 88);
             this.lblVistaConfiguracionIniciarConWindows.Name = "lblVistaConfiguracionIniciarConWindows";
-            this.lblVistaConfiguracionIniciarConWindows.Size = new System.Drawing.Size(223, 29);
+            this.lblVistaConfiguracionIniciarConWindows.Size = new System.Drawing.Size(177, 23);
             this.lblVistaConfiguracionIniciarConWindows.TabIndex = 1;
             this.lblVistaConfiguracionIniciarConWindows.Text = "Iniciar con windows";
+            // 
+            // bsVistaConfiguracionLatino
+            // 
+            this.bsVistaConfiguracionLatino.Activo = true;
+            this.bsVistaConfiguracionLatino.BackColor = System.Drawing.Color.Transparent;
+            this.bsVistaConfiguracionLatino.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.bsVistaConfiguracionLatino.Location = new System.Drawing.Point(746, 106);
+            this.bsVistaConfiguracionLatino.Name = "bsVistaConfiguracionLatino";
+            this.bsVistaConfiguracionLatino.Size = new System.Drawing.Size(36, 18);
+            this.bsVistaConfiguracionLatino.TabIndex = 2;
+            this.bsVistaConfiguracionLatino.Tag = "13";
+            this.bsVistaConfiguracionLatino.Clickaso += new System.EventHandler(this.CambiarConfiguracion);
             // 
             // lblVistaConfiguracionTema
             // 
             this.lblVistaConfiguracionTema.AutoSize = true;
-            this.lblVistaConfiguracionTema.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F);
+            this.lblVistaConfiguracionTema.Font = new System.Drawing.Font("Roboto Lt", 14F);
             this.lblVistaConfiguracionTema.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(153)))), ((int)(((byte)(153)))), ((int)(((byte)(153)))));
             this.lblVistaConfiguracionTema.Location = new System.Drawing.Point(735, 309);
             this.lblVistaConfiguracionTema.Name = "lblVistaConfiguracionTema";
-            this.lblVistaConfiguracionTema.Size = new System.Drawing.Size(76, 29);
+            this.lblVistaConfiguracionTema.Size = new System.Drawing.Size(58, 23);
             this.lblVistaConfiguracionTema.TabIndex = 1;
             this.lblVistaConfiguracionTema.Text = "Tema";
             // 
             // lblVistaConfiguracionRutaDescarga
             // 
             this.lblVistaConfiguracionRutaDescarga.AutoSize = true;
-            this.lblVistaConfiguracionRutaDescarga.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F);
+            this.lblVistaConfiguracionRutaDescarga.Font = new System.Drawing.Font("Roboto Lt", 14F);
             this.lblVistaConfiguracionRutaDescarga.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(153)))), ((int)(((byte)(153)))), ((int)(((byte)(153)))));
-            this.lblVistaConfiguracionRutaDescarga.Location = new System.Drawing.Point(680, 557);
+            this.lblVistaConfiguracionRutaDescarga.Location = new System.Drawing.Point(680, 538);
             this.lblVistaConfiguracionRutaDescarga.Name = "lblVistaConfiguracionRutaDescarga";
-            this.lblVistaConfiguracionRutaDescarga.Size = new System.Drawing.Size(202, 29);
+            this.lblVistaConfiguracionRutaDescarga.Size = new System.Drawing.Size(158, 23);
             this.lblVistaConfiguracionRutaDescarga.TabIndex = 1;
             this.lblVistaConfiguracionRutaDescarga.Text = "Ruta de descarga";
             // 
             // lblVistaConfiguracionKbpsBajada
             // 
             this.lblVistaConfiguracionKbpsBajada.AutoSize = true;
-            this.lblVistaConfiguracionKbpsBajada.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F);
+            this.lblVistaConfiguracionKbpsBajada.Font = new System.Drawing.Font("Roboto Lt", 14F);
             this.lblVistaConfiguracionKbpsBajada.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(153)))), ((int)(((byte)(153)))), ((int)(((byte)(153)))));
-            this.lblVistaConfiguracionKbpsBajada.Location = new System.Drawing.Point(320, 557);
+            this.lblVistaConfiguracionKbpsBajada.Location = new System.Drawing.Point(320, 538);
             this.lblVistaConfiguracionKbpsBajada.Name = "lblVistaConfiguracionKbpsBajada";
-            this.lblVistaConfiguracionKbpsBajada.Size = new System.Drawing.Size(69, 29);
+            this.lblVistaConfiguracionKbpsBajada.Size = new System.Drawing.Size(54, 23);
             this.lblVistaConfiguracionKbpsBajada.TabIndex = 1;
             this.lblVistaConfiguracionKbpsBajada.Text = "Kbps";
             // 
             // lblVistaConfiguracionKbpsSubida
             // 
             this.lblVistaConfiguracionKbpsSubida.AutoSize = true;
-            this.lblVistaConfiguracionKbpsSubida.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F);
+            this.lblVistaConfiguracionKbpsSubida.Font = new System.Drawing.Font("Roboto Lt", 14F);
             this.lblVistaConfiguracionKbpsSubida.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(153)))), ((int)(((byte)(153)))), ((int)(((byte)(153)))));
-            this.lblVistaConfiguracionKbpsSubida.Location = new System.Drawing.Point(320, 502);
+            this.lblVistaConfiguracionKbpsSubida.Location = new System.Drawing.Point(320, 485);
             this.lblVistaConfiguracionKbpsSubida.Name = "lblVistaConfiguracionKbpsSubida";
-            this.lblVistaConfiguracionKbpsSubida.Size = new System.Drawing.Size(69, 29);
+            this.lblVistaConfiguracionKbpsSubida.Size = new System.Drawing.Size(54, 23);
             this.lblVistaConfiguracionKbpsSubida.TabIndex = 1;
             this.lblVistaConfiguracionKbpsSubida.Text = "Kbps";
             // 
             // lblVistaConfiguracionLimiteSubida
             // 
             this.lblVistaConfiguracionLimiteSubida.AutoSize = true;
-            this.lblVistaConfiguracionLimiteSubida.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F);
+            this.lblVistaConfiguracionLimiteSubida.Font = new System.Drawing.Font("Roboto Lt", 14F);
             this.lblVistaConfiguracionLimiteSubida.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(153)))), ((int)(((byte)(153)))), ((int)(((byte)(153)))));
-            this.lblVistaConfiguracionLimiteSubida.Location = new System.Drawing.Point(121, 502);
+            this.lblVistaConfiguracionLimiteSubida.Location = new System.Drawing.Point(121, 485);
             this.lblVistaConfiguracionLimiteSubida.Name = "lblVistaConfiguracionLimiteSubida";
-            this.lblVistaConfiguracionLimiteSubida.Size = new System.Drawing.Size(156, 29);
+            this.lblVistaConfiguracionLimiteSubida.Size = new System.Drawing.Size(123, 23);
             this.lblVistaConfiguracionLimiteSubida.TabIndex = 1;
             this.lblVistaConfiguracionLimiteSubida.Text = "Limite subida";
             // 
             // lblVistaConfiguracionLimiteBajada
             // 
             this.lblVistaConfiguracionLimiteBajada.AutoSize = true;
-            this.lblVistaConfiguracionLimiteBajada.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F);
+            this.lblVistaConfiguracionLimiteBajada.Font = new System.Drawing.Font("Roboto Lt", 14F);
             this.lblVistaConfiguracionLimiteBajada.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(153)))), ((int)(((byte)(153)))), ((int)(((byte)(153)))));
-            this.lblVistaConfiguracionLimiteBajada.Location = new System.Drawing.Point(122, 557);
+            this.lblVistaConfiguracionLimiteBajada.Location = new System.Drawing.Point(122, 538);
             this.lblVistaConfiguracionLimiteBajada.Name = "lblVistaConfiguracionLimiteBajada";
-            this.lblVistaConfiguracionLimiteBajada.Size = new System.Drawing.Size(157, 29);
+            this.lblVistaConfiguracionLimiteBajada.Size = new System.Drawing.Size(122, 23);
             this.lblVistaConfiguracionLimiteBajada.TabIndex = 1;
             this.lblVistaConfiguracionLimiteBajada.Text = "Limite bajada";
             // 
             // lblVistaConfiguracionLimiteDescargas
             // 
             this.lblVistaConfiguracionLimiteDescargas.AutoSize = true;
-            this.lblVistaConfiguracionLimiteDescargas.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F);
+            this.lblVistaConfiguracionLimiteDescargas.Font = new System.Drawing.Font("Roboto Lt", 14F);
             this.lblVistaConfiguracionLimiteDescargas.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(153)))), ((int)(((byte)(153)))), ((int)(((byte)(153)))));
-            this.lblVistaConfiguracionLimiteDescargas.Location = new System.Drawing.Point(630, 502);
+            this.lblVistaConfiguracionLimiteDescargas.Location = new System.Drawing.Point(630, 485);
             this.lblVistaConfiguracionLimiteDescargas.Name = "lblVistaConfiguracionLimiteDescargas";
-            this.lblVistaConfiguracionLimiteDescargas.Size = new System.Drawing.Size(262, 29);
+            this.lblVistaConfiguracionLimiteDescargas.Size = new System.Drawing.Size(208, 23);
             this.lblVistaConfiguracionLimiteDescargas.TabIndex = 1;
             this.lblVistaConfiguracionLimiteDescargas.Text = "Descargas simultaneas";
             // 
             // lblVistaConfiguracionTemaClaro
             // 
             this.lblVistaConfiguracionTemaClaro.AutoSize = true;
-            this.lblVistaConfiguracionTemaClaro.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F);
+            this.lblVistaConfiguracionTemaClaro.Font = new System.Drawing.Font("Roboto Lt", 14F);
             this.lblVistaConfiguracionTemaClaro.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(153)))), ((int)(((byte)(153)))), ((int)(((byte)(153)))));
             this.lblVistaConfiguracionTemaClaro.Location = new System.Drawing.Point(687, 336);
             this.lblVistaConfiguracionTemaClaro.Name = "lblVistaConfiguracionTemaClaro";
-            this.lblVistaConfiguracionTemaClaro.Size = new System.Drawing.Size(71, 29);
+            this.lblVistaConfiguracionTemaClaro.Size = new System.Drawing.Size(53, 23);
             this.lblVistaConfiguracionTemaClaro.TabIndex = 1;
             this.lblVistaConfiguracionTemaClaro.Text = "Claro";
             // 
             // lblVistaConfiguracionIngles
             // 
             this.lblVistaConfiguracionIngles.AutoSize = true;
-            this.lblVistaConfiguracionIngles.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F);
+            this.lblVistaConfiguracionIngles.Font = new System.Drawing.Font("Roboto Lt", 14F);
             this.lblVistaConfiguracionIngles.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(153)))), ((int)(((byte)(153)))), ((int)(((byte)(153)))));
             this.lblVistaConfiguracionIngles.Location = new System.Drawing.Point(679, 104);
             this.lblVistaConfiguracionIngles.Name = "lblVistaConfiguracionIngles";
-            this.lblVistaConfiguracionIngles.Size = new System.Drawing.Size(78, 29);
+            this.lblVistaConfiguracionIngles.Size = new System.Drawing.Size(61, 23);
             this.lblVistaConfiguracionIngles.TabIndex = 1;
             this.lblVistaConfiguracionIngles.Text = "Ingles";
             // 
             // lblVistaConfiguracionTemaOscuro
             // 
             this.lblVistaConfiguracionTemaOscuro.AutoSize = true;
-            this.lblVistaConfiguracionTemaOscuro.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F);
+            this.lblVistaConfiguracionTemaOscuro.Font = new System.Drawing.Font("Roboto Lt", 14F);
             this.lblVistaConfiguracionTemaOscuro.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(153)))), ((int)(((byte)(153)))), ((int)(((byte)(153)))));
             this.lblVistaConfiguracionTemaOscuro.Location = new System.Drawing.Point(792, 336);
             this.lblVistaConfiguracionTemaOscuro.Name = "lblVistaConfiguracionTemaOscuro";
-            this.lblVistaConfiguracionTemaOscuro.Size = new System.Drawing.Size(91, 29);
+            this.lblVistaConfiguracionTemaOscuro.Size = new System.Drawing.Size(71, 23);
             this.lblVistaConfiguracionTemaOscuro.TabIndex = 1;
             this.lblVistaConfiguracionTemaOscuro.Text = "Oscuro";
             // 
             // lblVistaConfiguracionEspañol
             // 
             this.lblVistaConfiguracionEspañol.AutoSize = true;
-            this.lblVistaConfiguracionEspañol.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F);
+            this.lblVistaConfiguracionEspañol.Font = new System.Drawing.Font("Roboto Lt", 14F);
             this.lblVistaConfiguracionEspañol.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(153)))), ((int)(((byte)(153)))), ((int)(((byte)(153)))));
             this.lblVistaConfiguracionEspañol.Location = new System.Drawing.Point(792, 104);
             this.lblVistaConfiguracionEspañol.Name = "lblVistaConfiguracionEspañol";
-            this.lblVistaConfiguracionEspañol.Size = new System.Drawing.Size(101, 29);
+            this.lblVistaConfiguracionEspañol.Size = new System.Drawing.Size(77, 23);
             this.lblVistaConfiguracionEspañol.TabIndex = 1;
             this.lblVistaConfiguracionEspañol.Text = "Español";
             // 
             // lblVistaConfiguracionIdioma
             // 
             this.lblVistaConfiguracionIdioma.AutoSize = true;
-            this.lblVistaConfiguracionIdioma.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F);
+            this.lblVistaConfiguracionIdioma.Font = new System.Drawing.Font("Roboto Lt", 14F);
             this.lblVistaConfiguracionIdioma.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(153)))), ((int)(((byte)(153)))), ((int)(((byte)(153)))));
             this.lblVistaConfiguracionIdioma.Location = new System.Drawing.Point(730, 78);
             this.lblVistaConfiguracionIdioma.Name = "lblVistaConfiguracionIdioma";
-            this.lblVistaConfiguracionIdioma.Size = new System.Drawing.Size(86, 29);
+            this.lblVistaConfiguracionIdioma.Size = new System.Drawing.Size(68, 23);
             this.lblVistaConfiguracionIdioma.TabIndex = 1;
             this.lblVistaConfiguracionIdioma.Text = "Idioma";
             // 
@@ -1181,7 +878,7 @@
             this.tbVistaAboutDescripcion.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(13)))), ((int)(((byte)(23)))), ((int)(((byte)(33)))));
             this.tbVistaAboutDescripcion.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.tbVistaAboutDescripcion.Cursor = System.Windows.Forms.Cursors.Arrow;
-            this.tbVistaAboutDescripcion.Font = new System.Drawing.Font("Microsoft Sans Serif", 21F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tbVistaAboutDescripcion.Font = new System.Drawing.Font("Roboto Lt", 21F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tbVistaAboutDescripcion.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(153)))), ((int)(((byte)(153)))), ((int)(((byte)(153)))));
             this.tbVistaAboutDescripcion.Location = new System.Drawing.Point(28, 374);
             this.tbVistaAboutDescripcion.Multiline = true;
@@ -1285,9 +982,514 @@
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(385, 161);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(72, 17);
+            this.label1.Size = new System.Drawing.Size(54, 13);
             this.label1.TabIndex = 0;
             this.label1.Text = "descargar";
+            // 
+            // pnlVistaExplorar
+            // 
+            this.pnlVistaExplorar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(13)))), ((int)(((byte)(23)))), ((int)(((byte)(33)))));
+            this.pnlVistaExplorar.Controls.Add(this.pnlVistaExplorarDGV);
+            this.pnlVistaExplorar.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pnlVistaExplorar.Location = new System.Drawing.Point(0, 0);
+            this.pnlVistaExplorar.Margin = new System.Windows.Forms.Padding(2);
+            this.pnlVistaExplorar.Name = "pnlVistaExplorar";
+            this.pnlVistaExplorar.Size = new System.Drawing.Size(1035, 619);
+            this.pnlVistaExplorar.TabIndex = 17;
+            this.pnlVistaExplorar.Tag = "2";
+            this.pnlVistaExplorar.Visible = false;
+            // 
+            // pnlVistaExplorarDGV
+            // 
+            this.pnlVistaExplorarDGV.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.pnlVistaExplorarDGV.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(31)))), ((int)(((byte)(41)))));
+            this.pnlVistaExplorarDGV.Controls.Add(this.lblVistaExplorarArchivosCompartidosVecinos);
+            this.pnlVistaExplorarDGV.Controls.Add(this.dgvVistaExplorarArchivosCompartidosVecinos);
+            this.pnlVistaExplorarDGV.Location = new System.Drawing.Point(37, 26);
+            this.pnlVistaExplorarDGV.Name = "pnlVistaExplorarDGV";
+            this.pnlVistaExplorarDGV.Size = new System.Drawing.Size(960, 566);
+            this.pnlVistaExplorarDGV.TabIndex = 7;
+            // 
+            // lblVistaExplorarArchivosCompartidosVecinos
+            // 
+            this.lblVistaExplorarArchivosCompartidosVecinos.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblVistaExplorarArchivosCompartidosVecinos.BackColor = System.Drawing.Color.Transparent;
+            this.lblVistaExplorarArchivosCompartidosVecinos.Font = new System.Drawing.Font("Roboto Lt", 20F);
+            this.lblVistaExplorarArchivosCompartidosVecinos.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(153)))), ((int)(((byte)(153)))), ((int)(((byte)(153)))));
+            this.lblVistaExplorarArchivosCompartidosVecinos.Location = new System.Drawing.Point(147, 80);
+            this.lblVistaExplorarArchivosCompartidosVecinos.Name = "lblVistaExplorarArchivosCompartidosVecinos";
+            this.lblVistaExplorarArchivosCompartidosVecinos.Size = new System.Drawing.Size(666, 43);
+            this.lblVistaExplorarArchivosCompartidosVecinos.TabIndex = 5;
+            this.lblVistaExplorarArchivosCompartidosVecinos.Text = "No hay archivos disponibles para descargar";
+            this.lblVistaExplorarArchivosCompartidosVecinos.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // dgvVistaExplorarArchivosCompartidosVecinos
+            // 
+            this.dgvVistaExplorarArchivosCompartidosVecinos.AllowUserToAddRows = false;
+            this.dgvVistaExplorarArchivosCompartidosVecinos.AllowUserToDeleteRows = false;
+            this.dgvVistaExplorarArchivosCompartidosVecinos.AllowUserToResizeColumns = false;
+            this.dgvVistaExplorarArchivosCompartidosVecinos.AllowUserToResizeRows = false;
+            this.dgvVistaExplorarArchivosCompartidosVecinos.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dgvVistaExplorarArchivosCompartidosVecinos.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(31)))), ((int)(((byte)(41)))));
+            this.dgvVistaExplorarArchivosCompartidosVecinos.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.dgvVistaExplorarArchivosCompartidosVecinos.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None;
+            this.dgvVistaExplorarArchivosCompartidosVecinos.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
+            this.dgvVistaExplorarArchivosCompartidosVecinos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvVistaExplorarArchivosCompartidosVecinos.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.dataGridViewTextBoxColumn2,
+            this.dataGridViewTextBoxColumn6,
+            this.dataGridViewTextBoxColumn7,
+            this.dataGridViewTextBoxColumn8});
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvVistaExplorarArchivosCompartidosVecinos.DefaultCellStyle = dataGridViewCellStyle1;
+            this.dgvVistaExplorarArchivosCompartidosVecinos.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dgvVistaExplorarArchivosCompartidosVecinos.EnableHeadersVisualStyles = false;
+            this.dgvVistaExplorarArchivosCompartidosVecinos.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(31)))), ((int)(((byte)(41)))));
+            this.dgvVistaExplorarArchivosCompartidosVecinos.Location = new System.Drawing.Point(0, 0);
+            this.dgvVistaExplorarArchivosCompartidosVecinos.MultiSelect = false;
+            this.dgvVistaExplorarArchivosCompartidosVecinos.Name = "dgvVistaExplorarArchivosCompartidosVecinos";
+            this.dgvVistaExplorarArchivosCompartidosVecinos.ReadOnly = true;
+            this.dgvVistaExplorarArchivosCompartidosVecinos.RowHeadersVisible = false;
+            this.dgvVistaExplorarArchivosCompartidosVecinos.Size = new System.Drawing.Size(960, 566);
+            this.dgvVistaExplorarArchivosCompartidosVecinos.TabIndex = 6;
+            this.dgvVistaExplorarArchivosCompartidosVecinos.Tag = "E";
+            this.dgvVistaExplorarArchivosCompartidosVecinos.Visible = false;
+            this.dgvVistaExplorarArchivosCompartidosVecinos.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DescargarArchivo);
+            this.dgvVistaExplorarArchivosCompartidosVecinos.CellMouseMove += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.CambiarCursorDGV);
+            // 
+            // dataGridViewTextBoxColumn2
+            // 
+            this.dataGridViewTextBoxColumn2.DataPropertyName = "nombre";
+            this.dataGridViewTextBoxColumn2.HeaderText = "Nombre";
+            this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
+            this.dataGridViewTextBoxColumn2.ReadOnly = true;
+            // 
+            // dataGridViewTextBoxColumn6
+            // 
+            this.dataGridViewTextBoxColumn6.DataPropertyName = "tamaño";
+            this.dataGridViewTextBoxColumn6.HeaderText = "Tamaño";
+            this.dataGridViewTextBoxColumn6.Name = "dataGridViewTextBoxColumn6";
+            this.dataGridViewTextBoxColumn6.ReadOnly = true;
+            // 
+            // dataGridViewTextBoxColumn7
+            // 
+            this.dataGridViewTextBoxColumn7.DataPropertyName = "descripcion";
+            this.dataGridViewTextBoxColumn7.HeaderText = "Descripcion";
+            this.dataGridViewTextBoxColumn7.Name = "dataGridViewTextBoxColumn7";
+            this.dataGridViewTextBoxColumn7.ReadOnly = true;
+            // 
+            // dataGridViewTextBoxColumn8
+            // 
+            this.dataGridViewTextBoxColumn8.DataPropertyName = "activo";
+            this.dataGridViewTextBoxColumn8.HeaderText = "Descargar";
+            this.dataGridViewTextBoxColumn8.Name = "dataGridViewTextBoxColumn8";
+            this.dataGridViewTextBoxColumn8.ReadOnly = true;
+            // 
+            // pnlVistaCompartir
+            // 
+            this.pnlVistaCompartir.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(13)))), ((int)(((byte)(23)))), ((int)(((byte)(33)))));
+            this.pnlVistaCompartir.Controls.Add(this.pnlVistaCompartirMostarArchivos);
+            this.pnlVistaCompartir.Controls.Add(this.pnlVistaCompartirSeleccionarArchivo);
+            this.pnlVistaCompartir.Controls.Add(this.pnlVistaCompartirGuardarArchivo);
+            this.pnlVistaCompartir.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pnlVistaCompartir.Location = new System.Drawing.Point(0, 0);
+            this.pnlVistaCompartir.Margin = new System.Windows.Forms.Padding(2);
+            this.pnlVistaCompartir.Name = "pnlVistaCompartir";
+            this.pnlVistaCompartir.Size = new System.Drawing.Size(1035, 619);
+            this.pnlVistaCompartir.TabIndex = 16;
+            this.pnlVistaCompartir.Tag = "3";
+            this.pnlVistaCompartir.Visible = false;
+            // 
+            // pnlVistaCompartirMostarArchivos
+            // 
+            this.pnlVistaCompartirMostarArchivos.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.pnlVistaCompartirMostarArchivos.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(31)))), ((int)(((byte)(41)))));
+            this.pnlVistaCompartirMostarArchivos.Controls.Add(this.lblVistaCompartirVerArchivos);
+            this.pnlVistaCompartirMostarArchivos.Controls.Add(this.dgvVistaCompartirArchivos);
+            this.pnlVistaCompartirMostarArchivos.Location = new System.Drawing.Point(37, 156);
+            this.pnlVistaCompartirMostarArchivos.Name = "pnlVistaCompartirMostarArchivos";
+            this.pnlVistaCompartirMostarArchivos.Size = new System.Drawing.Size(960, 436);
+            this.pnlVistaCompartirMostarArchivos.TabIndex = 6;
+            // 
+            // lblVistaCompartirVerArchivos
+            // 
+            this.lblVistaCompartirVerArchivos.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblVistaCompartirVerArchivos.BackColor = System.Drawing.Color.Transparent;
+            this.lblVistaCompartirVerArchivos.Font = new System.Drawing.Font("Roboto Lt", 20F);
+            this.lblVistaCompartirVerArchivos.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(153)))), ((int)(((byte)(153)))), ((int)(((byte)(153)))));
+            this.lblVistaCompartirVerArchivos.Location = new System.Drawing.Point(203, 15);
+            this.lblVistaCompartirVerArchivos.Name = "lblVistaCompartirVerArchivos";
+            this.lblVistaCompartirVerArchivos.Size = new System.Drawing.Size(554, 43);
+            this.lblVistaCompartirVerArchivos.TabIndex = 5;
+            this.lblVistaCompartirVerArchivos.Text = "No hay archivos compartidos";
+            this.lblVistaCompartirVerArchivos.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // dgvVistaCompartirArchivos
+            // 
+            this.dgvVistaCompartirArchivos.AllowUserToAddRows = false;
+            this.dgvVistaCompartirArchivos.AllowUserToDeleteRows = false;
+            this.dgvVistaCompartirArchivos.AllowUserToResizeColumns = false;
+            this.dgvVistaCompartirArchivos.AllowUserToResizeRows = false;
+            this.dgvVistaCompartirArchivos.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dgvVistaCompartirArchivos.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(31)))), ((int)(((byte)(41)))));
+            this.dgvVistaCompartirArchivos.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.dgvVistaCompartirArchivos.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None;
+            this.dgvVistaCompartirArchivos.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
+            this.dgvVistaCompartirArchivos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvVistaCompartirArchivos.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.nombre,
+            this.tamaño,
+            this.descripcion,
+            this.activo,
+            this.borrar});
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvVistaCompartirArchivos.DefaultCellStyle = dataGridViewCellStyle2;
+            this.dgvVistaCompartirArchivos.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dgvVistaCompartirArchivos.EnableHeadersVisualStyles = false;
+            this.dgvVistaCompartirArchivos.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(31)))), ((int)(((byte)(41)))));
+            this.dgvVistaCompartirArchivos.Location = new System.Drawing.Point(0, 0);
+            this.dgvVistaCompartirArchivos.MultiSelect = false;
+            this.dgvVistaCompartirArchivos.Name = "dgvVistaCompartirArchivos";
+            this.dgvVistaCompartirArchivos.ReadOnly = true;
+            this.dgvVistaCompartirArchivos.RowHeadersVisible = false;
+            this.dgvVistaCompartirArchivos.Size = new System.Drawing.Size(960, 436);
+            this.dgvVistaCompartirArchivos.TabIndex = 6;
+            this.dgvVistaCompartirArchivos.Tag = "C";
+            this.dgvVistaCompartirArchivos.Visible = false;
+            this.dgvVistaCompartirArchivos.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.ActivoBorrarArchivo);
+            this.dgvVistaCompartirArchivos.CellMouseMove += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.CambiarCursorDGV);
+            // 
+            // nombre
+            // 
+            this.nombre.DataPropertyName = "nombre";
+            this.nombre.HeaderText = "Nombre";
+            this.nombre.Name = "nombre";
+            this.nombre.ReadOnly = true;
+            // 
+            // tamaño
+            // 
+            this.tamaño.DataPropertyName = "tamaño";
+            this.tamaño.HeaderText = "Tamaño";
+            this.tamaño.Name = "tamaño";
+            this.tamaño.ReadOnly = true;
+            // 
+            // descripcion
+            // 
+            this.descripcion.DataPropertyName = "descripcion";
+            this.descripcion.HeaderText = "Descripcion";
+            this.descripcion.Name = "descripcion";
+            this.descripcion.ReadOnly = true;
+            // 
+            // activo
+            // 
+            this.activo.DataPropertyName = "activo";
+            this.activo.HeaderText = "Activo";
+            this.activo.Name = "activo";
+            this.activo.ReadOnly = true;
+            // 
+            // borrar
+            // 
+            this.borrar.DataPropertyName = "borrar";
+            this.borrar.HeaderText = "Borrar";
+            this.borrar.Name = "borrar";
+            this.borrar.ReadOnly = true;
+            // 
+            // pnlVistaCompartirSeleccionarArchivo
+            // 
+            this.pnlVistaCompartirSeleccionarArchivo.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.pnlVistaCompartirSeleccionarArchivo.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(31)))), ((int)(((byte)(41)))));
+            this.pnlVistaCompartirSeleccionarArchivo.Controls.Add(this.lblVistaCompartirSeleccionar);
+            this.pnlVistaCompartirSeleccionarArchivo.Controls.Add(this.pbVistaCompartirSeleccionarArchivo);
+            this.pnlVistaCompartirSeleccionarArchivo.Location = new System.Drawing.Point(37, 26);
+            this.pnlVistaCompartirSeleccionarArchivo.Name = "pnlVistaCompartirSeleccionarArchivo";
+            this.pnlVistaCompartirSeleccionarArchivo.Size = new System.Drawing.Size(960, 100);
+            this.pnlVistaCompartirSeleccionarArchivo.TabIndex = 4;
+            // 
+            // lblVistaCompartirSeleccionar
+            // 
+            this.lblVistaCompartirSeleccionar.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.lblVistaCompartirSeleccionar.BackColor = System.Drawing.Color.Transparent;
+            this.lblVistaCompartirSeleccionar.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.lblVistaCompartirSeleccionar.Font = new System.Drawing.Font("Roboto Lt", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblVistaCompartirSeleccionar.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(153)))), ((int)(((byte)(153)))), ((int)(((byte)(153)))));
+            this.lblVistaCompartirSeleccionar.Location = new System.Drawing.Point(245, 62);
+            this.lblVistaCompartirSeleccionar.Name = "lblVistaCompartirSeleccionar";
+            this.lblVistaCompartirSeleccionar.Size = new System.Drawing.Size(470, 25);
+            this.lblVistaCompartirSeleccionar.TabIndex = 2;
+            this.lblVistaCompartirSeleccionar.Text = "Seleccione el archivo que quiera compartir";
+            this.lblVistaCompartirSeleccionar.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lblVistaCompartirSeleccionar.Click += new System.EventHandler(this.SeleccionarArchivoCompartir);
+            // 
+            // pbVistaCompartirSeleccionarArchivo
+            // 
+            this.pbVistaCompartirSeleccionarArchivo.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.pbVistaCompartirSeleccionarArchivo.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.pbVistaCompartirSeleccionarArchivo.Image = ((System.Drawing.Image)(resources.GetObject("pbVistaCompartirSeleccionarArchivo.Image")));
+            this.pbVistaCompartirSeleccionarArchivo.Location = new System.Drawing.Point(453, 14);
+            this.pbVistaCompartirSeleccionarArchivo.Name = "pbVistaCompartirSeleccionarArchivo";
+            this.pbVistaCompartirSeleccionarArchivo.Size = new System.Drawing.Size(55, 42);
+            this.pbVistaCompartirSeleccionarArchivo.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
+            this.pbVistaCompartirSeleccionarArchivo.TabIndex = 3;
+            this.pbVistaCompartirSeleccionarArchivo.TabStop = false;
+            this.pbVistaCompartirSeleccionarArchivo.Click += new System.EventHandler(this.SeleccionarArchivoCompartir);
+            // 
+            // pnlVistaCompartirGuardarArchivo
+            // 
+            this.pnlVistaCompartirGuardarArchivo.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.pnlVistaCompartirGuardarArchivo.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(31)))), ((int)(((byte)(41)))));
+            this.pnlVistaCompartirGuardarArchivo.Controls.Add(this.tbVistaCompartirDescripcionArchivo);
+            this.pnlVistaCompartirGuardarArchivo.Controls.Add(this.pbVistaCompartirCancelar);
+            this.pnlVistaCompartirGuardarArchivo.Controls.Add(this.pbVistaCompartirArchivo);
+            this.pnlVistaCompartirGuardarArchivo.Controls.Add(this.lblVistaCompartirTamañoArchivo);
+            this.pnlVistaCompartirGuardarArchivo.Controls.Add(this.lblVistaCompartirNombreArchivo);
+            this.pnlVistaCompartirGuardarArchivo.Location = new System.Drawing.Point(37, 26);
+            this.pnlVistaCompartirGuardarArchivo.Name = "pnlVistaCompartirGuardarArchivo";
+            this.pnlVistaCompartirGuardarArchivo.Size = new System.Drawing.Size(960, 100);
+            this.pnlVistaCompartirGuardarArchivo.TabIndex = 1;
+            this.pnlVistaCompartirGuardarArchivo.Visible = false;
+            // 
+            // tbVistaCompartirDescripcionArchivo
+            // 
+            this.tbVistaCompartirDescripcionArchivo.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.tbVistaCompartirDescripcionArchivo.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(1)))), ((int)(((byte)(9)))), ((int)(((byte)(17)))));
+            this.tbVistaCompartirDescripcionArchivo.Font = new System.Drawing.Font("Roboto Lt", 12F);
+            this.tbVistaCompartirDescripcionArchivo.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(153)))), ((int)(((byte)(153)))), ((int)(((byte)(153)))));
+            this.tbVistaCompartirDescripcionArchivo.Location = new System.Drawing.Point(449, 9);
+            this.tbVistaCompartirDescripcionArchivo.MaxLength = 128;
+            this.tbVistaCompartirDescripcionArchivo.Multiline = true;
+            this.tbVistaCompartirDescripcionArchivo.Name = "tbVistaCompartirDescripcionArchivo";
+            this.tbVistaCompartirDescripcionArchivo.Size = new System.Drawing.Size(443, 83);
+            this.tbVistaCompartirDescripcionArchivo.TabIndex = 4;
+            this.tbVistaCompartirDescripcionArchivo.Tag = "";
+            this.tbVistaCompartirDescripcionArchivo.Text = "Breve descripcion del archivo.";
+            this.tbVistaCompartirDescripcionArchivo.Click += new System.EventHandler(this.BorrarTB);
+            // 
+            // pbVistaCompartirCancelar
+            // 
+            this.pbVistaCompartirCancelar.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.pbVistaCompartirCancelar.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.pbVistaCompartirCancelar.Image = ((System.Drawing.Image)(resources.GetObject("pbVistaCompartirCancelar.Image")));
+            this.pbVistaCompartirCancelar.Location = new System.Drawing.Point(910, 54);
+            this.pbVistaCompartirCancelar.Name = "pbVistaCompartirCancelar";
+            this.pbVistaCompartirCancelar.Size = new System.Drawing.Size(38, 38);
+            this.pbVistaCompartirCancelar.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
+            this.pbVistaCompartirCancelar.TabIndex = 3;
+            this.pbVistaCompartirCancelar.TabStop = false;
+            this.pbVistaCompartirCancelar.Tag = "0";
+            this.pbVistaCompartirCancelar.Click += new System.EventHandler(this.CompartirCancelarArchivo);
+            // 
+            // pbVistaCompartirArchivo
+            // 
+            this.pbVistaCompartirArchivo.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.pbVistaCompartirArchivo.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.pbVistaCompartirArchivo.Image = ((System.Drawing.Image)(resources.GetObject("pbVistaCompartirArchivo.Image")));
+            this.pbVistaCompartirArchivo.Location = new System.Drawing.Point(910, 9);
+            this.pbVistaCompartirArchivo.Name = "pbVistaCompartirArchivo";
+            this.pbVistaCompartirArchivo.Size = new System.Drawing.Size(38, 38);
+            this.pbVistaCompartirArchivo.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
+            this.pbVistaCompartirArchivo.TabIndex = 3;
+            this.pbVistaCompartirArchivo.TabStop = false;
+            this.pbVistaCompartirArchivo.Tag = "1";
+            this.pbVistaCompartirArchivo.Click += new System.EventHandler(this.CompartirCancelarArchivo);
+            // 
+            // lblVistaCompartirTamañoArchivo
+            // 
+            this.lblVistaCompartirTamañoArchivo.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.lblVistaCompartirTamañoArchivo.BackColor = System.Drawing.Color.Transparent;
+            this.lblVistaCompartirTamañoArchivo.Font = new System.Drawing.Font("Roboto Lt", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblVistaCompartirTamañoArchivo.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(153)))), ((int)(((byte)(153)))), ((int)(((byte)(153)))));
+            this.lblVistaCompartirTamañoArchivo.Location = new System.Drawing.Point(161, 56);
+            this.lblVistaCompartirTamañoArchivo.Name = "lblVistaCompartirTamañoArchivo";
+            this.lblVistaCompartirTamañoArchivo.Size = new System.Drawing.Size(120, 34);
+            this.lblVistaCompartirTamañoArchivo.TabIndex = 2;
+            this.lblVistaCompartirTamañoArchivo.Text = "Tamaño";
+            this.lblVistaCompartirTamañoArchivo.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // lblVistaCompartirNombreArchivo
+            // 
+            this.lblVistaCompartirNombreArchivo.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.lblVistaCompartirNombreArchivo.BackColor = System.Drawing.Color.Transparent;
+            this.lblVistaCompartirNombreArchivo.Font = new System.Drawing.Font("Roboto Lt", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblVistaCompartirNombreArchivo.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(153)))), ((int)(((byte)(153)))), ((int)(((byte)(153)))));
+            this.lblVistaCompartirNombreArchivo.Location = new System.Drawing.Point(12, 11);
+            this.lblVistaCompartirNombreArchivo.Name = "lblVistaCompartirNombreArchivo";
+            this.lblVistaCompartirNombreArchivo.Size = new System.Drawing.Size(419, 34);
+            this.lblVistaCompartirNombreArchivo.TabIndex = 2;
+            this.lblVistaCompartirNombreArchivo.Text = "Nombre";
+            this.lblVistaCompartirNombreArchivo.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // pnlVistaSolicitar
+            // 
+            this.pnlVistaSolicitar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(13)))), ((int)(((byte)(23)))), ((int)(((byte)(33)))));
+            this.pnlVistaSolicitar.Controls.Add(this.pnlVistaSolicitarVerSolicitudes);
+            this.pnlVistaSolicitar.Controls.Add(this.pnlVistaSolicitarCompartirSolicitud);
+            this.pnlVistaSolicitar.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pnlVistaSolicitar.Location = new System.Drawing.Point(0, 0);
+            this.pnlVistaSolicitar.Margin = new System.Windows.Forms.Padding(2);
+            this.pnlVistaSolicitar.Name = "pnlVistaSolicitar";
+            this.pnlVistaSolicitar.Size = new System.Drawing.Size(1035, 619);
+            this.pnlVistaSolicitar.TabIndex = 15;
+            this.pnlVistaSolicitar.Tag = "4";
+            this.pnlVistaSolicitar.Visible = false;
+            // 
+            // pnlVistaSolicitarVerSolicitudes
+            // 
+            this.pnlVistaSolicitarVerSolicitudes.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.pnlVistaSolicitarVerSolicitudes.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(31)))), ((int)(((byte)(41)))));
+            this.pnlVistaSolicitarVerSolicitudes.Controls.Add(this.lblVistaSolicitarNuevasSolicitudes);
+            this.pnlVistaSolicitarVerSolicitudes.Controls.Add(this.dgvVistaSolicitar);
+            this.pnlVistaSolicitarVerSolicitudes.Location = new System.Drawing.Point(37, 156);
+            this.pnlVistaSolicitarVerSolicitudes.Name = "pnlVistaSolicitarVerSolicitudes";
+            this.pnlVistaSolicitarVerSolicitudes.Size = new System.Drawing.Size(960, 436);
+            this.pnlVistaSolicitarVerSolicitudes.TabIndex = 7;
+            // 
+            // lblVistaSolicitarNuevasSolicitudes
+            // 
+            this.lblVistaSolicitarNuevasSolicitudes.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblVistaSolicitarNuevasSolicitudes.BackColor = System.Drawing.Color.Transparent;
+            this.lblVistaSolicitarNuevasSolicitudes.Font = new System.Drawing.Font("Roboto Lt", 20F);
+            this.lblVistaSolicitarNuevasSolicitudes.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(153)))), ((int)(((byte)(153)))), ((int)(((byte)(153)))));
+            this.lblVistaSolicitarNuevasSolicitudes.Location = new System.Drawing.Point(203, 15);
+            this.lblVistaSolicitarNuevasSolicitudes.Name = "lblVistaSolicitarNuevasSolicitudes";
+            this.lblVistaSolicitarNuevasSolicitudes.Size = new System.Drawing.Size(554, 43);
+            this.lblVistaSolicitarNuevasSolicitudes.TabIndex = 5;
+            this.lblVistaSolicitarNuevasSolicitudes.Text = "No hay nuevas solicitudes";
+            this.lblVistaSolicitarNuevasSolicitudes.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // dgvVistaSolicitar
+            // 
+            this.dgvVistaSolicitar.AllowUserToAddRows = false;
+            this.dgvVistaSolicitar.AllowUserToDeleteRows = false;
+            this.dgvVistaSolicitar.AllowUserToResizeColumns = false;
+            this.dgvVistaSolicitar.AllowUserToResizeRows = false;
+            this.dgvVistaSolicitar.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dgvVistaSolicitar.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(31)))), ((int)(((byte)(41)))));
+            this.dgvVistaSolicitar.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.dgvVistaSolicitar.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None;
+            this.dgvVistaSolicitar.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
+            this.dgvVistaSolicitar.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvVistaSolicitar.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.dataGridViewTextBoxColumn1,
+            this.dataGridViewTextBoxColumn3,
+            this.dataGridViewTextBoxColumn4,
+            this.dataGridViewTextBoxColumn5});
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvVistaSolicitar.DefaultCellStyle = dataGridViewCellStyle3;
+            this.dgvVistaSolicitar.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dgvVistaSolicitar.EnableHeadersVisualStyles = false;
+            this.dgvVistaSolicitar.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(31)))), ((int)(((byte)(41)))));
+            this.dgvVistaSolicitar.Location = new System.Drawing.Point(0, 0);
+            this.dgvVistaSolicitar.MultiSelect = false;
+            this.dgvVistaSolicitar.Name = "dgvVistaSolicitar";
+            this.dgvVistaSolicitar.ReadOnly = true;
+            this.dgvVistaSolicitar.RowHeadersVisible = false;
+            this.dgvVistaSolicitar.Size = new System.Drawing.Size(960, 436);
+            this.dgvVistaSolicitar.TabIndex = 6;
+            this.dgvVistaSolicitar.Tag = "S";
+            this.dgvVistaSolicitar.Visible = false;
+            this.dgvVistaSolicitar.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.CompartirBorrarSolicitud);
+            this.dgvVistaSolicitar.CellMouseMove += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.CambiarCursorDGV);
+            // 
+            // dataGridViewTextBoxColumn1
+            // 
+            this.dataGridViewTextBoxColumn1.DataPropertyName = "nombre";
+            this.dataGridViewTextBoxColumn1.HeaderText = "Usuario";
+            this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
+            this.dataGridViewTextBoxColumn1.ReadOnly = true;
+            // 
+            // dataGridViewTextBoxColumn3
+            // 
+            this.dataGridViewTextBoxColumn3.DataPropertyName = "descripcion";
+            this.dataGridViewTextBoxColumn3.HeaderText = "Descripcion";
+            this.dataGridViewTextBoxColumn3.Name = "dataGridViewTextBoxColumn3";
+            this.dataGridViewTextBoxColumn3.ReadOnly = true;
+            // 
+            // dataGridViewTextBoxColumn4
+            // 
+            this.dataGridViewTextBoxColumn4.DataPropertyName = "activo";
+            this.dataGridViewTextBoxColumn4.HeaderText = "Compartir";
+            this.dataGridViewTextBoxColumn4.Name = "dataGridViewTextBoxColumn4";
+            this.dataGridViewTextBoxColumn4.ReadOnly = true;
+            // 
+            // dataGridViewTextBoxColumn5
+            // 
+            this.dataGridViewTextBoxColumn5.DataPropertyName = "borrar";
+            this.dataGridViewTextBoxColumn5.HeaderText = "Borrar";
+            this.dataGridViewTextBoxColumn5.Name = "dataGridViewTextBoxColumn5";
+            this.dataGridViewTextBoxColumn5.ReadOnly = true;
+            // 
+            // pnlVistaSolicitarCompartirSolicitud
+            // 
+            this.pnlVistaSolicitarCompartirSolicitud.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.pnlVistaSolicitarCompartirSolicitud.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(31)))), ((int)(((byte)(41)))));
+            this.pnlVistaSolicitarCompartirSolicitud.Controls.Add(this.lblVistaSolicitarInformacion);
+            this.pnlVistaSolicitarCompartirSolicitud.Controls.Add(this.tbVistaSolicitarDescripcion);
+            this.pnlVistaSolicitarCompartirSolicitud.Controls.Add(this.pictureBox2);
+            this.pnlVistaSolicitarCompartirSolicitud.Location = new System.Drawing.Point(37, 26);
+            this.pnlVistaSolicitarCompartirSolicitud.Name = "pnlVistaSolicitarCompartirSolicitud";
+            this.pnlVistaSolicitarCompartirSolicitud.Size = new System.Drawing.Size(960, 100);
+            this.pnlVistaSolicitarCompartirSolicitud.TabIndex = 2;
+            // 
+            // lblVistaSolicitarInformacion
+            // 
+            this.lblVistaSolicitarInformacion.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblVistaSolicitarInformacion.BackColor = System.Drawing.Color.Transparent;
+            this.lblVistaSolicitarInformacion.Font = new System.Drawing.Font("Roboto Lt", 16F);
+            this.lblVistaSolicitarInformacion.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(153)))), ((int)(((byte)(153)))), ((int)(((byte)(153)))));
+            this.lblVistaSolicitarInformacion.Location = new System.Drawing.Point(203, 7);
+            this.lblVistaSolicitarInformacion.Name = "lblVistaSolicitarInformacion";
+            this.lblVistaSolicitarInformacion.Size = new System.Drawing.Size(554, 33);
+            this.lblVistaSolicitarInformacion.TabIndex = 6;
+            this.lblVistaSolicitarInformacion.Text = "¡Solicita el archivo que necesites!";
+            this.lblVistaSolicitarInformacion.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // tbVistaSolicitarDescripcion
+            // 
+            this.tbVistaSolicitarDescripcion.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.tbVistaSolicitarDescripcion.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(1)))), ((int)(((byte)(9)))), ((int)(((byte)(17)))));
+            this.tbVistaSolicitarDescripcion.Font = new System.Drawing.Font("Roboto Lt", 12F);
+            this.tbVistaSolicitarDescripcion.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(153)))), ((int)(((byte)(153)))), ((int)(((byte)(153)))));
+            this.tbVistaSolicitarDescripcion.Location = new System.Drawing.Point(21, 44);
+            this.tbVistaSolicitarDescripcion.MaxLength = 128;
+            this.tbVistaSolicitarDescripcion.Multiline = true;
+            this.tbVistaSolicitarDescripcion.Name = "tbVistaSolicitarDescripcion";
+            this.tbVistaSolicitarDescripcion.Size = new System.Drawing.Size(867, 50);
+            this.tbVistaSolicitarDescripcion.TabIndex = 4;
+            this.tbVistaSolicitarDescripcion.Tag = "";
+            this.tbVistaSolicitarDescripcion.Text = "Breve descripcion del archivo.";
+            this.tbVistaSolicitarDescripcion.Click += new System.EventHandler(this.BorrarTB);
+            // 
+            // pictureBox2
+            // 
+            this.pictureBox2.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.pictureBox2.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.pictureBox2.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox2.Image")));
+            this.pictureBox2.Location = new System.Drawing.Point(902, 50);
+            this.pictureBox2.Name = "pictureBox2";
+            this.pictureBox2.Size = new System.Drawing.Size(38, 38);
+            this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
+            this.pictureBox2.TabIndex = 3;
+            this.pictureBox2.TabStop = false;
+            this.pictureBox2.Tag = "1";
+            this.pictureBox2.Click += new System.EventHandler(this.SolicitarArchivo);
             // 
             // pnlMenu
             // 
@@ -1328,11 +1530,11 @@
             // 
             this.lblMenuCRapidas.AutoSize = true;
             this.lblMenuCRapidas.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.lblMenuCRapidas.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
+            this.lblMenuCRapidas.Font = new System.Drawing.Font("Roboto Lt", 12F);
             this.lblMenuCRapidas.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(153)))), ((int)(((byte)(153)))), ((int)(((byte)(153)))));
             this.lblMenuCRapidas.Location = new System.Drawing.Point(98, 31);
             this.lblMenuCRapidas.Name = "lblMenuCRapidas";
-            this.lblMenuCRapidas.Size = new System.Drawing.Size(83, 25);
+            this.lblMenuCRapidas.Size = new System.Drawing.Size(67, 19);
             this.lblMenuCRapidas.TabIndex = 2;
             this.lblMenuCRapidas.Tag = "6";
             this.lblMenuCRapidas.Text = "Rapidas";
@@ -1342,11 +1544,11 @@
             // 
             this.lblMenuConfiguracionesR.AutoSize = true;
             this.lblMenuConfiguracionesR.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.lblMenuConfiguracionesR.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
+            this.lblMenuConfiguracionesR.Font = new System.Drawing.Font("Roboto Lt", 12F);
             this.lblMenuConfiguracionesR.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(153)))), ((int)(((byte)(153)))), ((int)(((byte)(153)))));
             this.lblMenuConfiguracionesR.Location = new System.Drawing.Point(69, 10);
             this.lblMenuConfiguracionesR.Name = "lblMenuConfiguracionesR";
-            this.lblMenuConfiguracionesR.Size = new System.Drawing.Size(154, 25);
+            this.lblMenuConfiguracionesR.Size = new System.Drawing.Size(124, 19);
             this.lblMenuConfiguracionesR.TabIndex = 2;
             this.lblMenuConfiguracionesR.Tag = "6";
             this.lblMenuConfiguracionesR.Text = "Configuraciones";
@@ -1429,11 +1631,11 @@
             // 
             this.lblMenuAbout.AutoSize = true;
             this.lblMenuAbout.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.lblMenuAbout.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F);
+            this.lblMenuAbout.Font = new System.Drawing.Font("Roboto Lt", 14F);
             this.lblMenuAbout.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(153)))), ((int)(((byte)(153)))), ((int)(((byte)(153)))));
             this.lblMenuAbout.Location = new System.Drawing.Point(66, 19);
             this.lblMenuAbout.Name = "lblMenuAbout";
-            this.lblMenuAbout.Size = new System.Drawing.Size(171, 29);
+            this.lblMenuAbout.Size = new System.Drawing.Size(130, 23);
             this.lblMenuAbout.TabIndex = 2;
             this.lblMenuAbout.Tag = "6";
             this.lblMenuAbout.Text = "Sobre bitNode";
@@ -1480,11 +1682,11 @@
             // 
             this.lblMenuConfiguracion.AutoSize = true;
             this.lblMenuConfiguracion.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.lblMenuConfiguracion.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F);
+            this.lblMenuConfiguracion.Font = new System.Drawing.Font("Roboto Lt", 14F);
             this.lblMenuConfiguracion.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(153)))), ((int)(((byte)(153)))), ((int)(((byte)(153)))));
             this.lblMenuConfiguracion.Location = new System.Drawing.Point(66, 19);
             this.lblMenuConfiguracion.Name = "lblMenuConfiguracion";
-            this.lblMenuConfiguracion.Size = new System.Drawing.Size(162, 29);
+            this.lblMenuConfiguracion.Size = new System.Drawing.Size(128, 23);
             this.lblMenuConfiguracion.TabIndex = 2;
             this.lblMenuConfiguracion.Tag = "5";
             this.lblMenuConfiguracion.Text = "Configuracion";
@@ -1531,11 +1733,11 @@
             // 
             this.lblMenuSolicitar.AutoSize = true;
             this.lblMenuSolicitar.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.lblMenuSolicitar.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F);
+            this.lblMenuSolicitar.Font = new System.Drawing.Font("Roboto Lt", 14F);
             this.lblMenuSolicitar.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(153)))), ((int)(((byte)(153)))), ((int)(((byte)(153)))));
             this.lblMenuSolicitar.Location = new System.Drawing.Point(66, 19);
             this.lblMenuSolicitar.Name = "lblMenuSolicitar";
-            this.lblMenuSolicitar.Size = new System.Drawing.Size(100, 29);
+            this.lblMenuSolicitar.Size = new System.Drawing.Size(76, 23);
             this.lblMenuSolicitar.TabIndex = 2;
             this.lblMenuSolicitar.Tag = "4";
             this.lblMenuSolicitar.Text = "Solicitar";
@@ -1582,11 +1784,11 @@
             // 
             this.lblMenuCompartir.AutoSize = true;
             this.lblMenuCompartir.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.lblMenuCompartir.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F);
+            this.lblMenuCompartir.Font = new System.Drawing.Font("Roboto Lt", 14F);
             this.lblMenuCompartir.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(153)))), ((int)(((byte)(153)))), ((int)(((byte)(153)))));
             this.lblMenuCompartir.Location = new System.Drawing.Point(66, 19);
             this.lblMenuCompartir.Name = "lblMenuCompartir";
-            this.lblMenuCompartir.Size = new System.Drawing.Size(119, 29);
+            this.lblMenuCompartir.Size = new System.Drawing.Size(93, 23);
             this.lblMenuCompartir.TabIndex = 2;
             this.lblMenuCompartir.Tag = "3";
             this.lblMenuCompartir.Text = "Compartir";
@@ -1633,11 +1835,11 @@
             // 
             this.lblMenuExplorar.AutoSize = true;
             this.lblMenuExplorar.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.lblMenuExplorar.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F);
+            this.lblMenuExplorar.Font = new System.Drawing.Font("Roboto Lt", 14F);
             this.lblMenuExplorar.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(153)))), ((int)(((byte)(153)))), ((int)(((byte)(153)))));
             this.lblMenuExplorar.Location = new System.Drawing.Point(66, 19);
             this.lblMenuExplorar.Name = "lblMenuExplorar";
-            this.lblMenuExplorar.Size = new System.Drawing.Size(103, 29);
+            this.lblMenuExplorar.Size = new System.Drawing.Size(77, 23);
             this.lblMenuExplorar.TabIndex = 2;
             this.lblMenuExplorar.Tag = "2";
             this.lblMenuExplorar.Text = "Explorar";
@@ -1684,11 +1886,11 @@
             // 
             this.lblMenuDescargar.AutoSize = true;
             this.lblMenuDescargar.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.lblMenuDescargar.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F);
+            this.lblMenuDescargar.Font = new System.Drawing.Font("Roboto Lt", 14F);
             this.lblMenuDescargar.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(153)))), ((int)(((byte)(153)))), ((int)(((byte)(153)))));
             this.lblMenuDescargar.Location = new System.Drawing.Point(66, 19);
             this.lblMenuDescargar.Name = "lblMenuDescargar";
-            this.lblMenuDescargar.Size = new System.Drawing.Size(124, 29);
+            this.lblMenuDescargar.Size = new System.Drawing.Size(96, 23);
             this.lblMenuDescargar.TabIndex = 2;
             this.lblMenuDescargar.Tag = "1";
             this.lblMenuDescargar.Text = "Descargar";
@@ -1725,143 +1927,6 @@
             // 
             this.ofdArchivo.Title = "Seleccione un archivo";
             // 
-            // bnudVistaConfiguracionDescargasSimultaneas
-            // 
-            this.bnudVistaConfiguracionDescargasSimultaneas.BackColor = System.Drawing.Color.Transparent;
-            this.bnudVistaConfiguracionDescargasSimultaneas.Location = new System.Drawing.Point(848, 496);
-            this.bnudVistaConfiguracionDescargasSimultaneas.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.bnudVistaConfiguracionDescargasSimultaneas.maxValor = 5;
-            this.bnudVistaConfiguracionDescargasSimultaneas.minValor = 0;
-            this.bnudVistaConfiguracionDescargasSimultaneas.Name = "bnudVistaConfiguracionDescargasSimultaneas";
-            this.bnudVistaConfiguracionDescargasSimultaneas.Size = new System.Drawing.Size(65, 35);
-            this.bnudVistaConfiguracionDescargasSimultaneas.TabIndex = 6;
-            this.bnudVistaConfiguracionDescargasSimultaneas.Tag = "33";
-            this.bnudVistaConfiguracionDescargasSimultaneas.UpDown = 1;
-            this.bnudVistaConfiguracionDescargasSimultaneas.valor = 0;
-            this.bnudVistaConfiguracionDescargasSimultaneas.CambioDeValor += new System.EventHandler(this.CambiarConfiguracion);
-            // 
-            // bnudVistaConfiguracionLimiteBajada
-            // 
-            this.bnudVistaConfiguracionLimiteBajada.BackColor = System.Drawing.Color.Transparent;
-            this.bnudVistaConfiguracionLimiteBajada.Location = new System.Drawing.Point(251, 551);
-            this.bnudVistaConfiguracionLimiteBajada.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.bnudVistaConfiguracionLimiteBajada.maxValor = 9999;
-            this.bnudVistaConfiguracionLimiteBajada.minValor = 0;
-            this.bnudVistaConfiguracionLimiteBajada.Name = "bnudVistaConfiguracionLimiteBajada";
-            this.bnudVistaConfiguracionLimiteBajada.Size = new System.Drawing.Size(65, 35);
-            this.bnudVistaConfiguracionLimiteBajada.TabIndex = 6;
-            this.bnudVistaConfiguracionLimiteBajada.Tag = "31";
-            this.bnudVistaConfiguracionLimiteBajada.UpDown = 5;
-            this.bnudVistaConfiguracionLimiteBajada.valor = 0;
-            this.bnudVistaConfiguracionLimiteBajada.CambioDeValor += new System.EventHandler(this.CambiarConfiguracion);
-            // 
-            // bnudVistaConfiguracionLimiteSubida
-            // 
-            this.bnudVistaConfiguracionLimiteSubida.BackColor = System.Drawing.Color.Transparent;
-            this.bnudVistaConfiguracionLimiteSubida.Location = new System.Drawing.Point(251, 496);
-            this.bnudVistaConfiguracionLimiteSubida.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.bnudVistaConfiguracionLimiteSubida.maxValor = 9999;
-            this.bnudVistaConfiguracionLimiteSubida.minValor = 0;
-            this.bnudVistaConfiguracionLimiteSubida.Name = "bnudVistaConfiguracionLimiteSubida";
-            this.bnudVistaConfiguracionLimiteSubida.Size = new System.Drawing.Size(65, 35);
-            this.bnudVistaConfiguracionLimiteSubida.TabIndex = 6;
-            this.bnudVistaConfiguracionLimiteSubida.Tag = "32";
-            this.bnudVistaConfiguracionLimiteSubida.UpDown = 5;
-            this.bnudVistaConfiguracionLimiteSubida.valor = 0;
-            this.bnudVistaConfiguracionLimiteSubida.CambioDeValor += new System.EventHandler(this.CambiarConfiguracion);
-            // 
-            // bsVistaConfiguracionEfectoFade
-            // 
-            this.bsVistaConfiguracionEfectoFade.Activo = true;
-            this.bsVistaConfiguracionEfectoFade.BackColor = System.Drawing.Color.Transparent;
-            this.bsVistaConfiguracionEfectoFade.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.bsVistaConfiguracionEfectoFade.Location = new System.Drawing.Point(94, 279);
-            this.bsVistaConfiguracionEfectoFade.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.bsVistaConfiguracionEfectoFade.Name = "bsVistaConfiguracionEfectoFade";
-            this.bsVistaConfiguracionEfectoFade.Size = new System.Drawing.Size(36, 18);
-            this.bsVistaConfiguracionEfectoFade.TabIndex = 2;
-            this.bsVistaConfiguracionEfectoFade.Tag = "21";
-            this.bsVistaConfiguracionEfectoFade.Clickaso += new System.EventHandler(this.CambiarConfiguracion);
-            // 
-            // bsVistaConfiguracionIniciarConWindows
-            // 
-            this.bsVistaConfiguracionIniciarConWindows.Activo = false;
-            this.bsVistaConfiguracionIniciarConWindows.BackColor = System.Drawing.Color.Transparent;
-            this.bsVistaConfiguracionIniciarConWindows.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.bsVistaConfiguracionIniciarConWindows.Location = new System.Drawing.Point(126, 90);
-            this.bsVistaConfiguracionIniciarConWindows.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.bsVistaConfiguracionIniciarConWindows.Name = "bsVistaConfiguracionIniciarConWindows";
-            this.bsVistaConfiguracionIniciarConWindows.Size = new System.Drawing.Size(36, 18);
-            this.bsVistaConfiguracionIniciarConWindows.TabIndex = 2;
-            this.bsVistaConfiguracionIniciarConWindows.Tag = "11";
-            this.bsVistaConfiguracionIniciarConWindows.Clickaso += new System.EventHandler(this.CambiarConfiguracion);
-            this.bsVistaConfiguracionIniciarConWindows.Click += new System.EventHandler(this.CambiarConfiguracion);
-            // 
-            // bsVistaConfiguracionEfectoMenu
-            // 
-            this.bsVistaConfiguracionEfectoMenu.Activo = true;
-            this.bsVistaConfiguracionEfectoMenu.BackColor = System.Drawing.Color.Transparent;
-            this.bsVistaConfiguracionEfectoMenu.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.bsVistaConfiguracionEfectoMenu.Location = new System.Drawing.Point(94, 371);
-            this.bsVistaConfiguracionEfectoMenu.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.bsVistaConfiguracionEfectoMenu.Name = "bsVistaConfiguracionEfectoMenu";
-            this.bsVistaConfiguracionEfectoMenu.Size = new System.Drawing.Size(36, 18);
-            this.bsVistaConfiguracionEfectoMenu.TabIndex = 2;
-            this.bsVistaConfiguracionEfectoMenu.Tag = "23";
-            this.bsVistaConfiguracionEfectoMenu.Clickaso += new System.EventHandler(this.CambiarConfiguracion);
-            // 
-            // bsVistaConfiguracionEfectoBotones
-            // 
-            this.bsVistaConfiguracionEfectoBotones.Activo = true;
-            this.bsVistaConfiguracionEfectoBotones.BackColor = System.Drawing.Color.Transparent;
-            this.bsVistaConfiguracionEfectoBotones.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.bsVistaConfiguracionEfectoBotones.Location = new System.Drawing.Point(94, 325);
-            this.bsVistaConfiguracionEfectoBotones.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.bsVistaConfiguracionEfectoBotones.Name = "bsVistaConfiguracionEfectoBotones";
-            this.bsVistaConfiguracionEfectoBotones.Size = new System.Drawing.Size(36, 18);
-            this.bsVistaConfiguracionEfectoBotones.TabIndex = 2;
-            this.bsVistaConfiguracionEfectoBotones.Tag = "22";
-            this.bsVistaConfiguracionEfectoBotones.Clickaso += new System.EventHandler(this.CambiarConfiguracion);
-            // 
-            // bsVistaConfiguracionMinimizarBandeja
-            // 
-            this.bsVistaConfiguracionMinimizarBandeja.Activo = false;
-            this.bsVistaConfiguracionMinimizarBandeja.BackColor = System.Drawing.Color.Transparent;
-            this.bsVistaConfiguracionMinimizarBandeja.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.bsVistaConfiguracionMinimizarBandeja.Location = new System.Drawing.Point(126, 148);
-            this.bsVistaConfiguracionMinimizarBandeja.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.bsVistaConfiguracionMinimizarBandeja.Name = "bsVistaConfiguracionMinimizarBandeja";
-            this.bsVistaConfiguracionMinimizarBandeja.Size = new System.Drawing.Size(36, 18);
-            this.bsVistaConfiguracionMinimizarBandeja.TabIndex = 2;
-            this.bsVistaConfiguracionMinimizarBandeja.Tag = "12";
-            this.bsVistaConfiguracionMinimizarBandeja.Clickaso += new System.EventHandler(this.CambiarConfiguracion);
-            // 
-            // bsVistaConfiguracionTema
-            // 
-            this.bsVistaConfiguracionTema.Activo = true;
-            this.bsVistaConfiguracionTema.BackColor = System.Drawing.Color.Transparent;
-            this.bsVistaConfiguracionTema.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.bsVistaConfiguracionTema.Location = new System.Drawing.Point(746, 338);
-            this.bsVistaConfiguracionTema.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.bsVistaConfiguracionTema.Name = "bsVistaConfiguracionTema";
-            this.bsVistaConfiguracionTema.Size = new System.Drawing.Size(36, 18);
-            this.bsVistaConfiguracionTema.TabIndex = 2;
-            this.bsVistaConfiguracionTema.Tag = "24";
-            this.bsVistaConfiguracionTema.Clickaso += new System.EventHandler(this.CambiarConfiguracion);
-            // 
-            // bsVistaConfiguracionLatino
-            // 
-            this.bsVistaConfiguracionLatino.Activo = true;
-            this.bsVistaConfiguracionLatino.BackColor = System.Drawing.Color.Transparent;
-            this.bsVistaConfiguracionLatino.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.bsVistaConfiguracionLatino.Location = new System.Drawing.Point(746, 106);
-            this.bsVistaConfiguracionLatino.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.bsVistaConfiguracionLatino.Name = "bsVistaConfiguracionLatino";
-            this.bsVistaConfiguracionLatino.Size = new System.Drawing.Size(36, 18);
-            this.bsVistaConfiguracionLatino.TabIndex = 2;
-            this.bsVistaConfiguracionLatino.Tag = "13";
-            this.bsVistaConfiguracionLatino.Clickaso += new System.EventHandler(this.CambiarConfiguracion);
-            // 
             // frmCliente
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
@@ -1877,7 +1942,8 @@
             this.Name = "frmCliente";
             this.Opacity = 0D;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Form1";
+            this.Text = "bitNode";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.bitNodeClosing);
             this.SizeChanged += new System.EventHandler(this.TimerOn);
             this.pnlBarra.ResumeLayout(false);
             this.pnlBarra.PerformLayout();
@@ -1886,6 +1952,20 @@
             ((System.ComponentModel.ISupportInitialize)(this.pbTitulo)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbIcono)).EndInit();
             this.pnlVistaContenedor.ResumeLayout(false);
+            this.pnlVistaConfiguracionGeneral.ResumeLayout(false);
+            this.pnlVistaConfiguracionGeneral.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pbVistaConfiguracionReconectar)).EndInit();
+            this.pnlVistaComfiguracionInterfaz.ResumeLayout(false);
+            this.pnlVistaConfiguracionTransferencias.ResumeLayout(false);
+            this.pnlVistaComfiguracionGeneral.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.pbVistaConfiguracionCarpetaDescarga)).EndInit();
+            this.pnlVistaAbout.ResumeLayout(false);
+            this.pnlVistaAbout.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pbVistaAboutBotonJulio)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbVistaBotonLcs)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbVistaAbout)).EndInit();
+            this.pnlVistaDescargar.ResumeLayout(false);
+            this.pnlVistaDescargar.PerformLayout();
             this.pnlVistaExplorar.ResumeLayout(false);
             this.pnlVistaExplorarDGV.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvVistaExplorarArchivosCompartidosVecinos)).EndInit();
@@ -1905,19 +1985,6 @@
             this.pnlVistaSolicitarCompartirSolicitud.ResumeLayout(false);
             this.pnlVistaSolicitarCompartirSolicitud.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
-            this.pnlVistaConfiguracionGeneral.ResumeLayout(false);
-            this.pnlVistaConfiguracionGeneral.PerformLayout();
-            this.pnlVistaComfiguracionInterfaz.ResumeLayout(false);
-            this.pnlVistaConfiguracionTransferencias.ResumeLayout(false);
-            this.pnlVistaComfiguracionGeneral.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.pbVistaConfiguracionCarpetaDescarga)).EndInit();
-            this.pnlVistaAbout.ResumeLayout(false);
-            this.pnlVistaAbout.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pbVistaAboutBotonJulio)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pbVistaBotonLcs)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pbVistaAbout)).EndInit();
-            this.pnlVistaDescargar.ResumeLayout(false);
-            this.pnlVistaDescargar.PerformLayout();
             this.pnlMenu.ResumeLayout(false);
             this.pnlMenuConfiguracionesRapidas.ResumeLayout(false);
             this.pnlMenuConfiguracionesRapidas.PerformLayout();
@@ -2077,6 +2144,11 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn6;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn7;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn8;
+        private System.Windows.Forms.Label lblVistaConfiguracionIP;
+        private System.Windows.Forms.PictureBox pbVistaConfiguracionReconectar;
+        private System.Windows.Forms.TextBox tbVistaConfiguracionIP;
+        private System.Windows.Forms.Label lblVistaConfiguracionBitNoders;
+        private System.Windows.Forms.Label lblVistaConfiguracionMiIP;
     }
 }
 

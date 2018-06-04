@@ -268,6 +268,15 @@ namespace Cliente.Idioma {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a  bitNoders vivos.
+        /// </summary>
+        internal static string lblVistaConfiguracionBitNoders {
+            get {
+                return ResourceManager.GetString("lblVistaConfiguracionBitNoders", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Efecto transision de botones.
         /// </summary>
         internal static string lblVistaConfiguracionEfectoBotones {
@@ -336,6 +345,15 @@ namespace Cliente.Idioma {
         internal static string lblVistaConfiguracionInterfaz {
             get {
                 return ResourceManager.GetString("lblVistaConfiguracionInterfaz", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a IP de coneccion.
+        /// </summary>
+        internal static string lblVistaConfiguracionIP {
+            get {
+                return ResourceManager.GetString("lblVistaConfiguracionIP", resourceCulture);
             }
         }
         
@@ -484,6 +502,15 @@ namespace Cliente.Idioma {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a La IP introducida no es valida..
+        /// </summary>
+        internal static string mensajeErrorIP {
+            get {
+                return ResourceManager.GetString("mensajeErrorIP", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a El archivo fue compartido exitosamente..
         /// </summary>
         internal static string mensajeExitoCompartirArchivo {
@@ -502,11 +529,38 @@ namespace Cliente.Idioma {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Mi IP: .
+        /// </summary>
+        internal static string miIP {
+            get {
+                return ResourceManager.GetString("miIP", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a La solicitud fue enviada, solo queda esperar..
         /// </summary>
         internal static string msgSolicitarArchivo {
             get {
                 return ResourceManager.GetString("msgSolicitarArchivo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a El archivo solicitado no existe..
+        /// </summary>
+        internal static string msjASNULL {
+            get {
+                return ResourceManager.GetString("msjASNULL", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Direccion IP copiada a portapapeles..
+        /// </summary>
+        internal static string msjIPPortapapeles {
+            get {
+                return ResourceManager.GetString("msjIPPortapapeles", resourceCulture);
             }
         }
         
@@ -534,6 +588,15 @@ namespace Cliente.Idioma {
         internal static string tbVistaCompartirDescripcionArchivo {
             get {
                 return ResourceManager.GetString("tbVistaCompartirDescripcionArchivo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Reconectar.
+        /// </summary>
+        internal static string ttReconectar {
+            get {
+                return ResourceManager.GetString("ttReconectar", resourceCulture);
             }
         }
     }

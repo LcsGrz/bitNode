@@ -14,7 +14,7 @@ namespace Cliente
         public static bool PermitirRecibir = true;
         private ManualResetEvent TodoHecho = new ManualResetEvent(true);
         public int puerto { get; set; } = 420;
-        Servidor server = new Servidor();
+        Controlador controlador = new Controlador();
         //Clase
         class StateObject
         {
@@ -29,7 +29,7 @@ namespace Cliente
             IPEndPoint iep1 = new IPEndPoint(ip, puerto);
 
             socket.SetSocketOption(SocketOptionLevel.Socket, SocketOptionName.Broadcast, 1);
-            socket.SendTo(Encoding.ASCII.GetBytes(msj), iep1);
+            socket.SendTo(Encoding.UTF8.GetBytes(msj), iep1);
             socket.Close();
         }
         public void RecibirUDP()
@@ -65,19 +65,34 @@ namespace Cliente
 
             int read = s.EndReceiveFrom(ar, ref tempRemoteEP);
             IPAddress IPRecibida = IPAddress.Parse(tempRemoteEP.ToString().Split(':')[0]);
-            if (!IPRecibida.Equals(Servidor.ObtenerIPLocal()))
+            if (!IPRecibida.Equals(Controlador.ObtenerIPLocal()))
             {
                 byte[] data = new byte[1024];
-                string[] stringData = Encoding.ASCII.GetString(SO.buffer, 0, read).Split('@');
+                string[] stringData = Encoding.UTF8.GetString(SO.buffer, 0, read).Split('@');
                 if (stringData[0] == "bitNode")
                 {
-                    server.AgregarIP(IPRecibida);
+                    controlador.AgregarIP(IPRecibida,(stringData[1] != "PING" && stringData[1] != "PONG"));
                     //--------------------------------------
                     switch (stringData[1])
                     {
                         case "PPING": // PrimerPing
                             {
-                                EnviarMSJ_UDP(IPRecibida, "bitNode@EACV@");
+                                string[] msj = stringData[2].Split('|');
+                                if (msj[0] == "BROADCAST")
+                                {
+                                    if (bool.Parse(msj[1]))
+                                    {
+                                        EnviarMSJ_UDP(IPRecibida, "bitNode@EACV@");
+                                    }
+                                    else
+                                    {
+                                        EnviarMSJ_UDP(IPRecibida, "bitNode@PONG@");
+                                    }
+                                }
+                                else //IPFIJA
+                                {
+                                    controlador.EnviarListaIPS(IPRecibida);
+                                }
                                 break;
                             }
                         case "PING": //Estoy vivo?
@@ -87,26 +102,56 @@ namespace Cliente
                             }
                         case "SOLICITAR": //Hay una solicitud
                             {
-                                Servidor.Solicitudes.Add(stringData[2]);
-                                Servidor.InformarSolicitud();
+                                Controlador.Solicitudes.Add(stringData[2]);
+                                Controlador.InformarSolicitud();
                                 break;
                             }
                         case "AACV": // AgregarArchivosCompartidosVecinos
                             {
                                 Archivo a = JsonConvert.DeserializeObject<Archivo>(stringData[2]);
+                                //a.IPPropietario.Add(IPRecibida);
                                 a.IPPropietario = IPRecibida;
-                                server.AgregarArchivosCompartidos(a);
+                                controlador.AgregarArchivosCompartidos(a);
                                 break;
                             }
                         case "EACV": // EliminarArchivosCompartidosVecinos
                             {
-                                server.EliminarArchivosCompartidosDeIP(IPRecibida);
-                                server.EnviarUDP(IPRecibida,"bitNode@CEACV@");
+                                if (Controlador.RecivirACV) {
+                                    controlador.EliminarArchivosCompartidosDeIP(IPRecibida);
+                                    controlador.EnviarUDP(IPRecibida, "bitNode@CEACV@");
+                                }
                                 break;
                             }
                         case "CEACV": // ConfirmadoEliminoArchivosCompartidosVecinos
                             {
-                                server.EnviarArchivosCompartidos(IPRecibida);
+                                controlador.EnviarArchivosCompartidos(IPRecibida);
+                                break;
+                            }
+                        case "SAD": // Solicitar Archivo a Descargar
+                            {
+                                string[] msj = stringData[2].Split('|');
+                                controlador.EnviarArchivoSolicitado(IPRecibida, Convert.ToInt32(msj[1]), msj[0], 0);
+                                break;
+                            }
+                        case "IPV": // Añadir IPVecinas
+                            {
+                                controlador.AgregarIP(IPAddress.Parse(stringData[2]),true);
+                                break;
+                            }
+                        case "BYE": // Se desconecto un bitNoder
+                            {
+                                controlador.EliminarIP(IPRecibida);
+                                controlador.EliminarArchivosCompartidosDeIP(IPRecibida);
+                                break;
+                            }
+                        case "SAC": // SolicitarArchivosCompartidos
+                            {
+                                EnviarMSJ_UDP(IPRecibida, "bitNode@EACV@");
+                                break;
+                            }
+                        case "ASNULL": // ArchivoSolicitado NULL - no existe
+                            {
+                                new frmMensaje(Idioma.StringResources.msjASNULL).ShowDialog();
                                 break;
                             }
                     }
