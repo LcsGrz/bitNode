@@ -16,7 +16,6 @@ namespace Cliente
         public static string rutaBN = Configuracion.bitNode + "\\ArchivosCompartidos";
         //Eventos
         public static event EventHandler ArchivoGuardado;
-        public static event EventHandler EnviarArchivo;
         //Constructor
         public Archivo(OpenFileDialog ofd)
         {
@@ -32,8 +31,7 @@ namespace Cliente
         public long Tamaño { get; set; }
         public string ArchivoMD5 { get; set; } = null;
         public bool Activo { get; set; } = true;
-        //public List<IPAddress> IPPropietario = new List<IPAddress>();
-        public IPAddress IPPropietario { get; set; }
+        public List<IPAddress> IPPropietario;
         //Funciones
         public static string KB_GB_MB(long peso)
         {
@@ -96,8 +94,7 @@ namespace Cliente
                 File.WriteAllText(rutaBN + "\\" + Nombre.Split('.')[0] + ".json", JsonConvert.SerializeObject(this));
                 if (!frmCliente.archivosCompartidos.Exists(x => x.ArchivoMD5.Contains(ArchivoMD5)))
                     frmCliente.archivosCompartidos.Add(this);
-                ArchivoGuardado?.Invoke(null, null);
-                EnviarArchivo?.Invoke(null, null);
+                ArchivoGuardado?.Invoke(this, null);
                 new frmMensaje(Idioma.StringResources.mensajeExitoCompartirArchivo).ShowDialog();
                 return;
             }
@@ -108,14 +105,8 @@ namespace Cliente
             if (File.Exists(rutaBN + "\\" + Nombre.Split('.')[0] + ".json"))
                 File.Delete(rutaBN + "\\" + Nombre.Split('.')[0] + ".json");
             frmCliente.archivosCompartidos.RemoveAt(index);
-            ArchivoGuardado?.Invoke(null, null);
-            EnviarArchivo?.Invoke(null, null);
         }
-        public void CambiarEstado()
-        {
-            File.WriteAllText(rutaBN + "\\" + Nombre.Split('.')[0] + ".json", JsonConvert.SerializeObject(this));
-            EnviarArchivo?.Invoke(null, null);
-        }
+        public void CambiarEstado() => File.WriteAllText(rutaBN + "\\" + Nombre.Split('.')[0] + ".json", JsonConvert.SerializeObject(this));
         public static bool ArchivoEnDisco(string ruta) => File.Exists(ruta);
     }
 }

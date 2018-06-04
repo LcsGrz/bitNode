@@ -297,4 +297,7 @@
   <data name="msjASNULL" xml:space="preserve">
     <value>El archivo solicitado no existe.</value>
   </data>
+  <data name="mensajebitNodeActivo" xml:space="preserve">
+    <value>bitNode ya se encuentra en ejecucion.</value>
+  </data>
 </root>

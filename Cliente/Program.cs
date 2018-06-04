@@ -1,9 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
-using System.Linq;
-using System.Threading;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Cliente
@@ -16,15 +13,20 @@ namespace Cliente
         [STAThread]
         static void Main()
         {
-            if (!Directory.Exists(Configuracion.bitNode))
+            if (Process.GetProcessesByName(Process.GetCurrentProcess().ProcessName).Length == 1)
             {
-                Directory.CreateDirectory(Configuracion.bitNode);
-            }
+                if (!Directory.Exists(Configuracion.bitNode))
+                    Directory.CreateDirectory(Configuracion.bitNode);
 
-            Application.EnableVisualStyles();
-            Application.SetCompatibleTextRenderingDefault(false);
-           // Application.Run(new frmSplash());
-            Application.Run(new frmCliente());
+                Application.EnableVisualStyles();
+                Application.SetCompatibleTextRenderingDefault(false);
+                // Application.Run(new frmSplash());
+                Application.Run(new frmCliente());
+            }
+            else
+            {
+                new frmMensaje(Idioma.StringResources.mensajebitNodeActivo).ShowDialog();
+            }
         }
     }
 }

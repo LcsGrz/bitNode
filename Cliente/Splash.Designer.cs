@@ -87,7 +87,7 @@
             this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "frmSplash";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Splash";
+            this.Text = "bitNode";
             this.Activated += new System.EventHandler(this.frmSplash_Activated);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);

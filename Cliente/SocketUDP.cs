@@ -71,7 +71,7 @@ namespace Cliente
                 string[] stringData = Encoding.UTF8.GetString(SO.buffer, 0, read).Split('@');
                 if (stringData[0] == "bitNode")
                 {
-                    controlador.AgregarIP(IPRecibida,(stringData[1] != "PING" && stringData[1] != "PONG"));
+                    controlador.AgregarIP(IPRecibida);
                     //--------------------------------------
                     switch (stringData[1])
                     {
@@ -81,18 +81,14 @@ namespace Cliente
                                 if (msj[0] == "BROADCAST")
                                 {
                                     if (bool.Parse(msj[1]))
-                                    {
-                                        EnviarMSJ_UDP(IPRecibida, "bitNode@EACV@");
-                                    }
+                                        EnviarMSJ_UDP(IPRecibida, "bitNode@ETACV@");
+                                    else if(Controlador.RecivirACV)
+                                        EnviarMSJ_UDP(IPRecibida, "bitNode@SAC@");
                                     else
-                                    {
                                         EnviarMSJ_UDP(IPRecibida, "bitNode@PONG@");
-                                    }
                                 }
                                 else //IPFIJA
-                                {
                                     controlador.EnviarListaIPS(IPRecibida);
-                                }
                                 break;
                             }
                         case "PING": //Estoy vivo?
@@ -106,17 +102,10 @@ namespace Cliente
                                 Controlador.InformarSolicitud();
                                 break;
                             }
-                        case "AACV": // AgregarArchivosCompartidosVecinos
+                        case "ETACV": // EliminarTodosLosArchivosCompartidosVecinos
                             {
-                                Archivo a = JsonConvert.DeserializeObject<Archivo>(stringData[2]);
-                                //a.IPPropietario.Add(IPRecibida);
-                                a.IPPropietario = IPRecibida;
-                                controlador.AgregarArchivosCompartidos(a);
-                                break;
-                            }
-                        case "EACV": // EliminarArchivosCompartidosVecinos
-                            {
-                                if (Controlador.RecivirACV) {
+                                if (Controlador.RecivirACV)
+                                {
                                     controlador.EliminarArchivosCompartidosDeIP(IPRecibida);
                                     controlador.EnviarUDP(IPRecibida, "bitNode@CEACV@");
                                 }
@@ -124,7 +113,7 @@ namespace Cliente
                             }
                         case "CEACV": // ConfirmadoEliminoArchivosCompartidosVecinos
                             {
-                                controlador.EnviarArchivosCompartidos(IPRecibida);
+                                controlador.EnviarListaArchivosCompartidos(IPRecibida);
                                 break;
                             }
                         case "SAD": // Solicitar Archivo a Descargar
@@ -135,7 +124,14 @@ namespace Cliente
                             }
                         case "IPV": // Añadir IPVecinas
                             {
-                                controlador.AgregarIP(IPAddress.Parse(stringData[2]),true);
+                                if (controlador.AgregarIP(IPAddress.Parse(stringData[2])))
+                                {
+                                    EnviarMSJ_UDP(IPAddress.Parse(stringData[2]), "bitNode@PPING@");
+                                }
+                                else
+                                {
+                                    EnviarMSJ_UDP(IPAddress.Parse(stringData[2]), "bitNode@PONG@"); // es necesario?
+                                }
                                 break;
                             }
                         case "BYE": // Se desconecto un bitNoder
@@ -146,12 +142,23 @@ namespace Cliente
                             }
                         case "SAC": // SolicitarArchivosCompartidos
                             {
-                                EnviarMSJ_UDP(IPRecibida, "bitNode@EACV@");
+                                EnviarMSJ_UDP(IPRecibida, "bitNode@ETACV@");
                                 break;
                             }
                         case "ASNULL": // ArchivoSolicitado NULL - no existe
                             {
                                 new frmMensaje(Idioma.StringResources.msjASNULL).ShowDialog();
+                                break;
+                            }
+                        case "AAC": // AgregarArchivoCompartido
+                            {
+                                if (Controlador.RecivirACV)
+                                    controlador.AgregarArchivoCompartido(JsonConvert.DeserializeObject<Archivo>(stringData[2]), IPRecibida);
+                                break;
+                            }
+                        case "EAC": // EliminarArchivoCompartido
+                            {
+                                controlador.EliminarArchivosCompartidosDeMD5(stringData[2], IPRecibida);
                                 break;
                             }
                     }

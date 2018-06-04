@@ -484,6 +484,15 @@ namespace Cliente.Idioma {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a bitNode ya se encuentra en ejecucion..
+        /// </summary>
+        internal static string mensajebitNodeActivo {
+            get {
+                return ResourceManager.GetString("mensajebitNodeActivo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Email copiado al portapapeles..
         /// </summary>
         internal static string mensajeEmail {

@@ -1,6 +1,5 @@
 ﻿using Cliente.Controles;
 using Microsoft.Win32;
-using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -9,8 +8,6 @@ using System.IO;
 using System.Net;
 using System.Net.NetworkInformation;
 using System.Runtime.InteropServices;
-using System.Text;
-using System.Text.RegularExpressions;
 using System.Threading;
 using System.Windows.Forms;
 
@@ -45,13 +42,18 @@ namespace Cliente
             AplicarTema();
             server.IniciarEjecuciones();
 
-            Archivo.ArchivoGuardado += new EventHandler((object sender, EventArgs e) => { this.Invoke(new Action(() => { CargarArchivosCompatidos(); })); });
+            Archivo.ArchivoGuardado += new EventHandler((object sender, EventArgs e) => { this.Invoke(new Action(() => { CargarArchivosCompatidos(); })); server.EnviarUnicoArchivoCompartido((Archivo)sender); });
             Controlador.informarSolicitud += new EventHandler((object sender, EventArgs e) => { this.Invoke(new Action(() => { CargarSolicitudes(); })); });
-            NetworkChange.NetworkAddressChanged += new NetworkAddressChangedEventHandler((object sender, EventArgs e) => {
-                tbVistaConfiguracionIP.Text = "255.255.255.255";
+            NetworkChange.NetworkAddressChanged += new NetworkAddressChangedEventHandler((object sender, EventArgs e) =>
+            {
+                this.Invoke(new Action(() => {
+                    tbVistaConfiguracionIP.Text = "255.255.255.255";
                 lblVistaConfiguracionMiIP.Text = Idioma.StringResources.miIP + Controlador.ObtenerIPLocal();
-                Reconectar(null, null); });
+                Reconectar(null, null);
+                }));
+            });
             Controlador.informarBitNoders += new EventHandler((object sender, EventArgs e) => { this.Invoke(new Action(() => { lblVistaConfiguracionBitNoders.Text = Controlador.IPSVecinas.Count + Idioma.StringResources.lblVistaConfiguracionBitNoders; })); });
+            Controlador.informarArchivo += new EventHandler((object sender, EventArgs e) => { if (tagAnterior == 1) { this.Invoke(new Action(() => { CargarArchivosCompartidosVecinos(); })); } });
         }
         //----------------------------------------------------------------------------------------------Funciones de form
         private void MoverForm(object sender, MouseEventArgs e) //Mover form
@@ -180,7 +182,7 @@ namespace Cliente
                     Controlador.RecivirACV = true;
                     server.EnviarUDP(null, "bitNode@SAC@");
                 }
-                CargarArchivosCompartidosVecinos();
+               // CargarArchivosCompartidosVecinos();
             }
             if (tagNuevo == 3)
                 pbMenuSolicitar.Image = Properties.Resources.SolictarOFF;
@@ -658,22 +660,6 @@ namespace Cliente
             }
 
         }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-            MessageBox.Show(Controlador.ArchivosCompartidosVecinos.Count.ToString());
-
-        }
-        private void button2_Click(object sender, EventArgs e)
-        {
-            server.EnviarUDP(IPAddress.Parse("10.62.245.9"),"bitNode@PING@");
-        }
-        private void button3_Click(object sender, EventArgs e)
-        {
-            //server.EnviarUDP(IPAddress.Broadcast, "bitNode@PING@asd");
-            server.EnviarUDP(null, "bitNode@SOLICITAR@gato|perro");
-        }
-
         private void SolicitarArchivo(object sender, EventArgs e) //Enviar solicitud de archivo
         {
             server.EnviarUDP(null, "bitNode@SOLICITAR@" + configuracion.nombre + "|" + tbVistaSolicitarDescripcion.Text);
@@ -712,10 +698,16 @@ namespace Cliente
                     archivosCompartidos[e.RowIndex].Activo = !archivosCompartidos[e.RowIndex].Activo;
                     dgvVistaCompartirArchivos.CurrentCell.Value = ImagenesArchivos[(archivosCompartidos[e.RowIndex].Activo) ? 0 : 1];
                     archivosCompartidos[e.RowIndex].CambiarEstado();
+                    if (archivosCompartidos[e.RowIndex].Activo)
+                        server.EnviarUnicoArchivoCompartido(archivosCompartidos[e.RowIndex]);
+                    else
+                        server.EnviarUDP(null, "bitNode@EAC@" + archivosCompartidos[e.RowIndex].ArchivoMD5);
                 }
                 else if (e.ColumnIndex.Equals(4))//Borrar = 4
                 {
+                    server.EnviarUDP(null, "bitNode@EAC@" + archivosCompartidos[e.RowIndex].ArchivoMD5);
                     archivosCompartidos[e.RowIndex].EliminarArchivo(e.RowIndex);
+                    dgvVistaCompartirArchivos.Rows.RemoveAt(e.RowIndex);
                 }
             }
         }
@@ -751,7 +743,8 @@ namespace Cliente
                 Controlador.RecivirACV = false;
                 server.VaciarIPS();
                 server.VaciarACV();
-                server.EnviarUDP(ip, "bitNode@PPING@" + (IPAddress.Broadcast.Equals(IPAddress.Parse(tbVistaConfiguracionIP.Text)) ? "BROADCAST" : "IPFIJA"));
+                lblVistaConfiguracionBitNoders.Text = "0" + Idioma.StringResources.lblVistaConfiguracionBitNoders;
+                server.EnviarUDP(ip, "bitNode@PPING@" + (IPAddress.Broadcast.Equals(IPAddress.Parse(configuracion.IPConeccion)) ? "BROADCAST" : "IPFIJA") + "|" + Controlador.RecivirACV);
             }
             else
             {
@@ -764,6 +757,11 @@ namespace Cliente
         {
             Clipboard.SetDataObject(Controlador.ObtenerIPLocal().ToString());
             new frmMensaje(Idioma.StringResources.msjIPPortapapeles).ShowDialog();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show(Controlador.ArchivosCompartidosVecinos.Count.ToString());
         }
 
         private void CargarArchivosCompatidos() //Carga los archivos compartidos en la vista

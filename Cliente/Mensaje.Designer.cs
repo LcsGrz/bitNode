@@ -139,7 +139,7 @@ namespace Cliente
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "frmMensaje";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Mensaje";
+            this.Text = "bitNode";
             this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.MoverForm);
             this.pnlMensaje.ResumeLayout(false);
             this.pnlMensaje.PerformLayout();

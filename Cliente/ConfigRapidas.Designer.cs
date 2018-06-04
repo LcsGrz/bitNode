@@ -38,14 +38,14 @@
             this.lblCerrarApp = new System.Windows.Forms.Label();
             this.lblDeseo = new System.Windows.Forms.Label();
             this.lblNoHacerNada = new System.Windows.Forms.Label();
-            this.panel2 = new System.Windows.Forms.Panel();
-            this.pbOk = new System.Windows.Forms.PictureBox();
-            this.pnlNada = new System.Windows.Forms.Panel();
             this.bsCerrarApp = new Cliente.Controles.botonSwitch();
             this.bsNoHacerNada = new Cliente.Controles.botonSwitch();
             this.bsApagar = new Cliente.Controles.botonSwitch();
             this.bsSuspender = new Cliente.Controles.botonSwitch();
             this.bsHibernar = new Cliente.Controles.botonSwitch();
+            this.panel2 = new System.Windows.Forms.Panel();
+            this.pbOk = new System.Windows.Forms.PictureBox();
+            this.pnlNada = new System.Windows.Forms.Panel();
             this.pnlContenedor.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbOk)).BeginInit();
             this.SuspendLayout();
@@ -175,35 +175,6 @@
             this.lblNoHacerNada.TabIndex = 2;
             this.lblNoHacerNada.Text = "No hacer nada";
             // 
-            // panel2
-            // 
-            this.panel2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(153)))), ((int)(((byte)(153)))), ((int)(((byte)(153)))));
-            this.panel2.Location = new System.Drawing.Point(92, 214);
-            this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(200, 10);
-            this.panel2.TabIndex = 2;
-            // 
-            // pbOk
-            // 
-            this.pbOk.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.pbOk.Image = ((System.Drawing.Image)(resources.GetObject("pbOk.Image")));
-            this.pbOk.Location = new System.Drawing.Point(360, 249);
-            this.pbOk.Name = "pbOk";
-            this.pbOk.Size = new System.Drawing.Size(29, 18);
-            this.pbOk.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
-            this.pbOk.TabIndex = 1;
-            this.pbOk.TabStop = false;
-            // 
-            // pnlNada
-            // 
-            this.pnlNada.BackColor = System.Drawing.Color.Transparent;
-            this.pnlNada.Dock = System.Windows.Forms.DockStyle.Top;
-            this.pnlNada.Location = new System.Drawing.Point(0, 0);
-            this.pnlNada.Name = "pnlNada";
-            this.pnlNada.Size = new System.Drawing.Size(398, 5);
-            this.pnlNada.TabIndex = 2;
-            this.pnlNada.MouseDown += new System.Windows.Forms.MouseEventHandler(this.MoverForm);
-            // 
             // bsCerrarApp
             // 
             this.bsCerrarApp.Activo = false;
@@ -264,6 +235,35 @@
             this.bsHibernar.Tag = "3";
             this.bsHibernar.Clickaso += new System.EventHandler(this.botonSwitch3_Clickaso);
             // 
+            // panel2
+            // 
+            this.panel2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(153)))), ((int)(((byte)(153)))), ((int)(((byte)(153)))));
+            this.panel2.Location = new System.Drawing.Point(92, 214);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(200, 10);
+            this.panel2.TabIndex = 2;
+            // 
+            // pbOk
+            // 
+            this.pbOk.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.pbOk.Image = ((System.Drawing.Image)(resources.GetObject("pbOk.Image")));
+            this.pbOk.Location = new System.Drawing.Point(360, 249);
+            this.pbOk.Name = "pbOk";
+            this.pbOk.Size = new System.Drawing.Size(29, 18);
+            this.pbOk.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
+            this.pbOk.TabIndex = 1;
+            this.pbOk.TabStop = false;
+            // 
+            // pnlNada
+            // 
+            this.pnlNada.BackColor = System.Drawing.Color.Transparent;
+            this.pnlNada.Dock = System.Windows.Forms.DockStyle.Top;
+            this.pnlNada.Location = new System.Drawing.Point(0, 0);
+            this.pnlNada.Name = "pnlNada";
+            this.pnlNada.Size = new System.Drawing.Size(398, 5);
+            this.pnlNada.TabIndex = 2;
+            this.pnlNada.MouseDown += new System.Windows.Forms.MouseEventHandler(this.MoverForm);
+            // 
             // frmConfigRapidas
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -280,7 +280,7 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "frmConfigRapidas";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "ConfigRapidas";
+            this.Text = "bitNode";
             this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.MoverForm);
             this.pnlContenedor.ResumeLayout(false);
             this.pnlContenedor.PerformLayout();
