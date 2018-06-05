@@ -45,7 +45,7 @@ namespace Cliente
         public Configuracion Leer()
         {
             if (!File.Exists(bitNode + "\\Newtonsoft_Json.dll"))
-                File.WriteAllBytes(Configuracion.bitNode + "\\Newtonsoft_Json.dll", Cliente.Properties.Resources.Newtonsoft_Json);
+                File.WriteAllBytes(Configuracion.bitNode + "\\Newtonsoft_Json.dll", Properties.Resources.Newtonsoft_Json);
             if (!File.Exists(bnConfiguracion))
             {
                 GenerarNombre();
