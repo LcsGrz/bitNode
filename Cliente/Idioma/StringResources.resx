@@ -300,4 +300,7 @@
   <data name="mensajebitNodeActivo" xml:space="preserve">
     <value>bitNode ya se encuentra en ejecucion.</value>
   </data>
+  <data name="lblVistaConfiguracionSyncAuto" xml:space="preserve">
+    <value>Sincronizacion continua</value>
+  </data>
 </root>

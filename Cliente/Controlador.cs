@@ -2,11 +2,9 @@
 using System;
 using System.Collections.Generic;
 using System.Net;
-using System.Net.NetworkInformation;
 using System.Net.Sockets;
 using System.Threading;
 using System.Timers;
-using System.Windows.Forms;
 
 namespace Cliente
 {
@@ -179,10 +177,18 @@ namespace Cliente
         public void SolicitarArchivo(int index)
         {
             int puerto = random.Next(100, 6500);
-            STCP.recibeFile(ArchivosCompartidosVecinos[index], puerto); //abriendo puerto para recibir archivo
-            ArchivosCompartidosVecinos[index].IPPropietario.ForEach(x => EnviarUDP(x, "bitNode@SAD@" + ArchivosCompartidosVecinos[index].ArchivoMD5 + "|" + puerto)); //SolicitarArchivo
+            int numero = ArchivosCompartidosVecinos[index].IPPropietario.Count;
+            STCP.recibeFile(ArchivosCompartidosVecinos[index], puerto, numero); //abriendo puerto para recibir archivo
+
+            int parte = 0;
+            ArchivosCompartidosVecinos[index].IPPropietario.ForEach(x =>
+            {
+                EnviarUDP(x, "bitNode@SAD@" + ArchivosCompartidosVecinos[index].ArchivoMD5 + "|" + puerto + "|" + parte + "|" + numero);
+                parte++;
+            });
+            //EnviarUDP(, "bitNode@SAD@" + ArchivosCompartidosVecinos[index].ArchivoMD5 + "|" + puerto); //SolicitarArchivo
         }
-        public void EnviarArchivoSolicitado(IPAddress ip, int puerto, string MD5, int offset)
+        public void EnviarArchivoSolicitado(IPAddress ip, int puerto, string MD5, int offset, int numero)
         {
             foreach (Archivo a in frmCliente.archivosCompartidos)
             {
@@ -191,7 +197,7 @@ namespace Cliente
                     if (!Archivo.ArchivoEnDisco(a.Ruta))
                         EnviarUDP(ip, "bitNode@ASNULL@");
                     else
-                        STCP.EnviarArchivo(a.Ruta, ip, offset, puerto);
+                        STCP.EnviarArchivo(a.Ruta, ip, offset, puerto, numero);
                     return;
                 }
             }

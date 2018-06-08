@@ -16,13 +16,19 @@ namespace Cliente
     {
         int portSolicitar = 666;
         int size = 2000; //tamaño de division del archivo
+        int posicion = 5;
         //Cliente
-        private byte[] arregloBytes(int n)
+        private void llenarBytes(ref byte[] sendB, int n)
         {
             byte[] arreglo = Encoding.UTF8.GetBytes(n.ToString());
-            return arreglo;
+            int contador = 0;
+            foreach (byte aux in arreglo)
+            {
+                sendB[sendB.Length - posicion + contador] = aux;
+                contador++;
+            }
         }
-        public void EnviarArchivo(string filename, IPAddress ip, int offset, int port)
+        public void EnviarArchivo(string filename, IPAddress ip, int nPc, int port, int nIps)
         {
             new Thread(() =>
             {
@@ -37,16 +43,18 @@ namespace Cliente
                     long partes = loadedFile.Length / size;
                     for (int i = 0; i < partes; i++)
                     {
-                        byte[] sendB = new byte[size + 2];
-                        loadedFile.Read(sendB, 0, sendB.Length - 2);
-                        sendB.Concat(arregloBytes(i));
+                        byte[] sendB = new byte[size + posicion];
+                        int size1 = sendB.Length;
+                        loadedFile.Read(sendB, 0, (sendB.Length - posicion));
+                        int size2 = sendB.Length;
+                        llenarBytes(ref sendB, i);
                         client.Send(sendB);
                     }
                     if (loadedFile.Length % size != 0)
                     {
-                        byte[] sendB = new byte[(loadedFile.Length % size) + 2];
-                        loadedFile.Read(sendB, 0, sendB.Length - 2);
-                        sendB.Concat(arregloBytes((int)partes * size));
+                        byte[] sendB = new byte[(loadedFile.Length % size) + posicion];
+                        loadedFile.Read(sendB, 0, sendB.Length);
+                        llenarBytes(ref sendB, (int)partes);
                         client.Send(sendB);
                     }
 
@@ -56,6 +64,7 @@ namespace Cliente
                 }
                 catch (Exception e)
                 {
+                    MessageBox.Show(e.Message + "----" + e.Source + "-----");
                     client.Shutdown(SocketShutdown.Both);
                     client.Close();
                 }
@@ -65,48 +74,60 @@ namespace Cliente
         bool puertoAbierto = true;
         TcpClient client;
 
-        public void recibeFile(Archivo archivo, int port)
+        public void recibeFile(Archivo archivo, int port, int offset)
         {
             new Thread(() =>
             {
                 var listener = new TcpListener(IPAddress.Any, portSolicitar);
                 listener.Start();
-                try
+
+                //try
                 {
-                    while (puertoAbierto)
+                    //while (puertoAbierto)
                     {
-                        using (var client = listener.AcceptTcpClient())
+                        var client = listener.AcceptTcpClient();
                         using (var stream = client.GetStream())
-                        using (var output = File.Create(new Configuracion().rutaDescarga + "\\" + archivo.Nombre.Split('.')[0] + ".bnp"))
+                        //using (var output = File.Create(new Configuracion().rutaDescarga + "\\" + archivo.Nombre.Split('.')[0] + ".bnp"))  
+                        using (FileStream output = new FileStream(new Configuracion().rutaDescarga + "\\" + archivo.Nombre.Split('.')[0] + ".bnp", FileMode.Append))
                         {
-                            var buffer = new byte[size + 2];
+                            output.SetLength(archivo.Tamaño);
+                            //----------------------------------------------
+                            var buffer = new byte[size + posicion];
                             int bytesRead;
                             int partes = (int)archivo.Tamaño / size + (archivo.Tamaño % size != 0 ? 1 : 0);
                             int contador = 0;
                             //Reconstruccion del archivo
                             while ((bytesRead = stream.Read(buffer, 0, buffer.Length)) > 0)
                             {
-                                // bytesRead; //BytesDescargados                                     
-                                char index = Convert.ToChar(new byte[] { buffer[size], buffer[size + 1] });
-                                //MessageBox.Show(bytesRead + "" + index);
-                                output.Write(buffer, Convert.ToInt32(index), bytesRead - 2);
-                                contador++; //ultimo paquete recibido 
+                                string index = "0";
+
+                                for (int x = 0; x < posicion; x++)
+                                {
+                                    int result = buffer[(buffer.Length) - 1 + x];
+                                    if (result != 0)
+                                    {
+                                        index += Convert.ToChar(result).ToString();
+                                    }
+                                }
+                                output.Write(buffer, 0, bytesRead - posicion);
+                                contador++;
                             }
+
                         }
+                        client.Close();
                     }
-                    client.Close();
+
                 }
+                /*
                 catch (Exception e)
                 {
-                    MessageBox.Show(e.Message);
-                    //File.Create(Configuracion.bitNode + "\\Descargas\\"); // guardar archivo para continuacion ?
+                    MessageBox.Show(e.Message + "----" + e.Source + "-----");
                     client.Close();
                     client.Dispose();
                     puertoAbierto = false;
-                    Console.Write("errr :v" + e.Message);
                 }
+                */
             }).Start();
         }
-        //Otros remplazar        
     }
 }

@@ -2,14 +2,10 @@
 using System.Diagnostics;
 using System.IO;
 using System.Windows.Forms;
-
 namespace Cliente
 {
     static class Program
     {
-        /// <summary>
-        /// Punto de entrada principal para la aplicación.
-        /// </summary>
         [STAThread]
         static void Main()
         {
@@ -20,13 +16,11 @@ namespace Cliente
 
                 Application.EnableVisualStyles();
                 Application.SetCompatibleTextRenderingDefault(false);
-                // Application.Run(new frmSplash());
+                Application.Run(new frmSplash());
                 Application.Run(new frmCliente());
             }
             else
-            {
                 new frmMensaje(Idioma.StringResources.mensajebitNodeActivo).ShowDialog();
-            }
         }
     }
 }

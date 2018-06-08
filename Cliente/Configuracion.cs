@@ -18,6 +18,7 @@ namespace Cliente
         public bool latino = true;
         public bool iniciarConWindows = false;
         public bool minimizarBandeja = false;
+        public bool SyncActiva = true;
         public string nombre;
         //Interfaz
         public bool MenuSlideDeluxe = true;

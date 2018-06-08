@@ -13,7 +13,7 @@ namespace Cliente
         //Variables
         public static bool PermitirRecibir = true;
         private ManualResetEvent TodoHecho = new ManualResetEvent(true);
-        public int puerto { get; set; } = 420;
+        public int puerto = 420;
         Controlador controlador = new Controlador();
         //Clase
         class StateObject
@@ -27,7 +27,9 @@ namespace Cliente
         {
             Socket socket = new Socket(AddressFamily.InterNetwork, SocketType.Dgram, ProtocolType.Udp);
             IPEndPoint iep1 = new IPEndPoint(ip, puerto);
+            //---
             Console.WriteLine("ENVIE: -IP: "+ip+ " -MSJ: " +msj);
+            //---
             socket.SetSocketOption(SocketOptionLevel.Socket, SocketOptionName.Broadcast, 1);
             socket.SendTo(Encoding.UTF8.GetBytes(msj), iep1);
             socket.Close();
@@ -72,7 +74,9 @@ namespace Cliente
 
                 if (stringData[0] == "bitNode")
                 {
+                    //---
                     Console.WriteLine("RECIBI: -IP: " + IPRecibida + " -MSJ: " + Encoding.UTF8.GetString(SO.buffer, 0, read));
+                    //---
                     bool primeraVez = controlador.AgregarIP(IPRecibida);
                     //--------------------------------------
                     switch (stringData[1])
@@ -127,7 +131,7 @@ namespace Cliente
                         case "SAD": // Solicitar Archivo a Descargar
                             {
                                 string[] msj = stringData[2].Split('|');
-                                controlador.EnviarArchivoSolicitado(IPRecibida, Convert.ToInt32(msj[1]), msj[0], 0);
+                                controlador.EnviarArchivoSolicitado(IPRecibida, Convert.ToInt32(msj[1]), msj[0], Convert.ToInt32(msj[2]), Convert.ToInt32(msj[3]));
                                 break;
                             }
                         case "IPV": // Añadir IPVecinas

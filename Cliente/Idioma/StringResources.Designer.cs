@@ -421,6 +421,15 @@ namespace Cliente.Idioma {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Sincronizacion continua.
+        /// </summary>
+        internal static string lblVistaConfiguracionSyncAuto {
+            get {
+                return ResourceManager.GetString("lblVistaConfiguracionSyncAuto", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Tema.
         /// </summary>
         internal static string lblVistaConfiguracionTema {

@@ -20,7 +20,7 @@ namespace Cliente
         private extern static void ReleaseCapture();
 
         [DllImport("user32.DLL", EntryPoint = "SendMessage")]
-        private extern static void SendMessage(System.IntPtr hWnd, int wMsg, int wParam, int lParam);
+        private extern static void SendMessage(IntPtr hWnd, int wMsg, int wParam, int lParam);
 
         Image[] ImagenesArchivos = { Properties.Resources.SwitchON, Properties.Resources.SwitchOFF, Properties.Resources.Cancelar, Properties.Resources.Compartir };
         PrivateFontCollection pfc = Configuracion.Tipografia();
@@ -329,6 +329,11 @@ namespace Cliente
                         configuracion.nombre = (sender as TextBox).Text;
                         break;
                     }
+                case 15:
+                    {
+                        configuracion.SyncActiva = (sender as botonSwitch).Activo;
+                        break;
+                    }
                 case 21:
                     {
                         configuracion.InicioFadeDeluxe = (sender as botonSwitch).Activo;
@@ -373,6 +378,7 @@ namespace Cliente
             bsVistaConfiguracionIniciarConWindows.Activo = configuracion.iniciarConWindows;
             bsVistaConfiguracionMinimizarBandeja.Activo = configuracion.minimizarBandeja;
             tbVistaConfiguracionNombre.Text = configuracion.nombre;
+            bsVistaConfiguracionBuscar.Activo = configuracion.SyncActiva;
             bsVistaConfiguracionLatino.Activo = configuracion.latino;
             bsVistaConfiguracionEfectoFade.Activo = configuracion.InicioFadeDeluxe;
             bsVistaConfiguracionEfectoBotones.Activo = configuracion.BotonSlideDeluxe;
@@ -492,6 +498,7 @@ namespace Cliente
             lblVistaConfiguracionIniciarConWindows.Text = Idioma.StringResources.lblVistaConfiguracionIniciarConWindows;
             lblVistaConfiguracionMinimizarBanjeda.Text = Idioma.StringResources.lblVistaConfiguracionMinimizarBanjeda;
             lblVistaConfiguracionNombre.Text = Idioma.StringResources.lblVistaConfiguracionNombre;
+            lblVistaConfiguracionSyncAuto.Text = Idioma.StringResources.lblVistaConfiguracionSyncAuto;
             lblVistaConfiguracionIdioma.Text = Idioma.StringResources.lblVistaConfiguracionIdioma;
             lblVistaConfiguracionIngles.Text = Idioma.StringResources.lblVistaConfiguracionIngles;
             lblVistaConfiguracionEspañol.Text = Idioma.StringResources.lblVistaConfiguracionEspañol;
@@ -567,6 +574,8 @@ namespace Cliente
             //Descargar
             //Explorar
             pnlVistaExplorarDGV.BackColor = configuracion.colorPanelesInternosVistas;
+            pnlVistaExploarBuscar.BackColor = configuracion.colorPanelesInternosVistas;
+            tbVistaExplorarBuscar.BackColor = configuracion.colorMenuSeleccion;
             //-----------------------------------------------------------------------------------
             dgvVistaExplorarArchivosCompartidosVecinos.DefaultCellStyle.BackColor = configuracion.colorPanelesInternosVistas;
             dgvVistaExplorarArchivosCompartidosVecinos.DefaultCellStyle.SelectionBackColor = configuracion.colorPanelesInternosVistas;
@@ -763,6 +772,11 @@ namespace Cliente
         private void button1_Click(object sender, EventArgs e)
         {
             MessageBox.Show(Controlador.ArchivosCompartidosVecinos.Count.ToString());
+        }
+
+        private void BuscarArchivoPorTag(object sender, EventArgs e) //Busca archivos por tags
+        {
+
         }
 
         private void CargarArchivosCompatidos() //Carga los archivos compartidos en la vista

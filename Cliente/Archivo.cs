@@ -110,8 +110,3 @@ namespace Cliente
         public static bool ArchivoEnDisco(string ruta) => File.Exists(ruta);
     }
 }
-
-/*
- https://msdn.microsoft.com/es-es/library/system.security.cryptography.md5(v=vs.110).aspx
- calcular y ccomparar md5
-     */
