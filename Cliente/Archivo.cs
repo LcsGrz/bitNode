@@ -31,6 +31,7 @@ namespace Cliente
         public long Tamaño { get; set; }
         public string ArchivoMD5 { get; set; } = null;
         public bool Activo { get; set; } = true;
+        public List<string> tags;
         public List<IPAddress> IPPropietario;
         //Funciones
         public static string KB_GB_MB(long peso)
@@ -91,8 +92,17 @@ namespace Cliente
             ArchivoMD5 = ArchivoMD5 ?? ObtenerMD5(Ruta);
             if (ArchivoMD5 != string.Empty)
             {
+                bool existe = false;
                 File.WriteAllText(rutaBN + "\\" + Nombre.Split('.')[0] + ".json", JsonConvert.SerializeObject(this));
-                if (!frmCliente.archivosCompartidos.Exists(x => x.ArchivoMD5.Contains(ArchivoMD5)))
+                frmCliente.archivosCompartidos.ForEach(x =>
+                {
+                    if (CompararMD5(x.ArchivoMD5, ArchivoMD5))
+                    {
+                        existe = true;
+                        x = this;
+                    }
+                });
+                if (!existe)
                     frmCliente.archivosCompartidos.Add(this);
                 ArchivoGuardado?.Invoke(this, null);
                 new frmMensaje(Idioma.StringResources.mensajeExitoCompartirArchivo).ShowDialog();

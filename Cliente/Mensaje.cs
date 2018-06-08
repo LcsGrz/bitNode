@@ -32,6 +32,7 @@ namespace Cliente
                 this.Size = new Size((lblMensaje.Size.Width + 40), 105);
 
             lblMensaje.Location = new Point(((pnlMensaje.Size.Width - lblMensaje.Size.Width) / 2), 31);
+            this.Focus();
         }
         //----------------------------------------------------------------------------------------------Funciones
         private void MoverForm(object sender, MouseEventArgs e) //Mover formulario
@@ -48,6 +49,14 @@ namespace Cliente
             panel1.BackColor = (configuracion.temaOscuro) ? configuracion.colorFondo : configuracion.colorPanelesInternosVistas;
             panel2.BackColor = (configuracion.temaOscuro) ? configuracion.colorFondo : configuracion.colorPanelesInternosVistas;
             panel3.BackColor = (configuracion.temaOscuro) ? configuracion.colorFondo : configuracion.colorPanelesInternosVistas;
+        }
+
+        private void TeclaEnter(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Return)
+            {
+                this.Close();
+            }
         }
     }
 }

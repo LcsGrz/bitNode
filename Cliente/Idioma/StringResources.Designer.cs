@@ -466,11 +466,29 @@ namespace Cliente.Idioma {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a No se encontraron archivos.
+        /// </summary>
+        internal static string lblVistaExplorarPerdon {
+            get {
+                return ResourceManager.GetString("lblVistaExplorarPerdon", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a No hay archivos disponibles para descargar.
         /// </summary>
-        internal static string lblVistaExplorarArchivosCompartidosVecinos {
+        internal static string lblVistaExplorarSyncOFF {
             get {
-                return ResourceManager.GetString("lblVistaExplorarArchivosCompartidosVecinos", resourceCulture);
+                return ResourceManager.GetString("lblVistaExplorarSyncOFF", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Busca un archivo para explorar.
+        /// </summary>
+        internal static string lblVistaExplorarSyncON {
+            get {
+                return ResourceManager.GetString("lblVistaExplorarSyncON", resourceCulture);
             }
         }
         
@@ -574,11 +592,29 @@ namespace Cliente.Idioma {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Por favor ingrese una breve descripcion.
+        /// </summary>
+        internal static string msjDescripcion {
+            get {
+                return ResourceManager.GetString("msjDescripcion", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Direccion IP copiada a portapapeles..
         /// </summary>
         internal static string msjIPPortapapeles {
             get {
                 return ResourceManager.GetString("msjIPPortapapeles", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Por favor ingrese minimo 5 tags separados por un espacio.
+        /// </summary>
+        internal static string msjTagNull {
+            get {
+                return ResourceManager.GetString("msjTagNull", resourceCulture);
             }
         }
         
@@ -606,6 +642,24 @@ namespace Cliente.Idioma {
         internal static string tbVistaCompartirDescripcionArchivo {
             get {
                 return ResourceManager.GetString("tbVistaCompartirDescripcionArchivo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Ingrese minimo 5 tags separados por un espacio.
+        /// </summary>
+        internal static string tbVistaCompartirTags {
+            get {
+                return ResourceManager.GetString("tbVistaCompartirTags", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Ingresa el nombre del archivo..
+        /// </summary>
+        internal static string tbVistaExplorarBuscar {
+            get {
+                return ResourceManager.GetString("tbVistaExplorarBuscar", resourceCulture);
             }
         }
         

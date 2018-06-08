@@ -140,6 +140,7 @@ namespace Cliente
             this.Name = "frmMensaje";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "bitNode";
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TeclaEnter);
             this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.MoverForm);
             this.pnlMensaje.ResumeLayout(false);
             this.pnlMensaje.PerformLayout();

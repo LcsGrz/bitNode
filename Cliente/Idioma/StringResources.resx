@@ -273,7 +273,7 @@
   <data name="msgSolicitarArchivo" xml:space="preserve">
     <value>La solicitud fue enviada, solo queda esperar.</value>
   </data>
-  <data name="lblVistaExplorarArchivosCompartidosVecinos" xml:space="preserve">
+  <data name="lblVistaExplorarSyncOFF" xml:space="preserve">
     <value>No hay archivos disponibles para descargar</value>
   </data>
   <data name="lblVistaConfiguracionBitNoders" xml:space="preserve">
@@ -302,5 +302,23 @@
   </data>
   <data name="lblVistaConfiguracionSyncAuto" xml:space="preserve">
     <value>Sincronizacion continua</value>
+  </data>
+  <data name="lblVistaExplorarPerdon" xml:space="preserve">
+    <value>No se encontraron archivos</value>
+  </data>
+  <data name="lblVistaExplorarSyncON" xml:space="preserve">
+    <value>Busca un archivo para explorar</value>
+  </data>
+  <data name="tbVistaExplorarBuscar" xml:space="preserve">
+    <value>Ingresa el nombre del archivo.</value>
+  </data>
+  <data name="msjDescripcion" xml:space="preserve">
+    <value>Por favor ingrese una breve descripcion</value>
+  </data>
+  <data name="msjTagNull" xml:space="preserve">
+    <value>Por favor ingrese minimo 5 tags separados por un espacio</value>
+  </data>
+  <data name="tbVistaCompartirTags" xml:space="preserve">
+    <value>Ingrese minimo 5 tags separados por un espacio</value>
   </data>
 </root>

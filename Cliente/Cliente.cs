@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Text;
 using System.IO;
+using System.Linq;
 using System.Net;
 using System.Net.NetworkInformation;
 using System.Runtime.InteropServices;
@@ -25,7 +26,7 @@ namespace Cliente
         Image[] ImagenesArchivos = { Properties.Resources.SwitchON, Properties.Resources.SwitchOFF, Properties.Resources.Cancelar, Properties.Resources.Compartir };
         PrivateFontCollection pfc = Configuracion.Tipografia();
         Configuracion configuracion = new Configuracion().Leer();
-        bool cerrar, TransparenciaFull = false;
+        bool cerrar, TransparenciaFull, clickTags, clickDescripcion = false;
         int tagAnterior = 0;
         Archivo archivoNuevo;
         Controlador server = new Controlador();
@@ -177,11 +178,13 @@ namespace Cliente
 
             if (tagNuevo == 1)
             {
-                if (!Controlador.RecivirACV)
+                if (!Controlador.RecivirACV &&  configuracion.SyncActiva)
                 {
                     Controlador.RecivirACV = true;
                     server.EnviarUDP(null, "bitNode@SAC@");
                 }
+                tbVistaExplorarBuscar.Text = Idioma.StringResources.tbVistaExplorarBuscar;
+                TBSinFoco(null, null);
                 CargarArchivosCompartidosVecinos();
             }
             if (tagNuevo == 3)
@@ -332,6 +335,9 @@ namespace Cliente
                 case 15:
                     {
                         configuracion.SyncActiva = (sender as botonSwitch).Activo;
+                        lblVistaExplorarArchivosCompartidosVecinos.Text = (configuracion.SyncActiva) ? Idioma.StringResources.lblVistaExplorarSyncON : Idioma.StringResources.lblVistaExplorarSyncOFF;
+                        Controlador.ArchivosCompartidosVecinos.Clear();
+                        Controlador.RecivirACV = false;
                         break;
                     }
                 case 21:
@@ -409,6 +415,7 @@ namespace Cliente
             //Descargar
             //Explorar
             lblVistaExplorarArchivosCompartidosVecinos.Font = veintiunoR;
+            tbVistaExplorarBuscar.Font = doceR;
             dgvVistaExplorarArchivosCompartidosVecinos.ColumnHeadersDefaultCellStyle.Font = catorceR;
             dgvVistaExplorarArchivosCompartidosVecinos.DefaultCellStyle.Font = doceR;
             //Compartir
@@ -416,6 +423,7 @@ namespace Cliente
             lblVistaCompartirNombreArchivo.Font = dieciseisR;
             lblVistaCompartirTamañoArchivo.Font = dieciseisR;
             tbVistaCompartirDescripcionArchivo.Font = doceR;
+            tbVistaCompartirTags.Font = doceR;
             lblVistaCompartirVerArchivos.Font = veintiunoR;
             dgvVistaCompartirArchivos.ColumnHeadersDefaultCellStyle.Font = catorceR;
             dgvVistaCompartirArchivos.DefaultCellStyle.Font = doceR;
@@ -431,6 +439,7 @@ namespace Cliente
             lblVistaConfiguracionMinimizarBanjeda.Font = catorceR;
             lblVistaConfiguracionNombre.Font = catorceR;
             tbVistaConfiguracionNombre.Font = doceR;
+            lblVistaConfiguracionSyncAuto.Font = doceR;
             lblVistaConfiguracionIdioma.Font = catorceR;
             lblVistaConfiguracionIngles.Font = catorceR;
             lblVistaConfiguracionEspañol.Font = catorceR;
@@ -469,13 +478,15 @@ namespace Cliente
             lblMenuCRapidas.Text = Idioma.StringResources.lblMenuCRapidas;
             //Descargar
             //Explorar
-            lblVistaExplorarArchivosCompartidosVecinos.Text = Idioma.StringResources.lblVistaExplorarArchivosCompartidosVecinos;
+            lblVistaExplorarArchivosCompartidosVecinos.Text = (configuracion.SyncActiva) ? Idioma.StringResources.lblVistaExplorarSyncON : Idioma.StringResources.lblVistaExplorarSyncOFF;
+            tbVistaExplorarBuscar.Text = Idioma.StringResources.tbVistaExplorarBuscar;
             dgvVistaExplorarArchivosCompartidosVecinos.Columns.Clear();
             foreach (string n in Idioma.StringResources.CabecerasDGVArchivoCompartidoArreglo.Split('-'))
                 dgvVistaExplorarArchivosCompartidosVecinos.Columns.Add(n, n);
             dgvVistaExplorarArchivosCompartidosVecinos.Columns.Add(new DataGridViewImageColumn() { Name = Idioma.StringResources.lblMenuDescargar });
             //Compartir
             tbVistaCompartirDescripcionArchivo.Text = Idioma.StringResources.tbVistaCompartirDescripcionArchivo;
+            tbVistaCompartirTags.Text = Idioma.StringResources.tbVistaCompartirTags;
             lblVistaCompartirSeleccionar.Text = Idioma.StringResources.lblVistaCompartirSeleccionar;
             lblVistaCompartirVerArchivos.Text = Idioma.StringResources.lblVistaCompartirVerArchivos;
             dgvVistaCompartirArchivos.Columns.Clear();
@@ -528,6 +539,10 @@ namespace Cliente
         private void BorrarTB(object sender, EventArgs e)//Borrar TextBox
         {
             (sender as TextBox).Clear();
+            if ((sender as TextBox).Name == "tbVistaCompartirDescripcionArchivo")
+                clickDescripcion = true;
+            else if ((sender as TextBox).Name == "tbVistaCompartirTags")
+                clickTags = true;
         }
         private void SeleccionarArchivoCompartir(object sender, EventArgs e) //Selecciona el archivo que quiere compartir y muestra sus datos
         {
@@ -545,17 +560,38 @@ namespace Cliente
         {
             if (Convert.ToInt32((sender as PictureBox).Tag) == 1)
             {
+                if (tbVistaCompartirDescripcionArchivo.TextLength == 0 || !clickDescripcion)
+                {
+                    new frmMensaje(Idioma.StringResources.msjDescripcion).ShowDialog();
+                    return;
+                }
+
+                string[] lista = tbVistaCompartirTags.Text.Split(' ');
+                archivoNuevo.tags = new List<string>();
+                for (int i = 0; i < lista.Length; i++)
+                {
+                    if (lista[i] != string.Empty)
+                        archivoNuevo.tags.Add(lista[i]);
+                }
+                if (tbVistaCompartirTags.TextLength == 0 || !clickTags || archivoNuevo.tags.Count < 5)
+                {
+                    new frmMensaje(Idioma.StringResources.msjTagNull).ShowDialog();
+                    return;
+                }
+
                 archivoNuevo.Descripcion = tbVistaCompartirDescripcionArchivo.Text;
                 archivoNuevo.GuardarArchivo();
-                CargarArchivosCompatidos();
             }
             else
             {
                 archivoNuevo = null;
             }
             tbVistaCompartirDescripcionArchivo.Text = Idioma.StringResources.tbVistaCompartirDescripcionArchivo;
+            tbVistaCompartirTags.Text = Idioma.StringResources.tbVistaCompartirTags;
             pnlVistaCompartirSeleccionarArchivo.Visible = !(pnlVistaCompartirGuardarArchivo.Visible = false);
             TBSinFoco(null, null);
+            clickTags = false;
+            clickDescripcion = false;
         }
         private void AplicarTema() //Aplica el tema seleccionado 
         {
@@ -590,6 +626,8 @@ namespace Cliente
             pnlVistaCompartirGuardarArchivo.BackColor = configuracion.colorPanelesInternosVistas;
             pnlVistaCompartirMostarArchivos.BackColor = configuracion.colorPanelesInternosVistas;
             tbVistaCompartirDescripcionArchivo.BackColor = configuracion.colorMenuSeleccion;
+            tbVistaCompartirTags.BackColor = configuracion.colorMenuSeleccion;
+            pnlVistaCompartirSeparador.BackColor = configuracion.colorFondo;
             //-----------------------------------------------------------------------------------
             dgvVistaCompartirArchivos.DefaultCellStyle.BackColor = configuracion.colorPanelesInternosVistas;
             dgvVistaCompartirArchivos.DefaultCellStyle.SelectionBackColor = configuracion.colorPanelesInternosVistas;
@@ -776,7 +814,7 @@ namespace Cliente
 
         private void BuscarArchivoPorTag(object sender, EventArgs e) //Busca archivos por tags
         {
-
+            TBSinFoco(null, null);
         }
 
         private void CargarArchivosCompatidos() //Carga los archivos compartidos en la vista
@@ -803,6 +841,7 @@ namespace Cliente
         }
         private void CargarArchivosCompartidosVecinos() //Carga los archivos en la vista Explorar
         {
+            lblVistaExplorarArchivosCompartidosVecinos.Text = (configuracion.SyncActiva) ? Idioma.StringResources.lblVistaExplorarSyncON : Idioma.StringResources.lblVistaExplorarSyncOFF;
             dgvVistaExplorarArchivosCompartidosVecinos.Visible = !(lblVistaExplorarArchivosCompartidosVecinos.Visible = (Controlador.ArchivosCompartidosVecinos.Count == 0));
             if (Controlador.ArchivosCompartidosVecinos.Count > 0)
             {
