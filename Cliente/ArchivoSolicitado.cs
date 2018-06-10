@@ -8,5 +8,6 @@ namespace Cliente
         public int ParteArchivo { get; set; }
         public int IDPosicion { get; set; }
         public string MD5 { get; set; }
+        public int posicionLista { get; set; }
     }
 }

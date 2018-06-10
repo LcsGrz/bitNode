@@ -186,16 +186,16 @@ namespace Cliente
                 if (archivosSolicitados.Count > 0 && EnviosActivos <= EnviosSimultaneos)
                 {
                     ArchivoSolicitado AS = archivosSolicitados.Dequeue();
-                    int PosicionArchivo = Archivo.PosicionArchivo(AS.MD5);
+                    AS.posicionLista = Archivo.PosicionArchivo(AS.MD5);
                     new Thread(() =>
                     {
-                        if (PosicionArchivo > -1)
+                        if (AS.posicionLista > -1)
                         {
                             EnviosActivos++;
                             STCP.EnviarSolicitud(AS);
                         }
                         else
-                            EnviarUDP(AS.IPDestino, "bitNode@ASNULL@" + frmCliente.archivosCompartidos[PosicionArchivo].Nombre);
+                            EnviarUDP(AS.IPDestino, "bitNode@ASNULL@" + frmCliente.archivosCompartidos[AS.posicionLista].Nombre);
                     }).Start();
                 }
                 else
