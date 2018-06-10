@@ -15,7 +15,7 @@ namespace Cliente
         int portSolicitar = 666;
         int size = 2000; //tamaño de division del archivo
         int maxThreadON = 12;
-        int posicion = 5;
+        int Nposicion = 6;
 
         public void RecibirTCP() //Recibir archivos solicitados
         {
@@ -51,10 +51,43 @@ namespace Cliente
 
         public void EnviarSolicitud(ArchivoSolicitado AS)
         {
+            IPEndPoint remoteEP = new IPEndPoint(AS.IPDestino,portSolicitar);
+            Socket client = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
+            //Socket client = new Socket(ip.AddressFamily,SocketType.Stream, ProtocolType.Tcp);
+
+            var loadedFile = new FileStream(frmCliente.archivosCompartidos[AS.posicionLista].Ruta, FileMode.Open, FileAccess.Read);
+
+            byte[] byteId = Encoding.ASCII.GetBytes(AS.IDPosicion.ToString());
+            byte[] byteParte = new byte[Nposicion];
+            byte[] aux = Encoding.ASCII.GetBytes(AS.ParteArchivo.ToString());
+
+            for (int i = 0; i < aux.Length; i++)
+            {
+                byteParte[i] = aux[i];
+            }
+
+            byte[] byteData = new byte[size];
+
+            loadedFile.Position = AS.ParteArchivo * size;
+            loadedFile.Read(byteData, 0, byteData.Length);
+
+            byte[] sendB = new byte[byteId.Length + byteParte.Length + byteData.Length];
+
+            byteId.CopyTo(sendB, 0);
+            byteParte.CopyTo(sendB, byteId.Length);
+            byteData.CopyTo(sendB, (byteId.Length + byteParte.Length));
+            // Send test data to the remote device.  
+            //Send(client, frmCliente.archivosCompartidos[AS.posicionLista].Ruta, AS.IDPosicion,AS.ParteArchivo);
+            client.Send(sendB);
+
+            // Release the socket.  
+            client.Shutdown(SocketShutdown.Both);
+            client.Close();
 
             Controlador.EnviosActivos--;
             Controlador.PermitirEnviarSolicitud.Set();
         }
+
 
         public void Frenar() //Frenar ejecuciones
         {
@@ -72,7 +105,7 @@ namespace Cliente
             int contador = 0;
             foreach (byte aux in arreglo)
             {
-                sendB[sendB.Length - posicion + contador] = aux;
+                sendB[sendB.Length - Nposicion + contador] = aux;
                 contador++;
             }
         }
@@ -91,16 +124,16 @@ namespace Cliente
                     long partes = loadedFile.Length / size;
                     for (int i = 0; i < partes; i++)
                     {
-                        byte[] sendB = new byte[size + posicion];
+                        byte[] sendB = new byte[size + Nposicion];
                         int size1 = sendB.Length;
-                        loadedFile.Read(sendB, 0, (sendB.Length - posicion));
+                        loadedFile.Read(sendB, 0, (sendB.Length - Nposicion));
                         int size2 = sendB.Length;
                         llenarBytes(ref sendB, i);
                         client.Send(sendB);
                     }
                     if (loadedFile.Length % size != 0)
                     {
-                        byte[] sendB = new byte[(loadedFile.Length % size) + posicion];
+                        byte[] sendB = new byte[(loadedFile.Length % size) + Nposicion];
                         loadedFile.Read(sendB, 0, sendB.Length);
                         llenarBytes(ref sendB, (int)partes);
                         client.Send(sendB);
@@ -140,7 +173,7 @@ namespace Cliente
                         {
                             output.SetLength(archivo.Tamaño);
                             //----------------------------------------------
-                            var buffer = new byte[size + posicion];
+                            var buffer = new byte[size + Nposicion];
                             int bytesRead;
                             int partes = (int)archivo.Tamaño / size + (archivo.Tamaño % size != 0 ? 1 : 0);
                             int contador = 0;
@@ -149,7 +182,7 @@ namespace Cliente
                             {
                                 string index = "0";
 
-                                for (int x = 0; x < posicion; x++)
+                                for (int x = 0; x < Nposicion; x++)
                                 {
                                     int result = buffer[(buffer.Length) - 1 + x];
                                     if (result != 0)
@@ -157,7 +190,7 @@ namespace Cliente
                                         index += Convert.ToChar(result).ToString();
                                     }
                                 }
-                                output.Write(buffer, 0, bytesRead - posicion);
+                                output.Write(buffer, 0, bytesRead - Nposicion);
                                 contador++;
                             }
 
