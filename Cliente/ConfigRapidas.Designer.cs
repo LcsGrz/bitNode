@@ -281,6 +281,7 @@
             this.Name = "frmConfigRapidas";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "bitNode";
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.frmConfigRapidas_KeyDown);
             this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.MoverForm);
             this.pnlContenedor.ResumeLayout(false);
             this.pnlContenedor.PerformLayout();

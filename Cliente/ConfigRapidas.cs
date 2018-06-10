@@ -1,21 +1,14 @@
 ﻿using Cliente.Controles;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
 using System.Drawing.Text;
-using System.Linq;
 using System.Runtime.InteropServices;
-using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Cliente
 {
     public partial class frmConfigRapidas : Form
-    { 
+    {
         //----------------------------------------------------------------------------------------------Variables
         [DllImport("user32.DLL", EntryPoint = "ReleaseCapture")]
         private extern static void ReleaseCapture();
@@ -65,6 +58,12 @@ namespace Cliente
             bsAnterior = (botonSwitch)sender;
             bsAnterior.Activo = true;
             Configuracion.FinalizoDescarga = Convert.ToInt32(bsAnterior.Tag);
+        }
+
+        private void frmConfigRapidas_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Return)
+                this.Close();
         }
     }
 }

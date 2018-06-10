@@ -118,5 +118,26 @@ namespace Cliente
         }
         public void CambiarEstado() => File.WriteAllText(rutaBN + "\\" + Nombre.Split('.')[0] + ".json", JsonConvert.SerializeObject(this));
         public static bool ArchivoEnDisco(string ruta) => File.Exists(ruta);
+        public static List<Archivo> TagArchivo(string listaTags)
+        {
+            List<Archivo> archivosTag = new List<Archivo>();
+            string[] tags = listaTags.Split('|');
+            frmCliente.archivosCompartidos.ForEach(a => {
+                for (int t = 0; t < a.tags.Count; t++)
+                {
+                    for (int i = 0; i < tags.Length; i++)
+                    {
+                        if (a.tags[t].Equals(tags[i]))
+                        {
+                            archivosTag.Add(a);
+                            i = tags.Length;
+                            t = a.tags.Count;
+                        }
+                    }
+                }
+            });
+            return archivosTag;
+        }
+       
     }
 }

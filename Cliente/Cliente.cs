@@ -2,10 +2,10 @@
 using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Drawing;
 using System.Drawing.Text;
 using System.IO;
-using System.Linq;
 using System.Net;
 using System.Net.NetworkInformation;
 using System.Runtime.InteropServices;
@@ -55,7 +55,7 @@ namespace Cliente
                 }));
             });
             Controlador.informarBitNoders += new EventHandler((object sender, EventArgs e) => { this.Invoke(new Action(() => { lblVistaConfiguracionBitNoders.Text = Controlador.IPSVecinas.Count + Idioma.StringResources.lblVistaConfiguracionBitNoders; })); });
-            Controlador.informarArchivo += new EventHandler((object sender, EventArgs e) => { if (tagAnterior == 1) { this.Invoke(new Action(() => { CargarArchivosCompartidosVecinos(); })); } });
+            Controlador.informarArchivo += new EventHandler((object sender, EventArgs e) => { if (tagAnterior == 1) { this.Invoke(new Action(() => { CargarArchivosCompartidosVecinos(null); })); } });
         }
         //----------------------------------------------------------------------------------------------Funciones de form
         private void MoverForm(object sender, MouseEventArgs e) //Mover form
@@ -187,7 +187,7 @@ namespace Cliente
                 Controlador.RecivirACV = true;
                 tbVistaExplorarBuscar.Text = Idioma.StringResources.tbVistaExplorarBuscar;
                 TBSinFoco(null, null);
-                CargarArchivosCompartidosVecinos();
+                CargarArchivosCompartidosVecinos(null);
             }
             if (tagNuevo == 3)
                 pbMenuSolicitar.Image = Properties.Resources.SolictarOFF;
@@ -340,6 +340,7 @@ namespace Cliente
                         lblVistaExplorarArchivosCompartidosVecinos.Text = (configuracion.SyncActiva) ? Idioma.StringResources.lblVistaExplorarSyncON : Idioma.StringResources.lblVistaExplorarSyncOFF;
                         Controlador.ArchivosCompartidosVecinos.Clear();
                         Controlador.RecivirACV = false;
+                        new frmMensaje((configuracion.SyncActiva) ? Idioma.StringResources.msjSyncON : Idioma.StringResources.msjSyncOFF).ShowDialog();
                         break;
                     }
                 case 21:
@@ -809,12 +810,6 @@ namespace Cliente
             Clipboard.SetDataObject(Controlador.ObtenerIPLocal().ToString());
             new frmMensaje(Idioma.StringResources.msjIPPortapapeles).ShowDialog();
         }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-            MessageBox.Show(Controlador.ArchivosCompartidosVecinos.Count.ToString());
-        }
-
         private void BuscarArchivoPorTag(object sender, EventArgs e) //Busca archivos por tags
         {
             dgvVistaExplorarArchivosCompartidosVecinos.Rows.Clear();
@@ -829,15 +824,24 @@ namespace Cliente
                     tags.Add(lista[i]);
             }
             if (tags.Count == 0)
-                server.EnviarUDP(null, "bitNode@SAC@");
+                if (configuracion.SyncActiva)
+                    CargarArchivosCompartidosVecinos(null);
+                else
+                    server.EnviarUDP(null, "bitNode@SAC@");
             else
             {
-                string msj = "bitNode@SACTAG@NOTAG";
+                string msj = string.Empty;
                 tags.ForEach(x => msj += ("|" + x));
-                server.EnviarUDP(null, msj);
+                if (configuracion.SyncActiva)
+                {
+                    CargarArchivosCompartidosVecinos(Archivo.TagArchivo(msj));
+                }
+                else
+                {
+                    server.EnviarUDP(null, "bitNode@SACTAG@NOTAG" + msj);
+                }
             }
         }
-
         private void CargarArchivosCompatidos() //Carga los archivos compartidos en la vista
         {
             dgvVistaCompartirArchivos.Visible = !(lblVistaCompartirVerArchivos.Visible = (archivosCompartidos.Count == 0));
@@ -860,17 +864,18 @@ namespace Cliente
                 dgvVistaCompartirArchivos.Columns[4].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
             }
         }
-        private void CargarArchivosCompartidosVecinos() //Carga los archivos en la vista Explorar
+        private void CargarArchivosCompartidosVecinos(List<Archivo> lista) //Carga los archivos en la vista Explorar
         {
+            List<Archivo> archivos = lista ?? Controlador.ArchivosCompartidosVecinos;
             dgvVistaExplorarArchivosCompartidosVecinos.Rows.Clear();
             lblVistaExplorarArchivosCompartidosVecinos.Text = (configuracion.SyncActiva) ? Idioma.StringResources.lblVistaExplorarSyncON : Idioma.StringResources.lblVistaExplorarSyncOFF;
             dgvVistaExplorarArchivosCompartidosVecinos.Visible = !(lblVistaExplorarArchivosCompartidosVecinos.Visible = (Controlador.ArchivosCompartidosVecinos.Count == 0));
-            if (Controlador.ArchivosCompartidosVecinos.Count > 0)
+            if (archivos.Count > 0)
             {
                 //Datos
-                for (int i = 0; i < Controlador.ArchivosCompartidosVecinos.Count; i++)
+                for (int i = 0; i < archivos.Count; i++)
                 {
-                    Archivo A = Controlador.ArchivosCompartidosVecinos[i];
+                    Archivo A = archivos[i];
                     dgvVistaExplorarArchivosCompartidosVecinos.Rows.Insert(i, A.Nombre, Archivo.KB_GB_MB(A.Tamaño), A.Descripcion, Properties.Resources.Descargar);
                 }
                 //Vista
@@ -880,6 +885,33 @@ namespace Cliente
                 dgvVistaExplorarArchivosCompartidosVecinos.Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
                 dgvVistaExplorarArchivosCompartidosVecinos.Columns[2].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
                 dgvVistaExplorarArchivosCompartidosVecinos.Columns[3].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            }
+        }
+        private void FinalizaronDescargas() //Ejecutar funcion especial cuando finaliza la descarga
+        {
+            switch (Configuracion.FinalizoDescarga)
+            {
+                case 1:
+                    {
+                        Close();
+                        break;
+                    }
+                case 2:
+                    {
+                        Application.SetSuspendState(PowerState.Suspend, true, true);
+                        break;
+                    }
+                case 3:
+                    {
+                        Application.SetSuspendState(PowerState.Hibernate, true, true);
+                        break;
+                    }
+                case 4:
+                    {
+
+                        Process.Start("shutdown", "/s /t 0");
+                        break;
+                    }
             }
         }
     }
@@ -893,6 +925,4 @@ namespace Cliente
      -
     mejoras:
      ver si puedo resumir mas los efectos
-     ir agregando fonts a cargar guentes
-     Cuando se resube un archivo, no actualiza la lista y muestra datos viejos
   */

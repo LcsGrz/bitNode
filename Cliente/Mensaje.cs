@@ -54,9 +54,7 @@ namespace Cliente
         private void TeclaEnter(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Return)
-            {
                 this.Close();
-            }
         }
     }
 }

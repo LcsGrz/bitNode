@@ -610,6 +610,24 @@ namespace Cliente.Idioma {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Debera buscar por el nombre del archivo para explorar..
+        /// </summary>
+        internal static string msjSyncOFF {
+            get {
+                return ResourceManager.GetString("msjSyncOFF", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Esta funcion consume mas ancho de banda, pero en &apos;Explorar&apos; vera todos los archivos compartidos..
+        /// </summary>
+        internal static string msjSyncON {
+            get {
+                return ResourceManager.GetString("msjSyncON", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Por favor ingrese minimo 5 tags separados por un espacio.
         /// </summary>
         internal static string msjTagNull {

@@ -53,7 +53,7 @@ namespace Cliente
             }
             catch (Exception e)
             {
-                MessageBox.Show(e.ToString());
+                new frmMensaje(e.ToString()).ShowDialog();
             }
         }
         private void cbRecibir(IAsyncResult ar)

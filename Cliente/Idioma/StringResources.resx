@@ -321,4 +321,10 @@
   <data name="tbVistaCompartirTags" xml:space="preserve">
     <value>Ingrese minimo 5 tags separados por un espacio</value>
   </data>
+  <data name="msjSyncOFF" xml:space="preserve">
+    <value>Debera buscar por el nombre del archivo para explorar.</value>
+  </data>
+  <data name="msjSyncON" xml:space="preserve">
+    <value>Esta funcion consume mas ancho de banda, pero en 'Explorar' vera todos los archivos compartidos.</value>
+  </data>
 </root>
