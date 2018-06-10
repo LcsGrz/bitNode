@@ -47,10 +47,11 @@ namespace Cliente
             Controlador.informarSolicitud += new EventHandler((object sender, EventArgs e) => { this.Invoke(new Action(() => { CargarSolicitudes(); })); });
             NetworkChange.NetworkAddressChanged += new NetworkAddressChangedEventHandler((object sender, EventArgs e) =>
             {
-                this.Invoke(new Action(() => {
+                this.Invoke(new Action(() =>
+                {
                     tbVistaConfiguracionIP.Text = "255.255.255.255";
-                lblVistaConfiguracionMiIP.Text = Idioma.StringResources.miIP + Controlador.ObtenerIPLocal();
-                Reconectar(null, null);
+                    lblVistaConfiguracionMiIP.Text = Idioma.StringResources.miIP + Controlador.ObtenerIPLocal();
+                    Reconectar(null, null);
                 }));
             });
             Controlador.informarBitNoders += new EventHandler((object sender, EventArgs e) => { this.Invoke(new Action(() => { lblVistaConfiguracionBitNoders.Text = Controlador.IPSVecinas.Count + Idioma.StringResources.lblVistaConfiguracionBitNoders; })); });
@@ -178,11 +179,12 @@ namespace Cliente
 
             if (tagNuevo == 1)
             {
-                if (!Controlador.RecivirACV &&  configuracion.SyncActiva)
-                {
-                    Controlador.RecivirACV = true;
+                if (!configuracion.SyncActiva)
+                    Controlador.ArchivosCompartidosVecinos.Clear();
+                if (!Controlador.RecivirACV && configuracion.SyncActiva)
                     server.EnviarUDP(null, "bitNode@SAC@");
-                }
+
+                Controlador.RecivirACV = true;
                 tbVistaExplorarBuscar.Text = Idioma.StringResources.tbVistaExplorarBuscar;
                 TBSinFoco(null, null);
                 CargarArchivosCompartidosVecinos();
@@ -539,9 +541,9 @@ namespace Cliente
         private void BorrarTB(object sender, EventArgs e)//Borrar TextBox
         {
             (sender as TextBox).Clear();
-            if ((sender as TextBox).Name == "tbVistaCompartirDescripcionArchivo")
+            if ((sender as TextBox).Name == "tbVistaCompartirDescripcionArchivo" && !clickDescripcion)
                 clickDescripcion = true;
-            else if ((sender as TextBox).Name == "tbVistaCompartirTags")
+            else if ((sender as TextBox).Name == "tbVistaCompartirTags" && !clickTags)
                 clickTags = true;
         }
         private void SeleccionarArchivoCompartir(object sender, EventArgs e) //Selecciona el archivo que quiere compartir y muestra sus datos
@@ -788,11 +790,12 @@ namespace Cliente
             {
                 configuracion.IPConeccion = tbVistaConfiguracionIP.Text;
                 configuracion.Guardar();
-                Controlador.RecivirACV = false;
+                Controlador.RecivirACV = (tagAnterior == 1);
                 server.VaciarIPS();
                 server.VaciarACV();
+                dgvVistaExplorarArchivosCompartidosVecinos.Rows.Clear();
                 lblVistaConfiguracionBitNoders.Text = "0" + Idioma.StringResources.lblVistaConfiguracionBitNoders;
-                server.EnviarUDP(ip, "bitNode@PPING@" + (IPAddress.Broadcast.Equals(IPAddress.Parse(configuracion.IPConeccion)) ? "OK" : "IPFIJA") + "|" + Controlador.RecivirACV);
+                server.EnviarUDP(ip, "bitNode@PPING@" + (IPAddress.Broadcast.Equals(IPAddress.Parse(configuracion.IPConeccion)) ? "OK" : "IPFIJA") + "|" + (Controlador.RecivirACV && configuracion.SyncActiva));
             }
             else
             {
@@ -814,7 +817,25 @@ namespace Cliente
 
         private void BuscarArchivoPorTag(object sender, EventArgs e) //Busca archivos por tags
         {
+            dgvVistaExplorarArchivosCompartidosVecinos.Rows.Clear();
+            Controlador.ArchivosCompartidosVecinos.Clear();
             TBSinFoco(null, null);
+
+            string[] lista = tbVistaExplorarBuscar.Text.Split(' ');
+            List<string> tags = new List<string>();
+            for (int i = 0; i < lista.Length; i++)
+            {
+                if (lista[i] != string.Empty)
+                    tags.Add(lista[i]);
+            }
+            if (tags.Count == 0)
+                server.EnviarUDP(null, "bitNode@SAC@");
+            else
+            {
+                string msj = "bitNode@SACTAG@NOTAG";
+                tags.ForEach(x => msj += ("|" + x));
+                server.EnviarUDP(null, msj);
+            }
         }
 
         private void CargarArchivosCompatidos() //Carga los archivos compartidos en la vista
@@ -841,12 +862,12 @@ namespace Cliente
         }
         private void CargarArchivosCompartidosVecinos() //Carga los archivos en la vista Explorar
         {
+            dgvVistaExplorarArchivosCompartidosVecinos.Rows.Clear();
             lblVistaExplorarArchivosCompartidosVecinos.Text = (configuracion.SyncActiva) ? Idioma.StringResources.lblVistaExplorarSyncON : Idioma.StringResources.lblVistaExplorarSyncOFF;
             dgvVistaExplorarArchivosCompartidosVecinos.Visible = !(lblVistaExplorarArchivosCompartidosVecinos.Visible = (Controlador.ArchivosCompartidosVecinos.Count == 0));
             if (Controlador.ArchivosCompartidosVecinos.Count > 0)
             {
                 //Datos
-                dgvVistaExplorarArchivosCompartidosVecinos.Rows.Clear();
                 for (int i = 0; i < Controlador.ArchivosCompartidosVecinos.Count; i++)
                 {
                     Archivo A = Controlador.ArchivosCompartidosVecinos[i];
@@ -875,8 +896,3 @@ namespace Cliente
      ir agregando fonts a cargar guentes
      Cuando se resube un archivo, no actualiza la lista y muestra datos viejos
   */
-
-/*
-    int y = x ?? -1; -> devuelve X si X no es null, si no -1
-    int length = text?.Length; // Compile Error: Cannot implicitly convert type 'int?' to 'int' -> preguntar este
-*/

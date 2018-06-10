@@ -38,7 +38,7 @@ namespace Cliente
             temporizadorPing.Elapsed += bitNodersVivos;
             temporizadorPing.Start();
             IPAddress ConectarmeIP = IPAddress.Parse(configuracion.IPConeccion);
-            EnviarUDP(ConectarmeIP, "bitNode@PPING@" + (IPAddress.Broadcast.Equals(ConectarmeIP) ? "OK" : "IPFIJA") + "|" + RecivirACV); //Primer ping      
+            EnviarUDP(ConectarmeIP, "bitNode@PPING@" + (IPAddress.Broadcast.Equals(ConectarmeIP) ? "OK" : "IPFIJA") + "|" + (RecivirACV && configuracion.SyncActiva)); //Primer ping      
         }
         public static IPAddress ObtenerIPLocal()
         {
@@ -153,26 +153,48 @@ namespace Cliente
             }
             informarArchivo?.Invoke(null, null);
         }
-        public void EnviarListaArchivosCompartidos(IPAddress iPAddress)
+        public void EnviarListaArchivosCompartidos(IPAddress ip)
         {
             foreach (Archivo a in frmCliente.archivosCompartidos)
             {
                 if (a.Activo)
                 {
-                    if (iPAddress == null)
+                    if (ip == null)
                     {
                         IPSVecinas.ForEach(x => EnviarUDP(x, "bitNode@AAC@" + JsonConvert.SerializeObject(a)));
                     }
                     else
                     {
                         string sa = "bitNode@AAC@" + JsonConvert.SerializeObject(a);
-                        EnviarUDP(iPAddress, sa);
+                        EnviarUDP(ip, sa);
                     }
                 }
             }
         }
         public void EnviarUnicoArchivoCompartido(Archivo a) => IPSVecinas.ForEach(x => EnviarUDP(x, "bitNode@AAC@" + JsonConvert.SerializeObject(a)));
         public void EnviarListaIPS(IPAddress ip) => IPSVecinas.ForEach(x => EnviarUDP(ip, "bitNode@IPV@" + x.ToString()));
+        public void EnviarListaArchivosCompartidosTAG(IPAddress ip, string strArchivos)
+        {
+            if (strArchivos == "NOTAG")
+                frmCliente.archivosCompartidos.ForEach(a => EnviarUDP(ip, "bitNode@AACT@" + JsonConvert.SerializeObject(a)));
+            else {
+                string[] tags = strArchivos.Split('|');
+                frmCliente.archivosCompartidos.ForEach(a => {
+                    for (int t = 0; t < a.tags.Count; t++)
+                    {
+                        for (int i = 0; i < tags.Length; i++)
+                        {
+                            if (a.tags[t].Equals(tags[i]))
+                            {
+                                EnviarUDP(ip, "bitNode@AACT@" + JsonConvert.SerializeObject(a));
+                                i = tags.Length;
+                                t = a.tags.Count;
+                            }
+                        }
+                    }
+                });
+            }
+        }
         //-----------------------------------------------TCP
         public void SolicitarArchivo(int index)
         {
