@@ -30,6 +30,7 @@ namespace Cliente
         public static ManualResetEvent PermitirEnviarSolicitud = new ManualResetEvent(true);
         public bool PermitirEnviarSolicitudes = true;
         public static int EnviosActivos = 0;
+        private int EnviosSimultaneos = 12;
         //----------------------------------------------------------------------------------------------Funciones
         //-----------------------------------------------Server
         public void IniciarEjecuciones()
@@ -182,7 +183,7 @@ namespace Cliente
             {
                 PermitirEnviarSolicitud.Reset();
 
-                if (archivosSolicitados.Count > 0 && EnviosActivos <= 12)
+                if (archivosSolicitados.Count > 0 && EnviosActivos <= EnviosSimultaneos)
                 {
                     ArchivoSolicitado AS = archivosSolicitados.Dequeue();
                     int PosicionArchivo = Archivo.PosicionArchivo(AS.MD5);
@@ -192,7 +193,6 @@ namespace Cliente
                         {
                             EnviosActivos++;
                             STCP.EnviarSolicitud(AS);
-                            return;
                         }
                         else
                             EnviarUDP(AS.IPDestino, "bitNode@ASNULL@" + frmCliente.archivosCompartidos[PosicionArchivo].Nombre);
