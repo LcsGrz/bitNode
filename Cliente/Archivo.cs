@@ -135,5 +135,13 @@ namespace Cliente
             });
             return archivosTag;
         }
+        public static int PosicionArchivo(string MD5)
+        {
+            for (int i = 0; i < frmCliente.archivosCompartidos.Count; i++)
+                if (CompararMD5(frmCliente.archivosCompartidos[i].ArchivoMD5, MD5))
+                    return (ArchivoEnDisco(frmCliente.archivosCompartidos[i].Ruta)) ? i : -1;
+
+            return -1;
+        }
     }
 }

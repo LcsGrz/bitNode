@@ -1,22 +1,68 @@
-﻿using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
+﻿using System;
 using System.IO;
-using System.Linq;
 using System.Net;
 using System.Net.Sockets;
 using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Cliente
 {
     public class SocketTCP
     {
+        public static bool PermitirRecibir = true;
+        private ManualResetEvent TodoHecho = new ManualResetEvent(true);
         int portSolicitar = 666;
         int size = 2000; //tamaño de division del archivo
+        int maxThreadON = 12;
         int posicion = 5;
+
+        public void RecibirTCP() //Recibir archivos solicitados
+        {
+            Socket socket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
+            IPEndPoint iep = new IPEndPoint(IPAddress.Any, portSolicitar);
+            EndPoint ep = iep;
+            try
+            {
+                socket.Bind(iep);
+                socket.Listen(maxThreadON);
+                while (PermitirRecibir)
+                {
+                    TodoHecho.Reset();
+
+                    socket.BeginAccept(new AsyncCallback(cbRecibir), socket);
+
+                    TodoHecho.WaitOne();
+                }
+            }
+            catch (Exception e)
+            {
+                new frmMensaje(e.ToString()).ShowDialog();
+            }
+        }
+        private void cbRecibir(IAsyncResult ar)
+        {
+            new Thread(() => {
+
+
+
+            }).Start();
+        }
+
+        public void EnviarSolicitud(ArchivoSolicitado AS)
+        {
+
+        }
+
+        public void Frenar() //Frenar ejecuciones
+        {
+            PermitirRecibir = false;
+            TodoHecho.Set();
+        }
+
+
+
+
         //Cliente
         private void llenarBytes(ref byte[] sendB, int n)
         {

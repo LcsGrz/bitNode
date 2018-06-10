@@ -17,14 +17,18 @@ namespace Cliente
         public static List<string> Solicitudes = new List<string>();
         public static List<Archivo> ArchivosCompartidosVecinos = new List<Archivo>();
         Thread EscucharUDP;
+        Thread EscucharTCP;
         private Configuracion configuracion = new Configuracion().Leer();
-        // Thread EscucharTCP;
         private static System.Timers.Timer temporizadorPing;
         public static event EventHandler informarSolicitud;
         public static event EventHandler informarBitNoders;
         public static event EventHandler informarArchivo;
         public static bool RecivirACV = false;
         private Random random = new Random();
+        //---------------------------------
+        public static Queue<ArchivoSolicitado> archivosSolicitados = new Queue<ArchivoSolicitado>();
+        private ManualResetEvent PermitirEnviarSolicitud = new ManualResetEvent(true);
+        public bool PermitirEnviarSolicitudes = true;
         //----------------------------------------------------------------------------------------------Funciones
         //-----------------------------------------------Server
         public void IniciarEjecuciones()
@@ -33,7 +37,7 @@ namespace Cliente
             EscucharUDP = new Thread(() => { SUDP.RecibirUDP(); });
             EscucharUDP.Start();
             STCP = new SocketTCP();
-            // EscucharTCP = new Thread(() => { SUDP.RecibirUDP(); });
+            EscucharTCP = new Thread(() => { STCP.RecibirTCP(); });
             temporizadorPing = new System.Timers.Timer(60000) { AutoReset = true, Enabled = true };
             temporizadorPing.Elapsed += bitNodersVivos;
             temporizadorPing.Start();
@@ -74,6 +78,8 @@ namespace Cliente
         {
             EnviarUDP(null, "bitNode@BYE@");
             SUDP.FrenarEscucha();
+            STCP.Frenar();
+            PermitirEnviarSolicitudes = false;
             temporizadorPing.Stop();
             temporizadorPing.Dispose();
         }
@@ -91,7 +97,7 @@ namespace Cliente
             if (ip != null)
                 SUDP.EnviarMSJ_UDP(ip, msj);
             else
-                    IPSVecinas.ForEach(ipv => SUDP.EnviarMSJ_UDP(ipv, msj));
+                IPSVecinas.ForEach(ipv => SUDP.EnviarMSJ_UDP(ipv, msj));
         }
         public void AgregarArchivoCompartido(Archivo a, IPAddress ip)
         {
@@ -163,30 +169,25 @@ namespace Cliente
         //-----------------------------------------------TCP
         public void SolicitarArchivo(int index)
         {
-            int puerto = random.Next(100, 6500);
-            int numero = ArchivosCompartidosVecinos[index].IPPropietario.Count;
-            STCP.recibeFile(ArchivosCompartidosVecinos[index], puerto, numero); //abriendo puerto para recibir archivo
-
-            int parte = 0;
-            ArchivosCompartidosVecinos[index].IPPropietario.ForEach(x =>
-            {
-                EnviarUDP(x, "bitNode@SAD@" + ArchivosCompartidosVecinos[index].ArchivoMD5 + "|" + puerto + "|" + parte + "|" + numero);
-                parte++;
-            });
-            //EnviarUDP(, "bitNode@SAD@" + ArchivosCompartidosVecinos[index].ArchivoMD5 + "|" + puerto); //SolicitarArchivo
+            /*Descargas solicitar = new Descargas();
+            solicitar.AgregarArchivos(ArchivosCompartidosVecinos[index]);
+            solicitar.SolicitarPartes();*/
         }
-        public void EnviarArchivoSolicitado(IPAddress ip, int puerto, string MD5, int offset, int numero)
+        public void EnviarArchivoSolicitado()
         {
-            foreach (Archivo a in frmCliente.archivosCompartidos)
-            {
-                if (Archivo.CompararMD5(a.ArchivoMD5, MD5))
+            while (PermitirEnviarSolicitudes) {
+                ArchivoSolicitado AS = archivosSolicitados.Dequeue();
+                int PosicionArchivo = Archivo.PosicionArchivo(AS.MD5);
+                new Thread(() =>
                 {
-                    if (!Archivo.ArchivoEnDisco(a.Ruta))
-                        EnviarUDP(ip, "bitNode@ASNULL@");
+                    if (PosicionArchivo > -1)
+                    {
+                        STCP.EnviarSolicitud(AS);
+                        return;
+                    }
                     else
-                        STCP.EnviarArchivo(a.Ruta, ip, offset, puerto, numero);
-                    return;
-                }
+                        EnviarUDP(AS.IPDestino, "bitNode@ASNULL@" + frmCliente.archivosCompartidos[PosicionArchivo].Nombre);
+                }).Start();
             }
         }
     }

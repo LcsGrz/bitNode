@@ -37,11 +37,11 @@ namespace Cliente
         public void RecibirUDP()
         {
             Socket socket = new Socket(AddressFamily.InterNetwork, SocketType.Dgram, ProtocolType.Udp);
-            IPEndPoint iep = new IPEndPoint(IPAddress.Any, 420);
-            EndPoint ep = iep;
-            socket.Bind(iep);
+            IPEndPoint iep = new IPEndPoint(IPAddress.Any, puerto);
             try
             {
+                EndPoint ep = iep;
+                socket.Bind(iep);
                 while (PermitirRecibir)
                 {
                     TodoHecho.Reset();
@@ -62,7 +62,7 @@ namespace Cliente
 
             StateObject SO = (StateObject)ar.AsyncState;
             Socket s = SO.socket;
-            IPEndPoint sender = new IPEndPoint(IPAddress.Any, 420);
+            IPEndPoint sender = new IPEndPoint(IPAddress.Any, puerto);
             EndPoint tempRemoteEP = sender;
 
             int read = s.EndReceiveFrom(ar, ref tempRemoteEP);
@@ -132,7 +132,9 @@ namespace Cliente
                         case "SAD": // Solicitar Archivo a Descargar
                             {
                                 string[] msj = stringData[2].Split('|');
-                                controlador.EnviarArchivoSolicitado(IPRecibida, Convert.ToInt32(msj[1]), msj[0], Convert.ToInt32(msj[2]), Convert.ToInt32(msj[3]));
+                                ArchivoSolicitado AS = new ArchivoSolicitado() { IPDestino = IPRecibida, MD5 = msj[0], ParteArchivo = Convert.ToInt32(msj[1]), IDPosicion = Convert.ToInt32(msj[2])};
+                                Controlador.archivosSolicitados.Enqueue(AS);
+                                // set eventhandler?
                                 break;
                             }
                         case "IPV": // Añadir IPVecinas
@@ -154,7 +156,7 @@ namespace Cliente
                             }
                         case "ASNULL": // ArchivoSolicitado NULL - no existe
                             {
-                                new frmMensaje(Idioma.StringResources.msjASNULL).ShowDialog();
+                                new frmMensaje(stringData[2] + " : " + Idioma.StringResources.msjASNULL).ShowDialog();
                                 break;
                             }
                         case "AAC": // AgregarArchivoCompartido
