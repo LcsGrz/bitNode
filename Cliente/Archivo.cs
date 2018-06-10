@@ -77,13 +77,9 @@ namespace Cliente
             {
                 Archivo a = JsonConvert.DeserializeObject<Archivo>(File.ReadAllText(rutaBN + "\\" + file.Name));
                 if (File.Exists(a.Ruta))
-                {
                     Archivos.Add(a);
-                }
                 else
-                {
                     File.Delete(rutaBN + "\\" + a.Nombre.Split('.')[0] + ".json");
-                }
             }
             return Archivos;
         }
@@ -118,11 +114,12 @@ namespace Cliente
         }
         public void CambiarEstado() => File.WriteAllText(rutaBN + "\\" + Nombre.Split('.')[0] + ".json", JsonConvert.SerializeObject(this));
         public static bool ArchivoEnDisco(string ruta) => File.Exists(ruta);
-        public static List<Archivo> TagArchivo(string listaTags)
+        public static List<Archivo> TagArchivo(List<Archivo> archivos, string listaTags)
         {
             List<Archivo> archivosTag = new List<Archivo>();
             string[] tags = listaTags.Split('|');
-            frmCliente.archivosCompartidos.ForEach(a => {
+            archivos.ForEach(a =>
+            {
                 for (int t = 0; t < a.tags.Count; t++)
                 {
                     for (int i = 0; i < tags.Length; i++)
@@ -138,6 +135,5 @@ namespace Cliente
             });
             return archivosTag;
         }
-       
     }
 }

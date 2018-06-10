@@ -812,34 +812,23 @@ namespace Cliente
         }
         private void BuscarArchivoPorTag(object sender, EventArgs e) //Busca archivos por tags
         {
-            dgvVistaExplorarArchivosCompartidosVecinos.Rows.Clear();
-            Controlador.ArchivosCompartidosVecinos.Clear();
             TBSinFoco(null, null);
 
             string[] lista = tbVistaExplorarBuscar.Text.Split(' ');
-            List<string> tags = new List<string>();
+            string msj = string.Empty;
             for (int i = 0; i < lista.Length; i++)
             {
                 if (lista[i] != string.Empty)
-                    tags.Add(lista[i]);
+                    msj += lista[i];
             }
-            if (tags.Count == 0)
-                if (configuracion.SyncActiva)
-                    CargarArchivosCompartidosVecinos(null);
-                else
-                    server.EnviarUDP(null, "bitNode@SAC@");
+            //------------------------------------------------------------
+            if (configuracion.SyncActiva)
+                CargarArchivosCompartidosVecinos((msj == string.Empty) ? null : Archivo.TagArchivo(Controlador.ArchivosCompartidosVecinos, msj));
             else
             {
-                string msj = string.Empty;
-                tags.ForEach(x => msj += ("|" + x));
-                if (configuracion.SyncActiva)
-                {
-                    CargarArchivosCompartidosVecinos(Archivo.TagArchivo(msj));
-                }
-                else
-                {
-                    server.EnviarUDP(null, "bitNode@SACTAG@NOTAG" + msj);
-                }
+                dgvVistaExplorarArchivosCompartidosVecinos.Rows.Clear();
+                Controlador.ArchivosCompartidosVecinos.Clear();
+                server.EnviarUDP(null, "bitNode@SACTAG@" + ((msj == string.Empty) ? "NOTAG" : msj));
             }
         }
         private void CargarArchivosCompatidos() //Carga los archivos compartidos en la vista

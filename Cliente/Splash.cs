@@ -5,11 +5,10 @@ namespace Cliente
 {
     public partial class frmSplash : Form
     {
-        Configuracion configuracion = new Configuracion().Leer();
         public frmSplash()
         {
             InitializeComponent();
-            BackColor = configuracion.colorVistaFondo;
+            BackColor = new Configuracion().Leer().colorVistaFondo;
             tCierre.Start();
         }
 

@@ -174,7 +174,7 @@ namespace Cliente
                                     controlador.EnviarListaArchivosCompartidosTAG(IPRecibida, stringData[2]);
                                 break;
                             }
-                        case "AACT": // AgregarArchivoCompartido
+                        case "AACT": // AgregarArchivoCompartido por TAG
                             {
                                 if (Controlador.RecivirACV && !sync)
                                     controlador.AgregarArchivoCompartido(JsonConvert.DeserializeObject<Archivo>(stringData[2]), IPRecibida);
