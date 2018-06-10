@@ -27,8 +27,9 @@ namespace Cliente
         private Random random = new Random();
         //---------------------------------
         public static Queue<ArchivoSolicitado> archivosSolicitados = new Queue<ArchivoSolicitado>();
-        private ManualResetEvent PermitirEnviarSolicitud = new ManualResetEvent(true);
+        public static ManualResetEvent PermitirEnviarSolicitud = new ManualResetEvent(true);
         public bool PermitirEnviarSolicitudes = true;
+        public static int EnviosActivos = 0;
         //----------------------------------------------------------------------------------------------Funciones
         //-----------------------------------------------Server
         public void IniciarEjecuciones()
@@ -43,6 +44,7 @@ namespace Cliente
             temporizadorPing.Start();
             IPAddress ConectarmeIP = IPAddress.Parse(configuracion.IPConeccion);
             EnviarUDP(ConectarmeIP, "bitNode@PPING@" + (IPAddress.Broadcast.Equals(ConectarmeIP) ? "OK" : "IPFIJA") + "|" + (RecivirACV && configuracion.SyncActiva)); //Primer ping      
+            ManejadorSolicitudes();
         }
         public static IPAddress ObtenerIPLocal()
         {
@@ -80,6 +82,7 @@ namespace Cliente
             SUDP.FrenarEscucha();
             STCP.Frenar();
             PermitirEnviarSolicitudes = false;
+            PermitirEnviarSolicitud.Set();
             temporizadorPing.Stop();
             temporizadorPing.Dispose();
         }
@@ -173,21 +176,30 @@ namespace Cliente
             solicitar.AgregarArchivos(ArchivosCompartidosVecinos[index]);
             solicitar.SolicitarPartes();*/
         }
-        public void EnviarArchivoSolicitado()
+        public void ManejadorSolicitudes()
         {
-            while (PermitirEnviarSolicitudes) {
-                ArchivoSolicitado AS = archivosSolicitados.Dequeue();
-                int PosicionArchivo = Archivo.PosicionArchivo(AS.MD5);
-                new Thread(() =>
+            while (PermitirEnviarSolicitudes)
+            {
+                PermitirEnviarSolicitud.Reset();
+
+                if (archivosSolicitados.Count > 0 && EnviosActivos <= 12)
                 {
-                    if (PosicionArchivo > -1)
+                    ArchivoSolicitado AS = archivosSolicitados.Dequeue();
+                    int PosicionArchivo = Archivo.PosicionArchivo(AS.MD5);
+                    new Thread(() =>
                     {
-                        STCP.EnviarSolicitud(AS);
-                        return;
-                    }
-                    else
-                        EnviarUDP(AS.IPDestino, "bitNode@ASNULL@" + frmCliente.archivosCompartidos[PosicionArchivo].Nombre);
-                }).Start();
+                        if (PosicionArchivo > -1)
+                        {
+                            EnviosActivos++;
+                            STCP.EnviarSolicitud(AS);
+                            return;
+                        }
+                        else
+                            EnviarUDP(AS.IPDestino, "bitNode@ASNULL@" + frmCliente.archivosCompartidos[PosicionArchivo].Nombre);
+                    }).Start();
+                }
+                else
+                    PermitirEnviarSolicitud.WaitOne();
             }
         }
     }

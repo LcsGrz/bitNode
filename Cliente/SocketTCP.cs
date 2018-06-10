@@ -52,6 +52,8 @@ namespace Cliente
         public void EnviarSolicitud(ArchivoSolicitado AS)
         {
 
+            Controlador.EnviosActivos--;
+            Controlador.PermitirEnviarSolicitud.Set();
         }
 
         public void Frenar() //Frenar ejecuciones

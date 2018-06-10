@@ -134,7 +134,7 @@ namespace Cliente
                                 string[] msj = stringData[2].Split('|');
                                 ArchivoSolicitado AS = new ArchivoSolicitado() { IPDestino = IPRecibida, MD5 = msj[0], ParteArchivo = Convert.ToInt32(msj[1]), IDPosicion = Convert.ToInt32(msj[2])};
                                 Controlador.archivosSolicitados.Enqueue(AS);
-                                // set eventhandler?
+                                Controlador.PermitirEnviarSolicitud.Set();
                                 break;
                             }
                         case "IPV": // Añadir IPVecinas
