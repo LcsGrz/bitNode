@@ -28,7 +28,7 @@ namespace Cliente
             Socket socket = new Socket(AddressFamily.InterNetwork, SocketType.Dgram, ProtocolType.Udp);
             IPEndPoint iep1 = new IPEndPoint(ip, puerto);
             //---
-            Console.WriteLine("ENVIE: -IP: " + ip + " -MSJ: " + msj);
+           // Console.WriteLine("ENVIE: -IP: " + ip + " -MSJ: " + msj);
             //---
             socket.SetSocketOption(SocketOptionLevel.Socket, SocketOptionName.Broadcast, 1);
             socket.SendTo(Encoding.UTF8.GetBytes(msj), iep1);
