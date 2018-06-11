@@ -327,4 +327,7 @@
   <data name="msjSyncON" xml:space="preserve">
     <value>Esta funcion consume mas ancho de banda, pero en 'Explorar' vera todos los archivos compartidos.</value>
   </data>
+  <data name="msjArchivoEnLista" xml:space="preserve">
+    <value>El archivo se añadio a la lista de descargas.</value>
+  </data>
 </root>

@@ -176,10 +176,20 @@ namespace Cliente
                                     controlador.EnviarListaArchivosCompartidosTAG(IPRecibida, stringData[2]);
                                 break;
                             }
-                        case "AACT": // AgregarArchivoCompartido por TAG
+                        case "AACT": // AgregarArchivoCompartido por TAGub
                             {
                                 if (Controlador.RecivirACV && !sync)
                                     controlador.AgregarArchivoCompartido(JsonConvert.DeserializeObject<Archivo>(stringData[2]), IPRecibida);
+                                break;
+                            }
+                        case "TEA": // TENES ESTE ARCHIVO
+                            {
+                                controlador.EnviarArchivosMD5(IPRecibida, stringData[2]);
+                                break;
+                            }
+                        case "AAS": // AgregarArchivoSolicitadoIP
+                            {
+                                controlador.AgregarIPArchivosNecesitados(IPRecibida, JsonConvert.DeserializeObject<Archivo>(stringData[2]).ArchivoMD5);
                                 break;
                             }
                     }

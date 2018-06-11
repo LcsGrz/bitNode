@@ -12,7 +12,7 @@ namespace Cliente
     {
         //----------------------------------------------------------------------------------------------Variables y atributos
         Random r = new Random();
-        private int InOutSimultaneos = 12;
+        private int InOutSimulgataneos = 12;
         private static SocketUDP SUDP;
         private static SocketTCP STCP;
         public static List<IPAddress> IPSVecinas = new List<IPAddress>();
@@ -72,6 +72,11 @@ namespace Cliente
                 if (!IPSVecinas.Exists(x => x.Equals(ip)))
                 {
                     IPSVecinas.Add(ip);
+                    //--------------- Solicitar archivos a descargar
+                    string archivos = string.Empty;
+                    archivosNecesitados.ForEach(x => archivos += ("|" + x.MD5));
+                    EnviarUDP(ip, "bitNode@TEA@" + archivos);
+                    //---------------
                     informarBitNoders?.Invoke(null, null);
                     return true;
                 }
@@ -106,7 +111,13 @@ namespace Cliente
             IPSVecinas.Remove(ip);
             informarBitNoders?.Invoke(null, null);
         }
-        public void InicializarArchvio(int index) => new ArchivoNecesitado(ArchivosCompartidosVecinos[index]);
+        public void InicializarArchvio(int index) //mejorar
+        {
+            if (!archivosNecesitados.Exists(x => Archivo.CompararMD5(x.MD5, ArchivosCompartidosVecinos[index].ArchivoMD5)))
+                new ArchivoNecesitado(ArchivosCompartidosVecinos[index]);
+
+            new frmMensaje(Idioma.StringResources.msjArchivoEnLista).ShowDialog();
+        }
         //-----------------------------------------------UDP
         public void EnviarUDP(IPAddress ip, string msj)
         {
@@ -130,6 +141,7 @@ namespace Cliente
             a.IPPropietario = new List<IPAddress>() { ip };
             ArchivosCompartidosVecinos.Add(a);
             informarArchivo?.Invoke(null, null);
+            PermitirEnviarSolicitud.Set();
         }
         public void EliminarArchivosCompartidosDeIP(IPAddress ip)
         {
@@ -182,6 +194,22 @@ namespace Cliente
             else
                 Archivo.TagArchivo(frmCliente.archivosCompartidos, strArchivos).ForEach(a => EnviarUDP(ip, "bitNode@AACT@" + JsonConvert.SerializeObject(a)));
         }
+        public void EnviarArchivosMD5(IPAddress ip, string MD5Archivos)
+        {
+            string[] archivos = MD5Archivos.Split('|');
+            for (int i = 0; i < archivos.Length; i++)
+            {
+                for (int x = 0; x < frmCliente.archivosCompartidos.Count; x++)
+                {
+                    if (Archivo.CompararMD5(frmCliente.archivosCompartidos[x].ArchivoMD5, archivos[i]))
+                    {
+                        EnviarUDP(ip, "bitNode@AAS@" + JsonConvert.SerializeObject(frmCliente.archivosCompartidos[x]));
+                        break;
+                    }
+                }
+            }
+        }
+        public void AgregarIPArchivosNecesitados(IPAddress ip, string MD5) => archivosNecesitados.ForEach(x => x.agregarIP(ip, MD5));
         //-----------------------------------------------TCP
         public void ManejadorNecesitados()
         {
@@ -191,7 +219,7 @@ namespace Cliente
                 {
                     PermitirSolicitarArchivos.Reset();
 
-                    if (archivosNecesitados.Count > 0 && SolicitudesActivas <= InOutSimultaneos)
+                    if (archivosNecesitados.Count > 0 && SolicitudesActivas <= InOutSimulgataneos)
                     {
                         new Thread(() =>
                         {
@@ -206,30 +234,31 @@ namespace Cliente
         }
         public void ManejadorSolicitudes()
         {
-            new Thread(() => { 
-            while (PermitirEnviarSolicitudes)
+            new Thread(() =>
             {
-                PermitirEnviarSolicitud.Reset();
-
-                if (archivosSolicitados.Count > 0 && EnviosActivos <= InOutSimultaneos)
+                while (PermitirEnviarSolicitudes)
                 {
-                    ArchivoSolicitado AS = archivosSolicitados.Dequeue();
-                    AS.posicionLista = Archivo.PosicionArchivo(AS.MD5);
-                    new Thread(() =>
+                    PermitirEnviarSolicitud.Reset();
+
+                    if (archivosSolicitados.Count > 0 && EnviosActivos <= InOutSimulgataneos)
                     {
-                        if (AS.posicionLista > -1)
+                        ArchivoSolicitado AS = archivosSolicitados.Dequeue();
+                        AS.posicionLista = Archivo.PosicionArchivo(AS.MD5);
+                        new Thread(() =>
                         {
-                            EnviosActivos++;
-                            STCP.EnviarSolicitud(AS);
-                        }
-                        else
-                            EnviarUDP(AS.IPDestino, "bitNode@ASNULL@" + frmCliente.archivosCompartidos[AS.posicionLista].Nombre);
-                    }).Start();
+                            if (AS.posicionLista > -1)
+                            {
+                                EnviosActivos++;
+                                STCP.EnviarSolicitud(AS);
+                            }
+                            else
+                                EnviarUDP(AS.IPDestino, "bitNode@ASNULL@" + frmCliente.archivosCompartidos[AS.posicionLista].Nombre);
+                        }).Start();
+                    }
+                    else
+                        PermitirEnviarSolicitud.WaitOne();
                 }
-                else
-                    PermitirEnviarSolicitud.WaitOne();
-            }
-        }).Start();
+            }).Start();
         }
     }
 }

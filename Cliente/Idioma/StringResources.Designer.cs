@@ -583,6 +583,15 @@ namespace Cliente.Idioma {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a El archivo se añadio a la lista de descargas..
+        /// </summary>
+        internal static string msjArchivoEnLista {
+            get {
+                return ResourceManager.GetString("msjArchivoEnLista", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a El archivo solicitado no existe..
         /// </summary>
         internal static string msjASNULL {

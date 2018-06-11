@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -45,6 +46,7 @@ namespace Cliente
                 Controlador.archivosNecesitados.Add(this);
             }).Start();
         }
+        public List<IPAddress> IPsPropietarios = new List<IPAddress>();
         public void Guardar() => File.WriteAllText(bnArchivosNecesitados + "\\" + Nombre.Split('.')[0] + ".json", JsonConvert.SerializeObject(this));
         public List<ArchivoNecesitado> Leer()
         {
@@ -65,6 +67,7 @@ namespace Cliente
                     an.RellenarBytes();
                     an.Guardar();
                 }
+                an.IPsPropietarios = new List<IPAddress>();
                 archivoNecesitados.Add(an);
             }
             return archivoNecesitados;
@@ -80,20 +83,19 @@ namespace Cliente
         {
             for (int i = 0; i < Partes.Length; i++)
             {
-                if (!Partes[i])
+                if (!Partes[i] && IPsPropietarios.Count > 0)
                 {
-                    foreach (Archivo aux in Controlador.ArchivosCompartidosVecinos)
-                    {
-
-                        if (Archivo.CompararMD5(MD5, aux.ArchivoMD5))
-                        {
-                            new Controlador().EnviarUDP(aux.IPPropietario[r.Next(0, aux.IPPropietario.Count)], "bitNode@SAD@" + MD5 + "|" + ID + "|" + i);
+                            new Controlador().EnviarUDP(IPsPropietarios[r.Next(0, IPsPropietarios.Count)], "bitNode@SAD@" + MD5 + "|" + ID + "|" + i);
                             Controlador.SolicitudesActivas--;
                             return;
-                        }
-                    }
                 }
             }
+        }
+        public void agregarIP(IPAddress ip , string MD5)
+        {
+            if (Archivo.CompararMD5(MD5, this.MD5))
+                if (!IPsPropietarios.Exists(x => (x.Equals(ip))))
+                    IPsPropietarios.Add(ip);
         }
     }
 }
