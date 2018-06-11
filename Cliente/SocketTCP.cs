@@ -16,7 +16,7 @@ namespace Cliente
         int size = 2000; //tamaño de division del archivo
         int maxThreadON = 12;
         int Nposicion = 6;
-
+        //-----------------------------------------------------------------------------------------------------------RECIBIR
         public void RecibirTCP() //Recibir archivos solicitados
         {
             IPEndPoint iep = new IPEndPoint(IPAddress.Any, portSolicitar);
@@ -42,13 +42,14 @@ namespace Cliente
         }
         private void cbRecibir(IAsyncResult ar)
         {
+            Console.WriteLine("etoy en al coneccicooonn");
             new Thread(() => {
 
-
-
+                Console.WriteLine("etoy en al coneccicooonn");
+                TodoHecho.Set();
             }).Start();
         }
-
+        //-----------------------------------------------------------------------------------------------------------ENVIAR
         public void EnviarSolicitud(ArchivoSolicitado AS)
         {
 
@@ -57,29 +58,17 @@ namespace Cliente
             var loadedFile = new FileStream(frmCliente.archivosCompartidos[AS.posicionLista].Ruta, FileMode.Open, FileAccess.Read);
             try
             {
-                byte[] byteId = Encoding.ASCII.GetBytes(AS.IDPosicion.ToString());
-                byte[] byteParte = new byte[Nposicion];
-                byte[] aux = Encoding.ASCII.GetBytes(AS.ParteArchivo.ToString());
+                // Connect to the remote endpoint.  
+                client.BeginConnect(remoteEP,new AsyncCallback(cbConectar), client);
 
-                for (int i = 0; i < aux.Length; i++)
-                {
-                    byteParte[i] = aux[i];
-                }
+                // Send test data to the remote device.  
+                // Convert the string data to byte data using ASCII encoding.  
+                byte[] byteData = Encoding.ASCII.GetBytes("pepe");
 
-                byte[] byteData = new byte[size];
+                // Begin sending the data to the remote device.  
+                client.BeginSend(byteData, 0, byteData.Length, 0,new AsyncCallback(cbEnviar), client);
 
-                loadedFile.Position = AS.ParteArchivo * size;
-                loadedFile.Read(byteData, 0, byteData.Length);
-
-                byte[] sendB = new byte[byteId.Length + byteParte.Length + byteData.Length];
-
-                byteId.CopyTo(sendB, 0);
-                byteParte.CopyTo(sendB, byteId.Length);
-                byteData.CopyTo(sendB, (byteId.Length + byteParte.Length));
-
-                client.Connect(remoteEP);
-                client.Send(sendB);
-
+                // Write the response to the console.  
 
                 // Release the socket.  
                 client.Shutdown(SocketShutdown.Both);
@@ -101,8 +90,34 @@ namespace Cliente
                 Controlador.PermitirEnviarSolicitud.Set();
             }
         }
+        public void cbConectar(IAsyncResult ar) {
+            Socket client = (Socket)ar.AsyncState;
 
+            // Complete the connection.  
+            client.EndConnect(ar);
 
+            Console.WriteLine("Socket connected to {0}",
+                client.RemoteEndPoint.ToString());
+        }
+
+        public void cbEnviar(IAsyncResult ar)
+        {
+            try
+            {
+                // Retrieve the socket from the state object.  
+                Socket client = (Socket)ar.AsyncState;
+
+                // Complete sending the data to the remote device.  
+                int bytesSent = client.EndSend(ar);
+                Console.WriteLine("Sent {0} bytes to server.", bytesSent);
+
+                // Signal that all bytes have been sent.  
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.ToString());
+            }
+        }
         public void Frenar() //Frenar ejecuciones
         {
             PermitirRecibir = false;
@@ -110,7 +125,7 @@ namespace Cliente
         }
 
 
-
+        //---------------------------------------------------------------------------------------------------------
 
         //Cliente
         private void llenarBytes(ref byte[] sendB, int n)

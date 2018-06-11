@@ -78,6 +78,8 @@ namespace Cliente
                     Console.WriteLine("RECIBI: -IP: " + IPRecibida + " -MSJ: " + Encoding.UTF8.GetString(SO.buffer, 0, read));
                     //---
                     bool primeraVez = controlador.AgregarIP(IPRecibida);
+                    if(primeraVez)
+                        controlador.EnviarArchivosNecesitados(IPRecibida); //--------------- Solicitar archivos a descargar
                     bool sync = new Configuracion().Leer().SyncActiva;
                     //--------------------------------------
                     switch (stringData[1])
@@ -102,9 +104,6 @@ namespace Cliente
                                 if (Controlador.RecivirACV && primeraVez && sync)
                                     EnviarMSJ_UDP(IPRecibida, "bitNode@PPING@OK|true");
 
-                                //--------------- Solicitar archivos a descargar
-                                controlador.EnviarArchivosNecesitados(IPRecibida);
-                                //---------------
                                 break;
                             }
                         //------------------------------------------------------------------------------
