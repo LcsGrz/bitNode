@@ -11,7 +11,7 @@ namespace Cliente
     public class SocketTCP
     {
         public static bool PermitirRecibir = true;
-        private ManualResetEvent TodoHecho = new ManualResetEvent(true);
+        private ManualResetEvent TodoHecho = new ManualResetEvent(false);
         int portSolicitar = 666;
         int size = 2000; //tamaño de division del archivo
         int maxThreadON = 12;
@@ -19,9 +19,9 @@ namespace Cliente
 
         public void RecibirTCP() //Recibir archivos solicitados
         {
-            Socket socket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
             IPEndPoint iep = new IPEndPoint(IPAddress.Any, portSolicitar);
-            EndPoint ep = iep;
+            Socket socket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
+
             try
             {
                 socket.Bind(iep);
@@ -88,10 +88,12 @@ namespace Cliente
             catch (Exception e)
             {
                 Console.WriteLine(e.Message);
-                client.Shutdown(SocketShutdown.Both);
+
                 client.Close();
+                client.Dispose();
                 loadedFile.Close();
                 loadedFile.Dispose();
+                Console.WriteLine("Cerre cliente");
             }
             finally
             {
