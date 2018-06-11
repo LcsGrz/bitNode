@@ -89,8 +89,6 @@ namespace Cliente
                     break;
                 }
             }
-            Controlador.SolicitudesActivas--;
-            Controlador.PermitirSolicitarArchivos.Set();
         }
         public void agregarIP(IPAddress ip, string MD5)
         {

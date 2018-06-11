@@ -12,7 +12,6 @@ namespace Cliente
     {
         //----------------------------------------------------------------------------------------------Variables y atributos
         Random r = new Random();
-        private int InOutSimulgataneos = 12;
         private static SocketUDP SUDP;
         private static SocketTCP STCP;
         public static List<IPAddress> IPSVecinas = new List<IPAddress>();
@@ -36,8 +35,6 @@ namespace Cliente
         //---
 
         private bool PermitirSolicitar = true;
-        public static ManualResetEvent PermitirSolicitarArchivos = new ManualResetEvent(true);
-        public static int SolicitudesActivas = 0;
         //----------------------------------------------------------------------------------------------Funciones
         //-----------------------------------------------Server
         public void IniciarEjecuciones()
@@ -92,7 +89,6 @@ namespace Cliente
             SUDP.FrenarEscucha();
             STCP.Frenar();
             PermitirSolicitar = false;
-            PermitirSolicitarArchivos.Set();
             PermitirEnviarSolicitudes = false;
             PermitirEnviarSolicitud.Set();
             temporizadorPing.Stop();
@@ -118,8 +114,6 @@ namespace Cliente
         {
             if (!archivosSolicitados.Exists(x => (Archivo.CompararMD5(x.MD5, AS.MD5) && AS.IDPosicion == x.IDPosicion && AS.ParteArchivo == x.ParteArchivo)))
                 archivosSolicitados.Add(AS);
-            else
-                Console.WriteLine("EXISTE FORRO");
         }
         //-----------------------------------------------UDP
         public void EnviarUDP(IPAddress ip, string msj)
@@ -227,14 +221,8 @@ namespace Cliente
                 while (PermitirSolicitar)
                 {
                     Thread.Sleep(1000);
-                    PermitirSolicitarArchivos.Reset();
-                    if (archivosNecesitados.Count > 0 && SolicitudesActivas <= InOutSimulgataneos)
-                    {
-                            SolicitudesActivas++;
+                    if (archivosNecesitados.Count > 0)
                             archivosNecesitados[r.Next(0, archivosNecesitados.Count)].SolicitarPartes();
-                    }
-                    else
-                        PermitirSolicitarArchivos.WaitOne(); //Es alpedo esto? entra tan rapido al while que lo sca
                 }
             }).Start();
         }

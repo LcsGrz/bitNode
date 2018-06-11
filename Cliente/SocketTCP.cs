@@ -12,9 +12,9 @@ namespace Cliente
     {
         public static bool PermitirRecibir = true;
         private ManualResetEvent TodoHecho = new ManualResetEvent(false);
-        int portSolicitar = 666;
-        int size = 2000; //tamaño de division del archivo
-        int maxThreadON = 12;
+        const int portSolicitar = 666;
+        const int size = 2000; //tamaño de division del archivo
+        const int maxThreadON = 12;
         int Nposicion = 6;
         //-----------------------------------------------------------------------------------------------------------RECIBIR
         public void RecibirTCP() //Recibir archivos solicitados
@@ -64,8 +64,7 @@ namespace Cliente
 
 
             // Create the state object.  
-            StateObject state = new StateObject();
-            state.workSocket = handler;
+            StateObject state = new StateObject{ workSocket = handler };
             handler.BeginReceive(state.buffer, 0, StateObject.BufferSize, 0,
                 new AsyncCallback(ReadCallback), state);
             /*new Thread(() => {
