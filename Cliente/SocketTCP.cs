@@ -50,6 +50,8 @@ namespace Cliente
             }).Start();
         }
         //-----------------------------------------------------------------------------------------------------------ENVIAR
+        private ManualResetEvent connectDone = new ManualResetEvent(false);
+        private ManualResetEvent sendDone = new ManualResetEvent(false);
         public void EnviarSolicitud(ArchivoSolicitado AS)
         {
 
@@ -60,14 +62,14 @@ namespace Cliente
             {
                 // Connect to the remote endpoint.  
                 client.BeginConnect(remoteEP,new AsyncCallback(cbConectar), client);
-
+                connectDone.WaitOne();
                 // Send test data to the remote device.  
                 // Convert the string data to byte data using ASCII encoding.  
                 byte[] byteData = Encoding.ASCII.GetBytes("pepe");
 
                 // Begin sending the data to the remote device.  
                 client.BeginSend(byteData, 0, byteData.Length, 0,new AsyncCallback(cbEnviar), client);
-
+                sendDone.WaitOne();
                 // Write the response to the console.  
 
                 // Release the socket.  
@@ -96,6 +98,7 @@ namespace Cliente
 
             Console.WriteLine("Socket connected to {0}",
                 client.RemoteEndPoint.ToString());
+            connectDone.Set();
         }
 
         public void cbEnviar(IAsyncResult ar)
@@ -110,6 +113,7 @@ namespace Cliente
                 Console.WriteLine("Sent {0} bytes to server.", bytesSent);
 
                 // Signal that all bytes have been sent.  
+                sendDone.Set();
             }
             catch (Exception e)
             {
