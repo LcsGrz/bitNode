@@ -31,7 +31,7 @@ namespace Cliente
         //------------UDP
         //---------------------------------
         public static Queue<ArchivoSolicitado> archivosSolicitados = new Queue<ArchivoSolicitado>();
-        public static ManualResetEvent PermitirEnviarSolicitud = new ManualResetEvent(true);
+        public static ManualResetEvent PermitirEnviarSolicitud = new ManualResetEvent(false);
         public bool PermitirEnviarSolicitudes = true;
         public static int EnviosActivos = 0;
         //---
@@ -48,6 +48,7 @@ namespace Cliente
             EscucharUDP.Start();
             STCP = new SocketTCP();
             EscucharTCP = new Thread(() => { STCP.RecibirTCP(); });
+            EscucharTCP.Start();
             temporizadorPing = new System.Timers.Timer(60000) { AutoReset = true, Enabled = true };
             temporizadorPing.Elapsed += bitNodersVivos;
             temporizadorPing.Start();
@@ -137,7 +138,7 @@ namespace Cliente
             a.IPPropietario = new List<IPAddress>() { ip };
             ArchivosCompartidosVecinos.Add(a);
             informarArchivo?.Invoke(null, null);
-            PermitirEnviarSolicitud.Set();
+            //PermitirEnviarSolicitud.Set();
         }
         public void EliminarArchivosCompartidosDeIP(IPAddress ip)
         {
@@ -240,7 +241,7 @@ namespace Cliente
                 {
                     PermitirEnviarSolicitud.Reset();
 
-                    if (archivosSolicitados.Count > 0 && EnviosActivos <= InOutSimulgataneos)
+                    if (archivosSolicitados.Count > 0 )//&& EnviosActivos <= InOutSimulgataneos)
                     {
                         ArchivoSolicitado AS = archivosSolicitados.Dequeue();
                         AS.posicionLista = Archivo.PosicionArchivo(AS.MD5);
@@ -248,15 +249,19 @@ namespace Cliente
                         {
                             if (AS.posicionLista > -1)
                             {
-                                EnviosActivos++;
+                                //EnviosActivos++;
+                                Console.WriteLine("Entre12231");
                                 STCP.EnviarSolicitud(AS);
                             }
                             else
                                 EnviarUDP(AS.IPDestino, "bitNode@ASNULL@" + frmCliente.archivosCompartidos[AS.posicionLista].Nombre);
                         }).Start();
-                    }
-                    else
+
+                        Console.WriteLine("Entre");
                         PermitirEnviarSolicitud.WaitOne();
+                    }
+                    //else
+                      //  PermitirEnviarSolicitud.WaitOne();
                 }
             }).Start();
         }

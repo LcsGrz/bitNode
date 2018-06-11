@@ -75,7 +75,7 @@ namespace Cliente
                 if (stringData[0] == "bitNode")
                 {
                     //---
-                    Console.WriteLine("RECIBI: -IP: " + IPRecibida + " -MSJ: " + Encoding.UTF8.GetString(SO.buffer, 0, read));
+                    //Console.WriteLine("RECIBI: -IP: " + IPRecibida + " -MSJ: " + Encoding.UTF8.GetString(SO.buffer, 0, read));
                     //---
                     bool primeraVez = controlador.AgregarIP(IPRecibida);
                     if(primeraVez)
@@ -134,10 +134,15 @@ namespace Cliente
                             }
                         case "SAD": // Solicitar Archivo a Descargar
                             {
+
                                 string[] msj = stringData[2].Split('|');
                                 ArchivoSolicitado AS = new ArchivoSolicitado() { IPDestino = IPRecibida, MD5 = msj[0], ParteArchivo = Convert.ToInt32(msj[1]), IDPosicion = Convert.ToInt32(msj[2])};
-                                Controlador.archivosSolicitados.Enqueue(AS);
-                                Controlador.PermitirEnviarSolicitud.Set();
+                               // Controlador.archivosSolicitados.Enqueue(AS);
+                                if (!Controlador.archivosSolicitados.Contains(AS))
+                                    Controlador.archivosSolicitados.Enqueue(AS);
+                                else
+                                    MessageBox.Show("pepe");
+                                //Controlador.PermitirEnviarSolicitud.Set();
                                 break;
                             }
                         case "IPV": // Añadir IPVecinas

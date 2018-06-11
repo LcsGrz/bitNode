@@ -42,12 +42,16 @@ namespace Cliente
         }
         private void cbRecibir(IAsyncResult ar)
         {
+
             Console.WriteLine("etoy en al coneccicooonn");
             new Thread(() => {
 
                 Console.WriteLine("etoy en al coneccicooonn");
                 TodoHecho.Set();
             }).Start();
+
+            Socket listener = (Socket)ar.AsyncState;
+            listener.EndAccept(ar);
         }
         //-----------------------------------------------------------------------------------------------------------ENVIAR
         private ManualResetEvent connectDone = new ManualResetEvent(false);
@@ -73,8 +77,11 @@ namespace Cliente
                 // Write the response to the console.  
 
                 // Release the socket.  
+                Console.WriteLine("Por cerrar");
                 client.Shutdown(SocketShutdown.Both);
+                Console.WriteLine("Cerrado");
                 client.Close();
+                Console.WriteLine("Posta");
             }
             catch (Exception e)
             {
@@ -88,8 +95,7 @@ namespace Cliente
             }
             finally
             {
-                Controlador.EnviosActivos--;
-                Controlador.PermitirEnviarSolicitud.Set();
+
             }
         }
         public void cbConectar(IAsyncResult ar) {
@@ -116,9 +122,12 @@ namespace Cliente
 
                 // Signal that all bytes have been sent.  
                 sendDone.Set();
+
             }
             catch (Exception e)
             {
+                Console.WriteLine("Error en cbEnviar");
+
                 Console.WriteLine(e.ToString());
             }
         }
