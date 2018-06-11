@@ -51,41 +51,53 @@ namespace Cliente
 
         public void EnviarSolicitud(ArchivoSolicitado AS)
         {
-            IPEndPoint remoteEP = new IPEndPoint(AS.IPDestino,portSolicitar);
-            Socket client = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
-            //Socket client = new Socket(ip.AddressFamily,SocketType.Stream, ProtocolType.Tcp);
 
+            IPEndPoint remoteEP = new IPEndPoint(AS.IPDestino, portSolicitar);
+            Socket  client = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
             var loadedFile = new FileStream(frmCliente.archivosCompartidos[AS.posicionLista].Ruta, FileMode.Open, FileAccess.Read);
-
-            byte[] byteId = Encoding.ASCII.GetBytes(AS.IDPosicion.ToString());
-            byte[] byteParte = new byte[Nposicion];
-            byte[] aux = Encoding.ASCII.GetBytes(AS.ParteArchivo.ToString());
-
-            for (int i = 0; i < aux.Length; i++)
+            try
             {
-                byteParte[i] = aux[i];
+                byte[] byteId = Encoding.ASCII.GetBytes(AS.IDPosicion.ToString());
+                byte[] byteParte = new byte[Nposicion];
+                byte[] aux = Encoding.ASCII.GetBytes(AS.ParteArchivo.ToString());
+
+                for (int i = 0; i < aux.Length; i++)
+                {
+                    byteParte[i] = aux[i];
+                }
+
+                byte[] byteData = new byte[size];
+
+                loadedFile.Position = AS.ParteArchivo * size;
+                loadedFile.Read(byteData, 0, byteData.Length);
+
+                byte[] sendB = new byte[byteId.Length + byteParte.Length + byteData.Length];
+
+                byteId.CopyTo(sendB, 0);
+                byteParte.CopyTo(sendB, byteId.Length);
+                byteData.CopyTo(sendB, (byteId.Length + byteParte.Length));
+
+                client.Connect(remoteEP);
+                client.Send(sendB);
+
+
+                // Release the socket.  
+                client.Shutdown(SocketShutdown.Both);
+                client.Close();
             }
-
-            byte[] byteData = new byte[size];
-
-            loadedFile.Position = AS.ParteArchivo * size;
-            loadedFile.Read(byteData, 0, byteData.Length);
-
-            byte[] sendB = new byte[byteId.Length + byteParte.Length + byteData.Length];
-
-            byteId.CopyTo(sendB, 0);
-            byteParte.CopyTo(sendB, byteId.Length);
-            byteData.CopyTo(sendB, (byteId.Length + byteParte.Length));
-            // Send test data to the remote device.  
-            //Send(client, frmCliente.archivosCompartidos[AS.posicionLista].Ruta, AS.IDPosicion,AS.ParteArchivo);
-            client.Send(sendB);
-
-            // Release the socket.  
-            client.Shutdown(SocketShutdown.Both);
-            client.Close();
-
-            Controlador.EnviosActivos--;
-            Controlador.PermitirEnviarSolicitud.Set();
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+                client.Shutdown(SocketShutdown.Both);
+                client.Close();
+                loadedFile.Close();
+                loadedFile.Dispose();
+            }
+            finally
+            {
+                Controlador.EnviosActivos--;
+                Controlador.PermitirEnviarSolicitud.Set();
+            }
         }
 
 
