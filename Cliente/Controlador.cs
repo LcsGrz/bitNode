@@ -116,7 +116,7 @@ namespace Cliente
         }
         public void agregarSolicitud(ArchivoSolicitado AS)
         {
-            if (!archivosSolicitados.Exists(x => (Archivo.CompararMD5(x.MD5, AS.MD5) && AS.ParteArchivo == x.ParteArchivo)))
+            if (!archivosSolicitados.Exists(x => (Archivo.CompararMD5(x.MD5, AS.MD5) && AS.IDPosicion == x.IDPosicion && AS.ParteArchivo == x.ParteArchivo)))
                 archivosSolicitados.Add(AS);
             else
                 Console.WriteLine("EXISTE FORRO");
