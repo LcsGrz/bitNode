@@ -12,245 +12,222 @@ namespace Cliente
     {
         public static bool PermitirRecibir = true;
         private ManualResetEvent TodoHecho = new ManualResetEvent(false);
-        int portSolicitar = 666;
-        int size = 2000; //tamaño de division del archivo
+        int port = 666;
         int maxThreadON = 12;
         int Nposicion = 6;
-        //-----------------------------------------------------------------------------------------------------------RECIBIR
-        public void RecibirTCP() //Recibir archivos solicitados
-        {
-            IPEndPoint iep = new IPEndPoint(IPAddress.Any, portSolicitar);
-            Socket socket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
-
-            try
-            {
-                socket.Bind(iep);
-                socket.Listen(maxThreadON);
-                while (PermitirRecibir)
-                {
-                    TodoHecho.Reset();
-
-                    socket.BeginAccept(new AsyncCallback(cbRecibir), socket);
-
-                    TodoHecho.WaitOne();
-                }
-            }
-            catch (Exception e)
-            {
-                new frmMensaje(e.ToString()).ShowDialog();
-            }
-        }
-        private void cbRecibir(IAsyncResult ar)
-        {
-
-            Console.WriteLine("etoy en al coneccicooonn");
-            new Thread(() => {
-
-                Console.WriteLine("etoy en al coneccicooonn");
-                TodoHecho.Set();
-            }).Start();
-
-            Socket listener = (Socket)ar.AsyncState;
-            listener.EndAccept(ar);
-        }
-        //-----------------------------------------------------------------------------------------------------------ENVIAR
+        //-----------------------------------------------
+        // ManualResetEvent instances signal completion.  
         private ManualResetEvent connectDone = new ManualResetEvent(false);
         private ManualResetEvent sendDone = new ManualResetEvent(false);
+
+        // The response from the remote device.  
+        private String response = String.Empty;
+
+        //-----------------------------------------------------------------------------------------------------------Enviar
         public void EnviarSolicitud(ArchivoSolicitado AS)
         {
-
-            IPEndPoint remoteEP = new IPEndPoint(AS.IPDestino, portSolicitar);
-            Socket  client = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
-            var loadedFile = new FileStream(frmCliente.archivosCompartidos[AS.posicionLista].Ruta, FileMode.Open, FileAccess.Read);
+            IPEndPoint remoteEP = new IPEndPoint(AS.IPDestino, port);
+            Socket client = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
             try
             {
-                // Connect to the remote endpoint.  
-                client.BeginConnect(remoteEP,new AsyncCallback(cbConectar), client);
+
+                client.BeginConnect(remoteEP, new AsyncCallback(ConnectCallback), client);
                 connectDone.WaitOne();
-                // Send test data to the remote device.  
-                // Convert the string data to byte data using ASCII encoding.  
-                byte[] byteData = Encoding.ASCII.GetBytes("pepe");
 
-                // Begin sending the data to the remote device.  
-                client.BeginSend(byteData, 0, byteData.Length, 0,new AsyncCallback(cbEnviar), client);
+                Send(client, frmCliente.archivosCompartidos[AS.IDPosicion].Ruta, AS.IDPosicion, AS.ParteArchivo);
                 sendDone.WaitOne();
-                // Write the response to the console.  
 
-                // Release the socket.  
-                Console.WriteLine("Por cerrar");
                 client.Shutdown(SocketShutdown.Both);
-                Console.WriteLine("Cerrado");
                 client.Close();
-                Console.WriteLine("Posta");
+                Controlador.PermitirEnviarSolicitud.Set();
             }
             catch (Exception e)
             {
-                Console.WriteLine(e.Message);
-
                 client.Close();
                 client.Dispose();
-                loadedFile.Close();
-                loadedFile.Dispose();
-                Console.WriteLine("Cerre cliente");
-            }
-            finally
-            {
-
+                Console.WriteLine("StartClient Error: " + e.ToString());
             }
         }
-        public void cbConectar(IAsyncResult ar) {
-            Socket client = (Socket)ar.AsyncState;
 
-            // Complete the connection.  
-            client.EndConnect(ar);
-
-            Console.WriteLine("Socket connected to {0}",
-                client.RemoteEndPoint.ToString());
-            connectDone.Set();
-        }
-
-        public void cbEnviar(IAsyncResult ar)
+        private void ConnectCallback(IAsyncResult ar)
         {
             try
             {
-                // Retrieve the socket from the state object.  
                 Socket client = (Socket)ar.AsyncState;
-
-                // Complete sending the data to the remote device.  
-                int bytesSent = client.EndSend(ar);
-                Console.WriteLine("Sent {0} bytes to server.", bytesSent);
-
-                // Signal that all bytes have been sent.  
-                sendDone.Set();
-
+                client.EndConnect(ar);
+                connectDone.Set();
             }
             catch (Exception e)
             {
-                Console.WriteLine("Error en cbEnviar");
-
-                Console.WriteLine(e.ToString());
+                Console.WriteLine("conecctcallback Error: " + e.ToString());
             }
         }
-        public void Frenar() //Frenar ejecuciones
+
+        private void Send(Socket client, String filename, int id, int Nparte)
+        {
+            FileStream loadedFile;
+            try
+            {
+                loadedFile = new FileStream(filename, FileMode.Open, FileAccess.Read);
+                
+                byte[] byteId = Encoding.ASCII.GetBytes(id.ToString() + "|");//ID                
+                byte[] byteParte = Encoding.ASCII.GetBytes(Nparte.ToString() + "|");//Parte
+
+               
+                byte[] byteData = new byte[StateObject.size];
+
+                loadedFile.Position = Nparte * StateObject.size;
+                loadedFile.Read(byteData, 0, byteData.Length);
+
+                byte[] bFinal = Encoding.ASCII.GetBytes("<BNF>");
+
+                byte[] sendB = new byte[byteId.Length + byteParte.Length + byteData.Length + bFinal.Length];
+
+                byteId.CopyTo(sendB, 0);
+                byteParte.CopyTo(sendB, byteId.Length);
+                byteData.CopyTo(sendB, (byteId.Length + byteParte.Length));
+
+                bFinal.CopyTo(sendB, (byteId.Length + byteParte.Length + byteData.Length));//Agrego el punto final del archivo
+
+                client.BeginSend(sendB, 0, sendB.Length, 0,
+                    new AsyncCallback(SendCallback), client);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("Error Send: " + e.Message);
+            }
+        }
+
+        private void SendCallback(IAsyncResult ar)
+        {
+            try
+            {
+                Socket client = (Socket)ar.AsyncState;
+
+                int bytesSent = client.EndSend(ar);
+
+                sendDone.Set();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("Send CallbackEroor: " + e.ToString());
+            }
+        }
+        //-----------------------------------------------------------------------------------------------------------Enviar
+
+        //-----------------------------------------------------------------------------------------------------------Recibir
+        public ManualResetEvent allDone = new ManualResetEvent(false);
+
+        public void RecibirTCP()
+        {
+            IPEndPoint sender = new IPEndPoint(IPAddress.Any, port);
+
+            Socket listener = new Socket(AddressFamily.InterNetwork,
+            SocketType.Stream, ProtocolType.Tcp);
+
+            try
+            {
+                listener.Bind(sender);
+                listener.Listen(100);
+
+                while (PermitirRecibir)
+                {
+                    allDone.Reset();
+
+                    listener.BeginAccept(new AsyncCallback(AcceptCallback), listener);
+
+                    allDone.WaitOne();
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.ToString());
+                MessageBox.Show(e.ToString());
+            }
+        }
+
+        public void AcceptCallback(IAsyncResult ar)
+        {
+            allDone.Set();
+
+            Socket listener = (Socket)ar.AsyncState;
+            Socket handler = listener.EndAccept(ar);
+
+            StateObject state = new StateObject();
+            state.workSocket = handler;
+            handler.BeginReceive(state.buffer, 0, StateObject.BufferSize, 0,
+                new AsyncCallback(ReadCallback), state);
+        }
+
+        public void ReadCallback(IAsyncResult ar)
+        {
+            StateObject state = (StateObject)ar.AsyncState;
+            Socket handler = state.workSocket;
+
+            int bytesRead = handler.EndReceive(ar);
+            if (bytesRead > 0)
+            {
+                string content;
+                state.sb.Append(Encoding.ASCII.GetString(
+                state.buffer, 0, bytesRead));
+
+                content = state.sb.ToString();
+                state.enterita += content;
+                if (content.IndexOf("<BNF>") > -1)
+                {
+                    state.ManejarArchivo(bytesRead);
+                }
+                else
+                {
+                    // Not all data received. Get more.  
+                    if (state.leerIndices)
+                    {
+                        string[] spliteo = content.Split('|');
+                        state.id = Convert.ToInt32(spliteo[0]);
+                        state.parte = Convert.ToInt32(spliteo[1]);
+                        state.leerIndices = false;
+                    }
+                    handler.BeginReceive(state.buffer, 0, StateObject.BufferSize, 0,
+                    new AsyncCallback(ReadCallback), state);
+                }
+            }
+        }
+
+        //Clase Auxiliar
+        public class StateObject
+        {
+            // public static int Nid = 1;
+            //  public static int Npartes = 6;
+            public string enterita = "";
+
+            public static int size = 100;
+            public Socket workSocket = null;
+            // Size of receive buffer.  
+            public int id=0;
+            public long parte=0;
+            public bool leerIndices = true;
+            public int byteLeidos = 0;
+            public const int BufferSize = 64;
+            // Receive buffer.  
+            public byte[] buffer = new byte[BufferSize];
+
+            public byte[] datos = new byte[size];
+            // Received data string.  
+            public StringBuilder sb = new StringBuilder();
+
+            public void ManejarArchivo(int byteRead)
+            {
+                using (FileStream output = new FileStream(Controlador.archivosNecesitados[id].RutaDesarga, FileMode.Append))
+                {
+                    output.Position = parte * size;
+                    output.Write(buffer, 0, buffer.Length);
+                }
+            }
+        }
+        public void Frenar()
         {
             PermitirRecibir = false;
-            TodoHecho.Set();
-        }
-
-
-        //---------------------------------------------------------------------------------------------------------
-
-        //Cliente
-        private void llenarBytes(ref byte[] sendB, int n)
-        {
-            byte[] arreglo = Encoding.UTF8.GetBytes(n.ToString());
-            int contador = 0;
-            foreach (byte aux in arreglo)
-            {
-                sendB[sendB.Length - Nposicion + contador] = aux;
-                contador++;
-            }
-        }
-        public void EnviarArchivo(string filename, IPAddress ip, int nPc, int port, int nIps)
-        {
-            new Thread(() =>
-            {
-                IPEndPoint ipEndPoint = new IPEndPoint(ip, portSolicitar);
-                Socket client = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
-
-                FileStream loadedFile;
-                try
-                {
-                    loadedFile = new FileStream(filename, FileMode.Open, FileAccess.Read);
-                    client.Connect(ipEndPoint);
-                    long partes = loadedFile.Length / size;
-                    for (int i = 0; i < partes; i++)
-                    {
-                        byte[] sendB = new byte[size + Nposicion];
-                        int size1 = sendB.Length;
-                        loadedFile.Read(sendB, 0, (sendB.Length - Nposicion));
-                        int size2 = sendB.Length;
-                        llenarBytes(ref sendB, i);
-                        client.Send(sendB);
-                    }
-                    if (loadedFile.Length % size != 0)
-                    {
-                        byte[] sendB = new byte[(loadedFile.Length % size) + Nposicion];
-                        loadedFile.Read(sendB, 0, sendB.Length);
-                        llenarBytes(ref sendB, (int)partes);
-                        client.Send(sendB);
-                    }
-
-                    loadedFile.Close();
-                    client.Shutdown(SocketShutdown.Both);
-                    client.Close();
-                }
-                catch (Exception e)
-                {
-                    MessageBox.Show(e.Message + "----" + e.Source + "-----");
-                    client.Shutdown(SocketShutdown.Both);
-                    client.Close();
-                }
-            }).Start();
-        }
-        //Servidor
-        bool puertoAbierto = true;
-        TcpClient client;
-
-        public void recibeFile(Archivo archivo, int port, int offset)
-        {
-            new Thread(() =>
-            {
-                var listener = new TcpListener(IPAddress.Any, portSolicitar);
-                listener.Start();
-
-                //try
-                {
-                    //while (puertoAbierto)
-                    {
-                        var client = listener.AcceptTcpClient();
-                        using (var stream = client.GetStream())
-                        //using (var output = File.Create(new Configuracion().rutaDescarga + "\\" + archivo.Nombre.Split('.')[0] + ".bnp"))  
-                        using (FileStream output = new FileStream(new Configuracion().rutaDescarga + "\\" + archivo.Nombre.Split('.')[0] + ".bnp", FileMode.Append))
-                        {
-                            output.SetLength(archivo.Tamaño);
-                            //----------------------------------------------
-                            var buffer = new byte[size + Nposicion];
-                            int bytesRead;
-                            int partes = (int)archivo.Tamaño / size + (archivo.Tamaño % size != 0 ? 1 : 0);
-                            int contador = 0;
-                            //Reconstruccion del archivo
-                            while ((bytesRead = stream.Read(buffer, 0, buffer.Length)) > 0)
-                            {
-                                string index = "0";
-
-                                for (int x = 0; x < Nposicion; x++)
-                                {
-                                    int result = buffer[(buffer.Length) - 1 + x];
-                                    if (result != 0)
-                                    {
-                                        index += Convert.ToChar(result).ToString();
-                                    }
-                                }
-                                output.Write(buffer, 0, bytesRead - Nposicion);
-                                contador++;
-                            }
-
-                        }
-                        client.Close();
-                    }
-
-                }
-                /*
-                catch (Exception e)
-                {
-                    MessageBox.Show(e.Message + "----" + e.Source + "-----");
-                    client.Close();
-                    client.Dispose();
-                    puertoAbierto = false;
-                }
-                */
-            }).Start();
+            allDone.Set();
         }
     }
 }

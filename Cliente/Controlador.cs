@@ -245,8 +245,8 @@ namespace Cliente
                     {
                         ArchivoSolicitado AS = archivosSolicitados.Dequeue();
                         AS.posicionLista = Archivo.PosicionArchivo(AS.MD5);
-                        new Thread(() =>
-                        {
+                       // new Thread(() =>
+                      //  {
                             if (AS.posicionLista > -1)
                             {
                                 //EnviosActivos++;
@@ -255,7 +255,7 @@ namespace Cliente
                             }
                             else
                                 EnviarUDP(AS.IPDestino, "bitNode@ASNULL@" + frmCliente.archivosCompartidos[AS.posicionLista].Nombre);
-                        }).Start();
+                       // }).Start();
 
                         Console.WriteLine("Entre");
                         PermitirEnviarSolicitud.WaitOne();
