@@ -104,6 +104,7 @@ namespace Cliente
         public void EliminarIP(IPAddress ip)
         {
             IPSVecinas.Remove(ip);
+            archivosNecesitados.ForEach(an => an.IPsPropietarios.Remove(ip));
             informarBitNoders?.Invoke(null, null);
         }
         public void InicializarArchvio(int index) //mejorar
@@ -219,7 +220,7 @@ namespace Cliente
             {
                 while (PermitirSolicitar)
                 {
-                    Thread.Sleep(500);
+                    Thread.Sleep(1000);
                     PermitirSolicitarArchivos.Reset();
                     if (archivosNecesitados.Count > 0 && SolicitudesActivas <= InOutSimulgataneos)
                     {
@@ -227,9 +228,7 @@ namespace Cliente
                             archivosNecesitados[r.Next(0, archivosNecesitados.Count)].SolicitarPartes();
                     }
                     else
-                    {
                         PermitirSolicitarArchivos.WaitOne(); //Es alpedo esto? entra tan rapido al while que lo sca
-                    }
                 }
             }).Start();
         }
