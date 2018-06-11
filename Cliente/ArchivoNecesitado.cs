@@ -85,13 +85,13 @@ namespace Cliente
             {
                 if (!Partes[i] && IPsPropietarios.Count > 0)
                 {
-                            new Controlador().EnviarUDP(IPsPropietarios[r.Next(0, IPsPropietarios.Count)], "bitNode@SAD@" + MD5 + "|" + ID + "|" + i);
-                            Controlador.SolicitudesActivas--;
-                            return;
+                    new Controlador().EnviarUDP(IPsPropietarios[r.Next(0, IPsPropietarios.Count)], "bitNode@SAD@" + MD5 + "|" + ID + "|" + i);
+                    Controlador.SolicitudesActivas--;
+                    return;
                 }
             }
         }
-        public void agregarIP(IPAddress ip , string MD5)
+        public void agregarIP(IPAddress ip, string MD5)
         {
             if (Archivo.CompararMD5(MD5, this.MD5))
                 if (!IPsPropietarios.Exists(x => (x.Equals(ip))))

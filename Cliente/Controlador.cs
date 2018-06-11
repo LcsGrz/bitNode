@@ -72,11 +72,6 @@ namespace Cliente
                 if (!IPSVecinas.Exists(x => x.Equals(ip)))
                 {
                     IPSVecinas.Add(ip);
-                    //--------------- Solicitar archivos a descargar
-                    string archivos = string.Empty;
-                    archivosNecesitados.ForEach(x => archivos += ("|" + x.MD5));
-                    EnviarUDP(ip, "bitNode@TEA@" + archivos);
-                    //---------------
                     informarBitNoders?.Invoke(null, null);
                     return true;
                 }
@@ -210,6 +205,13 @@ namespace Cliente
             }
         }
         public void AgregarIPArchivosNecesitados(IPAddress ip, string MD5) => archivosNecesitados.ForEach(x => x.agregarIP(ip, MD5));
+        public void EnviarArchivosNecesitados(IPAddress ip)
+        {
+            string archivos = string.Empty;
+            archivosNecesitados.ForEach(x => archivos += ("|" + x.MD5));
+            EnviarUDP(ip, "bitNode@TEA@" + archivos);
+        }
+
         //-----------------------------------------------TCP
         public void ManejadorNecesitados()
         {
