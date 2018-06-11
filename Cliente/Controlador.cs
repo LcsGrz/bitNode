@@ -11,11 +11,14 @@ namespace Cliente
     class Controlador
     {
         //----------------------------------------------------------------------------------------------Variables y atributos
+        Random r = new Random();
+        private int InOutSimultaneos = 12;
         private static SocketUDP SUDP;
         private static SocketTCP STCP;
         public static List<IPAddress> IPSVecinas = new List<IPAddress>();
         public static List<string> Solicitudes = new List<string>();
         public static List<Archivo> ArchivosCompartidosVecinos = new List<Archivo>();
+        public static List<ArchivoNecesitado> archivosNecesitados = new ArchivoNecesitado().Leer();
         Thread EscucharUDP;
         Thread EscucharTCP;
         private Configuracion configuracion = new Configuracion().Leer();
@@ -24,13 +27,18 @@ namespace Cliente
         public static event EventHandler informarBitNoders;
         public static event EventHandler informarArchivo;
         public static bool RecivirACV = false;
-        private Random random = new Random();
+        //------------TCP
+        //------------UDP
         //---------------------------------
         public static Queue<ArchivoSolicitado> archivosSolicitados = new Queue<ArchivoSolicitado>();
         public static ManualResetEvent PermitirEnviarSolicitud = new ManualResetEvent(true);
         public bool PermitirEnviarSolicitudes = true;
         public static int EnviosActivos = 0;
-        private int EnviosSimultaneos = 12;
+        //---
+
+        private bool PermitirSolicitar = true;
+        public static ManualResetEvent PermitirSolicitarArchivos = new ManualResetEvent(true);
+        public static int SolicitudesActivas = 0;
         //----------------------------------------------------------------------------------------------Funciones
         //-----------------------------------------------Server
         public void IniciarEjecuciones()
@@ -44,8 +52,9 @@ namespace Cliente
             temporizadorPing.Elapsed += bitNodersVivos;
             temporizadorPing.Start();
             IPAddress ConectarmeIP = IPAddress.Parse(configuracion.IPConeccion);
-            EnviarUDP(ConectarmeIP, "bitNode@PPING@" + (IPAddress.Broadcast.Equals(ConectarmeIP) ? "OK" : "IPFIJA") + "|" + (RecivirACV && configuracion.SyncActiva)); //Primer ping      
             ManejadorSolicitudes();
+            ManejadorNecesitados();
+            EnviarUDP(ConectarmeIP, "bitNode@PPING@" + (IPAddress.Broadcast.Equals(ConectarmeIP) ? "OK" : "IPFIJA") + "|" + (RecivirACV && configuracion.SyncActiva)); //Primer ping      
         }
         public static IPAddress ObtenerIPLocal()
         {
@@ -82,6 +91,8 @@ namespace Cliente
             EnviarUDP(null, "bitNode@BYE@");
             SUDP.FrenarEscucha();
             STCP.Frenar();
+            PermitirSolicitar = false;
+            PermitirSolicitarArchivos.Set();
             PermitirEnviarSolicitudes = false;
             PermitirEnviarSolicitud.Set();
             temporizadorPing.Stop();
@@ -95,6 +106,7 @@ namespace Cliente
             IPSVecinas.Remove(ip);
             informarBitNoders?.Invoke(null, null);
         }
+        public void InicializarArchvio(int index) => new ArchivoNecesitado(ArchivosCompartidosVecinos[index]);
         //-----------------------------------------------UDP
         public void EnviarUDP(IPAddress ip, string msj)
         {
@@ -171,19 +183,35 @@ namespace Cliente
                 Archivo.TagArchivo(frmCliente.archivosCompartidos, strArchivos).ForEach(a => EnviarUDP(ip, "bitNode@AACT@" + JsonConvert.SerializeObject(a)));
         }
         //-----------------------------------------------TCP
-        public void SolicitarArchivo(int index)
+        public void ManejadorNecesitados()
         {
-            /*Descargas solicitar = new Descargas();
-            solicitar.AgregarArchivos(ArchivosCompartidosVecinos[index]);
-            solicitar.SolicitarPartes();*/
+            new Thread(() =>
+            {
+                while (PermitirSolicitar)
+                {
+                    PermitirSolicitarArchivos.Reset();
+
+                    if (archivosNecesitados.Count > 0 && SolicitudesActivas <= InOutSimultaneos)
+                    {
+                        new Thread(() =>
+                        {
+                            SolicitudesActivas++;
+                            archivosNecesitados[r.Next(0, archivosNecesitados.Count)].SolicitarPartes();
+                        }).Start();
+                    }
+                    else
+                        PermitirSolicitarArchivos.WaitOne();
+                }
+            }).Start();
         }
         public void ManejadorSolicitudes()
         {
+            new Thread(() => { 
             while (PermitirEnviarSolicitudes)
             {
                 PermitirEnviarSolicitud.Reset();
 
-                if (archivosSolicitados.Count > 0 && EnviosActivos <= EnviosSimultaneos)
+                if (archivosSolicitados.Count > 0 && EnviosActivos <= InOutSimultaneos)
                 {
                     ArchivoSolicitado AS = archivosSolicitados.Dequeue();
                     AS.posicionLista = Archivo.PosicionArchivo(AS.MD5);
@@ -201,6 +229,7 @@ namespace Cliente
                 else
                     PermitirEnviarSolicitud.WaitOne();
             }
+        }).Start();
         }
     }
 }

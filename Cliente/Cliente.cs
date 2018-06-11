@@ -29,7 +29,7 @@ namespace Cliente
         bool cerrar, TransparenciaFull, clickTags, clickDescripcion = false;
         int tagAnterior = 0;
         Archivo archivoNuevo;
-        Controlador server = new Controlador();
+        Controlador controlador = new Controlador();
         List<Panel> panelesMenu, panelesVistas;
         public static List<Archivo> archivosCompartidos = Archivo.LeerArchivos();
         //----------------------------------------------------------------------------------------------Constructor del form
@@ -41,9 +41,9 @@ namespace Cliente
             CargarConfiguracion();
             AplicarIdioma();
             AplicarTema();
-            server.IniciarEjecuciones();
+            controlador.IniciarEjecuciones();
 
-            Archivo.ArchivoGuardado += new EventHandler((object sender, EventArgs e) => { this.Invoke(new Action(() => { CargarArchivosCompatidos(); })); server.EnviarUnicoArchivoCompartido((Archivo)sender); });
+            Archivo.ArchivoGuardado += new EventHandler((object sender, EventArgs e) => { this.Invoke(new Action(() => { CargarArchivosCompatidos(); })); controlador.EnviarUnicoArchivoCompartido((Archivo)sender); });
             Controlador.informarSolicitud += new EventHandler((object sender, EventArgs e) => { this.Invoke(new Action(() => { CargarSolicitudes(); })); });
             NetworkChange.NetworkAddressChanged += new NetworkAddressChangedEventHandler((object sender, EventArgs e) =>
             {
@@ -182,7 +182,7 @@ namespace Cliente
                 if (!configuracion.SyncActiva)
                     Controlador.ArchivosCompartidosVecinos.Clear();
                 if (!Controlador.RecivirACV && configuracion.SyncActiva)
-                    server.EnviarUDP(null, "bitNode@SAC@");
+                    controlador.EnviarUDP(null, "bitNode@SAC@");
 
                 Controlador.RecivirACV = true;
                 tbVistaExplorarBuscar.Text = Idioma.StringResources.tbVistaExplorarBuscar;
@@ -262,7 +262,7 @@ namespace Cliente
                 tagAnterior = tagNuevo;
             }
         }
-        private void bitNodeClosing(object sender, FormClosingEventArgs e) => server.FrenarEjecuciones(); //Evento de cerrado del form
+        private void bitNodeClosing(object sender, FormClosingEventArgs e) => controlador.FrenarEjecuciones(); //Evento de cerrado del form
         //----------------------------------------------------------------------------------------------Funciones
         private void MostrarInformacionPersonal(object sender, EventArgs e) //Mostrar GITHUB - MAIL propio
         {
@@ -712,7 +712,7 @@ namespace Cliente
         }
         private void SolicitarArchivo(object sender, EventArgs e) //Enviar solicitud de archivo
         {
-            server.EnviarUDP(null, "bitNode@SOLICITAR@" + configuracion.nombre + "|" + tbVistaSolicitarDescripcion.Text);
+            controlador.EnviarUDP(null, "bitNode@SOLICITAR@" + configuracion.nombre + "|" + tbVistaSolicitarDescripcion.Text);
             new frmMensaje(Idioma.StringResources.msgSolicitarArchivo).ShowDialog();
             tbVistaSolicitarDescripcion.Text = Idioma.StringResources.tbVistaCompartirDescripcionArchivo;
             TBSinFoco(null, null);
@@ -750,13 +750,13 @@ namespace Cliente
                     archivosCompartidos[e.RowIndex].CambiarEstado();
                     MessageBox.Show(archivosCompartidos[e.RowIndex].Activo.ToString());
                     if (archivosCompartidos[e.RowIndex].Activo)
-                        server.EnviarUnicoArchivoCompartido(archivosCompartidos[e.RowIndex]);
+                        controlador.EnviarUnicoArchivoCompartido(archivosCompartidos[e.RowIndex]);
                     else
-                        server.EnviarUDP(null, "bitNode@EAC@" + archivosCompartidos[e.RowIndex].ArchivoMD5);
+                        controlador.EnviarUDP(null, "bitNode@EAC@" + archivosCompartidos[e.RowIndex].ArchivoMD5);
                 }
                 else if (e.ColumnIndex.Equals(4))//Borrar = 4
                 {
-                    server.EnviarUDP(null, "bitNode@EAC@" + archivosCompartidos[e.RowIndex].ArchivoMD5);
+                    controlador.EnviarUDP(null, "bitNode@EAC@" + archivosCompartidos[e.RowIndex].ArchivoMD5);
                     archivosCompartidos[e.RowIndex].EliminarArchivo(e.RowIndex);
                     dgvVistaCompartirArchivos.Rows.RemoveAt(e.RowIndex);
                 }
@@ -778,12 +778,8 @@ namespace Cliente
         private void DescargarArchivo(object sender, DataGridViewCellEventArgs e) //Click en descargar archivo
         {
             if (dgvVistaExplorarArchivosCompartidosVecinos.CurrentCell != null && dgvVistaExplorarArchivosCompartidosVecinos.CurrentCell.Value != null && e.RowIndex != -1)
-            {
                 if (e.ColumnIndex.Equals(3)) //Activo = 3
-                {
-                    server.SolicitarArchivo(e.RowIndex);
-                }
-            }
+                    controlador.InicializarArchvio(e.RowIndex);
         }
         private void Reconectar(object sender, EventArgs e) //Iniciar la reconeccion
         {
@@ -792,11 +788,11 @@ namespace Cliente
                 configuracion.IPConeccion = tbVistaConfiguracionIP.Text;
                 configuracion.Guardar();
                 Controlador.RecivirACV = (tagAnterior == 1);
-                server.VaciarIPS();
-                server.VaciarACV();
+                controlador.VaciarIPS();
+                controlador.VaciarACV();
                 dgvVistaExplorarArchivosCompartidosVecinos.Rows.Clear();
                 lblVistaConfiguracionBitNoders.Text = "0" + Idioma.StringResources.lblVistaConfiguracionBitNoders;
-                server.EnviarUDP(ip, "bitNode@PPING@" + (IPAddress.Broadcast.Equals(IPAddress.Parse(configuracion.IPConeccion)) ? "OK" : "IPFIJA") + "|" + (Controlador.RecivirACV && configuracion.SyncActiva));
+                controlador.EnviarUDP(ip, "bitNode@PPING@" + (IPAddress.Broadcast.Equals(IPAddress.Parse(configuracion.IPConeccion)) ? "OK" : "IPFIJA") + "|" + (Controlador.RecivirACV && configuracion.SyncActiva));
             }
             else
             {
@@ -810,6 +806,12 @@ namespace Cliente
             Clipboard.SetDataObject(Controlador.ObtenerIPLocal().ToString());
             new frmMensaje(Idioma.StringResources.msjIPPortapapeles).ShowDialog();
         }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show(Controlador.archivosNecesitados.Count.ToString());
+        }
+
         private void BuscarArchivoPorTag(object sender, EventArgs e) //Busca archivos por tags
         {
             TBSinFoco(null, null);
@@ -828,7 +830,7 @@ namespace Cliente
             {
                 dgvVistaExplorarArchivosCompartidosVecinos.Rows.Clear();
                 Controlador.ArchivosCompartidosVecinos.Clear();
-                server.EnviarUDP(null, "bitNode@SACTAG@" + ((msj == string.Empty) ? "NOTAG" : msj));
+                controlador.EnviarUDP(null, "bitNode@SACTAG@" + ((msj == string.Empty) ? "NOTAG" : msj));
             }
         }
         private void CargarArchivosCompatidos() //Carga los archivos compartidos en la vista
