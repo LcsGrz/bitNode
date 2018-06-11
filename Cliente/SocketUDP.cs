@@ -28,7 +28,7 @@ namespace Cliente
             Socket socket = new Socket(AddressFamily.InterNetwork, SocketType.Dgram, ProtocolType.Udp);
             IPEndPoint iep1 = new IPEndPoint(ip, puerto);
             //---
-            Console.WriteLine("ENVIE: -IP: " + ip + " -MSJ: " + msj);
+          //  Console.WriteLine("ENVIE: -IP: " + ip + " -MSJ: " + msj);
             //---
             socket.SetSocketOption(SocketOptionLevel.Socket, SocketOptionName.Broadcast, 1);
             socket.SendTo(Encoding.UTF8.GetBytes(msj), iep1);
@@ -75,7 +75,7 @@ namespace Cliente
                 if (stringData[0] == "bitNode")
                 {
                     //---
-                    Console.WriteLine("RECIBI: -IP: " + IPRecibida + " -MSJ: " + Encoding.UTF8.GetString(SO.buffer, 0, read));
+                //    Console.WriteLine("RECIBI: -IP: " + IPRecibida + " -MSJ: " + Encoding.UTF8.GetString(SO.buffer, 0, read));
                     //---
                     bool primeraVez = controlador.AgregarIP(IPRecibida);
                     if(primeraVez)
@@ -136,8 +136,7 @@ namespace Cliente
                             {
                                 string[] msj = stringData[2].Split('|');
                                 ArchivoSolicitado AS = new ArchivoSolicitado() { IPDestino = IPRecibida, MD5 = msj[0], ParteArchivo = Convert.ToInt32(msj[1]), IDPosicion = Convert.ToInt32(msj[2])};
-                                Controlador.archivosSolicitados.Enqueue(AS);
-                                Controlador.PermitirEnviarSolicitud.Set();
+                                controlador.agregarSolicitud(AS);
                                 break;
                             }
                         case "IPV": // Añadir IPVecinas

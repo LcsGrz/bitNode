@@ -1,0 +1,333 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="lblMenuAbout" xml:space="preserve">
+    <value>About bitNode</value>
+  </data>
+  <data name="lblMenuCompartir" xml:space="preserve">
+    <value>Share</value>
+  </data>
+  <data name="lblMenuConfiguracion" xml:space="preserve">
+    <value>Options</value>
+  </data>
+  <data name="lblMenuDescargar" xml:space="preserve">
+    <value>Download</value>
+  </data>
+  <data name="lblMenuExplorar" xml:space="preserve">
+    <value>Find</value>
+  </data>
+  <data name="lblMenuSolicitar" xml:space="preserve">
+    <value>Request</value>
+  </data>
+  <data name="mensajeEmail" xml:space="preserve">
+    <value>Email copiado al portapapeles.</value>
+  </data>
+  <data name="MensajeIniciarConWindows" xml:space="preserve">
+    <value>Error al configurar, intente ejecutar como administrador.</value>
+  </data>
+  <data name="tbVistaAboutDescripcion" xml:space="preserve">
+    <value>Este proyecto fue realizado por alumnos de 3er año de la Universidad de la Punta (ULP) para la materia optativa programación concurrente como objetivo de cursada</value>
+  </data>
+  <data name="lblVistaConfiguracionEfectoBotones" xml:space="preserve">
+    <value>Button transition effect</value>
+  </data>
+  <data name="lblVistaConfiguracionEfectoFade" xml:space="preserve">
+    <value>Efecto transparencia de sistema</value>
+  </data>
+  <data name="lblVistaConfiguracionEspañol" xml:space="preserve">
+    <value>Spanish</value>
+  </data>
+  <data name="lblVistaConfiguracionGeneral" xml:space="preserve">
+    <value>General</value>
+  </data>
+  <data name="lblVistaConfiguracionIdioma" xml:space="preserve">
+    <value>Language</value>
+  </data>
+  <data name="lblVistaConfiguracionIngles" xml:space="preserve">
+    <value>English</value>
+  </data>
+  <data name="lblVistaConfiguracionIniciarConWindows" xml:space="preserve">
+    <value>Iniciar con windows</value>
+  </data>
+  <data name="lblVistaConfiguracionInterfaz" xml:space="preserve">
+    <value>Interfaz</value>
+  </data>
+  <data name="lblVistaConfiguracionLimiteBajada" xml:space="preserve">
+    <value>Limite bajada</value>
+  </data>
+  <data name="lblVistaConfiguracionLimiteDescargas" xml:space="preserve">
+    <value>Descargas simultaneas</value>
+  </data>
+  <data name="lblVistaConfiguracionLimiteSubida" xml:space="preserve">
+    <value>Limite subida</value>
+  </data>
+  <data name="lblVistaConfiguracionMinimizarBanjeda" xml:space="preserve">
+    <value>Minimizar a bandeja</value>
+  </data>
+  <data name="lblVistaConfiguracionMovimientoMenu" xml:space="preserve">
+    <value>Efecto deslizante de menu</value>
+  </data>
+  <data name="lblVistaConfiguracionRutaDescarga" xml:space="preserve">
+    <value>Ruta de descarga</value>
+  </data>
+  <data name="lblVistaConfiguracionTema" xml:space="preserve">
+    <value>Theme</value>
+  </data>
+  <data name="lblVistaConfiguracionTemaClaro" xml:space="preserve">
+    <value>Claro</value>
+  </data>
+  <data name="lblVistaConfiguracionTemaOscuro" xml:space="preserve">
+    <value>Oscuro</value>
+  </data>
+  <data name="lblVistaConfiguracionTranseferecias" xml:space="preserve">
+    <value>Transferencias</value>
+  </data>
+  <data name="lblConfiguracionesRapidasCerrarApp" xml:space="preserve">
+    <value>Close application</value>
+  </data>
+  <data name="lblConfiguracionesRapidasDeseo" xml:space="preserve">
+    <value>When you finish downloads, you want to:</value>
+  </data>
+  <data name="lblConfiguracionesRapidasNoHacerNada" xml:space="preserve">
+    <value>Do nothing</value>
+  </data>
+  <data name="lblConfiguracionesRapidasTitulo" xml:space="preserve">
+    <value>Quick configurations</value>
+  </data>
+  <data name="lblConfiguracionesRapidasApagar" xml:space="preserve">
+    <value>ShutDown</value>
+  </data>
+  <data name="lblConfiguracionesRapidasDescripcion" xml:space="preserve">
+    <value>Remember that you must configure them each time you start bitNode</value>
+  </data>
+  <data name="lblConfiguracionesRapidasHibernar" xml:space="preserve">
+    <value>Hibernate PC</value>
+  </data>
+  <data name="lblConfiguracionesRapidasSuspender" xml:space="preserve">
+    <value>Suspend PC</value>
+  </data>
+  <data name="lblMenuConfiguracionesR" xml:space="preserve">
+    <value>Configurations</value>
+  </data>
+  <data name="lblMenuCRapidas" xml:space="preserve">
+    <value>Quick</value>
+  </data>
+  <data name="lblVistaConfiguracionNombre" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="mensajeErrorCompartirArchivo" xml:space="preserve">
+    <value>Se produjo un error, vuelva a interntarlo.</value>
+  </data>
+  <data name="tbVistaCompartirDescripcionArchivo" xml:space="preserve">
+    <value>Breve descripcion del archivo.</value>
+  </data>
+  <data name="lblVistaCompartirSeleccionar" xml:space="preserve">
+    <value>Select the file you want to share</value>
+  </data>
+  <data name="mensajeExitoCompartirArchivo" xml:space="preserve">
+    <value>El archivo fue compartido exitosamente.</value>
+  </data>
+  <data name="lblVistaCompartirVerArchivos" xml:space="preserve">
+    <value>There are no shared files</value>
+  </data>
+  <data name="splashCargandoArchivos" xml:space="preserve">
+    <value>Cargando archivos</value>
+  </data>
+  <data name="CabecerasDGVArchivoCompartidoArreglo" xml:space="preserve">
+    <value>Name-Size-Description</value>
+  </data>
+  <data name="CabecerasDGVArchivoCompartidoActivo" xml:space="preserve">
+    <value>Active</value>
+  </data>
+  <data name="CabecerasDGVArchivoCompartidoEliminar" xml:space="preserve">
+    <value>Delete</value>
+  </data>
+  <data name="CabecerasDGVSolcitarArreglo" xml:space="preserve">
+    <value>User-Description</value>
+  </data>
+  <data name="CabecerasDGVSolicitarCompartir" xml:space="preserve">
+    <value>Share</value>
+  </data>
+  <data name="lblVistaSolicitarInformacion" xml:space="preserve">
+    <value>¡Solicita el archivo que necesites!</value>
+  </data>
+  <data name="lblVistaSolicitarNuevasSolicitudes" xml:space="preserve">
+    <value>No hay nuevas solicitudes</value>
+  </data>
+  <data name="msgSolicitarArchivo" xml:space="preserve">
+    <value>La solicitud fue enviada, solo queda esperar.</value>
+  </data>
+  <data name="lblVistaExplorarSyncOFF" xml:space="preserve">
+    <value>No hay archivos disponibles para descargar</value>
+  </data>
+  <data name="lblVistaConfiguracionBitNoders" xml:space="preserve">
+    <value> bitNoders vivos</value>
+  </data>
+  <data name="lblVistaConfiguracionIP" xml:space="preserve">
+    <value>IP de coneccion</value>
+  </data>
+  <data name="mensajeErrorIP" xml:space="preserve">
+    <value>La IP introducida no es valida.</value>
+  </data>
+  <data name="miIP" xml:space="preserve">
+    <value>My IP: </value>
+  </data>
+  <data name="msjIPPortapapeles" xml:space="preserve">
+    <value>Direccion IP copiada a portapapeles.</value>
+  </data>
+  <data name="ttReconectar" xml:space="preserve">
+    <value>Reconnect</value>
+  </data>
+  <data name="msjASNULL" xml:space="preserve">
+    <value>El archivo solicitado no existe.</value>
+  </data>
+  <data name="mensajebitNodeActivo" xml:space="preserve">
+    <value>bitNode ya se encuentra en ejecucion.</value>
+  </data>
+  <data name="lblVistaConfiguracionSyncAuto" xml:space="preserve">
+    <value>Sincronizacion continua</value>
+  </data>
+  <data name="lblVistaExplorarPerdon" xml:space="preserve">
+    <value>No se encontraron archivos</value>
+  </data>
+  <data name="lblVistaExplorarSyncON" xml:space="preserve">
+    <value>Busca un archivo para explorar</value>
+  </data>
+  <data name="tbVistaExplorarBuscar" xml:space="preserve">
+    <value>Ingresa el nombre del archivo.</value>
+  </data>
+  <data name="msjDescripcion" xml:space="preserve">
+    <value>Por favor ingrese una breve descripcion</value>
+  </data>
+  <data name="msjTagNull" xml:space="preserve">
+    <value>Por favor ingrese minimo 5 tags separados por un espacio</value>
+  </data>
+  <data name="tbVistaCompartirTags" xml:space="preserve">
+    <value>Ingrese minimo 5 tags separados por un espacio</value>
+  </data>
+  <data name="msjSyncOFF" xml:space="preserve">
+    <value>Debera buscar por el nombre del archivo para explorar.</value>
+  </data>
+  <data name="msjSyncON" xml:space="preserve">
+    <value>Esta funcion consume mas ancho de banda, pero en 'Explorar' vera todos los archivos compartidos.</value>
+  </data>
+  <data name="msjArchivoEnLista" xml:space="preserve">
+    <value>El archivo se añadio a la lista de descargas.</value>
+  </data>
+</root>

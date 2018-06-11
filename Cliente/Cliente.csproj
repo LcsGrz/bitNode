@@ -86,6 +86,11 @@
       <DependentUpon>botonSwitch.cs</DependentUpon>
     </Compile>
     <Compile Include="GlobalSuppressions.cs" />
+    <Compile Include="Idioma\StringResources.EN-US.Designer.cs">
+      <DependentUpon>StringResources.EN-US.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
     <Compile Include="Idioma\StringResources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -122,6 +127,10 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Controles\BotonSwitch.resx">
       <DependentUpon>botonSwitch.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Idioma\StringResources.EN-US.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>StringResources.EN-US.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Idioma\StringResources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

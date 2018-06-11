@@ -40,15 +40,52 @@ namespace Cliente
                 new frmMensaje(e.ToString()).ShowDialog();
             }
         }
+        //----
+        public class StateObject
+        {
+            // Client  socket.  
+            public Socket workSocket = null;
+            // Size of receive buffer.  
+            public const int BufferSize = 1024;
+            // Receive buffer.  
+            public byte[] buffer = new byte[BufferSize];
+            // Received data string.  
+            public StringBuilder sb = new StringBuilder();
+        }
+        int c = 0;
         private void cbRecibir(IAsyncResult ar)
         {
-            Console.WriteLine("etoy en al coneccicooonn");
-            new Thread(() => {
+            TodoHecho.Set();
 
-                Console.WriteLine("etoy en al coneccicooonn");
-                TodoHecho.Set();
-            }).Start();
+            Socket listener = (Socket)ar.AsyncState;
+            Console.WriteLine(++c + "port:" );
+   
+            Socket handler = listener.EndAccept(ar);
+
+
+            // Create the state object.  
+            StateObject state = new StateObject();
+            state.workSocket = handler;
+            handler.BeginReceive(state.buffer, 0, StateObject.BufferSize, 0,
+                new AsyncCallback(ReadCallback), state);
+            /*new Thread(() => {
+               
+            }).Start();*/
         }
+
+        public void ReadCallback(IAsyncResult ar)
+        {
+            String content = String.Empty;
+
+            // Retrieve the state object and the handler socket  
+            // from the asynchronous state object.  
+            StateObject state = (StateObject)ar.AsyncState;
+            Socket handler = state.workSocket;
+           int bytesRead = handler.EndReceive(ar);
+
+            Console.WriteLine("la concha de sy hermanaaaa ----" + c);
+        }
+
         //-----------------------------------------------------------------------------------------------------------ENVIAR
         private ManualResetEvent connectDone = new ManualResetEvent(false);
         private ManualResetEvent sendDone = new ManualResetEvent(false);
@@ -88,8 +125,6 @@ namespace Cliente
             }
             finally
             {
-                Controlador.EnviosActivos--;
-                Controlador.PermitirEnviarSolicitud.Set();
             }
         }
         public void cbConectar(IAsyncResult ar) {
@@ -116,6 +151,8 @@ namespace Cliente
 
                 // Signal that all bytes have been sent.  
                 sendDone.Set();
+                
+                Controlador.PermitirEnviarSolicitud.Set();
             }
             catch (Exception e)
             {
