@@ -178,19 +178,19 @@
     <value>Limite subida</value>
   </data>
   <data name="lblVistaConfiguracionMinimizarBanjeda" xml:space="preserve">
-    <value>Minimizar a bandeja</value>
+    <value>Minimize to tray</value>
   </data>
   <data name="lblVistaConfiguracionMovimientoMenu" xml:space="preserve">
-    <value>Efecto deslizante de menu</value>
+    <value>Menu sliding effect</value>
   </data>
   <data name="lblVistaConfiguracionRutaDescarga" xml:space="preserve">
-    <value>Ruta de descarga</value>
+    <value>Download path</value>
   </data>
   <data name="lblVistaConfiguracionTema" xml:space="preserve">
     <value>Theme</value>
   </data>
   <data name="lblVistaConfiguracionTemaClaro" xml:space="preserve">
-    <value>Claro</value>
+    <value>Ligth</value>
   </data>
   <data name="lblVistaConfiguracionTemaOscuro" xml:space="preserve">
     <value>Dark</value>
@@ -301,7 +301,7 @@
     <value>bitNode ya se encuentra en ejecucion.</value>
   </data>
   <data name="lblVistaConfiguracionSyncAuto" xml:space="preserve">
-    <value>Sincronizacion continua</value>
+    <value>Continuous synchronization</value>
   </data>
   <data name="lblVistaExplorarPerdon" xml:space="preserve">
     <value>No se encontraron archivos</value>
