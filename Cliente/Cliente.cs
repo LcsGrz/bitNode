@@ -41,7 +41,7 @@ namespace Cliente
             CargarConfiguracion();
             AplicarIdioma();
             AplicarTema();
-            controlador.IniciarEjecuciones();
+
 
             Archivo.ArchivoGuardado += new EventHandler((object sender, EventArgs e) => { this.Invoke(new Action(() => { CargarArchivosCompatidos(); })); controlador.EnviarUnicoArchivoCompartido((Archivo)sender); });
             Controlador.informarSolicitud += new EventHandler((object sender, EventArgs e) => { this.Invoke(new Action(() => { CargarSolicitudes(); })); });
@@ -56,7 +56,8 @@ namespace Cliente
             });
             Controlador.informarBitNoders += new EventHandler((object sender, EventArgs e) => { this.Invoke(new Action(() => { lblVistaConfiguracionBitNoders.Text = Controlador.IPSVecinas.Count + Idioma.StringResources.lblVistaConfiguracionBitNoders; })); });
             Controlador.informarArchivo += new EventHandler((object sender, EventArgs e) => { if (tagAnterior == 1) { this.Invoke(new Action(() => { CargarArchivosCompartidosVecinos(null); })); } });
-        }
+            controlador.IniciarEjecuciones();
+        }            
         //----------------------------------------------------------------------------------------------Funciones de form
         private void MoverForm(object sender, MouseEventArgs e) //Mover form
         {

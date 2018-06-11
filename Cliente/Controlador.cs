@@ -12,7 +12,6 @@ namespace Cliente
     {
         //----------------------------------------------------------------------------------------------Variables y atributos
         Random r = new Random();
-        private int InOutSimulgataneos = 12;
         private static SocketUDP SUDP;
         private static SocketTCP STCP;
         public static List<IPAddress> IPSVecinas = new List<IPAddress>();
@@ -30,15 +29,12 @@ namespace Cliente
         //------------TCP
         //------------UDP
         //---------------------------------
-        public static Queue<ArchivoSolicitado> archivosSolicitados = new Queue<ArchivoSolicitado>();
-        public static ManualResetEvent PermitirEnviarSolicitud = new ManualResetEvent(false);
+        public static List<ArchivoSolicitado> archivosSolicitados = new List<ArchivoSolicitado>();
+        public static ManualResetEvent PermitirEnviarSolicitud = new ManualResetEvent(true);
         public bool PermitirEnviarSolicitudes = true;
-        public static int EnviosActivos = 0;
         //---
 
         private bool PermitirSolicitar = true;
-        public static ManualResetEvent PermitirSolicitarArchivos = new ManualResetEvent(true);
-        public static int SolicitudesActivas = 0;
         //----------------------------------------------------------------------------------------------Funciones
         //-----------------------------------------------Server
         public void IniciarEjecuciones()
@@ -93,7 +89,6 @@ namespace Cliente
             SUDP.FrenarEscucha();
             STCP.Frenar();
             PermitirSolicitar = false;
-            PermitirSolicitarArchivos.Set();
             PermitirEnviarSolicitudes = false;
             PermitirEnviarSolicitud.Set();
             temporizadorPing.Stop();
@@ -114,6 +109,11 @@ namespace Cliente
                 new ArchivoNecesitado(ArchivosCompartidosVecinos[index]);
 
             new frmMensaje(Idioma.StringResources.msjArchivoEnLista).ShowDialog();
+        }
+        public void agregarSolicitud(ArchivoSolicitado AS)
+        {
+            if (!archivosSolicitados.Exists(x => (Archivo.CompararMD5(x.MD5, AS.MD5) && AS.IDPosicion == x.IDPosicion && AS.ParteArchivo == x.ParteArchivo)))
+                archivosSolicitados.Add(AS);
         }
         //-----------------------------------------------UDP
         public void EnviarUDP(IPAddress ip, string msj)
@@ -138,7 +138,6 @@ namespace Cliente
             a.IPPropietario = new List<IPAddress>() { ip };
             ArchivosCompartidosVecinos.Add(a);
             informarArchivo?.Invoke(null, null);
-            //PermitirEnviarSolicitud.Set();
         }
         public void EliminarArchivosCompartidosDeIP(IPAddress ip)
         {
@@ -222,18 +221,12 @@ namespace Cliente
                 while (PermitirSolicitar)
                 {
                     Thread.Sleep(1000);
-                    PermitirSolicitarArchivos.Reset();
-                    if (archivosNecesitados.Count > 0 && SolicitudesActivas <= InOutSimulgataneos)
-                    {
-                            SolicitudesActivas++;
+                    if (archivosNecesitados.Count > 0)
                             archivosNecesitados[r.Next(0, archivosNecesitados.Count)].SolicitarPartes();
-                    }
-                    else
-                        PermitirSolicitarArchivos.WaitOne(); //Es alpedo esto? entra tan rapido al while que lo sca
                 }
             }).Start();
         }
-        public void ManejadorSolicitudes()
+       public void ManejadorSolicitudes()
         {
             new Thread(() =>
             {
@@ -241,29 +234,25 @@ namespace Cliente
                 {
                     PermitirEnviarSolicitud.Reset();
 
-                    if (archivosSolicitados.Count > 0 )//&& EnviosActivos <= InOutSimulgataneos)
+                    if (archivosSolicitados.Count > 0)
                     {
-                        ArchivoSolicitado AS = archivosSolicitados.Dequeue();
+                        ArchivoSolicitado AS = archivosSolicitados[0];
+                        archivosSolicitados.RemoveAt(0);
                         AS.posicionLista = Archivo.PosicionArchivo(AS.MD5);
-                       // new Thread(() =>
-                      //  {
+                        new Thread(() =>
+                        {
                             if (AS.posicionLista > -1)
-                            {
-                                //EnviosActivos++;
-                                Console.WriteLine("Entre12231");
                                 STCP.EnviarSolicitud(AS);
-                            }
                             else
                                 EnviarUDP(AS.IPDestino, "bitNode@ASNULL@" + frmCliente.archivosCompartidos[AS.posicionLista].Nombre);
-                       // }).Start();
-
-                        Console.WriteLine("Entre");
+                        }).Start();
                         PermitirEnviarSolicitud.WaitOne();
                     }
                     //else
-                      //  PermitirEnviarSolicitud.WaitOne();
+                       // PermitirEnviarSolicitud.WaitOne();
                 }
             }).Start();
         }
+
     }
 }
