@@ -86,10 +86,11 @@ namespace Cliente
                 if (!Partes[i] && IPsPropietarios.Count > 0)
                 {
                     new Controlador().EnviarUDP(IPsPropietarios[r.Next(0, IPsPropietarios.Count)], "bitNode@SAD@" + MD5 + "|" + ID + "|" + i);
-                    Controlador.SolicitudesActivas--;
-                    return;
+                    break;
                 }
             }
+            Controlador.SolicitudesActivas--;
+            Controlador.PermitirSolicitarArchivos.Set();
         }
         public void agregarIP(IPAddress ip, string MD5)
         {

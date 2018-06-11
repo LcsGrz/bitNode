@@ -219,18 +219,17 @@ namespace Cliente
             {
                 while (PermitirSolicitar)
                 {
+                    Thread.Sleep(500);
                     PermitirSolicitarArchivos.Reset();
-
                     if (archivosNecesitados.Count > 0 && SolicitudesActivas <= InOutSimulgataneos)
                     {
-                        new Thread(() =>
-                        {
                             SolicitudesActivas++;
                             archivosNecesitados[r.Next(0, archivosNecesitados.Count)].SolicitarPartes();
-                        }).Start();
                     }
                     else
-                        PermitirSolicitarArchivos.WaitOne();
+                    {
+                        PermitirSolicitarArchivos.WaitOne(); //Es alpedo esto? entra tan rapido al while que lo sca
+                    }
                 }
             }).Start();
         }
