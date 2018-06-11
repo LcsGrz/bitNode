@@ -125,9 +125,7 @@ namespace Cliente
         public void RecibirTCP()
         {
             IPEndPoint sender = new IPEndPoint(IPAddress.Any, port);
-
-            Socket listener = new Socket(AddressFamily.InterNetwork,
-            SocketType.Stream, ProtocolType.Tcp);
+            Socket listener = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
 
             try
             {
@@ -138,16 +136,14 @@ namespace Cliente
                 {
                     allDone.Reset();
 
-                    listener.BeginAccept(
-                        new AsyncCallback(AcceptCallback),
-                        listener);
+                    listener.BeginAccept(new AsyncCallback(AcceptCallback), listener);
 
                     allDone.WaitOne();
                 }
             }
             catch (Exception e)
             {
-                Console.WriteLine(e.ToString());
+                Console.WriteLine("error al conectarrr " +e.ToString());
                 MessageBox.Show(e.ToString());
             }
         }
@@ -161,8 +157,7 @@ namespace Cliente
 
             StateObject state = new StateObject();
             state.workSocket = handler;
-            handler.BeginReceive(state.buffer, 0, StateObject.BufferSize, 0,
-                new AsyncCallback(ReadCallback), state);
+            handler.BeginReceive(state.buffer, 0, StateObject.BufferSize, 0, new AsyncCallback(ReadCallback), state);
         }
 
         public void ReadCallback(IAsyncResult ar)
@@ -171,23 +166,25 @@ namespace Cliente
             Socket handler = state.workSocket;
 
             int bytesRead = handler.EndReceive(ar);
+            state.byteLeidos += bytesRead;
             if (bytesRead > 0)
             {
                 //state.manejarArchivo(bytesRead);
-                Console.WriteLine("Recibiendo... 2: " + bytesRead);
-                handler.BeginReceive(state.buffer, 0, StateObject.BufferSize, 0,
-                new AsyncCallback(ReadCallback), state); //Leer mas datos
+                if (state.byteLeidos < 100)
+                {
+                    Console.WriteLine("Recibiendo... 2: " + bytesRead);
+                    handler.BeginReceive(state.buffer, 0, StateObject.BufferSize, 0, new AsyncCallback(ReadCallback), state); //Leer mas datos
+                }
+                else {
+                    Console.WriteLine("Tenemos un archivo completo: " + bytesRead + "---" + state.byteLeidos);
+                }
 
             }
-        }
-        public void FrenarEscuha()
-        {
-            PermitirRecibir = false;
-            allDone.Set();
         }
         //Clase Auxiliar
         public class StateObject
         {
+            public int byteLeidos=0;
             public static int Nid = 1;
             public static int Npartes = 6;
             public static int size = 100;

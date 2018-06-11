@@ -28,7 +28,7 @@ namespace Cliente
             Socket socket = new Socket(AddressFamily.InterNetwork, SocketType.Dgram, ProtocolType.Udp);
             IPEndPoint iep1 = new IPEndPoint(ip, puerto);
             //---
-          //  Console.WriteLine("ENVIE: -IP: " + ip + " -MSJ: " + msj);
+            Console.WriteLine("ENVIE: -IP: " + ip + " -MSJ: " + msj);
             //---
             socket.SetSocketOption(SocketOptionLevel.Socket, SocketOptionName.Broadcast, 1);
             socket.SendTo(Encoding.UTF8.GetBytes(msj), iep1);
@@ -78,14 +78,17 @@ namespace Cliente
                 //    Console.WriteLine("RECIBI: -IP: " + IPRecibida + " -MSJ: " + Encoding.UTF8.GetString(SO.buffer, 0, read));
                     //---
                     bool primeraVez = controlador.AgregarIP(IPRecibida);
-                    if(primeraVez)
-                        controlador.EnviarArchivosNecesitados(IPRecibida); //--------------- Solicitar archivos a descargar
+
+                    //--------------- Solicitar archivos a descargar
+                    if (primeraVez)
+                        controlador.EnviarArchivosNecesitados(IPRecibida);
                     bool sync = new Configuracion().Leer().SyncActiva;
                     //--------------------------------------
                     switch (stringData[1])
                     {
                         case "PPING": // PrimerPing
                             {
+
                                 string[] msj = stringData[2].Split('|');
                                 if (msj[0] == "OK")
                                 {
@@ -103,6 +106,7 @@ namespace Cliente
 
                                 if (Controlador.RecivirACV && primeraVez && sync)
                                     EnviarMSJ_UDP(IPRecibida, "bitNode@PPING@OK|true");
+           
 
                                 break;
                             }

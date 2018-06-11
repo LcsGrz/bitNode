@@ -208,9 +208,11 @@ namespace Cliente
         public void AgregarIPArchivosNecesitados(IPAddress ip, string MD5) => archivosNecesitados.ForEach(x => x.agregarIP(ip, MD5));
         public void EnviarArchivosNecesitados(IPAddress ip)
         {
-            string archivos = string.Empty;
-            archivosNecesitados.ForEach(x => archivos += ("|" + x.MD5));
-            EnviarUDP(ip, "bitNode@TEA@" + archivos);
+            if (archivosNecesitados.Count > 0) {
+                string archivos = string.Empty;
+                archivosNecesitados.ForEach(x => archivos += ("|" + x.MD5));
+                EnviarUDP(ip, "bitNode@TEA@" + archivos);
+            }
         }
 
         //-----------------------------------------------TCP
@@ -239,17 +241,18 @@ namespace Cliente
                         ArchivoSolicitado AS = archivosSolicitados[0];
                         archivosSolicitados.RemoveAt(0);
                         AS.posicionLista = Archivo.PosicionArchivo(AS.MD5);
-                        new Thread(() =>
-                        {
+                      /*  new Thread(() =>
+                        {*/
                             if (AS.posicionLista > -1)
                                 STCP.EnviarSolicitud(AS);
                             else
                                 EnviarUDP(AS.IPDestino, "bitNode@ASNULL@" + frmCliente.archivosCompartidos[AS.posicionLista].Nombre);
-                        }).Start();
+                        //}).Start();
                         PermitirEnviarSolicitud.WaitOne();
+
                     }
-                    //else
-                       // PermitirEnviarSolicitud.WaitOne();
+                    else
+                        Thread.Sleep(5000);
                 }
             }).Start();
         }
