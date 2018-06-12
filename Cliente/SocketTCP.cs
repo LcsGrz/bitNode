@@ -166,6 +166,7 @@ namespace Cliente
                 state.buffer, 0, bytesRead));
 
                 content = state.sb.ToString();
+                Console.WriteLine(content);
                 state.enterita += content;
 
                 if (content.IndexOf("<BNF>") > -1)
@@ -194,7 +195,7 @@ namespace Cliente
             //  public static int Npartes = 6;
             public string enterita = "";
 
-            public static int size = ArchivoNecesitado.TamañoParte;
+            public static int size = 100;
             public Socket workSocket = null;
             // Size of receive buffer.  
             public int id = 0;
@@ -211,7 +212,7 @@ namespace Cliente
 
             public void ManejarArchivo(int byteRead)
             {
-                Console.WriteLine("Enterita: " + enterita);
+                //Console.WriteLine("Enterita: " + enterita);
 
                 Console.WriteLine("ID: " + id);
                 Console.WriteLine("Parte: " + parte);

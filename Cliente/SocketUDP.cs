@@ -4,7 +4,6 @@ using System.Net;
 using System.Net.Sockets;
 using System.Text;
 using System.Threading;
-using System.Windows.Forms;
 
 namespace Cliente
 {
@@ -28,7 +27,7 @@ namespace Cliente
             Socket socket = new Socket(AddressFamily.InterNetwork, SocketType.Dgram, ProtocolType.Udp);
             IPEndPoint iep1 = new IPEndPoint(ip, puerto);
             //---
-            //  Console.WriteLine("ENVIE: -IP: " + ip + " -MSJ: " + msj);
+            // Console.WriteLine("ENVIE: -IP: " + ip + " -MSJ: " + msj);
             //---
             socket.SetSocketOption(SocketOptionLevel.Socket, SocketOptionName.Broadcast, 1);
             socket.SendTo(Encoding.UTF8.GetBytes(msj), iep1);
@@ -75,7 +74,7 @@ namespace Cliente
                 if (stringData[0] == "bitNode")
                 {
                     //---
-                    //Console.WriteLine("RECIBI: -IP: " + IPRecibida + " -MSJ: " + Encoding.UTF8.GetString(SO.buffer, 0, read));
+                    //    Console.WriteLine("RECIBI: -IP: " + IPRecibida + " -MSJ: " + Encoding.UTF8.GetString(SO.buffer, 0, read));
                     //---
                     bool primeraVez = controlador.AgregarIP(IPRecibida);
 
@@ -106,7 +105,7 @@ namespace Cliente
 
                                 if (Controlador.RecivirACV && primeraVez && sync)
                                     EnviarMSJ_UDP(IPRecibida, "bitNode@PPING@OK|true");
-           
+
 
                                 break;
                             }
@@ -139,7 +138,7 @@ namespace Cliente
                         case "SAD": // Solicitar Archivo a Descargar
                             {
                                 string[] msj = stringData[2].Split('|');
-                                ArchivoSolicitado AS = new ArchivoSolicitado() { IPDestino = IPRecibida, MD5 = msj[0], ParteArchivo = Convert.ToInt32(msj[1]), IDPosicion = Convert.ToInt32(msj[2])};
+                                ArchivoSolicitado AS = new ArchivoSolicitado() { IPDestino = IPRecibida, MD5 = msj[0], ParteArchivo = Convert.ToInt32(msj[1]), IDPosicion = Convert.ToInt32(msj[2]) };
                                 controlador.agregarSolicitud(AS);
                                 break;
                             }
@@ -157,7 +156,7 @@ namespace Cliente
                             }
                         case "SAC": // SolicitarArchivosCompartidos
                             {
-                                    EnviarMSJ_UDP(IPRecibida, "bitNode@ETACV@");
+                                EnviarMSJ_UDP(IPRecibida, "bitNode@ETACV@");
                                 break;
                             }
                         case "ASNULL": // ArchivoSolicitado NULL - no existe
@@ -179,7 +178,7 @@ namespace Cliente
                             }
                         case "SACTAG": //SolicitarArchivosCompartidos por TAG
                             {
-                                    controlador.EnviarListaArchivosCompartidosTAG(IPRecibida, stringData[2]);
+                                controlador.EnviarListaArchivosCompartidosTAG(IPRecibida, stringData[2]);
                                 break;
                             }
                         case "AACT": // AgregarArchivoCompartido por TAGub

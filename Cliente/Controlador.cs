@@ -11,30 +11,28 @@ namespace Cliente
     class Controlador
     {
         //----------------------------------------------------------------------------------------------Variables y atributos
+        private Configuracion configuracion = new Configuracion().Leer();
         Random r = new Random();
-        private static SocketUDP SUDP;
-        public static SocketTCP STCP;
         public static List<IPAddress> IPSVecinas = new List<IPAddress>();
         public static List<string> Solicitudes = new List<string>();
         public static List<Archivo> ArchivosCompartidosVecinos = new List<Archivo>();
         public static List<ArchivoNecesitado> archivosNecesitados = new ArchivoNecesitado().Leer();
-        Thread EscucharUDP;
-        Thread EscucharTCP;
-        private Configuracion configuracion = new Configuracion().Leer();
         private static System.Timers.Timer temporizadorPing;
-        public static event EventHandler informarSolicitud;
-        public static event EventHandler informarBitNoders;
-        public static event EventHandler informarArchivo;
         public static bool RecivirACV = false;
         //------------TCP
-        //------------UDP
-        //---------------------------------
+        private static SocketTCP STCP;
+        Thread EscucharTCP;
         public static List<ArchivoSolicitado> archivosSolicitados = new List<ArchivoSolicitado>();
         public static ManualResetEvent PermitirEnviarSolicitud = new ManualResetEvent(true);
         public bool PermitirEnviarSolicitudes = true;
-        //---
-
+        //------------UDP
+        private static SocketUDP SUDP;
+        Thread EscucharUDP;
         private bool PermitirSolicitar = true;
+        //----------------------------------------------------------------------------------------------Eventos
+        public static event EventHandler informarSolicitud;
+        public static event EventHandler informarBitNoders;
+        public static event EventHandler informarArchivo;
         //----------------------------------------------------------------------------------------------Funciones
         //-----------------------------------------------Server
         public void IniciarEjecuciones()
@@ -208,28 +206,27 @@ namespace Cliente
         public void AgregarIPArchivosNecesitados(IPAddress ip, string MD5) => archivosNecesitados.ForEach(x => x.agregarIP(ip, MD5));
         public void EnviarArchivosNecesitados(IPAddress ip)
         {
-            if (archivosNecesitados.Count > 0) {
+            if (archivosNecesitados.Count > 0)
+            {
                 string archivos = string.Empty;
                 archivosNecesitados.ForEach(x => archivos += ("|" + x.MD5));
                 EnviarUDP(ip, "bitNode@TEA@" + archivos);
             }
         }
-
         //-----------------------------------------------TCP
-        public void ManejadorNecesitados()
-        {
+        public void ManejadorNecesitados() =>
             new Thread(() =>
             {
                 while (PermitirSolicitar)
                 {
-                    Thread.Sleep(1000);
-                    if (archivosNecesitados.Count > 0)
-                            archivosNecesitados[r.Next(0, archivosNecesitados.Count)].SolicitarPartes();
+                    //Thread.Sleep(1000);
+                    archivosNecesitados.ForEach(x => { x.SolicitarPartes(); Thread.Sleep(2000); });
+                    Thread.Sleep(4000);
+                    //if (archivosNecesitados.Count > 0)
+                    //archivosNecesitados[r.Next(0, archivosNecesitados.Count)].SolicitarPartes();
                 }
             }).Start();
-        }
-       public void ManejadorSolicitudes()
-        {
+        public void ManejadorSolicitudes() =>
             new Thread(() =>
             {
                 while (PermitirEnviarSolicitudes)
@@ -241,24 +238,18 @@ namespace Cliente
                         ArchivoSolicitado AS = archivosSolicitados[0];
                         archivosSolicitados.RemoveAt(0);
                         AS.posicionLista = Archivo.PosicionArchivo(AS.MD5);
-                        //  new Thread(() =>
-                        //  {
+
                         if (AS.posicionLista > -1)
                         {
                             STCP.EnviarSolicitud(AS);
-                            PermitirEnviarSolicitud.Set();
+                            PermitirEnviarSolicitud.WaitOne();
                         }
                         else
                             EnviarUDP(AS.IPDestino, "bitNode@ASNULL@" + frmCliente.archivosCompartidos[AS.posicionLista].Nombre);
-                       // }).Start();
-                        PermitirEnviarSolicitud.WaitOne();
-                        //Thread.Sleep(3000);
                     }
                     else
                         Thread.Sleep(5000);
                 }
             }).Start();
-        }
-
     }
 }
