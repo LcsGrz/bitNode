@@ -33,7 +33,7 @@ namespace Cliente
                 Controlador.archivosNecesitados.Add(this);
             }).Start();
         //Atributos
-        public static int TamañoParte = 1000;
+        public static int TamañoParte = 100;
         private static string bnArchivosNecesitados = Configuracion.bitNode + @"\ArchivosNecesitados";
         public int TamañoUltimaParte { get; set; }
         public string Nombre { get; set; }
@@ -84,7 +84,7 @@ namespace Cliente
             {
                 if (!Partes[i] && IPsPropietarios.Count > 0)
                 {
-                    new Controlador().EnviarUDP(IPsPropietarios[r.Next(0, IPsPropietarios.Count)], "bitNode@SAD@" + MD5 + "|" + ID + "|" + i);
+                    new Controlador().EnviarUDP(IPsPropietarios[r.Next(0, IPsPropietarios.Count)], "bitNode@SAD@" + MD5 + "|" + i + "|" + ID);
                     if (++partes == 10)
                         break;
                 }

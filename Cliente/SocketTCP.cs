@@ -166,6 +166,7 @@ namespace Cliente
                 state.buffer, 0, bytesRead));
 
                 content = state.sb.ToString();
+                Console.WriteLine(content);
                 state.enterita += content;
 
                 if (content.IndexOf("<BNF>") > -1)
@@ -211,12 +212,20 @@ namespace Cliente
 
             public void ManejarArchivo(int byteRead)
             {
-                Console.WriteLine("Enterita: " + enterita);
+                //Console.WriteLine("Enterita: " + enterita);
 
-                // using (FileStream output = new FileStream(Controlador.archivosNecesitados[id].RutaDesarga, FileMode.Append))
+                Console.WriteLine("ID: " + id);
+                Console.WriteLine("Parte: " + parte);
+                //Console.WriteLine("Enterita: " + enterita);
+                if (Controlador.archivosNecesitados[id].Partes[parte])
                 {
-                    //   output.Position = parte * size;
-                    //  output.Write(buffer, 0, buffer.Length);
+                    using (FileStream output = new FileStream(Controlador.archivosNecesitados[id].RutaDesarga, FileMode.Append))
+                    {
+                        //output.Position = parte * size;
+                        //output.Write(buffer, 0, buffer.Length);
+                        Console.WriteLine("Escribiendo: ....");
+                        Console.WriteLine("Escribido: ....");
+                    }
                 }
             }
         }
