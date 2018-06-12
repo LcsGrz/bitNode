@@ -91,6 +91,7 @@ namespace Cliente
             PermitirEnviarSolicitud.Set();
             temporizadorPing.Stop();
             temporizadorPing.Dispose();
+            GuardarTodosArchivosNecesitados();
         }
         public void VaciarIPS() => IPSVecinas.Clear();
         public void VaciarACV() => ArchivosCompartidosVecinos.Clear();
@@ -113,6 +114,7 @@ namespace Cliente
             if (!archivosSolicitados.Exists(x => (Archivo.CompararMD5(x.MD5, AS.MD5) && AS.IDPosicion == x.IDPosicion && AS.ParteArchivo == x.ParteArchivo)))
                 archivosSolicitados.Add(AS);
         }
+        public void GuardarTodosArchivosNecesitados() => archivosNecesitados.ForEach(x => x.Guardar());
         //-----------------------------------------------UDP
         public void EnviarUDP(IPAddress ip, string msj)
         {
@@ -221,7 +223,7 @@ namespace Cliente
                 {
                     //Thread.Sleep(1000);
                     archivosNecesitados.ForEach(x => { x.SolicitarPartes(); Thread.Sleep(2000); });
-                    Thread.Sleep(4000);
+                    Thread.Sleep(1000);
                     //if (archivosNecesitados.Count > 0)
                     //archivosNecesitados[r.Next(0, archivosNecesitados.Count)].SolicitarPartes();
                 }
@@ -243,13 +245,25 @@ namespace Cliente
                         {
                             STCP.EnviarSolicitud(AS);
                             PermitirEnviarSolicitud.WaitOne();
+                            Thread.Sleep(100);
                         }
                         else
                             EnviarUDP(AS.IPDestino, "bitNode@ASNULL@" + frmCliente.archivosCompartidos[AS.posicionLista].Nombre);
                     }
                     else
-                        Thread.Sleep(5000);
+                        Thread.Sleep(2000);
                 }
             }).Start();
+        public void EliminarPeticiones(IPAddress ip)
+        {
+            for (int i = 0; i < archivosSolicitados.Count; i++)
+            {
+                if (archivosSolicitados[i].IPDestino.Equals(ip))
+                {
+                    archivosSolicitados.RemoveAt(i);
+                    i = -1;
+                }
+            }
+        }
     }
 }

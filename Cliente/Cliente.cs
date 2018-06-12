@@ -42,7 +42,6 @@ namespace Cliente
             AplicarIdioma();
             AplicarTema();
 
-
             Archivo.ArchivoGuardado += new EventHandler((object sender, EventArgs e) => { this.Invoke(new Action(() => { CargarArchivosCompatidos(); })); controlador.EnviarUnicoArchivoCompartido((Archivo)sender); });
             Controlador.informarSolicitud += new EventHandler((object sender, EventArgs e) => { this.Invoke(new Action(() => { CargarSolicitudes(); })); });
             NetworkChange.NetworkAddressChanged += new NetworkAddressChangedEventHandler((object sender, EventArgs e) =>
@@ -442,8 +441,8 @@ namespace Cliente
             lblVistaConfiguracionIniciarConWindows.Font = catorceR;
             lblVistaConfiguracionMinimizarBanjeda.Font = catorceR;
             lblVistaConfiguracionNombre.Font = catorceR;
-            tbVistaConfiguracionNombre.Font = doceR;
-            lblVistaConfiguracionSyncAuto.Font = doceR;
+            tbVistaConfiguracionNombre.Font = catorceR;
+            lblVistaConfiguracionSyncAuto.Font = catorceR;
             lblVistaConfiguracionIdioma.Font = catorceR;
             lblVistaConfiguracionIngles.Font = catorceR;
             lblVistaConfiguracionEspañol.Font = catorceR;
@@ -462,7 +461,7 @@ namespace Cliente
             lblVistaConfiguracionLimiteDescargas.Font = catorceR;
             lblVistaConfiguracionRutaDescarga.Font = catorceR;
             lblVistaConfiguracionIP.Font = catorceR;
-            tbVistaConfiguracionIP.Font = doceR;
+            tbVistaConfiguracionIP.Font = catorceR;
             lblVistaConfiguracionBitNoders.Font = catorceR;
             //About
             tbVistaAboutDescripcion.Font = veintiunoR;

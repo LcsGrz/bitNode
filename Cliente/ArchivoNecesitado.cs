@@ -22,27 +22,25 @@ namespace Cliente
                 //Datos descarga
                 Nombre = AN.Nombre;
                 Tamaño = AN.Tamaño;
-                CantidadPartes = (int)AN.Tamaño / TamañoParte + (AN.Tamaño % TamañoParte != 0 ? 1 : 0);
+                CantidadPartes = (uint)(AN.Tamaño / TamañoParte + (AN.Tamaño % TamañoParte != 0 ? 1 : 0));
                 TamañoUltimaParte = (int)AN.Tamaño % TamañoParte;
-                ID = Controlador.archivosNecesitados.Count;
                 MD5 = AN.ArchivoMD5;
-                Partes = new bool[CantidadPartes];
-                RellenarBytes();
+                Partes = new bool[CantidadPartes] ;
                 //-----------------------
                 Guardar();
                 Controlador.archivosNecesitados.Add(this);
             }).Start();
         //Atributos
-        public static int TamañoParte = 100;
+        public static int TamañoParte = 2100;
         private static string bnArchivosNecesitados = Configuracion.bitNode + @"\ArchivosNecesitados";
         public int TamañoUltimaParte { get; set; }
         public string Nombre { get; set; }
         public long Tamaño { get; set; }
         public bool[] Partes { get; set; }
         public string RutaDesarga { get; set; }
-        public int ID { get; set; }
         public string MD5 { get; set; }
-        public int CantidadPartes { get; set; }
+        public uint CantidadPartes { get; set; }
+        public uint PartesDescargadas { get; set; } = 0;
 
         public List<IPAddress> IPsPropietarios = new List<IPAddress>();
         public void Guardar() => File.WriteAllText(bnArchivosNecesitados + "\\" + Nombre.Split('.')[0] + ".json", JsonConvert.SerializeObject(this));
@@ -62,18 +60,12 @@ namespace Cliente
                     output.Close();
                     output.Dispose();
                     an.Partes = new bool[an.CantidadPartes];
-                    an.RellenarBytes();
                     an.Guardar();
                 }
                 an.IPsPropietarios = new List<IPAddress>();
                 archivoNecesitados.Add(an);
             }
             return archivoNecesitados;
-        }
-        public void RellenarBytes()
-        {
-            for (int i = 0; i < Partes.Length; i++)
-                Partes[i] = false;
         }
         private Random r = new Random();
         //Metodos
@@ -84,7 +76,7 @@ namespace Cliente
             {
                 if (!Partes[i] && IPsPropietarios.Count > 0)
                 {
-                    new Controlador().EnviarUDP(IPsPropietarios[r.Next(0, IPsPropietarios.Count)], "bitNode@SAD@" + MD5 + "|" + i + "|" + ID);
+                    new Controlador().EnviarUDP(IPsPropietarios[r.Next(0, IPsPropietarios.Count)], "bitNode@SAD@" + MD5 + "|" + i);
                     if (++partes == 10)
                         break;
                 }
