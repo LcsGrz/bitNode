@@ -36,11 +36,14 @@ namespace Cliente
         public frmCliente() //Constructor del Form - Aplica configuraciones y etc
         {
             InitializeComponent();
+            ArchivoNecesitado.archivosNecesitados = new ArchivoNecesitado().Leer();
+
             CargarListas();
             CargarFuentes();
             CargarConfiguracion();
             AplicarIdioma();
             AplicarTema();
+            CargarListaDescargas();
 
             Archivo.ArchivoGuardado += new EventHandler((object sender, EventArgs e) => { this.Invoke(new Action(() => { CargarArchivosCompatidos(); })); controlador.EnviarUnicoArchivoCompartido((Archivo)sender); });
             Controlador.informarSolicitud += new EventHandler((object sender, EventArgs e) => { this.Invoke(new Action(() => { CargarSolicitudes(); })); });
@@ -55,8 +58,21 @@ namespace Cliente
             });
             Controlador.informarBitNoders += new EventHandler((object sender, EventArgs e) => { this.Invoke(new Action(() => { lblVistaConfiguracionBitNoders.Text = Controlador.IPSVecinas.Count + Idioma.StringResources.lblVistaConfiguracionBitNoders; })); });
             Controlador.informarArchivo += new EventHandler((object sender, EventArgs e) => { if (tagAnterior == 1) { this.Invoke(new Action(() => { CargarArchivosCompartidosVecinos(null); })); } });
+            Controlador.informarEstadoDescarga += new EventHandler((object sender, EventArgs e) =>
+            {
+                this.Invoke(new Action(() =>
+                {
+                    if (tagAnterior == 0)
+                    {
+                        if (((int)sender) == 1)
+                            CargarListaDescargas();
+                        else
+                            CargarNuevosValoresDescargados();// actualizar por timer ?
+                    }
+                }));
+        });
             controlador.IniciarEjecuciones();
-        }            
+        }
         //----------------------------------------------------------------------------------------------Funciones de form
         private void MoverForm(object sender, MouseEventArgs e) //Mover form
         {
@@ -177,6 +193,8 @@ namespace Cliente
         {
             int tagNuevo = Convert.ToInt32((sender as Control).Tag) - 1;
 
+            if (tagNuevo == 0)
+                CargarListaDescargas();
             if (tagNuevo == 1)
             {
                 if (!configuracion.SyncActiva)
@@ -416,6 +434,8 @@ namespace Cliente
             lblMenuConfiguracionesR.Font = doceR;
             lblMenuCRapidas.Font = doceR;
             //Descargar
+            dgvVistaDescargas.ColumnHeadersDefaultCellStyle.Font = catorceR;
+            dgvVistaDescargas.DefaultCellStyle.Font = doceR;
             //Explorar
             lblVistaExplorarArchivosCompartidosVecinos.Font = veintiunoR;
             tbVistaExplorarBuscar.Font = doceR;
@@ -480,6 +500,13 @@ namespace Cliente
             lblMenuConfiguracionesR.Text = Idioma.StringResources.lblMenuConfiguracionesR;
             lblMenuCRapidas.Text = Idioma.StringResources.lblMenuCRapidas;
             //Descargar
+            ttAyuda.SetToolTip(pbVistaDescargarStart, Idioma.StringResources.ttDescargar);
+            ttAyuda.SetToolTip(pbVistaDescargarStop, Idioma.StringResources.ttDetener);
+            lblVistaDescargarExplorar.Text = Idioma.StringResources.lblVistaDescargarExplorar;
+            dgvVistaDescargas.Columns.Clear();
+            foreach (string n in Idioma.StringResources.CabecerasDGVDescargar.Split('-'))
+                dgvVistaDescargas.Columns.Add(n, n);
+            dgvVistaDescargas.Columns.Add(new DataGridViewImageColumn() { Name = Idioma.StringResources.CabecerasDGVArchivoCompartidoEliminar });
             //Explorar
             lblVistaExplorarArchivosCompartidosVecinos.Text = (configuracion.SyncActiva) ? Idioma.StringResources.lblVistaExplorarSyncON : Idioma.StringResources.lblVistaExplorarSyncOFF;
             tbVistaExplorarBuscar.Text = Idioma.StringResources.tbVistaExplorarBuscar;
@@ -611,6 +638,16 @@ namespace Cliente
             }
             panelesMenu[tagAnterior].Controls[0].BackColor = (pnlMenu.Width == 65) ? Color.Transparent : configuracion.colorDetalles;
             //Descargar
+            pnlVistaDescargarContenedor.BackColor = configuracion.colorPanelesInternosVistas;
+            //-----------------------------------------------------------------------------------
+            dgvVistaDescargas.DefaultCellStyle.BackColor = configuracion.colorPanelesInternosVistas;
+            dgvVistaDescargas.DefaultCellStyle.SelectionBackColor = configuracion.colorPanelesInternosVistas;
+            dgvVistaDescargas.DefaultCellStyle.SelectionForeColor = Color.FromArgb(255, 153, 153, 153);
+            dgvVistaDescargas.DefaultCellStyle.ForeColor = Color.FromArgb(255, 153, 153, 153);
+            dgvVistaDescargas.ColumnHeadersDefaultCellStyle.BackColor = configuracion.colorFondo;
+            dgvVistaDescargas.ColumnHeadersDefaultCellStyle.ForeColor = configuracion.colorDetalles;
+            dgvVistaDescargas.BackgroundColor = configuracion.colorPanelesInternosVistas;
+            dgvVistaDescargas.GridColor = configuracion.colorFondo;
             //Explorar
             pnlVistaExplorarDGV.BackColor = configuracion.colorPanelesInternosVistas;
             pnlVistaExploarBuscar.BackColor = configuracion.colorPanelesInternosVistas;
@@ -690,6 +727,7 @@ namespace Cliente
             {
                 case "D":
                     {
+                        dgvVistaDescargas.Cursor = (e.ColumnIndex.Equals(4) && e.RowIndex != -1) ? Cursors.Hand : Cursors.Arrow;
                         break;
                     }
                 case "E":
@@ -779,7 +817,7 @@ namespace Cliente
         {
             if (dgvVistaExplorarArchivosCompartidosVecinos.CurrentCell != null && dgvVistaExplorarArchivosCompartidosVecinos.CurrentCell.Value != null && e.RowIndex != -1)
                 if (e.ColumnIndex.Equals(3)) //Activo = 3
-                    controlador.InicializarArchvio(e.RowIndex);
+                    controlador.InicializarArchivo(e.RowIndex);
         }
         private void Reconectar(object sender, EventArgs e) //Iniciar la reconeccion
         {
@@ -807,9 +845,71 @@ namespace Cliente
             new frmMensaje(Idioma.StringResources.msjIPPortapapeles).ShowDialog();
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void IniciarDescargas(object sender, EventArgs e) //Inicia las descargas
         {
-            ///
+            if (!Controlador.PermitirSolicitar)
+            {
+                pbVistaDescargarStart.Image = Properties.Resources.PlayON;
+                pbVistaDescargarStop.Image = Properties.Resources.StopOFF;
+                Controlador.PermitirSolicitar = true;
+                ArchivoNecesitado.archivosNecesitados = new ArchivoNecesitado().Leer();
+                ArchivoNecesitado.Hacer(null, "EAN", null);
+                controlador.ManejadorNecesitados();
+            }
+        }
+
+        private void FrenarDescargas(object sender, EventArgs e) //Frena las descargas
+        {
+            if (Controlador.PermitirSolicitar)
+            {
+                pbVistaDescargarStart.Image = Properties.Resources.PlayOFF;
+                pbVistaDescargarStop.Image = Properties.Resources.StopON;
+                Controlador.PermitirSolicitar = false;
+                ArchivoNecesitado.Hacer(null, "SAVE", null);
+               // ArchivoNecesitado.archivosNecesitados.Clear();
+                controlador.EnviarUDP(null, "bitNode@EAS@");
+            }
+        }
+        private void CargarListaDescargas()
+        {
+            int ANC = ArchivoNecesitado.Hacer(null, "LC", null);
+            dgvVistaDescargas.Visible = !(lblVistaDescargarExplorar.Visible = (ANC == 0));
+            if (ANC > 0)
+            {
+                //Datos
+                dgvVistaDescargas.Rows.Clear();
+                for (int i = 0; i < ANC; i++)
+                {
+                    ArchivoNecesitado A = ArchivoNecesitado.archivosNecesitados[i];
+                    long tamaño = (A.Estado) ? A.Tamaño : (ArchivoNecesitado.TamañoParte < A.Tamaño) ? A.PartesDescargadas * ArchivoNecesitado.TamañoParte : A.Tamaño;
+                    dgvVistaDescargas.Rows.Insert(i, A.Nombre, Archivo.KB_GB_MB(tamaño), Archivo.KB_GB_MB(A.Tamaño), (A.PartesDescargadas * 100) / A.CantidadPartes + "%", ImagenesArchivos[2]);
+                    if (A.Estado)
+                    {
+                        dgvVistaDescargas[0, i].Style.ForeColor = configuracion.colorDetalles;
+                        dgvVistaDescargas[0, i].Style.SelectionForeColor = configuracion.colorDetalles;
+                        dgvVistaDescargas[3, i].Style.ForeColor = configuracion.colorDetalles;
+                        dgvVistaDescargas[3, i].Style.SelectionForeColor = configuracion.colorDetalles;
+                    }
+                }
+                //Vista
+                dgvVistaDescargas.ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+                dgvVistaDescargas.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+                dgvVistaDescargas.Columns[0].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+                dgvVistaDescargas.Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+                dgvVistaDescargas.Columns[2].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+                dgvVistaDescargas.Columns[3].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+                dgvVistaDescargas.Columns[4].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            }
+        } //Carga la lista de descargas en la vista
+
+        private void EliminarDescarga(object sender, DataGridViewCellEventArgs e) //Elimina la descarga Activa/No
+        {
+            if (dgvVistaDescargas.CurrentCell != null && dgvVistaDescargas.CurrentCell.Value != null && e.RowIndex != -1)
+                if (e.ColumnIndex.Equals(4))//Activo = 3
+                {
+                    ArchivoNecesitado.Hacer(e.RowIndex, "DEL", null);
+                    CargarListaDescargas();
+                }
         }
 
         private void BuscarArchivoPorTag(object sender, EventArgs e) //Busca archivos por tags
@@ -878,6 +978,28 @@ namespace Cliente
                 dgvVistaExplorarArchivosCompartidosVecinos.Columns[3].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
             }
         }
+        private void CargarNuevosValoresDescargados()//Actualiza los valores de la vista 'descargas'
+        {
+            int ANC = ArchivoNecesitado.Hacer(null, "LC", null);
+            dgvVistaDescargas.Visible = !(lblVistaDescargarExplorar.Visible = (ANC == 0));
+            if (ANC > 0)
+            {
+                for (int i = 0; i < ANC; i++)
+                {
+                    ArchivoNecesitado A = ArchivoNecesitado.archivosNecesitados[i];
+                    long tamaño = (A.Estado) ? A.Tamaño : (ArchivoNecesitado.TamañoParte < A.Tamaño) ? A.PartesDescargadas * ArchivoNecesitado.TamañoParte : A.Tamaño;
+                    dgvVistaDescargas[1, i].Value = Archivo.KB_GB_MB(tamaño);
+                    dgvVistaDescargas[3, i].Value = (A.PartesDescargadas * 100) / A.CantidadPartes + "%";
+                    if (A.Estado)
+                    {
+                        dgvVistaDescargas[0, i].Style.ForeColor = configuracion.colorDetalles;
+                        dgvVistaDescargas[0, i].Style.SelectionForeColor = configuracion.colorDetalles;
+                        dgvVistaDescargas[3, i].Style.ForeColor = configuracion.colorDetalles;
+                        dgvVistaDescargas[3, i].Style.SelectionForeColor = configuracion.colorDetalles;
+                    }
+                }
+            }
+        }
         private void FinalizaronDescargas() //Ejecutar funcion especial cuando finaliza la descarga
         {
             switch (Configuracion.FinalizoDescarga)
@@ -907,7 +1029,6 @@ namespace Cliente
         }
     }
 }
-
 /*
  https://stackoverflow.com/questions/2079813/c-sharp-put-pc-to-sleep-or-hibernate
  https://www.codeproject.com/Tips/480049/Shut-Down-Restart-Log-off-Lock-Hibernate-or-Sleep     

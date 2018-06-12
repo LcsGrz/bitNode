@@ -206,16 +206,41 @@
   <metadata name="tmrFader.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>3, 1</value>
   </metadata>
-  <metadata name="NombreArchivo.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
+  <data name="pbVistaDescargarStop.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAABkAAAAZCAYAAADE6YVjAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAO
+        xAAADsQBlSsOGwAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAAAB8SURBVEhL7ZYx
+        CgAhDAR9q/cpzZuuuVdY2Fhde5cVFsQmTeyysBAJzJQmiUiutTbtd6CjlHIlHfq28G6HhI9XezsWvMle
+        JU9yDHhkh8QMeGSHxAx4ZIfEDHhkh8QMeGSHxAx4ZIfEDHhkr5Kjf/z5awV3kQ5jW3i1iUj+AcKzztUb
+        hOz1AAAAAElFTkSuQmCC
+</value>
+  </data>
+  <metadata name="ttAyuda.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>209, 3</value>
   </metadata>
-  <metadata name="Estado.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+  <data name="pbVistaDescargarStart.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAABkAAAAcCAYAAACUJBTQAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAO
+        xAAADsQBlSsOGwAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAAAGQSURBVEhLzVa/
+        S8NAFD5FUDfpIAhFOrTQy8UYcHIruPgfuPkXdNbFoaOT4KSbe/+A7h1dBUcHdRJExF9g/fH8krzcXVKl
+        qTWHH3yEvPve95J7l8sJUmoXfCHP61GzuSLKAMwfQIqp1DuuxxQEizz8N4Dpqy5iit2TlDtUr8+ybDLA
+        9G2oiOEVim2TEFMs/x1gNLBMj8A76z5lH/1a45TxwX1IzJRaBSt4+n3c56fxE+xifJlTiwOJZrqUCjks
+        yPclYj09ZviIh9ijanWepaORfxMOayC2ibFzrTG8RLGtQv2C+EMn+n7A4QxgNB0vAM+70VrDU/RrnaXf
+        A6KRRVJQGC6g2AG09mKJGHmcYGyJpVlgMGpoIi74xcOsAX1X5xk+g52hfmVEUvocLgTkbKBnZxmPhNfx
+        9Kb9QmDsN7FBrdYMCrWRf6t9DPvRKp3oTWygUAUeh2C+XxfOivzv6UJOeY2HwU9L+AnsUK02x9IECDr5
+        GB1sK442SPdbPVjKT8vB79fRQcLJkcjB4a70Y6oQX28Me9/46IhfAAAAAElFTkSuQmCC
+</value>
+  </data>
+  <metadata name="NombreArchivo.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
   <metadata name="Descargado.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
   <metadata name="TamañoArchivo.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <metadata name="Progreso.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
   <metadata name="BorraraArchivo.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
@@ -404,9 +429,6 @@
         AJqiZUYZNhfdxzEI/wXAh276DVgzSVoBzXhJR3yFduEAAAAASUVORK5CYII=
 </value>
   </data>
-  <metadata name="ttAyuda.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>209, 3</value>
-  </metadata>
   <data name="pbVistaConfiguracionCarpetaDescarga.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAADcAAAAqCAYAAAAXk8MDAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAO

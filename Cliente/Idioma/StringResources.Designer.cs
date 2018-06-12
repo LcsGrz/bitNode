@@ -88,6 +88,15 @@ namespace Cliente.Idioma {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Nombre-Descargado-Total-Progreso.
+        /// </summary>
+        internal static string CabecerasDGVDescargar {
+            get {
+                return ResourceManager.GetString("CabecerasDGVDescargar", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Usuario-Descripcion.
         /// </summary>
         internal static string CabecerasDGVSolcitarArreglo {
@@ -466,6 +475,15 @@ namespace Cliente.Idioma {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a ¡Explora para descargar!.
+        /// </summary>
+        internal static string lblVistaDescargarExplorar {
+            get {
+                return ResourceManager.GetString("lblVistaDescargarExplorar", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a No se encontraron archivos.
         /// </summary>
         internal static string lblVistaExplorarPerdon {
@@ -687,6 +705,24 @@ namespace Cliente.Idioma {
         internal static string tbVistaExplorarBuscar {
             get {
                 return ResourceManager.GetString("tbVistaExplorarBuscar", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Descargar.
+        /// </summary>
+        internal static string ttDescargar {
+            get {
+                return ResourceManager.GetString("ttDescargar", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Detener.
+        /// </summary>
+        internal static string ttDetener {
+            get {
+                return ResourceManager.GetString("ttDetener", resourceCulture);
             }
         }
         
