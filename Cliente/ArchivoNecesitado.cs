@@ -2,29 +2,16 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Net;
-using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
 
 namespace Cliente
 {
     class ArchivoNecesitado
     {
-        public static int TamañoParte = 1000;
-        private static string bnArchivosNecesitados = Configuracion.bitNode + @"\ArchivosNecesitados";
-        public int TamañoUltimaParte { get; set; }
-        public string Nombre { get; set; }
-        public long Tamaño { get; set; }
-        public bool[] Partes { get; set; }
-        public string RutaDesarga { get; set; }
-        public int ID { get; set; }
-        public string MD5 { get; set; }
-        public int CantidadPartes { get; set; }
+        //Contructor
         public ArchivoNecesitado() { }
-        public ArchivoNecesitado(Archivo AN)
-        {
+        public ArchivoNecesitado(Archivo AN) =>
             new Thread(() =>
             {
                 RutaDesarga = new Configuracion().Leer().rutaDescarga + "\\" + AN.Nombre.Split('.')[0] + ".bnp";
@@ -45,7 +32,18 @@ namespace Cliente
                 Guardar();
                 Controlador.archivosNecesitados.Add(this);
             }).Start();
-        }
+        //Atributos
+        public static int TamañoParte = 1000;
+        private static string bnArchivosNecesitados = Configuracion.bitNode + @"\ArchivosNecesitados";
+        public int TamañoUltimaParte { get; set; }
+        public string Nombre { get; set; }
+        public long Tamaño { get; set; }
+        public bool[] Partes { get; set; }
+        public string RutaDesarga { get; set; }
+        public int ID { get; set; }
+        public string MD5 { get; set; }
+        public int CantidadPartes { get; set; }
+
         public List<IPAddress> IPsPropietarios = new List<IPAddress>();
         public void Guardar() => File.WriteAllText(bnArchivosNecesitados + "\\" + Nombre.Split('.')[0] + ".json", JsonConvert.SerializeObject(this));
         public List<ArchivoNecesitado> Leer()
@@ -78,15 +76,17 @@ namespace Cliente
                 Partes[i] = false;
         }
         private Random r = new Random();
-        //-----------------------------------------------------------
+        //Metodos
         public void SolicitarPartes()
         {
+            int partes = 0;
             for (int i = 0; i < Partes.Length; i++)
             {
                 if (!Partes[i] && IPsPropietarios.Count > 0)
                 {
                     new Controlador().EnviarUDP(IPsPropietarios[r.Next(0, IPsPropietarios.Count)], "bitNode@SAD@" + MD5 + "|" + ID + "|" + i);
-                    break;
+                    if (++partes == 10)
+                        break;
                 }
             }
         }
