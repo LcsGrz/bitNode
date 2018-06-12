@@ -223,7 +223,7 @@ namespace Cliente
                 {
                     //Thread.Sleep(1000);
                     archivosNecesitados.ForEach(x => { x.SolicitarPartes(); Thread.Sleep(2000); });
-                    Thread.Sleep(4000);
+                    Thread.Sleep(1000);
                     //if (archivosNecesitados.Count > 0)
                     //archivosNecesitados[r.Next(0, archivosNecesitados.Count)].SolicitarPartes();
                 }

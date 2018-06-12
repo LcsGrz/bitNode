@@ -31,7 +31,7 @@ namespace Cliente
                 Controlador.archivosNecesitados.Add(this);
             }).Start();
         //Atributos
-        public static int TamañoParte = 100;
+        public static int TamañoParte = 1024;
         private static string bnArchivosNecesitados = Configuracion.bitNode + @"\ArchivosNecesitados";
         public int TamañoUltimaParte { get; set; }
         public string Nombre { get; set; }

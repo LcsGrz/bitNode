@@ -239,7 +239,7 @@ namespace Cliente
             //  public static int Npartes = 6;
             public string enterita = "";
 
-            public static int size = 100;
+            public static int size = 1024;
             public Socket workSocket = null;
             // Size of receive buffer.  
             public string MD5;
@@ -286,7 +286,7 @@ namespace Cliente
                         find.Partes[parte] = true;
                         find.PartesDescargadas++;
                     }
-                    if(find.PartesDescargadas == find.CantidadPartes - 1)
+                    if(find.PartesDescargadas == find.CantidadPartes)
                     {
                         File.Move(find.RutaDesarga, find.Nombre);
                         Controlador.archivosNecesitados.Remove(find);
