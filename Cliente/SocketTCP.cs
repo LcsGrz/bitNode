@@ -85,11 +85,11 @@ namespace Cliente
                 long partes = loadedFile.Length / StateObject.size + (loadedFile.Length % StateObject.size == 0 ? 0:1);
                
                 byte[] byteData;
-                if (Nparte == partes)
+                //if (Nparte == partes)
                 {
-                    byteData = new byte[(int)(loadedFile.Length % StateObject.size)];
+                    //byteData = new byte[(int)(loadedFile.Length % StateObject.size)];
                 }
-                else
+                //else
                 {
                     byteData = new byte[StateObject.size];
                 }
