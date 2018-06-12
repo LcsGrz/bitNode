@@ -152,6 +152,7 @@ namespace Cliente
                             {
                                 controlador.EliminarIP(IPRecibida);
                                 controlador.EliminarArchivosCompartidosDeIP(IPRecibida);
+                                controlador.EliminarPeticiones(IPRecibida);
                                 break;
                             }
                         case "SAC": // SolicitarArchivosCompartidos

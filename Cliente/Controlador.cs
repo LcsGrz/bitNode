@@ -251,5 +251,16 @@ namespace Cliente
                         Thread.Sleep(5000);
                 }
             }).Start();
+        public void EliminarPeticiones(IPAddress ip)
+        {
+            for (int i = 0; i < archivosSolicitados.Count; i++)
+            {
+                if (archivosSolicitados[i].IPDestino.Equals(ip))
+                {
+                    archivosSolicitados.RemoveAt(i);
+                    i = -1;
+                }
+            }
+        }
     }
 }

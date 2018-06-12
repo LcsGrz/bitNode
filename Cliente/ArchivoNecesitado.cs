@@ -24,7 +24,7 @@ namespace Cliente
                 Tamaño = AN.Tamaño;
                 CantidadPartes = (int)AN.Tamaño / TamañoParte + (AN.Tamaño % TamañoParte != 0 ? 1 : 0);
                 TamañoUltimaParte = (int)AN.Tamaño % TamañoParte;
-                ID = Controlador.archivosNecesitados.Count + 1;
+                ID = Controlador.archivosNecesitados.Count;
                 MD5 = AN.ArchivoMD5;
                 Partes = new bool[CantidadPartes];
                 RellenarBytes();

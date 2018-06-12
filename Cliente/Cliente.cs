@@ -442,8 +442,8 @@ namespace Cliente
             lblVistaConfiguracionIniciarConWindows.Font = catorceR;
             lblVistaConfiguracionMinimizarBanjeda.Font = catorceR;
             lblVistaConfiguracionNombre.Font = catorceR;
-            tbVistaConfiguracionNombre.Font = doceR;
-            lblVistaConfiguracionSyncAuto.Font = doceR;
+            tbVistaConfiguracionNombre.Font = catorceR;
+            lblVistaConfiguracionSyncAuto.Font = catorceR;
             lblVistaConfiguracionIdioma.Font = catorceR;
             lblVistaConfiguracionIngles.Font = catorceR;
             lblVistaConfiguracionEspañol.Font = catorceR;
@@ -462,7 +462,7 @@ namespace Cliente
             lblVistaConfiguracionLimiteDescargas.Font = catorceR;
             lblVistaConfiguracionRutaDescarga.Font = catorceR;
             lblVistaConfiguracionIP.Font = catorceR;
-            tbVistaConfiguracionIP.Font = doceR;
+            tbVistaConfiguracionIP.Font = catorceR;
             lblVistaConfiguracionBitNoders.Font = catorceR;
             //About
             tbVistaAboutDescripcion.Font = veintiunoR;

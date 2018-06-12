@@ -44,7 +44,7 @@ namespace Cliente
                 client.BeginConnect(remoteEP, new AsyncCallback(ConnectCallback), client);
                 connectDone.WaitOne();
 
-                Send(client, frmCliente.archivosCompartidos[AS.IDPosicion].Ruta, AS.IDPosicion, AS.ParteArchivo);
+                Send(client, frmCliente.archivosCompartidos[AS.IDPosicion].Ruta, AS.MD5, AS.ParteArchivo);
                 sendDone.WaitOne();
 
                 client.Shutdown(SocketShutdown.Send);
@@ -71,14 +71,14 @@ namespace Cliente
             }
         }
 
-        private void Send(Socket client, String filename, int id, int Nparte)
+        private void Send(Socket client, String filename, string MD5, int Nparte)
         {
             FileStream loadedFile;
             try
             {
                 loadedFile = new FileStream(filename, FileMode.Open, FileAccess.Read);
 
-                byte[] byteId = Encoding.ASCII.GetBytes(id.ToString() + "|");//ID                
+                byte[] byteId = Encoding.ASCII.GetBytes(MD5.ToString() + "|");//ID                
                 byte[] byteParte = Encoding.ASCII.GetBytes(Nparte.ToString() + "|");//Parte
 
 
@@ -164,27 +164,58 @@ namespace Cliente
                 string content;
                 state.sb.Append(Encoding.ASCII.GetString(
                 state.buffer, 0, bytesRead));
-
                 content = state.sb.ToString();
-                Console.WriteLine(content);
-                state.enterita += content;
+                Console.WriteLine("Entre: "+ state.byteLeidos);
+                Console.WriteLine("ByteLeidos:" + bytesRead);
 
                 if (content.IndexOf("<BNF>") > -1)
                 {
+                    Buffer.BlockCopy(state.buffer,
+                               0,
+                               state.datos,
+                               state.byteLeidos,
+                               bytesRead-5
+                               );
+                    //---------------
+                    string paco;
+                    state.faso.Append(Encoding.ASCII.GetString(
+                    state.datos, 0, state.datos.Length));
+                    paco = state.faso.ToString();
+
+                    Console.WriteLine("Content: " + paco);
                     state.ManejarArchivo(bytesRead);
                 }
                 else
                 {
-                    // Not all data received. Get more.  
                     if (state.leerIndices)
                     {
                         string[] spliteo = content.Split('|');
-                        state.id = Convert.ToInt32(spliteo[0]);
+                        state.MD5 = spliteo[0];
                         state.parte = Convert.ToInt32(spliteo[1]);
                         state.leerIndices = false;
+                        int indices = state.MD5.Length + state.Long(state.parte) +2;
+                        Buffer.BlockCopy(state.buffer,
+                            indices,
+                            state.datos,
+                            state.byteLeidos,
+                            state.buffer.Length - indices
+                            );
+                        //--
+                        state.byteLeidos += bytesRead - indices;
+                    }
+                    else
+                    {
+                        Buffer.BlockCopy(state.buffer,
+                                0,
+                                state.datos,
+                                state.byteLeidos,
+                                bytesRead
+                                );
+                        state.byteLeidos += bytesRead;
                     }
                     handler.BeginReceive(state.buffer, 0, StateObject.BufferSize, 0, new AsyncCallback(ReadCallback), state);
                 }
+               
             }
         }
         //-----------------------------------------------------------------------------------------------------------
@@ -198,7 +229,7 @@ namespace Cliente
             public static int size = 100;
             public Socket workSocket = null;
             // Size of receive buffer.  
-            public int id = 0;
+            public string MD5;
             public long parte = 0;
             public bool leerIndices = true;
             public int byteLeidos = 0;
@@ -209,24 +240,56 @@ namespace Cliente
             public byte[] datos = new byte[size];
             // Received data string.  
             public StringBuilder sb = new StringBuilder();
-
+            public StringBuilder faso = new StringBuilder();
             public void ManejarArchivo(int byteRead)
             {
                 //Console.WriteLine("Enterita: " + enterita);
 
-                Console.WriteLine("ID: " + id);
+                Console.WriteLine("ID: " + MD5);
                 Console.WriteLine("Parte: " + parte);
                 //Console.WriteLine("Enterita: " + enterita);
-                if (Controlador.archivosNecesitados[id].Partes[parte])
-                {
-                    using (FileStream output = new FileStream(Controlador.archivosNecesitados[id].RutaDesarga, FileMode.Append))
+                ArchivoNecesitado find = new ArchivoNecesitado();
+
+                for (int i = 0; i < Controlador.archivosNecesitados.Count; i++)
+                    if (Archivo.CompararMD5(Controlador.archivosNecesitados[i].MD5, MD5))
                     {
-                        //output.Position = parte * size;
-                        //output.Write(buffer, 0, buffer.Length);
-                        Console.WriteLine("Escribiendo: ....");
-                        Console.WriteLine("Escribido: ....");
+                        find = Controlador.archivosNecesitados[i];
+                        break;
+                    }
+                //Remplazar todo
+                if (!find.Partes[parte]) 
+                {
+                    using (FileStream output = new FileStream(find.RutaDesarga, FileMode.Open))
+                    {
+                        output.Position = parte * size;
+                        if (parte == find.CantidadPartes - 1)
+                        {
+                            output.Write(datos, 0, find.TamañoUltimaParte);
+                        }
+                        else
+                        {
+                            output.Write(datos, 0, datos.Length);
+                        }
+                        find.Partes[parte] = true;
                     }
                 }
+            }
+            public int IntLength(int i)
+            {
+                if (i < 0)
+                    throw new ArgumentOutOfRangeException();
+                if (i == 0)
+                    return 1;
+                return (int)Math.Floor(Math.Log10(i)) + 1;
+            }
+
+            public int Long(long i)
+            {
+                if (i < 0)
+                    throw new ArgumentOutOfRangeException();
+                if (i == 0)
+                    return 1;
+                return (int)Math.Floor(Math.Log10(i)) + 1;
             }
         }
     }
