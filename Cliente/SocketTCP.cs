@@ -59,7 +59,7 @@ namespace Cliente
             }
             catch (Exception e)
             {
-                Console.WriteLine(e.ToString());
+                Console.WriteLine("conecctcallback Error: " + e.ToString());
             }
         }
 
@@ -69,29 +69,25 @@ namespace Cliente
             try
             {
                 loadedFile = new FileStream(filename, FileMode.Open, FileAccess.Read);
-                long partes = loadedFile.Length / StateObject.size;
+                
+                byte[] byteId = Encoding.ASCII.GetBytes(id.ToString() + "|");//ID                
+                byte[] byteParte = Encoding.ASCII.GetBytes(Nparte.ToString() + "|");//Parte
 
-                byte[] byteId = new byte[StateObject.Nid];
-                byte[] byteParte = new byte[StateObject.Npartes];
-
-                byteId = Encoding.ASCII.GetBytes(id.ToString());
-                byte[] byteAux = Encoding.ASCII.GetBytes(Nparte.ToString());
-
-                for (int i = 0; i < byteAux.Length; i++) // Rellenar espacios con ceros
-                {
-                    byteParte[i] = byteAux[i];
-                }
-
+               
                 byte[] byteData = new byte[StateObject.size];
 
                 loadedFile.Position = Nparte * StateObject.size;
                 loadedFile.Read(byteData, 0, byteData.Length);
 
-                byte[] sendB = new byte[StateObject.Nid + StateObject.Npartes + byteData.Length];
+                byte[] bFinal = Encoding.ASCII.GetBytes("<BNF>");
+
+                byte[] sendB = new byte[byteId.Length + byteParte.Length + byteData.Length + bFinal.Length];
 
                 byteId.CopyTo(sendB, 0);
                 byteParte.CopyTo(sendB, byteId.Length);
                 byteData.CopyTo(sendB, (byteId.Length + byteParte.Length));
+
+                bFinal.CopyTo(sendB, (byteId.Length + byteParte.Length + byteData.Length));//Agrego el punto final del archivo
 
                 client.BeginSend(sendB, 0, sendB.Length, 0,
                     new AsyncCallback(SendCallback), client);
@@ -125,7 +121,9 @@ namespace Cliente
         public void RecibirTCP()
         {
             IPEndPoint sender = new IPEndPoint(IPAddress.Any, port);
-            Socket listener = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
+
+            Socket listener = new Socket(AddressFamily.InterNetwork,
+            SocketType.Stream, ProtocolType.Tcp);
 
             try
             {
@@ -143,7 +141,7 @@ namespace Cliente
             }
             catch (Exception e)
             {
-                Console.WriteLine("error al conectarrr " +e.ToString());
+                Console.WriteLine(e.ToString());
                 MessageBox.Show(e.ToString());
             }
         }
@@ -157,7 +155,8 @@ namespace Cliente
 
             StateObject state = new StateObject();
             state.workSocket = handler;
-            handler.BeginReceive(state.buffer, 0, StateObject.BufferSize, 0, new AsyncCallback(ReadCallback), state);
+            handler.BeginReceive(state.buffer, 0, StateObject.BufferSize, 0,
+                new AsyncCallback(ReadCallback), state);
         }
 
         public void ReadCallback(IAsyncResult ar)
@@ -166,37 +165,64 @@ namespace Cliente
             Socket handler = state.workSocket;
 
             int bytesRead = handler.EndReceive(ar);
-            state.byteLeidos += bytesRead;
             if (bytesRead > 0)
             {
-                //state.manejarArchivo(bytesRead);
-                if (state.byteLeidos < 100)
-                {
-                    Console.WriteLine("Recibiendo... 2: " + bytesRead);
-                    handler.BeginReceive(state.buffer, 0, StateObject.BufferSize, 0, new AsyncCallback(ReadCallback), state); //Leer mas datos
-                }
-                else {
-                    Console.WriteLine("Tenemos un archivo completo: " + bytesRead + "---" + state.byteLeidos);
-                }
+                string content;
+                state.sb.Append(Encoding.ASCII.GetString(
+                state.buffer, 0, bytesRead));
 
+                content = state.sb.ToString();
+                state.enterita += content;
+                if (content.IndexOf("<BNF>") > -1)
+                {
+                    state.ManejarArchivo(bytesRead);
+                }
+                else
+                {
+                    // Not all data received. Get more.  
+                    if (state.leerIndices)
+                    {
+                        string[] spliteo = content.Split('|');
+                        state.id = Convert.ToInt32(spliteo[0]);
+                        state.parte = Convert.ToInt32(spliteo[1]);
+                        state.leerIndices = false;
+                    }
+                    handler.BeginReceive(state.buffer, 0, StateObject.BufferSize, 0,
+                    new AsyncCallback(ReadCallback), state);
+                }
             }
         }
+
         //Clase Auxiliar
         public class StateObject
         {
-            public int byteLeidos=0;
-            public static int Nid = 1;
-            public static int Npartes = 6;
+            // public static int Nid = 1;
+            //  public static int Npartes = 6;
+            public string enterita = "";
+
             public static int size = 100;
             public Socket workSocket = null;
             // Size of receive buffer.  
+            public int id=0;
+            public long parte=0;
+            public bool leerIndices = true;
+            public int byteLeidos = 0;
             public const int BufferSize = 64;
             // Receive buffer.  
             public byte[] buffer = new byte[BufferSize];
+
+            public byte[] datos = new byte[size];
             // Received data string.  
             public StringBuilder sb = new StringBuilder();
 
-
+            public void ManejarArchivo(int byteRead)
+            {
+                using (FileStream output = new FileStream(Controlador.archivosNecesitados[id].RutaDesarga, FileMode.Append))
+                {
+                    output.Position = parte * size;
+                    output.Write(buffer, 0, buffer.Length);
+                }
+            }
         }
         public void Frenar()
         {
