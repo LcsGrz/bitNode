@@ -1,6 +1,7 @@
 ﻿using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Net;
 using System.Net.Sockets;
 using System.Threading;
@@ -16,7 +17,6 @@ namespace Cliente
         public static List<IPAddress> IPSVecinas = new List<IPAddress>();
         public static List<string> Solicitudes = new List<string>();
         public static List<Archivo> ArchivosCompartidosVecinos = new List<Archivo>();
-        public static List<ArchivoNecesitado> archivosNecesitados = new ArchivoNecesitado().Leer();
         private static System.Timers.Timer temporizadorPing;
         public static bool RecivirACV = false;
         //------------TCP
@@ -37,6 +37,7 @@ namespace Cliente
         //-----------------------------------------------Server
         public void IniciarEjecuciones()
         {
+            ArchivoNecesitado.archivosNecesitados = new ArchivoNecesitado().Leer();
             SUDP = new SocketUDP();
             STCP = new SocketTCP();
             EscucharUDP = new Thread(() => { SUDP.RecibirUDP(); });
@@ -99,13 +100,13 @@ namespace Cliente
         public void EliminarIP(IPAddress ip)
         {
             IPSVecinas.Remove(ip);
-            archivosNecesitados.ForEach(an => an.IPsPropietarios.Remove(ip));
+            ArchivoNecesitado.Hacer(null,"DELIP",ip);
             informarBitNoders?.Invoke(null, null);
         }
         public void InicializarArchvio(int index) //mejorar
         {
-            if (!archivosNecesitados.Exists(x => Archivo.CompararMD5(x.MD5, ArchivosCompartidosVecinos[index].ArchivoMD5)))
-                new ArchivoNecesitado(ArchivosCompartidosVecinos[index]);
+                if (ArchivoNecesitado.Hacer(ArchivosCompartidosVecinos[index].ArchivoMD5, "EXIST",null) == 0)
+                    new ArchivoNecesitado(ArchivosCompartidosVecinos[index]);
 
             new frmMensaje(Idioma.StringResources.msjArchivoEnLista).ShowDialog();
         }
@@ -114,7 +115,7 @@ namespace Cliente
             if (!archivosSolicitados.Exists(x => (Archivo.CompararMD5(x.MD5, AS.MD5) && AS.IDPosicion == x.IDPosicion && AS.ParteArchivo == x.ParteArchivo)))
                 archivosSolicitados.Add(AS);
         }
-        public void GuardarTodosArchivosNecesitados() => archivosNecesitados.ForEach(x => x.Guardar());
+        public void GuardarTodosArchivosNecesitados() => ArchivoNecesitado.Hacer(null,null,null);
         //-----------------------------------------------UDP
         public void EnviarUDP(IPAddress ip, string msj)
         {
@@ -205,27 +206,18 @@ namespace Cliente
                 }
             }
         }
-        public void AgregarIPArchivosNecesitados(IPAddress ip, string MD5) => archivosNecesitados.ForEach(x => x.agregarIP(ip, MD5));
-        public void EnviarArchivosNecesitados(IPAddress ip)
-        {
-            if (archivosNecesitados.Count > 0)
-            {
-                string archivos = string.Empty;
-                archivosNecesitados.ForEach(x => archivos += ("|" + x.MD5));
-                EnviarUDP(ip, "bitNode@TEA@" + archivos);
-            }
-        }
+        public void AgregarIPArchivosNecesitados(IPAddress ip, string MD5) => ArchivoNecesitado.Hacer(MD5,"ADDIP",ip);
+        public void EnviarArchivosNecesitados(IPAddress ip) => ArchivoNecesitado.Hacer(null, "EAN", ip);
         //-----------------------------------------------TCP
         public void ManejadorNecesitados() =>
             new Thread(() =>
             {
                 while (PermitirSolicitar)
                 {
-                    //Thread.Sleep(1000);
-                    archivosNecesitados.ForEach(x => { x.SolicitarPartes(); Thread.Sleep(2000); });
                     Thread.Sleep(1000);
-                    //if (archivosNecesitados.Count > 0)
-                    //archivosNecesitados[r.Next(0, archivosNecesitados.Count)].SolicitarPartes();
+                    int ASCount = ArchivoNecesitado.Hacer(null, "L", null);
+                    if (ASCount > 0)
+                        ArchivoNecesitado.archivosNecesitados[r.Next(0, ASCount)].SolicitarPartes();
                 }
             }).Start();
         public void ManejadorSolicitudes() =>
@@ -265,5 +257,6 @@ namespace Cliente
                 }
             }
         }
+        
     }
 }
