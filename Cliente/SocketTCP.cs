@@ -44,7 +44,7 @@ namespace Cliente
                 client.BeginConnect(remoteEP, new AsyncCallback(ConnectCallback), client);
                 connectDone.WaitOne();
 
-                Send(client, frmCliente.archivosCompartidos[AS.IDPosicion].Ruta, AS.MD5, AS.ParteArchivo);
+                Send(client, frmCliente.archivosCompartidos[AS.posicionLista].Ruta, AS.MD5, AS.ParteArchivo);
                 sendDone.WaitOne();
 
                 client.Shutdown(SocketShutdown.Send);
@@ -82,7 +82,19 @@ namespace Cliente
                 byte[] byteParte = Encoding.ASCII.GetBytes(Nparte.ToString() + "|");//Parte
 
 
-                byte[] byteData = new byte[StateObject.size];
+                long partes = loadedFile.Length / StateObject.size + (loadedFile.Length % StateObject.size == 0 ? 0:1);
+               
+                byte[] byteData;
+                if (Nparte == partes)
+                {
+                    byteData = new byte[(int)(loadedFile.Length % StateObject.size)];
+                }
+                else
+                {
+                    byteData = new byte[StateObject.size];
+                }
+
+                Console.WriteLine("Tamaño de datos enviados: " + byteData.Length);
 
                 loadedFile.Position = Nparte * StateObject.size;
                 loadedFile.Read(byteData, 0, byteData.Length);
@@ -164,6 +176,7 @@ namespace Cliente
                 string content;
                 state.sb.Append(Encoding.ASCII.GetString(
                 state.buffer, 0, bytesRead));
+                
                 content = state.sb.ToString();
                 Console.WriteLine("Entre: "+ state.byteLeidos);
                 Console.WriteLine("ByteLeidos:" + bytesRead);
@@ -245,7 +258,7 @@ namespace Cliente
             {
                 //Console.WriteLine("Enterita: " + enterita);
 
-                Console.WriteLine("ID: " + MD5);
+                Console.WriteLine("MD5: " + MD5);
                 Console.WriteLine("Parte: " + parte);
                 //Console.WriteLine("Enterita: " + enterita);
                 ArchivoNecesitado find = new ArchivoNecesitado();
@@ -271,6 +284,12 @@ namespace Cliente
                             output.Write(datos, 0, datos.Length);
                         }
                         find.Partes[parte] = true;
+                        find.PartesDescargadas++;
+                    }
+                    if(find.PartesDescargadas == find.CantidadPartes - 1)
+                    {
+                        File.Move(find.RutaDesarga, find.Nombre);
+                        Controlador.archivosNecesitados.Remove(find);
                     }
                 }
             }

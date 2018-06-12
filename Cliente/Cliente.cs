@@ -42,7 +42,6 @@ namespace Cliente
             AplicarIdioma();
             AplicarTema();
 
-
             Archivo.ArchivoGuardado += new EventHandler((object sender, EventArgs e) => { this.Invoke(new Action(() => { CargarArchivosCompatidos(); })); controlador.EnviarUnicoArchivoCompartido((Archivo)sender); });
             Controlador.informarSolicitud += new EventHandler((object sender, EventArgs e) => { this.Invoke(new Action(() => { CargarSolicitudes(); })); });
             NetworkChange.NetworkAddressChanged += new NetworkAddressChangedEventHandler((object sender, EventArgs e) =>
