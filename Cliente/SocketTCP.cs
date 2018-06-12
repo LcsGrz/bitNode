@@ -44,7 +44,7 @@ namespace Cliente
                 client.BeginConnect(remoteEP, new AsyncCallback(ConnectCallback), client);
                 connectDone.WaitOne();
 
-                Send(client, frmCliente.archivosCompartidos[AS.IDPosicion].Ruta, AS.IDPosicion, AS.ParteArchivo);
+                Send(client, frmCliente.archivosCompartidos[AS.posicionLista].Ruta, AS.MD5, AS.ParteArchivo);
                 sendDone.WaitOne();
 
                 client.Shutdown(SocketShutdown.Send);
@@ -71,18 +71,30 @@ namespace Cliente
             }
         }
 
-        private void Send(Socket client, String filename, int id, int Nparte)
+        private void Send(Socket client, String filename, string MD5, int Nparte)
         {
             FileStream loadedFile;
             try
             {
                 loadedFile = new FileStream(filename, FileMode.Open, FileAccess.Read);
 
-                byte[] byteId = Encoding.ASCII.GetBytes(id.ToString() + "|");//ID                
+                byte[] byteId = Encoding.ASCII.GetBytes(MD5.ToString() + "|");//ID                
                 byte[] byteParte = Encoding.ASCII.GetBytes(Nparte.ToString() + "|");//Parte
 
 
-                byte[] byteData = new byte[StateObject.size];
+                long partes = loadedFile.Length / StateObject.size + (loadedFile.Length % StateObject.size == 0 ? 0:1);
+               
+                byte[] byteData;
+                if (Nparte == partes)
+                {
+                    byteData = new byte[(int)(loadedFile.Length % StateObject.size)];
+                }
+                else
+                {
+                    byteData = new byte[StateObject.size];
+                }
+
+                Console.WriteLine("Tamaño de datos enviados: " + byteData.Length);
 
                 loadedFile.Position = Nparte * StateObject.size;
                 loadedFile.Read(byteData, 0, byteData.Length);
@@ -164,25 +176,46 @@ namespace Cliente
                 string content;
                 state.sb.Append(Encoding.ASCII.GetString(
                 state.buffer, 0, bytesRead));
-
+                
                 content = state.sb.ToString();
                 Console.WriteLine(content);
                 state.enterita += content;
 
                 if (content.IndexOf("<BNF>") > -1)
                 {
+                    Buffer.BlockCopy(state.buffer,
+                            0,
+                            state.datos,
+                            state.byteLeidos,
+                            state.buffer.Length
+                            );
+                    state.byteLeidos += state.buffer.Length;
                     state.ManejarArchivo(bytesRead);
                 }
                 else
-                {
-                    // Not all data received. Get more.  
+                { 
                     if (state.leerIndices)
                     {
                         string[] spliteo = content.Split('|');
                         state.id = Convert.ToInt32(spliteo[0]);
                         state.parte = Convert.ToInt32(spliteo[1]);
                         state.leerIndices = false;
+                        int indices = state.IntLength(state.id) + state.Long(state.parte);
+                        Buffer.BlockCopy(state.buffer,
+                            indices,
+                            state.datos,
+                            state.byteLeidos,
+                            state.buffer.Length - indices
+                            );
+                        state.byteLeidos += state.buffer.Length - indices;
                     }
+                    Buffer.BlockCopy(state.buffer,
+                            0,
+                            state.datos,
+                            state.byteLeidos,
+                            state.buffer.Length
+                            );
+                    state.byteLeidos += state.buffer.Length;
                     handler.BeginReceive(state.buffer, 0, StateObject.BufferSize, 0, new AsyncCallback(ReadCallback), state);
                 }
             }
@@ -219,14 +252,31 @@ namespace Cliente
                 //Console.WriteLine("Enterita: " + enterita);
                 if (Controlador.archivosNecesitados[id].Partes[parte])
                 {
-                    using (FileStream output = new FileStream(Controlador.archivosNecesitados[id].RutaDesarga, FileMode.Append))
+                    int indices = IntLength(id) + Long(parte);
+
+                    Buffer.BlockCopy(buffer, indices, datos, 0, buffer.Length - indices);
+                    using (FileStream output = new FileStream(Controlador.archivosNecesitados[id].RutaDesarga, FileMode.Open))
                     {
                         //output.Position = parte * size;
                         //output.Write(buffer, 0, buffer.Length);
-                        Console.WriteLine("Escribiendo: ....");
-                        Console.WriteLine("Escribido: ....");
                     }
                 }
+            }
+            public int IntLength(int i)
+            {
+                if (i < 0)
+                    throw new ArgumentOutOfRangeException();
+                if (i == 0)
+                    return 1;
+                return (int)Math.Floor(Math.Log10(i)) + 1;
+            }
+            public int Long(long i)
+            {
+                if (i < 0)
+                    throw new ArgumentOutOfRangeException();
+                if (i == 0)
+                    return 1;
+                return (int)Math.Floor(Math.Log10(i)) + 1;
             }
         }
     }
