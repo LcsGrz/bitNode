@@ -13,7 +13,7 @@ namespace Cliente
         //----------------------------------------------------------------------------------------------Variables y atributos
         Random r = new Random();
         private static SocketUDP SUDP;
-        private static SocketTCP STCP;
+        public static SocketTCP STCP;
         public static List<IPAddress> IPSVecinas = new List<IPAddress>();
         public static List<string> Solicitudes = new List<string>();
         public static List<Archivo> ArchivosCompartidosVecinos = new List<Archivo>();
@@ -40,9 +40,9 @@ namespace Cliente
         public void IniciarEjecuciones()
         {
             SUDP = new SocketUDP();
+            STCP = new SocketTCP();
             EscucharUDP = new Thread(() => { SUDP.RecibirUDP(); });
             EscucharUDP.Start();
-            STCP = new SocketTCP();
             EscucharTCP = new Thread(() => { STCP.RecibirTCP(); });
             EscucharTCP.Start();
             temporizadorPing = new System.Timers.Timer(60000) { AutoReset = true, Enabled = true };
@@ -241,15 +241,18 @@ namespace Cliente
                         ArchivoSolicitado AS = archivosSolicitados[0];
                         archivosSolicitados.RemoveAt(0);
                         AS.posicionLista = Archivo.PosicionArchivo(AS.MD5);
-                      /*  new Thread(() =>
-                        {*/
-                            if (AS.posicionLista > -1)
-                                STCP.EnviarSolicitud(AS);
-                            else
-                                EnviarUDP(AS.IPDestino, "bitNode@ASNULL@" + frmCliente.archivosCompartidos[AS.posicionLista].Nombre);
-                        //}).Start();
+                        //  new Thread(() =>
+                        //  {
+                        if (AS.posicionLista > -1)
+                        {
+                            STCP.EnviarSolicitud(AS);
+                            PermitirEnviarSolicitud.Set();
+                        }
+                        else
+                            EnviarUDP(AS.IPDestino, "bitNode@ASNULL@" + frmCliente.archivosCompartidos[AS.posicionLista].Nombre);
+                       // }).Start();
                         PermitirEnviarSolicitud.WaitOne();
-
+                        //Thread.Sleep(3000);
                     }
                     else
                         Thread.Sleep(5000);

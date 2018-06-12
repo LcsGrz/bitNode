@@ -75,7 +75,7 @@ namespace Cliente
                 if (stringData[0] == "bitNode")
                 {
                     //---
-                //    Console.WriteLine("RECIBI: -IP: " + IPRecibida + " -MSJ: " + Encoding.UTF8.GetString(SO.buffer, 0, read));
+                    //Console.WriteLine("RECIBI: -IP: " + IPRecibida + " -MSJ: " + Encoding.UTF8.GetString(SO.buffer, 0, read));
                     //---
                     bool primeraVez = controlador.AgregarIP(IPRecibida);
 

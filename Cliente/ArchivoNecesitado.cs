@@ -37,7 +37,7 @@ namespace Cliente
                 Tamaño = AN.Tamaño;
                 CantidadPartes = (int)AN.Tamaño / TamañoParte + (AN.Tamaño % TamañoParte != 0 ? 1 : 0);
                 TamañoUltimaParte = (int)AN.Tamaño % TamañoParte;
-                ID = Controlador.archivosNecesitados.Count + 1;
+                ID = Controlador.archivosNecesitados.Count;
                 MD5 = AN.ArchivoMD5;
                 Partes = new bool[CantidadPartes];
                 RellenarBytes();
@@ -85,7 +85,7 @@ namespace Cliente
             {
                 if (!Partes[i] && IPsPropietarios.Count > 0)
                 {
-                    new Controlador().EnviarUDP(IPsPropietarios[r.Next(0, IPsPropietarios.Count)], "bitNode@SAD@" + MD5 + "|" + ID + "|" + i);
+                    new Controlador().EnviarUDP(IPsPropietarios[r.Next(0, IPsPropietarios.Count)], "bitNode@SAD@" + MD5 + "|" + i + "|" + ID);
                     break;
                 }
             }
