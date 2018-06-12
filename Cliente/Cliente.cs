@@ -810,7 +810,7 @@ namespace Cliente
 
         private void button1_Click(object sender, EventArgs e)
         {
-            MessageBox.Show(Controlador.archivosNecesitados.Count.ToString());
+            ///
         }
 
         private void BuscarArchivoPorTag(object sender, EventArgs e) //Busca archivos por tags
