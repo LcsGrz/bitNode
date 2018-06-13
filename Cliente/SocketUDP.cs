@@ -106,7 +106,6 @@ namespace Cliente
                                 if (Controlador.RecivirACV && primeraVez && sync)
                                     EnviarMSJ_UDP(IPRecibida, "bitNode@PPING@OK|true");
 
-
                                 break;
                             }
                         //------------------------------------------------------------------------------

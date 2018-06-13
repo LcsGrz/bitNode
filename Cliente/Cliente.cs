@@ -61,11 +61,13 @@ namespace Cliente
             Controlador.informarEstadoDescarga += new EventHandler((object sender, EventArgs e) =>
             {
                 ArchivosNecesitadosRecibidos = true;
-                if (tagAnterior == 0 && ((int)sender) == 1)
+                if (((int)sender) == 1)
                     CargarListaDescargas();
                 if (ArchivoNecesitado.Hacer(null, "VE", null) == 1)
                     FinalizaronDescargas();
             });
+            if (ArchivoNecesitado.Hacer(null, "L", null) > 0)
+                tmrModificarAN.Start();
             controlador.IniciarEjecuciones();
         }
         //----------------------------------------------------------------------------------------------Funciones de form
@@ -457,7 +459,7 @@ namespace Cliente
             lblVistaConfiguracionIniciarConWindows.Font = catorceR;
             lblVistaConfiguracionMinimizarBanjeda.Font = catorceR;
             lblVistaConfiguracionNombre.Font = catorceR;
-            tbVistaConfiguracionNombre.Font = catorceR;
+            tbVistaConfiguracionNombre.Font = doceR;
             lblVistaConfiguracionSyncAuto.Font = catorceR;
             lblVistaConfiguracionIdioma.Font = catorceR;
             lblVistaConfiguracionIngles.Font = catorceR;
@@ -477,7 +479,7 @@ namespace Cliente
             lblVistaConfiguracionLimiteDescargas.Font = catorceR;
             lblVistaConfiguracionRutaDescarga.Font = catorceR;
             lblVistaConfiguracionIP.Font = catorceR;
-            tbVistaConfiguracionIP.Font = catorceR;
+            tbVistaConfiguracionIP.Font = doceR;
             lblVistaConfiguracionBitNoders.Font = catorceR;
             //About
             tbVistaAboutDescripcion.Font = veintiunoR;
@@ -976,26 +978,30 @@ namespace Cliente
         }
         private void CargarNuevosValoresDescargados(object sender, EventArgs e)//Actualiza los valores de la vista 'descargas'
         {
-            ArchivosNecesitadosRecibidos = false;
-            int ANC = ArchivoNecesitado.Hacer(null, "LC", null);
-            dgvVistaDescargas.Visible = !(lblVistaDescargarExplorar.Visible = (ANC == 0));
-            if (ANC > 0)
+            try
             {
-                for (int i = 0; i < ANC; i++)
+                ArchivosNecesitadosRecibidos = false;
+                int ANC = ArchivoNecesitado.Hacer(null, "LC", null);
+                dgvVistaDescargas.Visible = !(lblVistaDescargarExplorar.Visible = (ANC == 0));
+                if (ANC > 0)
                 {
-                    ArchivoNecesitado A = ArchivoNecesitado.archivosNecesitados[i];
-                    long tamaño = (A.Estado) ? A.Tamaño : (ArchivoNecesitado.TamañoParte < A.Tamaño) ? A.PartesDescargadas * ArchivoNecesitado.TamañoParte : A.Tamaño;
-                    dgvVistaDescargas[1, i].Value = Archivo.KB_GB_MB(tamaño);
-                    dgvVistaDescargas[3, i].Value = (A.PartesDescargadas * 100) / A.CantidadPartes + "%";
-                    if (A.Estado)
+                    for (int i = 0; i < ANC; i++)
                     {
-                        dgvVistaDescargas[0, i].Style.ForeColor = configuracion.colorDetalles;
-                        dgvVistaDescargas[0, i].Style.SelectionForeColor = configuracion.colorDetalles;
-                        dgvVistaDescargas[3, i].Style.ForeColor = configuracion.colorDetalles;
-                        dgvVistaDescargas[3, i].Style.SelectionForeColor = configuracion.colorDetalles;
+                        ArchivoNecesitado A = ArchivoNecesitado.archivosNecesitados[i];
+                        long tamaño = (A.Estado) ? A.Tamaño : (ArchivoNecesitado.TamañoParte < A.Tamaño) ? A.PartesDescargadas * ArchivoNecesitado.TamañoParte : A.Tamaño;
+                        dgvVistaDescargas[1, i].Value = Archivo.KB_GB_MB(tamaño);
+                        dgvVistaDescargas[3, i].Value = (A.PartesDescargadas * 100) / A.CantidadPartes + "%";
+                        if (A.Estado)
+                        {
+                            dgvVistaDescargas[0, i].Style.ForeColor = configuracion.colorDetalles;
+                            dgvVistaDescargas[0, i].Style.SelectionForeColor = configuracion.colorDetalles;
+                            dgvVistaDescargas[3, i].Style.ForeColor = configuracion.colorDetalles;
+                            dgvVistaDescargas[3, i].Style.SelectionForeColor = configuracion.colorDetalles;
+                        }
                     }
                 }
             }
+            catch (Exception) { }
         }
         private void FinalizaronDescargas() //Ejecutar funcion especial cuando finaliza la descarga
         {

@@ -35,7 +35,7 @@ namespace Cliente
         private static string bnArchivosNecesitados = Configuracion.bitNode + @"\ArchivosNecesitados";
         private static Random r = new Random();
         private static object locker = new object();
-        public static int TamañoParte = 2100;
+        public static int TamañoParte = 65536;
         //----------
         public string Nombre { get; set; }
         public string MD5 { get; set; }
@@ -76,17 +76,29 @@ namespace Cliente
         {
             if (!Estado)
             {
-                int partes = 0;
-                for (int i = 0; i < Partes.Length; i++)
+                int index = r.Next(0, (int)CantidadPartes);
+                if (CantidadPartes / 2 > PartesDescargadas)
                 {
-                    if (!Partes[i] && IPsPropietarios.Count > 0)
+                    if (!Partes[index] && IPsPropietarios.Count > 0)
                     {
-                        new Controlador().EnviarUDP(IPsPropietarios[r.Next(0, IPsPropietarios.Count)], "bitNode@SAD@" + MD5 + "|" + i);
-                        if (++partes == 10)
-                            break;
+                        new Controlador().EnviarUDP(IPsPropietarios[r.Next(0, IPsPropietarios.Count)], "bitNode@SAD@" + MD5 + "|" + index);
+                        Thread.Sleep(500);
                     }
                 }
-                Thread.Sleep(1000);
+                else
+                {
+                    int contador = 0;
+                    for (int i = 0; i < CantidadPartes; i++)
+                    {
+                        if (!Partes[index] && IPsPropietarios.Count > 0)
+                        {
+                            new Controlador().EnviarUDP(IPsPropietarios[r.Next(0, IPsPropietarios.Count)], "bitNode@SAD@" + MD5 + "|" + index);
+                            Thread.Sleep(500);
+                            if (++contador == 5)
+                                break;
+                        }
+                    }
+                }
             }
         } //Solicita partes faltantes a los bitNoders
         public void agregarIP(IPAddress ip, string MD5)

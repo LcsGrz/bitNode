@@ -238,7 +238,7 @@ namespace Cliente
             public long parte = 0;
             public bool leerIndices = true;
             public int byteLeidos = 0;
-            public const int BufferSize = 2000;
+            public const int BufferSize = 8192;
             // Receive buffer.  
             public byte[] buffer = new byte[BufferSize];
 

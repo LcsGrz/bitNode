@@ -158,6 +158,7 @@ namespace Cliente
                 if (Archivo.CompararMD5(ArchivosCompartidosVecinos[i].ArchivoMD5, MD5))
                 {
                     ArchivosCompartidosVecinos[i].IPPropietario.Remove(ip);
+                    ArchivoNecesitado.Hacer(null,"DELIP",ip);
                     if (ArchivosCompartidosVecinos[i].IPPropietario.Count == 0)
                     {
                         ArchivosCompartidosVecinos.RemoveAt(i);
@@ -196,7 +197,7 @@ namespace Cliente
             {
                 for (int x = 0; x < frmCliente.archivosCompartidos.Count; x++)
                 {
-                    if (Archivo.CompararMD5(frmCliente.archivosCompartidos[x].ArchivoMD5, archivos[i]))
+                    if (Archivo.CompararMD5(frmCliente.archivosCompartidos[x].ArchivoMD5, archivos[i]) && frmCliente.archivosCompartidos[x].Activo)
                     {
                         EnviarUDP(ip, "bitNode@AAS@" + JsonConvert.SerializeObject(frmCliente.archivosCompartidos[x]));
                         break;
@@ -234,8 +235,6 @@ namespace Cliente
                             PermitirEnviarSolicitud.WaitOne();
                             Thread.Sleep(100);
                         }
-                        else
-                            EnviarUDP(AS.IPDestino, "bitNode@ASNULL@" + frmCliente.archivosCompartidos[AS.posicionLista].Nombre);
                     }
                     else
                         Thread.Sleep(2000);
