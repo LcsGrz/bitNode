@@ -136,19 +136,19 @@
     <value>Request</value>
   </data>
   <data name="mensajeEmail" xml:space="preserve">
-    <value>Email copiado al portapapeles.</value>
+    <value>Email copied to the clipboard.</value>
   </data>
   <data name="MensajeIniciarConWindows" xml:space="preserve">
-    <value>Error al configurar, intente ejecutar como administrador.</value>
+    <value>Error when configuring, try to run as administrator.</value>
   </data>
   <data name="tbVistaAboutDescripcion" xml:space="preserve">
-    <value>Este proyecto fue realizado por alumnos de 3er año de la Universidad de la Punta (ULP) para la materia optativa programación concurrente como objetivo de cursada</value>
+    <value>This project was carried out by 3rd year students of the Universidad de la Punta (ULP) for the optional subject concurrent programming as a course objective</value>
   </data>
   <data name="lblVistaConfiguracionEfectoBotones" xml:space="preserve">
     <value>Button transition effect</value>
   </data>
   <data name="lblVistaConfiguracionEfectoFade" xml:space="preserve">
-    <value>Efecto transparencia de sistema</value>
+    <value>System transparency effect</value>
   </data>
   <data name="lblVistaConfiguracionEspañol" xml:space="preserve">
     <value>Spanish</value>
@@ -163,19 +163,19 @@
     <value>English</value>
   </data>
   <data name="lblVistaConfiguracionIniciarConWindows" xml:space="preserve">
-    <value>Iniciar con windows</value>
+    <value>Start with windows</value>
   </data>
   <data name="lblVistaConfiguracionInterfaz" xml:space="preserve">
-    <value>Interfaz</value>
+    <value>Interface</value>
   </data>
   <data name="lblVistaConfiguracionLimiteBajada" xml:space="preserve">
-    <value>Limite bajada</value>
+    <value>Dropped limit</value>
   </data>
   <data name="lblVistaConfiguracionLimiteDescargas" xml:space="preserve">
-    <value>Descargas simultaneas</value>
+    <value>Simultaneous downloads</value>
   </data>
   <data name="lblVistaConfiguracionLimiteSubida" xml:space="preserve">
-    <value>Limite subida</value>
+    <value>Limit upload</value>
   </data>
   <data name="lblVistaConfiguracionMinimizarBanjeda" xml:space="preserve">
     <value>Minimize to tray</value>
@@ -196,7 +196,7 @@
     <value>Dark</value>
   </data>
   <data name="lblVistaConfiguracionTranseferecias" xml:space="preserve">
-    <value>Transferencias</value>
+    <value>Transfers</value>
   </data>
   <data name="lblConfiguracionesRapidasCerrarApp" xml:space="preserve">
     <value>Close application</value>
@@ -232,22 +232,22 @@
     <value>Name</value>
   </data>
   <data name="mensajeErrorCompartirArchivo" xml:space="preserve">
-    <value>Se produjo un error, vuelva a interntarlo.</value>
+    <value>An error occurred, try again.</value>
   </data>
   <data name="tbVistaCompartirDescripcionArchivo" xml:space="preserve">
-    <value>Breve descripcion del archivo.</value>
+    <value>Short description of the file.</value>
   </data>
   <data name="lblVistaCompartirSeleccionar" xml:space="preserve">
     <value>Select the file you want to share</value>
   </data>
   <data name="mensajeExitoCompartirArchivo" xml:space="preserve">
-    <value>El archivo fue compartido exitosamente.</value>
+    <value>The file was successfully shared.</value>
   </data>
   <data name="lblVistaCompartirVerArchivos" xml:space="preserve">
     <value>There are no shared files</value>
   </data>
   <data name="splashCargandoArchivos" xml:space="preserve">
-    <value>Cargando archivos</value>
+    <value>Uploading files</value>
   </data>
   <data name="CabecerasDGVArchivoCompartidoArreglo" xml:space="preserve">
     <value>Name-Size-Description</value>
@@ -265,69 +265,81 @@
     <value>Share</value>
   </data>
   <data name="lblVistaSolicitarInformacion" xml:space="preserve">
-    <value>¡Solicita el archivo que necesites!</value>
+    <value>Request the file you need!</value>
   </data>
   <data name="lblVistaSolicitarNuevasSolicitudes" xml:space="preserve">
-    <value>No hay nuevas solicitudes</value>
+    <value>No new requests</value>
   </data>
   <data name="msgSolicitarArchivo" xml:space="preserve">
-    <value>La solicitud fue enviada, solo queda esperar.</value>
+    <value>The request was sent, just wait.</value>
   </data>
   <data name="lblVistaExplorarSyncOFF" xml:space="preserve">
-    <value>No hay archivos disponibles para descargar</value>
+    <value>There are no files available to download</value>
   </data>
   <data name="lblVistaConfiguracionBitNoders" xml:space="preserve">
-    <value> bitNoders vivos</value>
+    <value>live bitNoders</value>
   </data>
   <data name="lblVistaConfiguracionIP" xml:space="preserve">
-    <value>IP de coneccion</value>
+    <value>Connection IP</value>
   </data>
   <data name="mensajeErrorIP" xml:space="preserve">
-    <value>La IP introducida no es valida.</value>
+    <value>The IP entered is not valid.</value>
   </data>
   <data name="miIP" xml:space="preserve">
     <value>My IP: </value>
   </data>
   <data name="msjIPPortapapeles" xml:space="preserve">
-    <value>Direccion IP copiada a portapapeles.</value>
+    <value>IP address copied to the clipboard.</value>
   </data>
   <data name="ttReconectar" xml:space="preserve">
     <value>Reconnect</value>
   </data>
   <data name="msjASNULL" xml:space="preserve">
-    <value>El archivo solicitado no existe.</value>
+    <value>The requested file does not exist.</value>
   </data>
   <data name="mensajebitNodeActivo" xml:space="preserve">
-    <value>bitNode ya se encuentra en ejecucion.</value>
+    <value>bitNode is already running.</value>
   </data>
   <data name="lblVistaConfiguracionSyncAuto" xml:space="preserve">
     <value>Continuous synchronization</value>
   </data>
   <data name="lblVistaExplorarPerdon" xml:space="preserve">
-    <value>No se encontraron archivos</value>
+    <value>No files found</value>
   </data>
   <data name="lblVistaExplorarSyncON" xml:space="preserve">
     <value>Busca un archivo para explorar</value>
   </data>
   <data name="tbVistaExplorarBuscar" xml:space="preserve">
-    <value>Ingresa el nombre del archivo.</value>
+    <value>Enter the name of the file.</value>
   </data>
   <data name="msjDescripcion" xml:space="preserve">
-    <value>Por favor ingrese una breve descripcion</value>
+    <value>Please enter a short description</value>
   </data>
   <data name="msjTagNull" xml:space="preserve">
-    <value>Por favor ingrese minimo 5 tags separados por un espacio</value>
+    <value>Please enter a minimum of 5 tags separated by a space</value>
   </data>
   <data name="tbVistaCompartirTags" xml:space="preserve">
-    <value>Ingrese minimo 5 tags separados por un espacio</value>
+    <value>Enter at least 5 tags separated by a space</value>
   </data>
   <data name="msjSyncOFF" xml:space="preserve">
-    <value>Debera buscar por el nombre del archivo para explorar.</value>
+    <value>You should search by the file name to explore.</value>
   </data>
   <data name="msjSyncON" xml:space="preserve">
-    <value>Esta funcion consume mas ancho de banda, pero en 'Explorar' vera todos los archivos compartidos.</value>
+    <value>This function consumes more bandwidth, but in 'Explore' you will see all the shared files.</value>
   </data>
   <data name="msjArchivoEnLista" xml:space="preserve">
-    <value>El archivo se añadio a la lista de descargas.</value>
+    <value>The file was added to the download list.</value>
+  </data>
+  <data name="ttDescargar" xml:space="preserve">
+    <value>Play</value>
+  </data>
+  <data name="ttDetener" xml:space="preserve">
+    <value>Stop</value>
+  </data>
+  <data name="lblVistaDescargarExplorar" xml:space="preserve">
+    <value>Explore to download!</value>
+  </data>
+  <data name="CabecerasDGVDescargar" xml:space="preserve">
+    <value>Name-Downloaded-Total-Progress</value>
   </data>
 </root>

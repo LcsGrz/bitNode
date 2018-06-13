@@ -279,10 +279,11 @@ namespace Cliente
                             find.PartesDescargadas++;
                         }
                     }
-                    find.DescargaCompleta();         
+                    find.DescargaCompleta();
+
+                    Console.WriteLine("Parte: " + parte + "/" + find.CantidadPartes);
+                    Console.WriteLine("Partes totales: " + find.PartesDescargadas + "/" + find.CantidadPartes);
                 }
-                Console.WriteLine("Parte: " + parte + "/" + find.CantidadPartes);
-                Console.WriteLine("Partes totales: " + find.PartesDescargadas + "/" + find.CantidadPartes);
             }
             public int IntLength(int i)
             {

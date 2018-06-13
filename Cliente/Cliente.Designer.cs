@@ -30,10 +30,10 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmCliente));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
             this.pnlBarra = new System.Windows.Forms.Panel();
             this.pbCerrar = new System.Windows.Forms.PictureBox();
             this.pbMinimizar = new System.Windows.Forms.PictureBox();
@@ -43,16 +43,16 @@
             this.pnlBarraGris1Px = new System.Windows.Forms.Panel();
             this.pnlVistaContenedor = new System.Windows.Forms.Panel();
             this.pnlVistaDescargar = new System.Windows.Forms.Panel();
-            this.panel2 = new System.Windows.Forms.Panel();
-            this.button2 = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
+            this.pnlVistaDescargarContenedor = new System.Windows.Forms.Panel();
+            this.pbVistaDescargarStop = new System.Windows.Forms.PictureBox();
+            this.pbVistaDescargarStart = new System.Windows.Forms.PictureBox();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.label2 = new System.Windows.Forms.Label();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.lblVistaDescargarExplorar = new System.Windows.Forms.Label();
+            this.dgvVistaDescargas = new System.Windows.Forms.DataGridView();
             this.NombreArchivo = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Estado = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Descargado = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.TamañoArchivo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Progreso = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.BorraraArchivo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.pnlVistaExplorar = new System.Windows.Forms.Panel();
             this.pnlVistaExploarBuscar = new System.Windows.Forms.Panel();
@@ -182,6 +182,7 @@
             this.ttAyuda = new System.Windows.Forms.ToolTip(this.components);
             this.niMinimizar = new System.Windows.Forms.NotifyIcon(this.components);
             this.ofdArchivo = new System.Windows.Forms.OpenFileDialog();
+            this.tmrModificarAN = new System.Windows.Forms.Timer(this.components);
             this.pnlBarra.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbCerrar)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbMinimizar)).BeginInit();
@@ -189,9 +190,11 @@
             ((System.ComponentModel.ISupportInitialize)(this.pbIcono)).BeginInit();
             this.pnlVistaContenedor.SuspendLayout();
             this.pnlVistaDescargar.SuspendLayout();
-            this.panel2.SuspendLayout();
+            this.pnlVistaDescargarContenedor.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pbVistaDescargarStop)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbVistaDescargarStart)).BeginInit();
             this.panel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvVistaDescargas)).BeginInit();
             this.pnlVistaExplorar.SuspendLayout();
             this.pnlVistaExploarBuscar.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbVistaExplorarBuscar)).BeginInit();
@@ -322,12 +325,12 @@
             // pnlVistaContenedor
             // 
             this.pnlVistaContenedor.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(13)))), ((int)(((byte)(23)))), ((int)(((byte)(33)))));
+            this.pnlVistaContenedor.Controls.Add(this.pnlVistaDescargar);
             this.pnlVistaContenedor.Controls.Add(this.pnlVistaExplorar);
             this.pnlVistaContenedor.Controls.Add(this.pnlVistaCompartir);
             this.pnlVistaContenedor.Controls.Add(this.pnlVistaSolicitar);
             this.pnlVistaContenedor.Controls.Add(this.pnlVistaConfiguracionGeneral);
             this.pnlVistaContenedor.Controls.Add(this.pnlVistaAbout);
-            this.pnlVistaContenedor.Controls.Add(this.pnlVistaDescargar);
             this.pnlVistaContenedor.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlVistaContenedor.Location = new System.Drawing.Point(65, 31);
             this.pnlVistaContenedor.Margin = new System.Windows.Forms.Padding(2);
@@ -339,7 +342,7 @@
             // pnlVistaDescargar
             // 
             this.pnlVistaDescargar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(13)))), ((int)(((byte)(23)))), ((int)(((byte)(33)))));
-            this.pnlVistaDescargar.Controls.Add(this.panel2);
+            this.pnlVistaDescargar.Controls.Add(this.pnlVistaDescargarContenedor);
             this.pnlVistaDescargar.Controls.Add(this.panel1);
             this.pnlVistaDescargar.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlVistaDescargar.Location = new System.Drawing.Point(0, 0);
@@ -349,111 +352,113 @@
             this.pnlVistaDescargar.TabIndex = 18;
             this.pnlVistaDescargar.Tag = "1";
             // 
-            // panel2
+            // pnlVistaDescargarContenedor
             // 
-            this.panel2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.panel2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(31)))), ((int)(((byte)(41)))));
-            this.panel2.Controls.Add(this.button2);
-            this.panel2.Controls.Add(this.button1);
-            this.panel2.Location = new System.Drawing.Point(37, 23);
-            this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(960, 46);
-            this.panel2.TabIndex = 9;
+            this.pnlVistaDescargarContenedor.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.pnlVistaDescargarContenedor.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(31)))), ((int)(((byte)(41)))));
+            this.pnlVistaDescargarContenedor.Controls.Add(this.pbVistaDescargarStop);
+            this.pnlVistaDescargarContenedor.Controls.Add(this.pbVistaDescargarStart);
+            this.pnlVistaDescargarContenedor.Location = new System.Drawing.Point(37, 23);
+            this.pnlVistaDescargarContenedor.Name = "pnlVistaDescargarContenedor";
+            this.pnlVistaDescargarContenedor.Size = new System.Drawing.Size(960, 46);
+            this.pnlVistaDescargarContenedor.TabIndex = 9;
             // 
-            // button2
+            // pbVistaDescargarStop
             // 
-            this.button2.Location = new System.Drawing.Point(256, 12);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(75, 23);
-            this.button2.TabIndex = 0;
-            this.button2.Text = "button1";
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button1_Click);
+            this.pbVistaDescargarStop.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.pbVistaDescargarStop.Image = ((System.Drawing.Image)(resources.GetObject("pbVistaDescargarStop.Image")));
+            this.pbVistaDescargarStop.Location = new System.Drawing.Point(53, 11);
+            this.pbVistaDescargarStop.Name = "pbVistaDescargarStop";
+            this.pbVistaDescargarStop.Size = new System.Drawing.Size(25, 25);
+            this.pbVistaDescargarStop.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
+            this.pbVistaDescargarStop.TabIndex = 0;
+            this.pbVistaDescargarStop.TabStop = false;
+            this.ttAyuda.SetToolTip(this.pbVistaDescargarStop, "Detener");
+            this.pbVistaDescargarStop.Click += new System.EventHandler(this.FrenarDescargas);
             // 
-            // button1
+            // pbVistaDescargarStart
             // 
-            this.button1.Location = new System.Drawing.Point(125, 13);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 0;
-            this.button1.Text = "button1";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.pbVistaDescargarStart.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.pbVistaDescargarStart.Image = ((System.Drawing.Image)(resources.GetObject("pbVistaDescargarStart.Image")));
+            this.pbVistaDescargarStart.Location = new System.Drawing.Point(14, 9);
+            this.pbVistaDescargarStart.Name = "pbVistaDescargarStart";
+            this.pbVistaDescargarStart.Size = new System.Drawing.Size(25, 28);
+            this.pbVistaDescargarStart.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
+            this.pbVistaDescargarStart.TabIndex = 0;
+            this.pbVistaDescargarStart.TabStop = false;
+            this.ttAyuda.SetToolTip(this.pbVistaDescargarStart, "Descargar");
+            this.pbVistaDescargarStart.Click += new System.EventHandler(this.IniciarDescargas);
             // 
             // panel1
             // 
             this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(31)))), ((int)(((byte)(41)))));
-            this.panel1.Controls.Add(this.label2);
-            this.panel1.Controls.Add(this.dataGridView1);
+            this.panel1.Controls.Add(this.lblVistaDescargarExplorar);
+            this.panel1.Controls.Add(this.dgvVistaDescargas);
             this.panel1.Location = new System.Drawing.Point(37, 88);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(960, 508);
             this.panel1.TabIndex = 8;
             // 
-            // label2
+            // lblVistaDescargarExplorar
             // 
-            this.label2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.label2.BackColor = System.Drawing.Color.Transparent;
-            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F);
-            this.label2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(153)))), ((int)(((byte)(153)))), ((int)(((byte)(153)))));
-            this.label2.Location = new System.Drawing.Point(203, 51);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(554, 43);
-            this.label2.TabIndex = 5;
-            this.label2.Text = "¡Explora para descargar!";
-            this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lblVistaDescargarExplorar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblVistaDescargarExplorar.BackColor = System.Drawing.Color.Transparent;
+            this.lblVistaDescargarExplorar.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F);
+            this.lblVistaDescargarExplorar.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(153)))), ((int)(((byte)(153)))), ((int)(((byte)(153)))));
+            this.lblVistaDescargarExplorar.Location = new System.Drawing.Point(203, 51);
+            this.lblVistaDescargarExplorar.Name = "lblVistaDescargarExplorar";
+            this.lblVistaDescargarExplorar.Size = new System.Drawing.Size(554, 43);
+            this.lblVistaDescargarExplorar.TabIndex = 5;
+            this.lblVistaDescargarExplorar.Text = "¡Explora para descargar!";
+            this.lblVistaDescargarExplorar.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // dataGridView1
+            // dgvVistaDescargas
             // 
-            this.dataGridView1.AllowUserToAddRows = false;
-            this.dataGridView1.AllowUserToDeleteRows = false;
-            this.dataGridView1.AllowUserToResizeColumns = false;
-            this.dataGridView1.AllowUserToResizeRows = false;
-            this.dataGridView1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.dataGridView1.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(31)))), ((int)(((byte)(41)))));
-            this.dataGridView1.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.dataGridView1.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None;
-            this.dataGridView1.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.dgvVistaDescargas.AllowUserToAddRows = false;
+            this.dgvVistaDescargas.AllowUserToDeleteRows = false;
+            this.dgvVistaDescargas.AllowUserToResizeColumns = false;
+            this.dgvVistaDescargas.AllowUserToResizeRows = false;
+            this.dgvVistaDescargas.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dgvVistaDescargas.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(31)))), ((int)(((byte)(41)))));
+            this.dgvVistaDescargas.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.dgvVistaDescargas.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None;
+            this.dgvVistaDescargas.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
+            this.dgvVistaDescargas.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvVistaDescargas.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.NombreArchivo,
-            this.Estado,
             this.Descargado,
             this.TamañoArchivo,
+            this.Progreso,
             this.BorraraArchivo});
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridView1.DefaultCellStyle = dataGridViewCellStyle4;
-            this.dataGridView1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dataGridView1.EnableHeadersVisualStyles = false;
-            this.dataGridView1.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(31)))), ((int)(((byte)(41)))));
-            this.dataGridView1.Location = new System.Drawing.Point(0, 0);
-            this.dataGridView1.MultiSelect = false;
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.ReadOnly = true;
-            this.dataGridView1.RowHeadersVisible = false;
-            this.dataGridView1.Size = new System.Drawing.Size(960, 508);
-            this.dataGridView1.TabIndex = 6;
-            this.dataGridView1.Tag = "S";
-            this.dataGridView1.Visible = false;
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvVistaDescargas.DefaultCellStyle = dataGridViewCellStyle5;
+            this.dgvVistaDescargas.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dgvVistaDescargas.EnableHeadersVisualStyles = false;
+            this.dgvVistaDescargas.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(31)))), ((int)(((byte)(41)))));
+            this.dgvVistaDescargas.Location = new System.Drawing.Point(0, 0);
+            this.dgvVistaDescargas.MultiSelect = false;
+            this.dgvVistaDescargas.Name = "dgvVistaDescargas";
+            this.dgvVistaDescargas.ReadOnly = true;
+            this.dgvVistaDescargas.RowHeadersVisible = false;
+            this.dgvVistaDescargas.Size = new System.Drawing.Size(960, 508);
+            this.dgvVistaDescargas.TabIndex = 6;
+            this.dgvVistaDescargas.Tag = "D";
+            this.dgvVistaDescargas.Visible = false;
+            this.dgvVistaDescargas.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.EliminarDescarga);
+            this.dgvVistaDescargas.CellMouseMove += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.CambiarCursorDGV);
             // 
             // NombreArchivo
             // 
             this.NombreArchivo.HeaderText = "Nombre";
             this.NombreArchivo.Name = "NombreArchivo";
             this.NombreArchivo.ReadOnly = true;
-            // 
-            // Estado
-            // 
-            this.Estado.HeaderText = "Estado";
-            this.Estado.Name = "Estado";
-            this.Estado.ReadOnly = true;
             // 
             // Descargado
             // 
@@ -466,6 +471,12 @@
             this.TamañoArchivo.HeaderText = "Tamaño total";
             this.TamañoArchivo.Name = "TamañoArchivo";
             this.TamañoArchivo.ReadOnly = true;
+            // 
+            // Progreso
+            // 
+            this.Progreso.HeaderText = "Progreso";
+            this.Progreso.Name = "Progreso";
+            this.Progreso.ReadOnly = true;
             // 
             // BorraraArchivo
             // 
@@ -569,14 +580,14 @@
             this.dataGridViewTextBoxColumn6,
             this.dataGridViewTextBoxColumn7,
             this.dataGridViewTextBoxColumn8});
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvVistaExplorarArchivosCompartidosVecinos.DefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle6.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvVistaExplorarArchivosCompartidosVecinos.DefaultCellStyle = dataGridViewCellStyle6;
             this.dgvVistaExplorarArchivosCompartidosVecinos.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvVistaExplorarArchivosCompartidosVecinos.EnableHeadersVisualStyles = false;
             this.dgvVistaExplorarArchivosCompartidosVecinos.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(31)))), ((int)(((byte)(41)))));
@@ -677,14 +688,14 @@
             this.descripcion,
             this.activo,
             this.borrar});
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvVistaCompartirArchivos.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle7.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle7.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle7.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle7.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle7.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvVistaCompartirArchivos.DefaultCellStyle = dataGridViewCellStyle7;
             this.dgvVistaCompartirArchivos.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvVistaCompartirArchivos.EnableHeadersVisualStyles = false;
             this.dgvVistaCompartirArchivos.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(31)))), ((int)(((byte)(41)))));
@@ -770,7 +781,7 @@
             this.tbVistaCompartirTags.Location = new System.Drawing.Point(436, 60);
             this.tbVistaCompartirTags.MaxLength = 255;
             this.tbVistaCompartirTags.Name = "tbVistaCompartirTags";
-            this.tbVistaCompartirTags.Size = new System.Drawing.Size(463, 30);
+            this.tbVistaCompartirTags.Size = new System.Drawing.Size(463, 26);
             this.tbVistaCompartirTags.TabIndex = 4;
             this.tbVistaCompartirTags.Tag = "";
             this.tbVistaCompartirTags.Text = "Ingrese minimo 5 tags separados por un espacio";
@@ -786,7 +797,7 @@
             this.tbVistaCompartirDescripcionArchivo.Location = new System.Drawing.Point(436, 14);
             this.tbVistaCompartirDescripcionArchivo.MaxLength = 50;
             this.tbVistaCompartirDescripcionArchivo.Name = "tbVistaCompartirDescripcionArchivo";
-            this.tbVistaCompartirDescripcionArchivo.Size = new System.Drawing.Size(463, 30);
+            this.tbVistaCompartirDescripcionArchivo.Size = new System.Drawing.Size(463, 26);
             this.tbVistaCompartirDescripcionArchivo.TabIndex = 4;
             this.tbVistaCompartirDescripcionArchivo.Tag = "";
             this.tbVistaCompartirDescripcionArchivo.Text = "Breve descripcion del archivo.";
@@ -941,14 +952,14 @@
             this.dataGridViewTextBoxColumn3,
             this.dataGridViewTextBoxColumn4,
             this.dataGridViewTextBoxColumn5});
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvVistaSolicitar.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle8.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle8.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle8.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle8.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle8.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvVistaSolicitar.DefaultCellStyle = dataGridViewCellStyle8;
             this.dgvVistaSolicitar.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvVistaSolicitar.EnableHeadersVisualStyles = false;
             this.dgvVistaSolicitar.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(31)))), ((int)(((byte)(41)))));
@@ -1108,7 +1119,7 @@
             this.lblVistaConfiguracionSyncAuto.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(153)))), ((int)(((byte)(153)))), ((int)(((byte)(153)))));
             this.lblVistaConfiguracionSyncAuto.Location = new System.Drawing.Point(167, 167);
             this.lblVistaConfiguracionSyncAuto.Name = "lblVistaConfiguracionSyncAuto";
-            this.lblVistaConfiguracionSyncAuto.Size = new System.Drawing.Size(266, 29);
+            this.lblVistaConfiguracionSyncAuto.Size = new System.Drawing.Size(211, 24);
             this.lblVistaConfiguracionSyncAuto.TabIndex = 18;
             this.lblVistaConfiguracionSyncAuto.Text = "Sincronizacion continua";
             // 
@@ -1119,7 +1130,7 @@
             this.bsVistaConfiguracionBuscar.BackColor = System.Drawing.Color.Transparent;
             this.bsVistaConfiguracionBuscar.Cursor = System.Windows.Forms.Cursors.Hand;
             this.bsVistaConfiguracionBuscar.Location = new System.Drawing.Point(126, 169);
-            this.bsVistaConfiguracionBuscar.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.bsVistaConfiguracionBuscar.Margin = new System.Windows.Forms.Padding(4);
             this.bsVistaConfiguracionBuscar.Name = "bsVistaConfiguracionBuscar";
             this.bsVistaConfiguracionBuscar.Size = new System.Drawing.Size(36, 18);
             this.bsVistaConfiguracionBuscar.TabIndex = 17;
@@ -1175,7 +1186,7 @@
             this.tbVistaConfiguracionIP.Location = new System.Drawing.Point(241, 585);
             this.tbVistaConfiguracionIP.MaxLength = 15;
             this.tbVistaConfiguracionIP.Name = "tbVistaConfiguracionIP";
-            this.tbVistaConfiguracionIP.Size = new System.Drawing.Size(127, 23);
+            this.tbVistaConfiguracionIP.Size = new System.Drawing.Size(127, 19);
             this.tbVistaConfiguracionIP.TabIndex = 13;
             this.tbVistaConfiguracionIP.Tag = "14";
             this.tbVistaConfiguracionIP.Text = "255.255.255.255";
@@ -1188,7 +1199,7 @@
             this.lblVistaConfiguracionIP.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(153)))), ((int)(((byte)(153)))), ((int)(((byte)(153)))));
             this.lblVistaConfiguracionIP.Location = new System.Drawing.Point(89, 584);
             this.lblVistaConfiguracionIP.Name = "lblVistaConfiguracionIP";
-            this.lblVistaConfiguracionIP.Size = new System.Drawing.Size(185, 29);
+            this.lblVistaConfiguracionIP.Size = new System.Drawing.Size(147, 24);
             this.lblVistaConfiguracionIP.TabIndex = 12;
             this.lblVistaConfiguracionIP.Text = "IP de coneccion";
             // 
@@ -1202,7 +1213,7 @@
             this.tbVistaConfiguracionNombre.Location = new System.Drawing.Point(751, 132);
             this.tbVistaConfiguracionNombre.MaxLength = 12;
             this.tbVistaConfiguracionNombre.Name = "tbVistaConfiguracionNombre";
-            this.tbVistaConfiguracionNombre.Size = new System.Drawing.Size(127, 23);
+            this.tbVistaConfiguracionNombre.Size = new System.Drawing.Size(127, 19);
             this.tbVistaConfiguracionNombre.TabIndex = 9;
             this.tbVistaConfiguracionNombre.Tag = "14";
             this.tbVistaConfiguracionNombre.Text = "NOMBRE";
@@ -1228,7 +1239,7 @@
             this.bnudVistaConfiguracionDescargasSimultaneas.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.bnudVistaConfiguracionDescargasSimultaneas.BackColor = System.Drawing.Color.Transparent;
             this.bnudVistaConfiguracionDescargasSimultaneas.Location = new System.Drawing.Point(848, 479);
-            this.bnudVistaConfiguracionDescargasSimultaneas.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.bnudVistaConfiguracionDescargasSimultaneas.Margin = new System.Windows.Forms.Padding(4);
             this.bnudVistaConfiguracionDescargasSimultaneas.maxValor = 5;
             this.bnudVistaConfiguracionDescargasSimultaneas.minValor = 0;
             this.bnudVistaConfiguracionDescargasSimultaneas.Name = "bnudVistaConfiguracionDescargasSimultaneas";
@@ -1243,7 +1254,7 @@
             // 
             this.bnudVistaConfiguracionLimiteBajada.BackColor = System.Drawing.Color.Transparent;
             this.bnudVistaConfiguracionLimiteBajada.Location = new System.Drawing.Point(251, 532);
-            this.bnudVistaConfiguracionLimiteBajada.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.bnudVistaConfiguracionLimiteBajada.Margin = new System.Windows.Forms.Padding(4);
             this.bnudVistaConfiguracionLimiteBajada.maxValor = 9999;
             this.bnudVistaConfiguracionLimiteBajada.minValor = 0;
             this.bnudVistaConfiguracionLimiteBajada.Name = "bnudVistaConfiguracionLimiteBajada";
@@ -1258,7 +1269,7 @@
             // 
             this.bnudVistaConfiguracionLimiteSubida.BackColor = System.Drawing.Color.Transparent;
             this.bnudVistaConfiguracionLimiteSubida.Location = new System.Drawing.Point(251, 479);
-            this.bnudVistaConfiguracionLimiteSubida.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.bnudVistaConfiguracionLimiteSubida.Margin = new System.Windows.Forms.Padding(4);
             this.bnudVistaConfiguracionLimiteSubida.maxValor = 9999;
             this.bnudVistaConfiguracionLimiteSubida.minValor = 0;
             this.bnudVistaConfiguracionLimiteSubida.Name = "bnudVistaConfiguracionLimiteSubida";
@@ -1276,7 +1287,7 @@
             this.lblVistaConfiguracionEfectoBotones.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(153)))), ((int)(((byte)(153)))), ((int)(((byte)(153)))));
             this.lblVistaConfiguracionEfectoBotones.Location = new System.Drawing.Point(136, 323);
             this.lblVistaConfiguracionEfectoBotones.Name = "lblVistaConfiguracionEfectoBotones";
-            this.lblVistaConfiguracionEfectoBotones.Size = new System.Drawing.Size(317, 29);
+            this.lblVistaConfiguracionEfectoBotones.Size = new System.Drawing.Size(247, 24);
             this.lblVistaConfiguracionEfectoBotones.TabIndex = 1;
             this.lblVistaConfiguracionEfectoBotones.Text = "Efecto transision de botones";
             // 
@@ -1287,7 +1298,7 @@
             this.lblVistaConfiguracionMovimientoMenu.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(153)))), ((int)(((byte)(153)))), ((int)(((byte)(153)))));
             this.lblVistaConfiguracionMovimientoMenu.Location = new System.Drawing.Point(136, 369);
             this.lblVistaConfiguracionMovimientoMenu.Name = "lblVistaConfiguracionMovimientoMenu";
-            this.lblVistaConfiguracionMovimientoMenu.Size = new System.Drawing.Size(296, 29);
+            this.lblVistaConfiguracionMovimientoMenu.Size = new System.Drawing.Size(233, 24);
             this.lblVistaConfiguracionMovimientoMenu.TabIndex = 1;
             this.lblVistaConfiguracionMovimientoMenu.Text = "Efecto deslizante de menu";
             // 
@@ -1321,7 +1332,7 @@
             this.lblVistaConfiguracionEfectoFade.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(153)))), ((int)(((byte)(153)))), ((int)(((byte)(153)))));
             this.lblVistaConfiguracionEfectoFade.Location = new System.Drawing.Point(136, 277);
             this.lblVistaConfiguracionEfectoFade.Name = "lblVistaConfiguracionEfectoFade";
-            this.lblVistaConfiguracionEfectoFade.Size = new System.Drawing.Size(355, 29);
+            this.lblVistaConfiguracionEfectoFade.Size = new System.Drawing.Size(276, 24);
             this.lblVistaConfiguracionEfectoFade.TabIndex = 1;
             this.lblVistaConfiguracionEfectoFade.Text = "Efecto transparencia de sistema";
             // 
@@ -1354,7 +1365,7 @@
             this.bsVistaConfiguracionEfectoFade.BackColor = System.Drawing.Color.Transparent;
             this.bsVistaConfiguracionEfectoFade.Cursor = System.Windows.Forms.Cursors.Hand;
             this.bsVistaConfiguracionEfectoFade.Location = new System.Drawing.Point(94, 279);
-            this.bsVistaConfiguracionEfectoFade.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.bsVistaConfiguracionEfectoFade.Margin = new System.Windows.Forms.Padding(4);
             this.bsVistaConfiguracionEfectoFade.Name = "bsVistaConfiguracionEfectoFade";
             this.bsVistaConfiguracionEfectoFade.Size = new System.Drawing.Size(36, 18);
             this.bsVistaConfiguracionEfectoFade.TabIndex = 2;
@@ -1367,7 +1378,7 @@
             this.bsVistaConfiguracionIniciarConWindows.BackColor = System.Drawing.Color.Transparent;
             this.bsVistaConfiguracionIniciarConWindows.Cursor = System.Windows.Forms.Cursors.Hand;
             this.bsVistaConfiguracionIniciarConWindows.Location = new System.Drawing.Point(126, 72);
-            this.bsVistaConfiguracionIniciarConWindows.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.bsVistaConfiguracionIniciarConWindows.Margin = new System.Windows.Forms.Padding(4);
             this.bsVistaConfiguracionIniciarConWindows.Name = "bsVistaConfiguracionIniciarConWindows";
             this.bsVistaConfiguracionIniciarConWindows.Size = new System.Drawing.Size(36, 18);
             this.bsVistaConfiguracionIniciarConWindows.TabIndex = 2;
@@ -1381,7 +1392,7 @@
             this.bsVistaConfiguracionEfectoMenu.BackColor = System.Drawing.Color.Transparent;
             this.bsVistaConfiguracionEfectoMenu.Cursor = System.Windows.Forms.Cursors.Hand;
             this.bsVistaConfiguracionEfectoMenu.Location = new System.Drawing.Point(94, 371);
-            this.bsVistaConfiguracionEfectoMenu.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.bsVistaConfiguracionEfectoMenu.Margin = new System.Windows.Forms.Padding(4);
             this.bsVistaConfiguracionEfectoMenu.Name = "bsVistaConfiguracionEfectoMenu";
             this.bsVistaConfiguracionEfectoMenu.Size = new System.Drawing.Size(36, 18);
             this.bsVistaConfiguracionEfectoMenu.TabIndex = 2;
@@ -1417,7 +1428,7 @@
             this.bsVistaConfiguracionEfectoBotones.BackColor = System.Drawing.Color.Transparent;
             this.bsVistaConfiguracionEfectoBotones.Cursor = System.Windows.Forms.Cursors.Hand;
             this.bsVistaConfiguracionEfectoBotones.Location = new System.Drawing.Point(94, 325);
-            this.bsVistaConfiguracionEfectoBotones.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.bsVistaConfiguracionEfectoBotones.Margin = new System.Windows.Forms.Padding(4);
             this.bsVistaConfiguracionEfectoBotones.Name = "bsVistaConfiguracionEfectoBotones";
             this.bsVistaConfiguracionEfectoBotones.Size = new System.Drawing.Size(36, 18);
             this.bsVistaConfiguracionEfectoBotones.TabIndex = 2;
@@ -1430,7 +1441,7 @@
             this.bsVistaConfiguracionMinimizarBandeja.BackColor = System.Drawing.Color.Transparent;
             this.bsVistaConfiguracionMinimizarBandeja.Cursor = System.Windows.Forms.Cursors.Hand;
             this.bsVistaConfiguracionMinimizarBandeja.Location = new System.Drawing.Point(126, 120);
-            this.bsVistaConfiguracionMinimizarBandeja.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.bsVistaConfiguracionMinimizarBandeja.Margin = new System.Windows.Forms.Padding(4);
             this.bsVistaConfiguracionMinimizarBandeja.Name = "bsVistaConfiguracionMinimizarBandeja";
             this.bsVistaConfiguracionMinimizarBandeja.Size = new System.Drawing.Size(36, 18);
             this.bsVistaConfiguracionMinimizarBandeja.TabIndex = 2;
@@ -1458,7 +1469,7 @@
             this.lblVistaConfiguracionMinimizarBanjeda.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(153)))), ((int)(((byte)(153)))), ((int)(((byte)(153)))));
             this.lblVistaConfiguracionMinimizarBanjeda.Location = new System.Drawing.Point(167, 118);
             this.lblVistaConfiguracionMinimizarBanjeda.Name = "lblVistaConfiguracionMinimizarBanjeda";
-            this.lblVistaConfiguracionMinimizarBanjeda.Size = new System.Drawing.Size(228, 29);
+            this.lblVistaConfiguracionMinimizarBanjeda.Size = new System.Drawing.Size(178, 24);
             this.lblVistaConfiguracionMinimizarBanjeda.TabIndex = 1;
             this.lblVistaConfiguracionMinimizarBanjeda.Text = "Minimizar a bandeja";
             // 
@@ -1469,7 +1480,7 @@
             this.bsVistaConfiguracionTema.BackColor = System.Drawing.Color.Transparent;
             this.bsVistaConfiguracionTema.Cursor = System.Windows.Forms.Cursors.Hand;
             this.bsVistaConfiguracionTema.Location = new System.Drawing.Point(746, 338);
-            this.bsVistaConfiguracionTema.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.bsVistaConfiguracionTema.Margin = new System.Windows.Forms.Padding(4);
             this.bsVistaConfiguracionTema.Name = "bsVistaConfiguracionTema";
             this.bsVistaConfiguracionTema.Size = new System.Drawing.Size(36, 18);
             this.bsVistaConfiguracionTema.TabIndex = 2;
@@ -1483,7 +1494,7 @@
             this.lblVistaConfiguracionIniciarConWindows.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(153)))), ((int)(((byte)(153)))), ((int)(((byte)(153)))));
             this.lblVistaConfiguracionIniciarConWindows.Location = new System.Drawing.Point(167, 70);
             this.lblVistaConfiguracionIniciarConWindows.Name = "lblVistaConfiguracionIniciarConWindows";
-            this.lblVistaConfiguracionIniciarConWindows.Size = new System.Drawing.Size(223, 29);
+            this.lblVistaConfiguracionIniciarConWindows.Size = new System.Drawing.Size(175, 24);
             this.lblVistaConfiguracionIniciarConWindows.TabIndex = 1;
             this.lblVistaConfiguracionIniciarConWindows.Text = "Iniciar con windows";
             // 
@@ -1494,7 +1505,7 @@
             this.bsVistaConfiguracionLatino.BackColor = System.Drawing.Color.Transparent;
             this.bsVistaConfiguracionLatino.Cursor = System.Windows.Forms.Cursors.Hand;
             this.bsVistaConfiguracionLatino.Location = new System.Drawing.Point(746, 97);
-            this.bsVistaConfiguracionLatino.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.bsVistaConfiguracionLatino.Margin = new System.Windows.Forms.Padding(4);
             this.bsVistaConfiguracionLatino.Name = "bsVistaConfiguracionLatino";
             this.bsVistaConfiguracionLatino.Size = new System.Drawing.Size(36, 18);
             this.bsVistaConfiguracionLatino.TabIndex = 2;
@@ -1509,7 +1520,7 @@
             this.lblVistaConfiguracionTema.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(153)))), ((int)(((byte)(153)))), ((int)(((byte)(153)))));
             this.lblVistaConfiguracionTema.Location = new System.Drawing.Point(735, 309);
             this.lblVistaConfiguracionTema.Name = "lblVistaConfiguracionTema";
-            this.lblVistaConfiguracionTema.Size = new System.Drawing.Size(76, 29);
+            this.lblVistaConfiguracionTema.Size = new System.Drawing.Size(59, 24);
             this.lblVistaConfiguracionTema.TabIndex = 1;
             this.lblVistaConfiguracionTema.Text = "Tema";
             // 
@@ -1521,7 +1532,7 @@
             this.lblVistaConfiguracionRutaDescarga.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(153)))), ((int)(((byte)(153)))), ((int)(((byte)(153)))));
             this.lblVistaConfiguracionRutaDescarga.Location = new System.Drawing.Point(680, 538);
             this.lblVistaConfiguracionRutaDescarga.Name = "lblVistaConfiguracionRutaDescarga";
-            this.lblVistaConfiguracionRutaDescarga.Size = new System.Drawing.Size(202, 29);
+            this.lblVistaConfiguracionRutaDescarga.Size = new System.Drawing.Size(158, 24);
             this.lblVistaConfiguracionRutaDescarga.TabIndex = 1;
             this.lblVistaConfiguracionRutaDescarga.Text = "Ruta de descarga";
             // 
@@ -1532,7 +1543,7 @@
             this.lblVistaConfiguracionKbpsBajada.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(153)))), ((int)(((byte)(153)))), ((int)(((byte)(153)))));
             this.lblVistaConfiguracionKbpsBajada.Location = new System.Drawing.Point(320, 538);
             this.lblVistaConfiguracionKbpsBajada.Name = "lblVistaConfiguracionKbpsBajada";
-            this.lblVistaConfiguracionKbpsBajada.Size = new System.Drawing.Size(69, 29);
+            this.lblVistaConfiguracionKbpsBajada.Size = new System.Drawing.Size(53, 24);
             this.lblVistaConfiguracionKbpsBajada.TabIndex = 1;
             this.lblVistaConfiguracionKbpsBajada.Text = "Kbps";
             // 
@@ -1543,7 +1554,7 @@
             this.lblVistaConfiguracionKbpsSubida.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(153)))), ((int)(((byte)(153)))), ((int)(((byte)(153)))));
             this.lblVistaConfiguracionKbpsSubida.Location = new System.Drawing.Point(320, 485);
             this.lblVistaConfiguracionKbpsSubida.Name = "lblVistaConfiguracionKbpsSubida";
-            this.lblVistaConfiguracionKbpsSubida.Size = new System.Drawing.Size(69, 29);
+            this.lblVistaConfiguracionKbpsSubida.Size = new System.Drawing.Size(53, 24);
             this.lblVistaConfiguracionKbpsSubida.TabIndex = 1;
             this.lblVistaConfiguracionKbpsSubida.Text = "Kbps";
             // 
@@ -1554,7 +1565,7 @@
             this.lblVistaConfiguracionLimiteSubida.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(153)))), ((int)(((byte)(153)))), ((int)(((byte)(153)))));
             this.lblVistaConfiguracionLimiteSubida.Location = new System.Drawing.Point(121, 485);
             this.lblVistaConfiguracionLimiteSubida.Name = "lblVistaConfiguracionLimiteSubida";
-            this.lblVistaConfiguracionLimiteSubida.Size = new System.Drawing.Size(156, 29);
+            this.lblVistaConfiguracionLimiteSubida.Size = new System.Drawing.Size(120, 24);
             this.lblVistaConfiguracionLimiteSubida.TabIndex = 1;
             this.lblVistaConfiguracionLimiteSubida.Text = "Limite subida";
             // 
@@ -1565,7 +1576,7 @@
             this.lblVistaConfiguracionLimiteBajada.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(153)))), ((int)(((byte)(153)))), ((int)(((byte)(153)))));
             this.lblVistaConfiguracionLimiteBajada.Location = new System.Drawing.Point(122, 538);
             this.lblVistaConfiguracionLimiteBajada.Name = "lblVistaConfiguracionLimiteBajada";
-            this.lblVistaConfiguracionLimiteBajada.Size = new System.Drawing.Size(157, 29);
+            this.lblVistaConfiguracionLimiteBajada.Size = new System.Drawing.Size(120, 24);
             this.lblVistaConfiguracionLimiteBajada.TabIndex = 1;
             this.lblVistaConfiguracionLimiteBajada.Text = "Limite bajada";
             // 
@@ -1577,7 +1588,7 @@
             this.lblVistaConfiguracionLimiteDescargas.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(153)))), ((int)(((byte)(153)))), ((int)(((byte)(153)))));
             this.lblVistaConfiguracionLimiteDescargas.Location = new System.Drawing.Point(630, 485);
             this.lblVistaConfiguracionLimiteDescargas.Name = "lblVistaConfiguracionLimiteDescargas";
-            this.lblVistaConfiguracionLimiteDescargas.Size = new System.Drawing.Size(262, 29);
+            this.lblVistaConfiguracionLimiteDescargas.Size = new System.Drawing.Size(203, 24);
             this.lblVistaConfiguracionLimiteDescargas.TabIndex = 1;
             this.lblVistaConfiguracionLimiteDescargas.Text = "Descargas simultaneas";
             // 
@@ -1589,7 +1600,7 @@
             this.lblVistaConfiguracionTemaClaro.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(153)))), ((int)(((byte)(153)))), ((int)(((byte)(153)))));
             this.lblVistaConfiguracionTemaClaro.Location = new System.Drawing.Point(687, 336);
             this.lblVistaConfiguracionTemaClaro.Name = "lblVistaConfiguracionTemaClaro";
-            this.lblVistaConfiguracionTemaClaro.Size = new System.Drawing.Size(71, 29);
+            this.lblVistaConfiguracionTemaClaro.Size = new System.Drawing.Size(54, 24);
             this.lblVistaConfiguracionTemaClaro.TabIndex = 1;
             this.lblVistaConfiguracionTemaClaro.Text = "Claro";
             // 
@@ -1613,7 +1624,7 @@
             this.lblVistaConfiguracionTemaOscuro.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(153)))), ((int)(((byte)(153)))), ((int)(((byte)(153)))));
             this.lblVistaConfiguracionTemaOscuro.Location = new System.Drawing.Point(792, 336);
             this.lblVistaConfiguracionTemaOscuro.Name = "lblVistaConfiguracionTemaOscuro";
-            this.lblVistaConfiguracionTemaOscuro.Size = new System.Drawing.Size(91, 29);
+            this.lblVistaConfiguracionTemaOscuro.Size = new System.Drawing.Size(72, 24);
             this.lblVistaConfiguracionTemaOscuro.TabIndex = 1;
             this.lblVistaConfiguracionTemaOscuro.Text = "Oscuro";
             // 
@@ -1625,7 +1636,7 @@
             this.lblVistaConfiguracionEspañol.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(153)))), ((int)(((byte)(153)))), ((int)(((byte)(153)))));
             this.lblVistaConfiguracionEspañol.Location = new System.Drawing.Point(792, 95);
             this.lblVistaConfiguracionEspañol.Name = "lblVistaConfiguracionEspañol";
-            this.lblVistaConfiguracionEspañol.Size = new System.Drawing.Size(101, 29);
+            this.lblVistaConfiguracionEspañol.Size = new System.Drawing.Size(79, 24);
             this.lblVistaConfiguracionEspañol.TabIndex = 1;
             this.lblVistaConfiguracionEspañol.Text = "Español";
             // 
@@ -1760,7 +1771,7 @@
             this.lblMenuCRapidas.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(153)))), ((int)(((byte)(153)))), ((int)(((byte)(153)))));
             this.lblMenuCRapidas.Location = new System.Drawing.Point(98, 31);
             this.lblMenuCRapidas.Name = "lblMenuCRapidas";
-            this.lblMenuCRapidas.Size = new System.Drawing.Size(83, 25);
+            this.lblMenuCRapidas.Size = new System.Drawing.Size(68, 20);
             this.lblMenuCRapidas.TabIndex = 2;
             this.lblMenuCRapidas.Tag = "6";
             this.lblMenuCRapidas.Text = "Rapidas";
@@ -1774,7 +1785,7 @@
             this.lblMenuConfiguracionesR.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(153)))), ((int)(((byte)(153)))), ((int)(((byte)(153)))));
             this.lblMenuConfiguracionesR.Location = new System.Drawing.Point(69, 10);
             this.lblMenuConfiguracionesR.Name = "lblMenuConfiguracionesR";
-            this.lblMenuConfiguracionesR.Size = new System.Drawing.Size(154, 25);
+            this.lblMenuConfiguracionesR.Size = new System.Drawing.Size(124, 20);
             this.lblMenuConfiguracionesR.TabIndex = 2;
             this.lblMenuConfiguracionesR.Tag = "6";
             this.lblMenuConfiguracionesR.Text = "Configuraciones";
@@ -1861,7 +1872,7 @@
             this.lblMenuAbout.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(153)))), ((int)(((byte)(153)))), ((int)(((byte)(153)))));
             this.lblMenuAbout.Location = new System.Drawing.Point(66, 19);
             this.lblMenuAbout.Name = "lblMenuAbout";
-            this.lblMenuAbout.Size = new System.Drawing.Size(171, 29);
+            this.lblMenuAbout.Size = new System.Drawing.Size(132, 24);
             this.lblMenuAbout.TabIndex = 2;
             this.lblMenuAbout.Tag = "6";
             this.lblMenuAbout.Text = "Sobre bitNode";
@@ -1912,7 +1923,7 @@
             this.lblMenuConfiguracion.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(153)))), ((int)(((byte)(153)))), ((int)(((byte)(153)))));
             this.lblMenuConfiguracion.Location = new System.Drawing.Point(66, 19);
             this.lblMenuConfiguracion.Name = "lblMenuConfiguracion";
-            this.lblMenuConfiguracion.Size = new System.Drawing.Size(162, 29);
+            this.lblMenuConfiguracion.Size = new System.Drawing.Size(127, 24);
             this.lblMenuConfiguracion.TabIndex = 2;
             this.lblMenuConfiguracion.Tag = "5";
             this.lblMenuConfiguracion.Text = "Configuracion";
@@ -1963,7 +1974,7 @@
             this.lblMenuSolicitar.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(153)))), ((int)(((byte)(153)))), ((int)(((byte)(153)))));
             this.lblMenuSolicitar.Location = new System.Drawing.Point(66, 19);
             this.lblMenuSolicitar.Name = "lblMenuSolicitar";
-            this.lblMenuSolicitar.Size = new System.Drawing.Size(100, 29);
+            this.lblMenuSolicitar.Size = new System.Drawing.Size(75, 24);
             this.lblMenuSolicitar.TabIndex = 2;
             this.lblMenuSolicitar.Tag = "4";
             this.lblMenuSolicitar.Text = "Solicitar";
@@ -2014,7 +2025,7 @@
             this.lblMenuCompartir.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(153)))), ((int)(((byte)(153)))), ((int)(((byte)(153)))));
             this.lblMenuCompartir.Location = new System.Drawing.Point(66, 19);
             this.lblMenuCompartir.Name = "lblMenuCompartir";
-            this.lblMenuCompartir.Size = new System.Drawing.Size(119, 29);
+            this.lblMenuCompartir.Size = new System.Drawing.Size(91, 24);
             this.lblMenuCompartir.TabIndex = 2;
             this.lblMenuCompartir.Tag = "3";
             this.lblMenuCompartir.Text = "Compartir";
@@ -2065,7 +2076,7 @@
             this.lblMenuExplorar.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(153)))), ((int)(((byte)(153)))), ((int)(((byte)(153)))));
             this.lblMenuExplorar.Location = new System.Drawing.Point(66, 19);
             this.lblMenuExplorar.Name = "lblMenuExplorar";
-            this.lblMenuExplorar.Size = new System.Drawing.Size(103, 29);
+            this.lblMenuExplorar.Size = new System.Drawing.Size(81, 24);
             this.lblMenuExplorar.TabIndex = 2;
             this.lblMenuExplorar.Tag = "2";
             this.lblMenuExplorar.Text = "Explorar";
@@ -2116,7 +2127,7 @@
             this.lblMenuDescargar.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(153)))), ((int)(((byte)(153)))), ((int)(((byte)(153)))));
             this.lblMenuDescargar.Location = new System.Drawing.Point(66, 19);
             this.lblMenuDescargar.Name = "lblMenuDescargar";
-            this.lblMenuDescargar.Size = new System.Drawing.Size(124, 29);
+            this.lblMenuDescargar.Size = new System.Drawing.Size(96, 24);
             this.lblMenuDescargar.TabIndex = 2;
             this.lblMenuDescargar.Tag = "1";
             this.lblMenuDescargar.Text = "Descargar";
@@ -2153,6 +2164,11 @@
             // 
             this.ofdArchivo.Title = "Seleccione un archivo";
             // 
+            // tmrModificarAN
+            // 
+            this.tmrModificarAN.Interval = 1000;
+            this.tmrModificarAN.Tick += new System.EventHandler(this.CargarNuevosValoresDescargados);
+            // 
             // frmCliente
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
@@ -2179,9 +2195,12 @@
             ((System.ComponentModel.ISupportInitialize)(this.pbIcono)).EndInit();
             this.pnlVistaContenedor.ResumeLayout(false);
             this.pnlVistaDescargar.ResumeLayout(false);
-            this.panel2.ResumeLayout(false);
+            this.pnlVistaDescargarContenedor.ResumeLayout(false);
+            this.pnlVistaDescargarContenedor.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pbVistaDescargarStop)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbVistaDescargarStart)).EndInit();
             this.panel1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvVistaDescargas)).EndInit();
             this.pnlVistaExplorar.ResumeLayout(false);
             this.pnlVistaExploarBuscar.ResumeLayout(false);
             this.pnlVistaExploarBuscar.PerformLayout();
@@ -2377,13 +2396,8 @@
         private System.Windows.Forms.Label lblVistaConfiguracionBitNoders;
         private System.Windows.Forms.Label lblVistaConfiguracionMiIP;
         private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.DataGridView dataGridView1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn NombreArchivo;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Estado;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Descargado;
-        private System.Windows.Forms.DataGridViewTextBoxColumn TamañoArchivo;
-        private System.Windows.Forms.DataGridViewTextBoxColumn BorraraArchivo;
+        private System.Windows.Forms.Label lblVistaDescargarExplorar;
+        private System.Windows.Forms.DataGridView dgvVistaDescargas;
         private System.Windows.Forms.Panel pnlVistaExploarBuscar;
         private System.Windows.Forms.PictureBox pbVistaExplorarBuscar;
         private System.Windows.Forms.TextBox tbVistaExplorarBuscar;
@@ -2391,9 +2405,15 @@
         private System.Windows.Forms.Label lblVistaConfiguracionSyncAuto;
         private System.Windows.Forms.TextBox tbVistaCompartirTags;
         private System.Windows.Forms.Panel pnlVistaCompartirSeparador;
-        private System.Windows.Forms.Panel panel2;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Panel pnlVistaDescargarContenedor;
+        private System.Windows.Forms.PictureBox pbVistaDescargarStop;
+        private System.Windows.Forms.PictureBox pbVistaDescargarStart;
+        private System.Windows.Forms.DataGridViewTextBoxColumn NombreArchivo;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Descargado;
+        private System.Windows.Forms.DataGridViewTextBoxColumn TamañoArchivo;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Progreso;
+        private System.Windows.Forms.DataGridViewTextBoxColumn BorraraArchivo;
+        private System.Windows.Forms.Timer tmrModificarAN;
     }
 }
 

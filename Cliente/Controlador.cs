@@ -1,7 +1,6 @@
 ﻿using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Net;
 using System.Net.Sockets;
 using System.Threading;
@@ -15,29 +14,28 @@ namespace Cliente
         private Configuracion configuracion = new Configuracion().Leer();
         Random r = new Random();
         public static List<IPAddress> IPSVecinas = new List<IPAddress>();
-        public static List<string> Solicitudes = new List<string>();
+        public static List<string> Solicitudes = new List<string>(); //Solicitud de archivo - vista 'Solicitar'
         public static List<Archivo> ArchivosCompartidosVecinos = new List<Archivo>();
         private static System.Timers.Timer temporizadorPing;
         public static bool RecivirACV = false;
         //------------TCP
         private static SocketTCP STCP;
         Thread EscucharTCP;
-        public static List<ArchivoSolicitado> archivosSolicitados = new List<ArchivoSolicitado>();
         public static ManualResetEvent PermitirEnviarSolicitud = new ManualResetEvent(true);
         public bool PermitirEnviarSolicitudes = true;
         //------------UDP
         private static SocketUDP SUDP;
         Thread EscucharUDP;
-        private bool PermitirSolicitar = true;
+        public static bool PermitirSolicitar = true;
         //----------------------------------------------------------------------------------------------Eventos
         public static event EventHandler informarSolicitud;
         public static event EventHandler informarBitNoders;
         public static event EventHandler informarArchivo;
+        public static event EventHandler informarEstadoDescarga;
         //----------------------------------------------------------------------------------------------Funciones
         //-----------------------------------------------Server
         public void IniciarEjecuciones()
         {
-            ArchivoNecesitado.archivosNecesitados = new ArchivoNecesitado().Leer();
             SUDP = new SocketUDP();
             STCP = new SocketTCP();
             EscucharUDP = new Thread(() => { SUDP.RecibirUDP(); });
@@ -51,7 +49,19 @@ namespace Cliente
             ManejadorSolicitudes();
             ManejadorNecesitados();
             EnviarUDP(ConectarmeIP, "bitNode@PPING@" + (IPAddress.Broadcast.Equals(ConectarmeIP) ? "OK" : "IPFIJA") + "|" + (RecivirACV && configuracion.SyncActiva)); //Primer ping      
-        }
+        } //Inicia todas las ejecuciones del servidor
+        public void FrenarEjecuciones()
+        {
+            EnviarUDP(null, "bitNode@BYE@");
+            SUDP.FrenarEscucha();
+            STCP.Frenar();
+            PermitirSolicitar = false;
+            PermitirEnviarSolicitudes = false;
+            PermitirEnviarSolicitud.Set();
+            temporizadorPing.Stop();
+            temporizadorPing.Dispose();
+            GuardarTodosArchivosNecesitados();
+        } //Frena todas las ejecuciones activas
         public static IPAddress ObtenerIPLocal()
         {
             foreach (var IP in Dns.GetHostEntry(Dns.GetHostName()).AddressList)
@@ -60,7 +70,7 @@ namespace Cliente
                     return IP;
             }
             throw new Exception("No network adapters with an IPv4 address in the system!");
-        }
+        } //Retorna la IP 
         public bool AgregarIP(IPAddress ip)
         {
             if (!ip.Equals(ObtenerIPLocal()))
@@ -73,7 +83,7 @@ namespace Cliente
                 }
             }
             return false;
-        }
+        }  //Agrega bitNoders
         private void bitNodersVivos(Object source, ElapsedEventArgs e)
         {
             List<IPAddress> aux = new List<IPAddress>();
@@ -81,41 +91,29 @@ namespace Cliente
             IPSVecinas.Clear();
             informarBitNoders?.Invoke(null, null);
             aux.ForEach(ip => EnviarUDP(ip, "bitNode@PING@"));
-        }
-        public void FrenarEjecuciones()
-        {
-            EnviarUDP(null, "bitNode@BYE@");
-            SUDP.FrenarEscucha();
-            STCP.Frenar();
-            PermitirSolicitar = false;
-            PermitirEnviarSolicitudes = false;
-            PermitirEnviarSolicitud.Set();
-            temporizadorPing.Stop();
-            temporizadorPing.Dispose();
-            GuardarTodosArchivosNecesitados();
-        }
+        } //Ping a bitNoders
         public void VaciarIPS() => IPSVecinas.Clear();
         public void VaciarACV() => ArchivosCompartidosVecinos.Clear();
         public static void InformarSolicitud() => informarSolicitud?.Invoke(null, null);
+        public static void InformarEstadoDescarga(object valor) => informarEstadoDescarga?.Invoke(valor, null);
         public void EliminarIP(IPAddress ip)
         {
             IPSVecinas.Remove(ip);
-            ArchivoNecesitado.Hacer(null,"DELIP",ip);
+            ArchivoNecesitado.Hacer(null, "DELIP", ip);
             informarBitNoders?.Invoke(null, null);
-        }
-        public void InicializarArchvio(int index) //mejorar
+        } //Se desconecto un bitNoder
+        public void InicializarArchivo(int index)
         {
-                if (ArchivoNecesitado.Hacer(ArchivosCompartidosVecinos[index].ArchivoMD5, "EXIST",null) == 0)
-                    new ArchivoNecesitado(ArchivosCompartidosVecinos[index]);
+            if (ArchivoNecesitado.Hacer(ArchivosCompartidosVecinos[index].ArchivoMD5, "EXIST", null) == 0)
+                new ArchivoNecesitado(ArchivosCompartidosVecinos[index]);
 
             new frmMensaje(Idioma.StringResources.msjArchivoEnLista).ShowDialog();
-        }
+        } //Prepara el archivoNecesitado 
         public void agregarSolicitud(ArchivoSolicitado AS)
         {
-            if (!archivosSolicitados.Exists(x => (Archivo.CompararMD5(x.MD5, AS.MD5) && AS.IDPosicion == x.IDPosicion && AS.ParteArchivo == x.ParteArchivo)))
-                archivosSolicitados.Add(AS);
-        }
-        public void GuardarTodosArchivosNecesitados() => ArchivoNecesitado.Hacer(null,null,null);
+            ArchivoSolicitado.Hacer(AS, "ADD", null);
+        } //Agrega nuevas solicitudes de archivos a la lista
+        public void GuardarTodosArchivosNecesitados() => ArchivoNecesitado.Hacer(null, "SAVE", null);
         //-----------------------------------------------UDP
         public void EnviarUDP(IPAddress ip, string msj)
         {
@@ -183,14 +181,14 @@ namespace Cliente
             }
         }
         public void EnviarUnicoArchivoCompartido(Archivo a) => IPSVecinas.ForEach(x => EnviarUDP(x, "bitNode@AAC@" + JsonConvert.SerializeObject(a)));
-        public void EnviarListaIPS(IPAddress ip) => IPSVecinas.ForEach(x => EnviarUDP(ip, "bitNode@IPV@" + x.ToString()));
+        public void EnviarListaIPS(IPAddress ip) => IPSVecinas.ForEach(x => EnviarUDP(ip, "bitNode@IPV@" + x.ToString())); //Envio lista de ip 'IPFIJA'
         public void EnviarListaArchivosCompartidosTAG(IPAddress ip, string strArchivos)
         {
             if (strArchivos == "NOTAG")
                 frmCliente.archivosCompartidos.ForEach(a => EnviarUDP(ip, "bitNode@AACT@" + JsonConvert.SerializeObject(a)));
             else
                 Archivo.TagArchivo(frmCliente.archivosCompartidos, strArchivos).ForEach(a => EnviarUDP(ip, "bitNode@AACT@" + JsonConvert.SerializeObject(a)));
-        }
+        } //Busco coincidencias de mis AC con los tags recividos y los envio
         public void EnviarArchivosMD5(IPAddress ip, string MD5Archivos)
         {
             string[] archivos = MD5Archivos.Split('|');
@@ -205,8 +203,8 @@ namespace Cliente
                     }
                 }
             }
-        }
-        public void AgregarIPArchivosNecesitados(IPAddress ip, string MD5) => ArchivoNecesitado.Hacer(MD5,"ADDIP",ip);
+        } //Envio archivos == MD5
+        public void AgregarIPArchivosNecesitados(IPAddress ip, string MD5) => ArchivoNecesitado.Hacer(MD5, "ADDIP", ip);
         public void EnviarArchivosNecesitados(IPAddress ip) => ArchivoNecesitado.Hacer(null, "EAN", ip);
         //-----------------------------------------------TCP
         public void ManejadorNecesitados() =>
@@ -214,12 +212,9 @@ namespace Cliente
             {
                 while (PermitirSolicitar)
                 {
-                    Thread.Sleep(1000);
-                    int ASCount = ArchivoNecesitado.Hacer(null, "L", null);
-                    if (ASCount > 0)
-                        ArchivoNecesitado.archivosNecesitados[r.Next(0, ASCount)].SolicitarPartes();
+                    ArchivoNecesitado.Hacer(null,"SP",null);
                 }
-            }).Start();
+            }).Start(); //Se encarga de solicitar las partes de los archivos
         public void ManejadorSolicitudes() =>
             new Thread(() =>
             {
@@ -227,10 +222,10 @@ namespace Cliente
                 {
                     PermitirEnviarSolicitud.Reset();
 
-                    if (archivosSolicitados.Count > 0)
+                    if (ArchivoSolicitado.Hacer(null, "L", null) > 0)
                     {
-                        ArchivoSolicitado AS = archivosSolicitados[0];
-                        archivosSolicitados.RemoveAt(0);
+                        ArchivoSolicitado AS = ArchivoSolicitado.archivosSolicitados[0];
+                        ArchivoSolicitado.Hacer(null, "DEL", 0);
                         AS.posicionLista = Archivo.PosicionArchivo(AS.MD5);
 
                         if (AS.posicionLista > -1)
@@ -245,18 +240,7 @@ namespace Cliente
                     else
                         Thread.Sleep(2000);
                 }
-            }).Start();
-        public void EliminarPeticiones(IPAddress ip)
-        {
-            for (int i = 0; i < archivosSolicitados.Count; i++)
-            {
-                if (archivosSolicitados[i].IPDestino.Equals(ip))
-                {
-                    archivosSolicitados.RemoveAt(i);
-                    i = -1;
-                }
-            }
-        }
-        
+            }).Start(); //Se encarga de enviar las partes solicitadas
+        public void EliminarPeticiones(IPAddress ip) => ArchivoSolicitado.Hacer(null, "DELIP", ip); //Elimina solicitudes cuando un bitNoder se desconecta
     }
 }

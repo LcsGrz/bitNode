@@ -101,6 +101,26 @@ namespace Cliente.Properties {
         }
         
         /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap PlayOFF {
+            get {
+                object obj = ResourceManager.GetObject("PlayOFF", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap PlayON {
+            get {
+                object obj = ResourceManager.GetObject("PlayON", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
         ///   Busca un recurso adaptado de tipo System.Byte[].
         /// </summary>
         internal static byte[] Roboto_Light {
@@ -126,6 +146,26 @@ namespace Cliente.Properties {
         internal static System.Drawing.Bitmap SolictarOFF {
             get {
                 object obj = ResourceManager.GetObject("SolictarOFF", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap StopOFF {
+            get {
+                object obj = ResourceManager.GetObject("StopOFF", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap StopON {
+            get {
+                object obj = ResourceManager.GetObject("StopON", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

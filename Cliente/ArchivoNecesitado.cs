@@ -10,7 +10,7 @@ namespace Cliente
     class ArchivoNecesitado
     {
         public static List<ArchivoNecesitado> archivosNecesitados;
-        //Contructor
+        //-----------------------------------------------Contructor
         public ArchivoNecesitado() { }
         public ArchivoNecesitado(Archivo AN) =>
             new Thread(() =>
@@ -31,19 +31,23 @@ namespace Cliente
                 Guardar();
                 Hacer(this, "ADD", null);
             }).Start();
-        //Atributos
-        public static int TamañoParte = 2100;
+        //-----------------------------------------------Atributos
         private static string bnArchivosNecesitados = Configuracion.bitNode + @"\ArchivosNecesitados";
-        public int TamañoUltimaParte { get; set; }
+        private static Random r = new Random();
+        private static object locker = new object();
+        public static int TamañoParte = 2100;
+        //----------
         public string Nombre { get; set; }
-        public long Tamaño { get; set; }
-        public bool[] Partes { get; set; }
-        public string RutaDesarga { get; set; }
         public string MD5 { get; set; }
         public uint CantidadPartes { get; set; }
+        public bool[] Partes { get; set; }
         public uint PartesDescargadas { get; set; } = 0;
-
+        public long Tamaño { get; set; }
+        public int TamañoUltimaParte { get; set; }
+        public string RutaDesarga { get; set; }
+        public bool Estado { get; set; } = false;
         public List<IPAddress> IPsPropietarios = new List<IPAddress>();
+        //-----------------------------------------------Metodos
         public void Guardar() => File.WriteAllText(bnArchivosNecesitados + "\\" + Nombre.Split('.')[0] + ".json", JsonConvert.SerializeObject(this));
         public List<ArchivoNecesitado> Leer()
         {
@@ -67,31 +71,33 @@ namespace Cliente
                 archivoNecesitados.Add(an);
             }
             return archivoNecesitados;
-        }
-        private Random r = new Random();
-        //Metodos
+        } //Lee la lista de archivos de la carpeta
         public void SolicitarPartes()
         {
-            int partes = 0;
-            for (int i = 0; i < Partes.Length; i++)
+            if (!Estado)
             {
-                if (!Partes[i] && IPsPropietarios.Count > 0)
+                int partes = 0;
+                for (int i = 0; i < Partes.Length; i++)
                 {
-                    new Controlador().EnviarUDP(IPsPropietarios[r.Next(0, IPsPropietarios.Count)], "bitNode@SAD@" + MD5 + "|" + i);
-                    if (++partes == 10)
-                        break;
+                    if (!Partes[i] && IPsPropietarios.Count > 0)
+                    {
+                        new Controlador().EnviarUDP(IPsPropietarios[r.Next(0, IPsPropietarios.Count)], "bitNode@SAD@" + MD5 + "|" + i);
+                        if (++partes == 10)
+                            break;
+                    }
                 }
+                Thread.Sleep(1000);
             }
-        }
+        } //Solicita partes faltantes a los bitNoders
         public void agregarIP(IPAddress ip, string MD5)
         {
             if (Archivo.CompararMD5(MD5, this.MD5))
                 if (!IPsPropietarios.Exists(x => (x.Equals(ip))))
                     IPsPropietarios.Add(ip);
-        }
+        }  //Agrega una IP nueva al archivo
         public void DescargaCompleta()
         {
-            if (PartesDescargadas == CantidadPartes)
+            if (PartesDescargadas >= CantidadPartes)
             {
                 //constrolar partes descargadas arreglo de bool
                 string ruta = RutaDesarga.Split('.')[0] + "." + Nombre.Split('.')[1];
@@ -99,12 +105,13 @@ namespace Cliente
                     File.Move(RutaDesarga, @ruta);
                 else
                 {
-                    ruta = RutaDesarga.Split('.')[0] + "(bN-" + r.Next(0, 100) + ")." + Nombre.Split('.')[1];
+                    ruta = RutaDesarga.Split('.')[0] + "(bN-" + r.Next(0, 999) + ")." + Nombre.Split('.')[1];
                     File.Move(RutaDesarga, @ruta);
                 }
-                Hacer(this, "DEL", null);
+                Hacer(this, "CE", null);
             }
-        }
+            Controlador.InformarEstadoDescarga(0);
+        } //Verifica si la descarga fue completada e elimina basura
         public void Eliminar()
         {
             for (int i = 0; i < archivosNecesitados.Count; i++)
@@ -119,22 +126,34 @@ namespace Cliente
                 File.Delete(RutaDesarga);
             if (File.Exists(bnArchivosNecesitados + "\\" + Nombre.Split('.')[0] + ".json"))
                 File.Delete(bnArchivosNecesitados + "\\" + Nombre.Split('.')[0] + ".json");
-        }
-        private static object locker = new object();
-        public static int Hacer(object AS, string hacer, object dato)
+        } //Elimina basura
+        public static int Hacer(object AN, string hacer, object dato)
         {
             lock (locker)
             {
+                int c = 0;
+                for (int i = 0; i < archivosNecesitados.Count; i++)
+                {
+                    if (!archivosNecesitados[i].Estado)
+                        c++;
+                }
                 switch (hacer)
                 {
                     case "ADD": //Añadir
                         {
-                            archivosNecesitados.Add((ArchivoNecesitado)AS);
+                            archivosNecesitados.Add((ArchivoNecesitado)AN);
+                            Controlador.InformarEstadoDescarga(1);
                             break;
                         }
                     case "DEL": //Eliminar
                         {
-                            ((ArchivoNecesitado)AS).Eliminar();
+                            //((ArchivoNecesitado)AN).Eliminar();
+                            archivosNecesitados[(int)AN].Eliminar();
+                            break;
+                        }
+                    case "CE": //CambiarEstado
+                        {
+                            ((ArchivoNecesitado)AN).Estado = true;
                             break;
                         }
                     case "DELIP": //EliminarIP
@@ -144,35 +163,60 @@ namespace Cliente
                         }
                     case "ADDIP": //EliminarIP
                         {
-                            archivosNecesitados.ForEach(x => x.agregarIP((IPAddress)dato, (string)AS));
+                            archivosNecesitados.ForEach(x => x.agregarIP((IPAddress)dato, (string)AN));
                             break;
                         }
                     case "SAVE": //Guardar
                         {
-                            archivosNecesitados.ForEach(x => x.Guardar());
+                            archivosNecesitados.ForEach(x => { x.IPsPropietarios.Clear(); x.Guardar(); });
                             break;
                         }
                     case "EXIST": //Existe
                         {
-                            return (archivosNecesitados.Exists(x => Archivo.CompararMD5(x.MD5, (string)AS)) ? 1 : 0);
+                            return (archivosNecesitados.Exists(x => Archivo.CompararMD5(x.MD5, (string)AN)) ? 1 : 0);
                         }
                     case "L": //Longitud
                         {
+                            return c;
+                        }
+                    case "LC": //LongitudCompleta
+                        {
                             return archivosNecesitados.Count;
+                        }
+                    case "SP": //SolicitarParte
+                        {
+                            if (c > 0)
+                            {
+                                archivosNecesitados[r.Next(0, archivosNecesitados.Count)].SolicitarPartes();
+                            }
+                        }
+                        break;
+                    case "VE": //SolicitarParte
+                        {
+                            for (int i = 0; i < archivosNecesitados.Count; i++)
+                            {
+                                if (!archivosNecesitados[i].Estado)
+                                    return 0;
+                            }
+                            return 1;
                         }
                     case "EAN":
                         {
-                            if (archivosNecesitados.Count > 0)
+                            if (Controlador.PermitirSolicitar && c > 0)
                             {
+                                Controlador controlador = new Controlador();
                                 string archivos = string.Empty;
-                                archivosNecesitados.ForEach(x => archivos += ("|" + x.MD5));
-                                new Controlador().EnviarUDP((IPAddress)dato, "bitNode@TEA@" + archivos);
+                                archivosNecesitados.ForEach(x => { if (!x.Estado) archivos += ("|" + x.MD5); });
+                                if (AN != null)
+                                    controlador.EnviarUDP((IPAddress)dato, "bitNode@TEA@" + archivos);
+                                else
+                                    Controlador.IPSVecinas.ForEach(x => controlador.EnviarUDP(x, "bitNode@TEA@" + archivos));
                             }
                             break;
                         }
                 }
                 return 1; //True
             }
-        }
+        } //HACE TODAS LAS FUNCIONES
     }
 }
