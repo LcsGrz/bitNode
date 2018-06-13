@@ -63,8 +63,9 @@ namespace Cliente
                 ArchivosNecesitadosRecibidos = true;
                 if (((int)sender) == 1)
                     pnlVistaDescargar.Invoke(new Action(() => { CargarListaDescargas(); }));
+
                 if (ArchivoNecesitado.Hacer(null, "VE", null) == 1)
-                    Invoke(new Action(() => { FinalizaronDescargas(); }));
+                    this.Invoke(new Action(() => { FinalizaronDescargas(); }));
             });
             if (ArchivoNecesitado.Hacer(null, "L", null) > 0)
                 tmrModificarAN.Start();
@@ -278,7 +279,12 @@ namespace Cliente
                 tagAnterior = tagNuevo;
             }
         }
-        private void bitNodeClosing(object sender, FormClosingEventArgs e) => controlador.FrenarEjecuciones(); //Evento de cerrado del form
+        private void bitNodeClosing(object sender, FormClosingEventArgs e)
+        {
+            if (tmrModificarAN.Enabled)
+                tmrModificarAN.Stop();
+            controlador.FrenarEjecuciones();
+        } //Evento de cerrado del form
         //----------------------------------------------------------------------------------------------Funciones
         private void MostrarInformacionPersonal(object sender, EventArgs e) //Mostrar GITHUB - MAIL propio
         {
@@ -784,7 +790,7 @@ namespace Cliente
                     archivosCompartidos[e.RowIndex].Activo = !archivosCompartidos[e.RowIndex].Activo;
                     dgvVistaCompartirArchivos.CurrentCell.Value = ImagenesArchivos[(archivosCompartidos[e.RowIndex].Activo) ? 0 : 1];
                     archivosCompartidos[e.RowIndex].CambiarEstado();
-                    MessageBox.Show(archivosCompartidos[e.RowIndex].Activo.ToString());
+
                     if (archivosCompartidos[e.RowIndex].Activo)
                         controlador.EnviarUnicoArchivoCompartido(archivosCompartidos[e.RowIndex]);
                     else
@@ -870,7 +876,7 @@ namespace Cliente
         }
         private void CargarListaDescargas()
         {
-            int ANC = ArchivoNecesitado.Hacer(null, "LC", null);
+            int ANC = ArchivoNecesitado.archivosNecesitados.Count;//ArchivoNecesitado.Hacer(null, "LC", null);
             dgvVistaDescargas.Visible = !(lblVistaDescargarExplorar.Visible = (ANC == 0));
             if (ANC > 0)
             {
@@ -1008,7 +1014,7 @@ namespace Cliente
                         }
                     }));
                 }
-                catch (Exception) { }
+                catch (Exception es) {  }
             }).Start();
         }
         private void FinalizaronDescargas() //Ejecutar funcion especial cuando finaliza la descarga

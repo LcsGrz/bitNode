@@ -260,10 +260,12 @@ namespace Cliente
                 Console.WriteLine("MD5: " + MD5);
 
                 //Remplazar todo
-                if (find != null && !find.Partes[parte]) 
+                lock (pepe)
                 {
-                    //bloquear si es el mismo archivo
-                    lock (pepe) {
+                    if (find != null && !find.Partes[parte])
+                    {
+                        //bloquear si es el mismo archivo
+
                         using (FileStream output = new FileStream(find.RutaDesarga, FileMode.Open))
                         {
                             output.Position = parte * size;
@@ -280,10 +282,9 @@ namespace Cliente
                         }
                         find.DescargaCompleta();
 
+                        Console.WriteLine("Parte: " + parte + "/" + find.CantidadPartes);
+                        Console.WriteLine("Partes totales: " + find.PartesDescargadas + "/" + find.CantidadPartes);
                     }
-
-                    Console.WriteLine("Parte: " + parte + "/" + find.CantidadPartes);
-                    Console.WriteLine("Partes totales: " + find.PartesDescargadas + "/" + find.CantidadPartes);
                 }
             }
             public int IntLength(int i)

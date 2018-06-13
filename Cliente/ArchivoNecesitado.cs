@@ -134,10 +134,10 @@ namespace Cliente
                     break;
                 }
             }
-            if (File.Exists(RutaDesarga))
-                File.Delete(RutaDesarga);
             if (File.Exists(bnArchivosNecesitados + "\\" + Nombre.Split('.')[0] + ".json"))
                 File.Delete(bnArchivosNecesitados + "\\" + Nombre.Split('.')[0] + ".json");
+            if (File.Exists(RutaDesarga))
+                File.Delete(RutaDesarga);
         } //Elimina basura
         public static int Hacer(object AN, string hacer, object dato)
         {
