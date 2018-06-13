@@ -198,6 +198,11 @@ namespace Cliente
                                 controlador.AgregarIPArchivosNecesitados(IPRecibida, JsonConvert.DeserializeObject<Archivo>(stringData[2]).ArchivoMD5);
                                 break;
                             }
+                        case "EAS": // EliminarArchivoSolicitado
+                            {
+                                ArchivoNecesitado.Hacer(null, "DELIP", IPRecibida);
+                                break;
+                            }
                     }
                 }
             }

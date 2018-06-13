@@ -330,4 +330,16 @@
   <data name="msjArchivoEnLista" xml:space="preserve">
     <value>El archivo se añadio a la lista de descargas.</value>
   </data>
+  <data name="ttDescargar" xml:space="preserve">
+    <value>Descargar</value>
+  </data>
+  <data name="ttDetener" xml:space="preserve">
+    <value>Detener</value>
+  </data>
+  <data name="lblVistaDescargarExplorar" xml:space="preserve">
+    <value>¡Explora para descargar!</value>
+  </data>
+  <data name="CabecerasDGVDescargar" xml:space="preserve">
+    <value>Nombre-Descargado-Total-Progreso</value>
+  </data>
 </root>

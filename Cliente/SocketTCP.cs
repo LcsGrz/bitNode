@@ -238,7 +238,7 @@ namespace Cliente
             public long parte = 0;
             public bool leerIndices = true;
             public int byteLeidos = 0;
-            public const int BufferSize = 2000;
+            public const int BufferSize = 65536;
             // Receive buffer.  
             public byte[] buffer = new byte[BufferSize];
 
@@ -279,10 +279,11 @@ namespace Cliente
                             find.PartesDescargadas++;
                         }
                     }
-                    find.DescargaCompleta();         
+                    find.DescargaCompleta();
+
+                    Console.WriteLine("Parte: " + parte + "/" + find.CantidadPartes);
+                    Console.WriteLine("Partes totales: " + find.PartesDescargadas + "/" + find.CantidadPartes);
                 }
-                Console.WriteLine("Parte: " + parte + "/" + find.CantidadPartes);
-                Console.WriteLine("Partes totales: " + find.PartesDescargadas + "/" + find.CantidadPartes);
             }
             public int IntLength(int i)
             {
