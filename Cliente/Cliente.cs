@@ -66,10 +66,8 @@ namespace Cliente
                 if (ArchivoNecesitado.Hacer(null, "VE", null) == 1)
                     FinalizaronDescargas();
             });
-            if (ArchivoNecesitado.Hacer(null, "L", null) >0)
-            {
+            if (ArchivoNecesitado.Hacer(null, "L", null) > 0)
                 tmrModificarAN.Start();
-            }
             controlador.IniciarEjecuciones();
         }
         //----------------------------------------------------------------------------------------------Funciones de form
@@ -461,7 +459,7 @@ namespace Cliente
             lblVistaConfiguracionIniciarConWindows.Font = catorceR;
             lblVistaConfiguracionMinimizarBanjeda.Font = catorceR;
             lblVistaConfiguracionNombre.Font = catorceR;
-            tbVistaConfiguracionNombre.Font = catorceR;
+            tbVistaConfiguracionNombre.Font = doceR;
             lblVistaConfiguracionSyncAuto.Font = catorceR;
             lblVistaConfiguracionIdioma.Font = catorceR;
             lblVistaConfiguracionIngles.Font = catorceR;
@@ -481,7 +479,7 @@ namespace Cliente
             lblVistaConfiguracionLimiteDescargas.Font = catorceR;
             lblVistaConfiguracionRutaDescarga.Font = catorceR;
             lblVistaConfiguracionIP.Font = catorceR;
-            tbVistaConfiguracionIP.Font = catorceR;
+            tbVistaConfiguracionIP.Font = doceR;
             lblVistaConfiguracionBitNoders.Font = catorceR;
             //About
             tbVistaAboutDescripcion.Font = veintiunoR;
