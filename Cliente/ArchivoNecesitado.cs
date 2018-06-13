@@ -35,7 +35,7 @@ namespace Cliente
         private static string bnArchivosNecesitados = Configuracion.bitNode + @"\ArchivosNecesitados";
         private static Random r = new Random();
         private static object locker = new object();
-        public static int TamañoParte = 65536;
+        public static int TamañoParte = 65536*2;
         //----------
         public string Nombre { get; set; }
         public string MD5 { get; set; }

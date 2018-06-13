@@ -62,9 +62,9 @@ namespace Cliente
             {
                 ArchivosNecesitadosRecibidos = true;
                 if (((int)sender) == 1)
-                    CargarListaDescargas();
+                    pnlVistaDescargar.Invoke(new Action(() => { CargarListaDescargas(); }));
                 if (ArchivoNecesitado.Hacer(null, "VE", null) == 1)
-                    FinalizaronDescargas();
+                    Invoke(new Action(() => { FinalizaronDescargas(); }));
             });
             if (ArchivoNecesitado.Hacer(null, "L", null) > 0)
                 tmrModificarAN.Start();
@@ -978,30 +978,38 @@ namespace Cliente
         }
         private void CargarNuevosValoresDescargados(object sender, EventArgs e)//Actualiza los valores de la vista 'descargas'
         {
-            try
+            new Thread(() =>
             {
-                ArchivosNecesitadosRecibidos = false;
-                int ANC = ArchivoNecesitado.Hacer(null, "LC", null);
-                dgvVistaDescargas.Visible = !(lblVistaDescargarExplorar.Visible = (ANC == 0));
-                if (ANC > 0)
+                try
                 {
-                    for (int i = 0; i < ANC; i++)
+                    ArchivosNecesitadosRecibidos = false;
+                    int ANC = ArchivoNecesitado.Hacer(null, "LC", null);
+                    pnlVistaDescargar.Invoke(new Action(() =>
                     {
-                        ArchivoNecesitado A = ArchivoNecesitado.archivosNecesitados[i];
-                        long tamaño = (A.Estado) ? A.Tamaño : (ArchivoNecesitado.TamañoParte < A.Tamaño) ? A.PartesDescargadas * ArchivoNecesitado.TamañoParte : A.Tamaño;
-                        dgvVistaDescargas[1, i].Value = Archivo.KB_GB_MB(tamaño);
-                        dgvVistaDescargas[3, i].Value = (A.PartesDescargadas * 100) / A.CantidadPartes + "%";
-                        if (A.Estado)
+                        dgvVistaDescargas.Visible = !(lblVistaDescargarExplorar.Visible = (ANC == 0));
+                        if (ANC > 0)
                         {
-                            dgvVistaDescargas[0, i].Style.ForeColor = configuracion.colorDetalles;
-                            dgvVistaDescargas[0, i].Style.SelectionForeColor = configuracion.colorDetalles;
-                            dgvVistaDescargas[3, i].Style.ForeColor = configuracion.colorDetalles;
-                            dgvVistaDescargas[3, i].Style.SelectionForeColor = configuracion.colorDetalles;
+                            for (int i = 0; i < ANC; i++)
+                            {
+                                ArchivoNecesitado A = ArchivoNecesitado.archivosNecesitados[i];
+                                long tamaño = (A.Estado) ? A.Tamaño : (ArchivoNecesitado.TamañoParte < A.Tamaño) ? A.PartesDescargadas * ArchivoNecesitado.TamañoParte : A.Tamaño;
+
+                                dgvVistaDescargas[1, i].Value = Archivo.KB_GB_MB(tamaño);
+                                dgvVistaDescargas[3, i].Value = (A.PartesDescargadas * 100) / A.CantidadPartes + "%";
+                                if (A.Estado)
+                                {
+                                    dgvVistaDescargas[0, i].Style.ForeColor = configuracion.colorDetalles;
+                                    dgvVistaDescargas[0, i].Style.SelectionForeColor = configuracion.colorDetalles;
+                                    dgvVistaDescargas[3, i].Style.ForeColor = configuracion.colorDetalles;
+                                    dgvVistaDescargas[3, i].Style.SelectionForeColor = configuracion.colorDetalles;
+                                }
+
+                            }
                         }
-                    }
+                    }));
                 }
-            }
-            catch (Exception) { }
+                catch (Exception) { }
+            }).Start();
         }
         private void FinalizaronDescargas() //Ejecutar funcion especial cuando finaliza la descarga
         {

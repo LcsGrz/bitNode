@@ -278,8 +278,9 @@ namespace Cliente
                             find.Partes[parte] = true;
                             find.PartesDescargadas++;
                         }
+                        find.DescargaCompleta();
+
                     }
-                    find.DescargaCompleta();
 
                     Console.WriteLine("Parte: " + parte + "/" + find.CantidadPartes);
                     Console.WriteLine("Partes totales: " + find.PartesDescargadas + "/" + find.CantidadPartes);
