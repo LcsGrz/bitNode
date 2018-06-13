@@ -26,7 +26,7 @@ namespace Cliente
         Image[] ImagenesArchivos = { Properties.Resources.SwitchON, Properties.Resources.SwitchOFF, Properties.Resources.Cancelar, Properties.Resources.Compartir };
         PrivateFontCollection pfc = Configuracion.Tipografia();
         Configuracion configuracion = new Configuracion().Leer();
-        bool cerrar, TransparenciaFull, clickTags, clickDescripcion = false;
+        bool cerrar, TransparenciaFull, clickTags, clickDescripcion, ArchivosNecesitadosRecibidos = false;
         int tagAnterior = 0;
         Archivo archivoNuevo;
         Controlador controlador = new Controlador();
@@ -60,17 +60,12 @@ namespace Cliente
             Controlador.informarArchivo += new EventHandler((object sender, EventArgs e) => { if (tagAnterior == 1) { this.Invoke(new Action(() => { CargarArchivosCompartidosVecinos(null); })); } });
             Controlador.informarEstadoDescarga += new EventHandler((object sender, EventArgs e) =>
             {
-                this.Invoke(new Action(() =>
-                {
-                    if (tagAnterior == 0)
-                    {
-                        if (((int)sender) == 1)
-                            CargarListaDescargas();
-                        else
-                            CargarNuevosValoresDescargados();// actualizar por timer ?
-                    }
-                }));
-        });
+                ArchivosNecesitadosRecibidos = true;
+                if (tagAnterior == 0 && ((int)sender) == 1)
+                    CargarListaDescargas();
+                if (ArchivoNecesitado.Hacer(null, "VE", null) == 1)
+                    FinalizaronDescargas();
+            });
             controlador.IniciarEjecuciones();
         }
         //----------------------------------------------------------------------------------------------Funciones de form
@@ -193,8 +188,11 @@ namespace Cliente
         {
             int tagNuevo = Convert.ToInt32((sender as Control).Tag) - 1;
 
-            if (tagNuevo == 0)
-                CargarListaDescargas();
+            if (tagNuevo == 0 && ArchivosNecesitadosRecibidos && !tmrModificarAN.Enabled)
+                tmrModificarAN.Start();
+            if (tagNuevo != 0 && tmrModificarAN.Enabled)
+                tmrModificarAN.Stop();
+
             if (tagNuevo == 1)
             {
                 if (!configuracion.SyncActiva)
@@ -232,9 +230,7 @@ namespace Cliente
                         }).Start();
                     }
                     else
-                    {
                         pnlRojoMenu.Location = new Point(0, nY);
-                    }
                 }
                 else
                 {
@@ -866,7 +862,7 @@ namespace Cliente
                 pbVistaDescargarStop.Image = Properties.Resources.StopON;
                 Controlador.PermitirSolicitar = false;
                 ArchivoNecesitado.Hacer(null, "SAVE", null);
-               // ArchivoNecesitado.archivosNecesitados.Clear();
+                // ArchivoNecesitado.archivosNecesitados.Clear();
                 controlador.EnviarUDP(null, "bitNode@EAS@");
             }
         }
@@ -978,8 +974,9 @@ namespace Cliente
                 dgvVistaExplorarArchivosCompartidosVecinos.Columns[3].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
             }
         }
-        private void CargarNuevosValoresDescargados()//Actualiza los valores de la vista 'descargas'
+        private void CargarNuevosValoresDescargados(object sender, EventArgs e)//Actualiza los valores de la vista 'descargas'
         {
+            ArchivosNecesitadosRecibidos = false;
             int ANC = ArchivoNecesitado.Hacer(null, "LC", null);
             dgvVistaDescargas.Visible = !(lblVistaDescargarExplorar.Visible = (ANC == 0));
             if (ANC > 0)
@@ -1002,6 +999,7 @@ namespace Cliente
         }
         private void FinalizaronDescargas() //Ejecutar funcion especial cuando finaliza la descarga
         {
+            tmrModificarAN.Stop();
             switch (Configuracion.FinalizoDescarga)
             {
                 case 1:

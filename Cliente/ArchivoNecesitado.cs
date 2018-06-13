@@ -191,7 +191,15 @@ namespace Cliente
                             }
                         }
                         break;
-
+                    case "VE": //SolicitarParte
+                        {
+                            for (int i = 0; i < archivosNecesitados.Count; i++)
+                            {
+                                if (!archivosNecesitados[i].Estado)
+                                    return 0;
+                            }
+                            return 1;
+                        }
                     case "EAN":
                         {
                             if (Controlador.PermitirSolicitar && c > 0)
