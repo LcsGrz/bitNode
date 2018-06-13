@@ -35,7 +35,7 @@ namespace Cliente
         private static string bnArchivosNecesitados = Configuracion.bitNode + @"\ArchivosNecesitados";
         private static Random r = new Random();
         private static object locker = new object();
-        public static int TamañoParte = 65536;
+        public static int TamañoParte = 65536*2;
         //----------
         public string Nombre { get; set; }
         public string MD5 { get; set; }
@@ -134,10 +134,10 @@ namespace Cliente
                     break;
                 }
             }
-            if (File.Exists(RutaDesarga))
-                File.Delete(RutaDesarga);
             if (File.Exists(bnArchivosNecesitados + "\\" + Nombre.Split('.')[0] + ".json"))
                 File.Delete(bnArchivosNecesitados + "\\" + Nombre.Split('.')[0] + ".json");
+            if (File.Exists(RutaDesarga))
+                File.Delete(RutaDesarga);
         } //Elimina basura
         public static int Hacer(object AN, string hacer, object dato)
         {
